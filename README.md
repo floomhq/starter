@@ -102,3 +102,12 @@ Planned but not bundled yet:
 
 These require license/provenance review before bundling.
 
+## Architecture
+
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for the local install model, target
+detection, conflict handling, and discovery flow.
+
+## Curation
+
+See [docs/CURATION-BRIEF.md](./docs/CURATION-BRIEF.md) for the next source
+curation pass.
