@@ -92,6 +92,43 @@ test("install writes selected skills, index, provenance, and instructions to tem
   assert.match(claudeInstructions, /local-find-skills/);
 });
 
+test("install autodetects present targets when --targets is omitted", () => {
+  const root = tmpRoot("autodetect");
+  fs.mkdirSync(path.join(root, "claude"), { recursive: true });
+  fs.mkdirSync(path.join(root, "cursor"), { recursive: true });
+
+  const output = run([
+    "install",
+    "--profiles",
+    "core",
+    "--root",
+    root,
+    "--yes"
+  ]);
+
+  assert.match(output, /Targets: claude, cursor/);
+  assert.equal(fs.existsSync(path.join(root, "claude", "skills", "local-find-skills", "SKILL.md")), true);
+  assert.equal(fs.existsSync(path.join(root, "cursor", "skills", "local-find-skills", "SKILL.md")), true);
+  assert.equal(fs.existsSync(path.join(root, "codex", "skills", "local-find-skills", "SKILL.md")), false);
+});
+
+test("install asks for explicit targets when no local agents are detected", () => {
+  const root = tmpRoot("no-targets");
+  assert.throws(
+    () => run(["install", "--profiles", "core", "--root", root, "--yes"]),
+    /No supported local agents detected/
+  );
+});
+
+test("explicit --targets all still installs every target", () => {
+  const root = tmpRoot("all-targets");
+  run(["install", "--profiles", "core", "--targets", "all", "--root", root, "--yes"]);
+
+  for (const target of ["claude", "codex", "cursor", "opencode", "kimi"]) {
+    assert.equal(fs.existsSync(path.join(root, target, "skills", "local-find-skills", "SKILL.md")), true);
+  }
+});
+
 test("install refuses to overwrite untracked existing skills", () => {
   const root = tmpRoot("conflict");
   const existing = path.join(root, "claude", "skills", "local-find-skills");

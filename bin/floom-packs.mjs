@@ -33,6 +33,7 @@ Examples:
   floom-packs install --profiles core,dev,writing --targets claude,codex --yes
   floom-packs install --all --targets all --yes
 
+When --targets is omitted, floom-packs installs to detected local agents.
 Real installs require --yes. Without --yes, install prints a dry-run plan.`;
 }
 
@@ -93,8 +94,35 @@ function selectProfiles(flags) {
   return [...new Set(withCore)].map((id) => profileById(id).id);
 }
 
-function selectTargets(flags) {
-  const requested = splitList(flags.targets || "all");
+function targetPresencePath(target, rootOverride) {
+  if (rootOverride) return path.join(rootOverride, target);
+
+  const home = os.homedir();
+  const paths = {
+    claude: path.join(home, ".claude"),
+    codex: process.env.CODEX_HOME ?? path.join(home, ".codex"),
+    cursor: path.join(home, ".cursor"),
+    opencode: path.join(home, ".config", "opencode"),
+    kimi: path.join(home, ".kimi")
+  };
+
+  return paths[target];
+}
+
+function detectTargets(rootOverride) {
+  return TARGETS.filter((target) => fs.existsSync(targetPresencePath(target, rootOverride)));
+}
+
+function selectTargets(flags, rootOverride) {
+  if (!flags.targets) {
+    const detected = detectTargets(rootOverride);
+    if (detected.length === 0) {
+      throw new Error("No supported local agents detected. Pass --targets claude,codex,cursor,opencode,kimi or --targets all.");
+    }
+    return detected;
+  }
+
+  const requested = splitList(flags.targets);
   const selected = requested.includes("all") ? TARGETS : requested;
 
   for (const target of selected) {
@@ -221,7 +249,7 @@ function upsertBlock(existing, block) {
 function buildPlan(flags) {
   const rootOverride = flags.root ? path.resolve(expandHome(flags.root)) : null;
   const profileIds = selectProfiles(flags);
-  const targets = selectTargets(flags);
+  const targets = selectTargets(flags, rootOverride);
   const skills = selectedSkills(profileIds);
   const idxPath = indexPath(rootOverride);
 
@@ -416,4 +444,3 @@ try {
   console.error(error.message);
   process.exit(1);
 }
-
