@@ -1,0 +1,27 @@
+{
+  "slug": "video-processor",
+  "name": "video-processor",
+  "publisher": "benchflow-ai",
+  "source_repo": "https://github.com/benchflow-ai/skillsbench",
+  "skills_sh_url": null,
+  "install_count_skills_sh": null,
+  "license": "Apache-2.0",
+  "description": "Removes video segments (silences, openings) via ffmpeg filter_complex.",
+  "fires_when": "\"remove silences\", \"cut the intro\", batch segment removal",
+  "skill_md_content": "---\nname: video-processor\ndescription: Process videos by removing segments and concatenating remaining parts. Use when you need to remove detected pauses/openings from videos, create highlight reels, or batch process segment removals using ffmpeg filter_complex.\n---\n\n# Video Segment Processor\n\nProcesses videos by removing specified segments and concatenating the remaining parts. Handles multiple removal segments efficiently using ffmpeg's filter_complex.\n\n## Use Cases\n\n- Removing detected pauses and openings from videos\n- Creating highlight reels by keeping only specific segments\n- Batch processing multiple segment removals\n\n## Usage\n\n```bash\npython3 /root/.claude/skills/video-processor/scripts/process_video.py \\\n    --input /path/to/input.mp4 \\\n    --output /path/to/output.mp4 \\\n    --remove-segments /path/to/segments.json\n```\n\n### Parameters\n\n- `--input`: Path to input video file\n- `--output`: Path to output video file\n- `--remove-segments`: JSON file containing segments to remove\n\n### Input Segment Format\n\n```json\n{\n  \"segments\": [\n    {\"start\": 0, \"end\": 600, \"duration\": 600},\n    {\"start\": 610, \"end\": 613, \"duration\": 3}\n  ]\n}\n```\n\nOr multiple segment files:\n\n```bash\npython3 /root/.claude/skills/video-processor/scripts/process_video.py \\\n    --input video.mp4 \\\n    --output output.mp4 \\\n    --remove-segments opening.json pauses.json\n```\n\n### Output\n\nCreates the processed video and a report JSON:\n\n```json\n{\n  \"original_duration\": 3908.61,\n  \"output_duration\": 3078.61,\n  \"removed_duration\": 830.0,\n  \"compression_percentage\": 21.24,\n  \"segments_removed\": 91,\n  \"segments_kept\": 91\n}\n```\n\n## How It Works\n\n1. **Load removal segments** from JSON file(s)\n2. **Calculate keep segments** (inverse of removal segments)\n3. **Build ffmpeg filter** to trim and concatenate\n4. **Process video** using hardware-accelerated encoding\n5. **Generate report** with statistics\n\n### FFmpeg Filter Example\n\nFor 3 segments to keep:\n```\n[0:v]trim=start=600:end=610,setpts=PTS-STARTPTS[v0];\n[0:a]atrim=start=600:end=610,asetpts=PTS-STARTPTS[a0];\n[0:v]trim=start=613:end=1000,setpts=PTS-STARTPTS[v1];\n[0:a]atrim=start=613:end=1000,asetpts=PTS-STARTPTS[a1];\n[v0][v1]concat=n=2:v=1:a=0[outv];\n[a0][a1]concat=n=2:v=0:a=1[outa]\n```\n\n## Dependencies\n\n- ffmpeg with libx264 and aac support\n- Python 3.11+\n\n## Limitations\n\n- Processing time: ~0.3× video duration (e.g., 20 min for 65 min video)\n- Requires sufficient disk space (output ≈ 70-80% of input size)\n- May have frame-accurate cuts (not sample-accurate)\n\n## Example\n\n```bash\n# Process video with opening and pause removal\npython3 /root/.claude/skills/video-processor/scripts/process_video.py \\\n    --input /root/lecture.mp4 \\\n    --output /root/compressed.mp4 \\\n    --remove-segments /root/opening.json /root/pauses.json\n\n# Result: 65 min → 51 min (21.2% compression)\n```\n\n## Performance Tips\n\n- Use `-preset medium` for balanced speed/quality\n- Use `-crf 23` for good quality at reasonable size\n- Process on machines with 2+ CPU cores for faster encoding\n\n## Notes\n\n- Preserves video quality using CRF encoding\n- Maintains audio sync throughout\n- Handles edge cases (segments at start/end of video)\n- Generates detailed statistics for verification\n",
+  "skill_md_url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/main/tasks/video-silence-remover/environment/skills/video-processor/SKILL.md",
+  "skill_md_size_bytes": 3211,
+  "files": [
+    {
+      "name": "SKILL.md",
+      "size_bytes": 3211,
+      "type": "main"
+    },
+    {
+      "name": "scripts",
+      "size_bytes": 0,
+      "type": "support"
+    }
+  ],
+  "fetched_at": "2026-05-10T23:29:31.314615+00:00"
+}
