@@ -1,0 +1,328 @@
+{
+  "id": "starter",
+  "name": "Floom Starter",
+  "description": "A broad local-first starter portfolio of curated agent skills.",
+  "version": "0.1.0",
+  "defaultProfiles": [
+    "core"
+  ],
+  "targets": [
+    "claude",
+    "codex",
+    "cursor",
+    "opencode",
+    "kimi"
+  ],
+  "profiles": [
+    {
+      "id": "core",
+      "name": "Core",
+      "description": "Skill discovery, task framing, and project onboarding for everyone.",
+      "skills": [
+        "local-find-skills",
+        "task-brief",
+        "project-onboarding"
+      ]
+    },
+    {
+      "id": "dev",
+      "name": "Dev",
+      "description": "Code review, tests, security, browser checks, and repo analysis.",
+      "skills": [
+        "pr-review",
+        "python-testing",
+        "security-review",
+        "browser-performance-debugging",
+        "github-repo-analytics"
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "description": "Brand voice, concise drafts, documents, and presentations.",
+      "skills": [
+        "brand-voice-writer",
+        "outbound-email-draft",
+        "offer-letter-generator",
+        "ppt-reference-formatting"
+      ]
+    },
+    {
+      "id": "research",
+      "name": "Research",
+      "description": "Source-aware briefs, citations, enterprise search, and PDF extraction.",
+      "skills": [
+        "research-brief",
+        "citation-check",
+        "enterprise-search",
+        "pdf-text-parser"
+      ]
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "description": "Landing pages, positioning, customer synthesis, and brand voice.",
+      "skills": [
+        "landing-page-review",
+        "brand-voice-writer",
+        "customer-interview-synthesis"
+      ]
+    },
+    {
+      "id": "sales",
+      "name": "Sales",
+      "description": "Outbound, customer context, and sales data analysis.",
+      "skills": [
+        "outbound-email-draft",
+        "customer-interview-synthesis",
+        "sales-pivot-analysis"
+      ]
+    },
+    {
+      "id": "ops",
+      "name": "Ops",
+      "description": "Meetings, SOPs, onboarding, and file organization.",
+      "skills": [
+        "meeting-notes-to-actions",
+        "ops-sop-builder",
+        "project-onboarding",
+        "organize-files"
+      ]
+    },
+    {
+      "id": "founder",
+      "name": "Founder",
+      "description": "Strategy briefs, customer learning, landing pages, and decisions.",
+      "skills": [
+        "task-brief",
+        "research-brief",
+        "customer-interview-synthesis",
+        "landing-page-review",
+        "meeting-notes-to-actions"
+      ]
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "description": "Spreadsheets, PDFs, financial QA, and table extraction.",
+      "skills": [
+        "pdf-excel-diff",
+        "financial-modeling-qa",
+        "sales-pivot-analysis",
+        "ppt-excel-table"
+      ]
+    },
+    {
+      "id": "design",
+      "name": "Design",
+      "description": "Visual QA and browser-based implementation checks.",
+      "skills": [
+        "visual-qa-review",
+        "browser-performance-debugging"
+      ]
+    },
+    {
+      "id": "video",
+      "name": "Video",
+      "description": "Transcript, silence, and filler-word workflows.",
+      "skills": [
+        "video-filler-word-remover",
+        "video-silence-remover",
+        "video-tutorial-indexer"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "slug": "local-find-skills",
+      "name": "Local Find Skills",
+      "source": "floom",
+      "description": "Search the locally installed Floom starter skill index and choose the smallest relevant skill set for the current task."
+    },
+    {
+      "slug": "task-brief",
+      "name": "Task Brief",
+      "source": "floom",
+      "description": "Turn a fuzzy request into a clear task brief with goal, constraints, decisions, and verification steps."
+    },
+    {
+      "slug": "meeting-notes-to-actions",
+      "name": "Meeting Notes To Actions",
+      "source": "floom",
+      "description": "Convert messy meeting notes into decisions, owners, deadlines, and follow-up tasks."
+    },
+    {
+      "slug": "research-brief",
+      "name": "Research Brief",
+      "source": "floom",
+      "description": "Produce a source-aware research brief with claims, evidence, caveats, and next checks."
+    },
+    {
+      "slug": "customer-interview-synthesis",
+      "name": "Customer Interview Synthesis",
+      "source": "floom",
+      "description": "Turn interview notes into pains, jobs-to-be-done, objections, quotes, and product implications."
+    },
+    {
+      "slug": "landing-page-review",
+      "name": "Landing Page Review",
+      "source": "floom",
+      "description": "Review a landing page for clarity, conversion, trust, information hierarchy, and launch readiness."
+    },
+    {
+      "slug": "outbound-email-draft",
+      "name": "Outbound Email Draft",
+      "source": "floom",
+      "description": "Draft concise outbound emails from target context, offer, proof, and desired next step."
+    },
+    {
+      "slug": "ops-sop-builder",
+      "name": "Ops SOP Builder",
+      "source": "floom",
+      "description": "Convert a recurring workflow into a practical SOP with steps, checks, owners, and escalation rules."
+    },
+    {
+      "slug": "visual-qa-review",
+      "name": "Visual QA Review",
+      "source": "floom",
+      "description": "Review a UI screenshot or page for layout breakage, visual hierarchy, spacing, text fit, and interaction clarity."
+    },
+    {
+      "slug": "brand-voice-writer",
+      "name": "Brand Voice Writer",
+      "source": "floom",
+      "description": "Make agent output sound like the team."
+    },
+    {
+      "slug": "pr-review",
+      "name": "Pragmatic PR Reviewer",
+      "source": "floom",
+      "description": "Review code changes for launch-risk issues."
+    },
+    {
+      "slug": "project-onboarding",
+      "name": "Project Onboarding",
+      "source": "floom",
+      "description": "A starter workflow for bringing an agent into a project."
+    },
+    {
+      "slug": "citation-check",
+      "name": "Citation Check",
+      "source": "skillsbench",
+      "upstream": "tasks/citation-check/environment/skills/citation-management",
+      "description": "Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. This skill should be used when you need to find papers, verify citation information, convert DOIs to BibTeX, or ensure reference accuracy in scientific writing."
+    },
+    {
+      "slug": "offer-letter-generator",
+      "name": "Offer Letter Generator",
+      "source": "skillsbench",
+      "upstream": "tasks/offer-letter-generator/environment/skills/docx",
+      "description": "Word document manipulation with python-docx - handling split placeholders, headers/footers, nested tables"
+    },
+    {
+      "slug": "organize-files",
+      "name": "Organize Files",
+      "source": "skillsbench",
+      "upstream": "tasks/organize-messy-files/environment/skills/docx",
+      "description": "\"Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks\""
+    },
+    {
+      "slug": "pdf-excel-diff",
+      "name": "PDF Excel Diff",
+      "source": "skillsbench",
+      "upstream": "tasks/pdf-excel-diff/environment/skills/pdf",
+      "description": "Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale."
+    },
+    {
+      "slug": "sales-pivot-analysis",
+      "name": "Sales Pivot Analysis",
+      "source": "skillsbench",
+      "upstream": "tasks/sales-pivot-analysis/environment/skills/pdf",
+      "description": "\"ALWAYS use this skill instead of the Read tool for PDF files. The Read tool cannot extract PDF tables properly. Use this skill when: (1) Reading ANY PDF file, (2) Extracting tables from PDFs, (3) Converting PDF tables to pandas DataFrames, (4) Processing multi-page PDFs\""
+    },
+    {
+      "slug": "pdf-text-parser",
+      "name": "PDF Text Parser",
+      "source": "skillsbench",
+      "upstream": "tasks/edit-pdf/environment/skills/text-parser",
+      "description": "\"Guide for parsing structured text input files.\""
+    },
+    {
+      "slug": "ppt-excel-table",
+      "name": "PPT Excel Table",
+      "source": "skillsbench",
+      "upstream": "tasks/exceltable-in-ppt/environment/skills/xlsx",
+      "description": "\"Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas\""
+    },
+    {
+      "slug": "python-testing",
+      "name": "Python Testing",
+      "source": "skillsbench",
+      "upstream": "tasks/fix-build-agentops/environment/skills/testing-python",
+      "description": "Write and evaluate effective Python tests using pytest. Use when writing tests, reviewing test code, debugging test failures, or improving test coverage. Covers test design, fixtures, parameterization, mocking, and async testing."
+    },
+    {
+      "slug": "security-review",
+      "name": "Security Review",
+      "source": "skillsbench",
+      "upstream": "tasks/fix-erlang-ssh-cve/environment/skills/senior-security",
+      "description": "Comprehensive security engineering skill for application security, penetration testing, security architecture, and compliance auditing. Includes security assessment tools, threat modeling, crypto implementation, and security automation. Use when designing security architecture, conducting penetration tests, implementing cryptography, or performing security audits."
+    },
+    {
+      "slug": "browser-performance-debugging",
+      "name": "Browser Performance Debugging",
+      "source": "skillsbench",
+      "upstream": "tasks/react-performance-debugging/environment/skills/browser-testing",
+      "description": "\"VERIFY your changes work. Measure performance, CLS. Use BEFORE and AFTER making changes to confirm fixes. Includes ready-to-run scripts: measure-cls.ts, detect-flicker.ts\""
+    },
+    {
+      "slug": "github-repo-analytics",
+      "name": "GitHub Repo Analytics",
+      "source": "skillsbench",
+      "upstream": "tasks/gh-repo-analytics/environment/skills/gh-cli",
+      "description": "\"The gh CLI is GitHub's official command line tool for interacting with GitHub repositories, issues, pull requests, and more. When needs to interact with GitHub repositories, issues, pull requests, and more, use this skill.\""
+    },
+    {
+      "slug": "video-filler-word-remover",
+      "name": "Video Filler Word Remover",
+      "source": "skillsbench",
+      "upstream": "tasks/video-filler-word-remover/environment/skills/filler-word-processing",
+      "description": "\"Process filler word annotations to generate video edit lists. Use when working with timestamp annotations for removing speech disfluencies (um, uh, like, you know) from audio/video content.\""
+    },
+    {
+      "slug": "video-silence-remover",
+      "name": "Video Silence Remover",
+      "source": "skillsbench",
+      "upstream": "tasks/video-silence-remover/environment/skills/audio-extractor",
+      "description": "Extract audio from video files to WAV format. Use when you need to analyze audio from video, prepare audio for energy calculation, or convert video audio to standard format for processing."
+    },
+    {
+      "slug": "video-tutorial-indexer",
+      "name": "Video Tutorial Indexer",
+      "source": "skillsbench",
+      "upstream": "tasks/video-tutorial-indexer/environment/skills/speech-to-text",
+      "description": "Transcribe video to timestamped text using Whisper tiny model (pre-installed)."
+    },
+    {
+      "slug": "ppt-reference-formatting",
+      "name": "PPT Reference Formatting",
+      "source": "skillsbench",
+      "upstream": "tasks/pptx-reference-formatting/environment/skills/pptx",
+      "description": "\"Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks\""
+    },
+    {
+      "slug": "enterprise-search",
+      "name": "Enterprise Search",
+      "source": "skillsbench",
+      "upstream": "tasks/enterprise-information-search/environment/skills/enterprise-artifact-search",
+      "description": "Multi-hop evidence search + structured extraction over enterprise artifact datasets (docs/chats/meetings/PRs/URLs). Strong disambiguation to prevent cross-product leakage; returns JSON-ready entities plus evidence pointers."
+    },
+    {
+      "slug": "financial-modeling-qa",
+      "name": "Financial Modeling QA",
+      "source": "skillsbench",
+      "upstream": "tasks/financial-modeling-qa/environment/skills/pdf",
+      "description": "Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale."
+    }
+  ]
+}
