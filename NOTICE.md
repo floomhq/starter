@@ -1,7 +1,7 @@
 # Notices
 
-This package bundles Floom-authored starter skills and selected skills derived
-from SkillsBench.
+This package bundles curated seed skills maintained in this repo and selected
+skills derived from SkillsBench.
 
 SkillsBench source:
 
@@ -11,4 +11,3 @@ SkillsBench source:
 
 The full Apache-2.0 license text for SkillsBench is included at
 `licenses/LICENSE.skillsbench`.
-

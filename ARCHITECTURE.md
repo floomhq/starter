@@ -211,7 +211,7 @@ classDiagram
 
 Bundled now:
 
-- Floom-authored utility skills.
+- Curated seed skills maintained in this repo.
 - Selected SkillsBench-derived skills from Apache-2.0 upstream.
 
 Planned curation sources:
@@ -262,4 +262,3 @@ Current tests verify:
 - missing detected targets produces an explicit error;
 - `--targets all` writes all five launch targets;
 - untracked existing skills are not overwritten.
-

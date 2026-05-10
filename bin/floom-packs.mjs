@@ -6,7 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const PACKAGE_NAME = "@floomhq/packs";
-const PACKAGE_VERSION = "0.0.0";
+const PACKAGE_VERSION = "0.1.0";
 const PACK_ID = "starter";
 const TARGETS = ["claude", "codex", "cursor", "opencode", "kimi"];
 
@@ -26,6 +26,7 @@ function usage() {
 
 Usage:
   floom-packs list
+  floom-packs manifest [--json]
   floom-packs install [--profiles core,dev] [--targets claude,codex|all] [--all] [--dry-run] [--yes]
 
 Examples:
@@ -428,6 +429,23 @@ function list(flags) {
   console.log(`Skills: ${payload.skills.length}`);
 }
 
+function printManifest(flags) {
+  if (flags.json) {
+    console.log(JSON.stringify(manifest, null, 2));
+    return;
+  }
+
+  console.log(`${manifest.name} (${manifest.id})`);
+  console.log(manifest.description);
+  console.log("");
+  console.log(`Version: ${manifest.version}`);
+  console.log(`Profiles: ${manifest.profiles.length}`);
+  console.log(`Skills: ${manifest.skills.length}`);
+  console.log(`Targets: ${manifest.targets.join(", ")}`);
+  console.log("");
+  console.log("Use --json for the full machine-readable manifest.");
+}
+
 const [command, ...rest] = process.argv.slice(2);
 
 try {
@@ -435,6 +453,8 @@ try {
     console.log(usage());
   } else if (command === "list") {
     list(parseFlags(rest));
+  } else if (command === "manifest") {
+    printManifest(parseFlags(rest));
   } else if (command === "install") {
     install(parseFlags(rest));
   } else {

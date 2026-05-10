@@ -1,6 +1,6 @@
 {
   "name": "@floomhq/packs",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Local-first curated skill packs for Claude, Codex, Cursor, OpenCode, and Kimi.",
   "type": "module",
   "bin": {
@@ -10,6 +10,8 @@
     "bin/",
     "packs/",
     "licenses/",
+    "docs/",
+    "ARCHITECTURE.md",
     "README.md",
     "NOTICE.md"
   ],
@@ -29,4 +31,3 @@
   ],
   "license": "Apache-2.0"
 }
-

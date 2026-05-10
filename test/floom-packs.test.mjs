@@ -30,6 +30,16 @@ test("list prints profiles and skill count", () => {
   assert.match(output, /Skills: 29/);
 });
 
+test("manifest command exposes the full pack manifest", () => {
+  const output = run(["manifest", "--json"]);
+  const payload = JSON.parse(output);
+
+  assert.equal(payload.id, "starter");
+  assert.equal(payload.profiles.length, 11);
+  assert.equal(payload.skills.length, 29);
+  assert.deepEqual(payload.targets, ["claude", "codex", "cursor", "opencode", "kimi"]);
+});
+
 test("manifest references existing skills with frontmatter", () => {
   const slugs = new Set();
 

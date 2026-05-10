@@ -7,7 +7,7 @@
   "targets": ["claude", "codex", "cursor", "opencode", "kimi"],
   "sources": {
     "floom": {
-      "label": "Floom-authored",
+      "label": "Curated seed skills",
       "license": "Apache-2.0",
       "status": "bundled"
     },
@@ -131,4 +131,3 @@
     { "slug": "financial-modeling-qa", "name": "Financial Modeling QA", "source": "skillsbench", "upstream": "tasks/financial-modeling-qa/environment/skills/pdf" }
   ]
 }
-

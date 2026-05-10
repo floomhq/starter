@@ -2,112 +2,204 @@
 
 Local-first curated skill packs for agent users.
 
-Package:
+Floom Packs installs useful agent skills into the tools people already use:
+Claude Code, Codex CLI, Cursor, OpenCode, and Kimi.
+
+No Floom account, cloud sync, daemon, or MCP setup is required.
 
 ```bash
 npx @floomhq/packs install
 ```
 
-CLI:
+## What This Is
 
-```bash
-floom-packs
-```
+Floom Packs is a standalone npm package and CLI:
 
-## Install
+- npm package: `@floomhq/packs`
+- CLI binary: `floom-packs`
+- default pack: `starter`
 
-Preview the default starter install:
+It installs:
+
+- local skill folders;
+- a local skill index at `~/.floom/packs/starter-index.json`;
+- a `local-find-skills` discovery skill;
+- short instruction snippets that teach agents how to find and use installed
+  skills.
+
+## Quickstart
+
+Preview the install plan:
 
 ```bash
 npx @floomhq/packs install --dry-run
 ```
 
+Install into detected local agents:
+
+```bash
+npx @floomhq/packs install --yes
+```
+
 Install selected profiles:
 
 ```bash
-npx @floomhq/packs install --profiles core,dev,writing --targets claude,codex --yes
+npx @floomhq/packs install --profiles core,dev,writing --yes
 ```
 
-Install every profile:
+Install selected profiles into explicit agents:
 
 ```bash
-npx @floomhq/packs install --all --yes
+npx @floomhq/packs install --profiles founder,marketing,sales --targets claude,codex --yes
 ```
 
-## What It Writes
+Install everything into every supported agent:
 
-The installer writes:
+```bash
+npx @floomhq/packs install --all --targets all --yes
+```
 
-- skill folders into target agent skill roots;
-- a local index at `~/.floom/packs/starter-index.json`;
-- local skill discovery instructions into each selected harness instruction file.
+## Commands
 
-No cloud account, daemon, or MCP is required.
+```bash
+floom-packs list
+floom-packs manifest --json
+floom-packs install --dry-run
+floom-packs install --profiles core,dev --yes
+```
 
-## Targets
+`list` prints profile summaries.
 
-Supported targets:
+`manifest --json` prints the full machine-readable pack manifest for UI and docs
+integration.
 
-- `claude`
-- `codex`
-- `cursor`
-- `opencode`
-- `kimi`
-- `all`
+`install` copies selected skills and writes local discovery instructions.
 
 ## Profiles
 
-Run:
+Current V0 profiles:
+
+| Profile | Purpose |
+| --- | --- |
+| `core` | Skill discovery, task framing, and project onboarding. |
+| `dev` | Code review, tests, security, browser checks, and repo analysis. |
+| `writing` | Brand voice, concise drafts, documents, and presentations. |
+| `research` | Source-aware briefs, citations, enterprise search, and PDF extraction. |
+| `marketing` | Landing pages, positioning, customer synthesis, and brand voice. |
+| `sales` | Outbound, customer context, and sales data analysis. |
+| `ops` | Meetings, SOPs, onboarding, and file organization. |
+| `founder` | Strategy briefs, customer learning, landing pages, and decisions. |
+| `data` | Spreadsheets, PDFs, financial QA, and table extraction. |
+| `design` | Visual QA and browser-based implementation checks. |
+| `video` | Transcript, silence, and filler-word workflows. |
+
+`core` is included automatically unless `--all` is used.
+
+## Target Detection
+
+When `--targets` is omitted, Floom Packs detects installed local agents:
+
+| Target | Detection path | Skill root |
+| --- | --- | --- |
+| `claude` | `~/.claude` | `~/.claude/skills` |
+| `codex` | `~/.codex` or `CODEX_HOME` | `~/.codex/skills` |
+| `cursor` | `~/.cursor` | `~/.cursor/skills-cursor` |
+| `opencode` | `~/.config/opencode` | `~/.config/opencode/skills` |
+| `kimi` | `~/.kimi` | `~/.kimi/skills` |
+
+If no supported agent is detected, pass targets explicitly:
 
 ```bash
-npx @floomhq/packs list
+npx @floomhq/packs install --targets claude,codex --yes
 ```
 
-V0 profiles:
+## Existing Local Skills
 
-- `core`
-- `dev`
-- `writing`
-- `research`
-- `marketing`
-- `sales`
-- `ops`
-- `founder`
-- `data`
-- `design`
-- `video`
+Floom Packs adds skills beside existing local skills. It does not delete or
+scan unrelated local skills.
 
-## Safety
+Each installed skill folder receives a provenance file:
 
-Real installs require `--yes`. Without `--yes`, `install` prints a dry-run plan.
-
-Use `--root <dir>` to test against temporary roots:
-
-```bash
-npx @floomhq/packs install --profiles core,dev --targets claude,codex --root /tmp/floom-packs-test --yes
+```text
+.floom-pack.json
 ```
+
+If a destination folder already exists and does not have Floom Packs provenance,
+the installer reports a conflict and refuses to overwrite it.
+
+Use `--force` only when replacing an existing local folder is intentional.
+
+## Safety And Privacy
+
+Default safety behavior:
+
+- `install` is a dry-run unless `--yes` is provided.
+- untracked existing skill folders are not overwritten.
+- Floom Packs writes only local files.
+- no cloud account is required.
+- no install telemetry is sent.
+- no MCP server or background daemon is started.
+
+See [docs/PRIVACY-SAFETY.md](./docs/PRIVACY-SAFETY.md) for the full safety
+model.
 
 ## Source Boundaries
 
-Bundled sources:
+Bundled now:
 
-- Floom-authored skills.
-- Selected Apache-2.0 SkillsBench-derived skills.
+- curated seed skills maintained in this repo;
+- selected Apache-2.0 SkillsBench-derived skills.
 
 Planned but not bundled yet:
 
-- skills.sh ecosystem skills.
-- superpowers skills.
-- standalone-safe gstack skills.
+- skills.sh ecosystem skills;
+- native Claude skills and examples;
+- standalone-safe gstack skills;
+- superpowers skills;
+- other clear-license open skill sources.
 
-These require license/provenance review before bundling.
+Third-party content is only bundled after license and provenance review.
+
+See [docs/CURATION-BRIEF.md](./docs/CURATION-BRIEF.md) for the curation task.
+
+## Website And UI Integration
+
+The website can use:
+
+```bash
+floom-packs manifest --json
+```
+
+for profiles, skill counts, source labels, and supported targets.
+
+See [docs/WEBSITE-INTEGRATION.md](./docs/WEBSITE-INTEGRATION.md) for the UI data
+contract, social proof metrics, and copy rules.
 
 ## Architecture
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for the local install model, target
-detection, conflict handling, and discovery flow.
+detection, conflict handling, discovery flow, and Mermaid diagrams.
 
-## Curation
+Visual explainer:
 
-See [docs/CURATION-BRIEF.md](./docs/CURATION-BRIEF.md) for the next source
-curation pass.
+https://floom-packs-architecture-2026-05-10.surge.sh/
+
+## Launch Status
+
+This repo is launch-ready as the package backend after the outsourced curation
+and UI passes land.
+
+Current verified backend:
+
+- install planner;
+- local target detection;
+- profile selection;
+- local skill copy;
+- local index generation;
+- instruction injection;
+- provenance tracking;
+- overwrite protection;
+- package tarball execution on a clean VPS.
+
+See [docs/LAUNCH-CHECKLIST.md](./docs/LAUNCH-CHECKLIST.md).
+
