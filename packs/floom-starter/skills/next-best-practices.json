@@ -1,0 +1,117 @@
+{
+  "slug": "next-best-practices",
+  "name": "next-best-practices",
+  "publisher": "vercel-labs",
+  "source_repo": "https://github.com/vercel-labs/next-skills",
+  "skills_sh_url": "https://skills.sh/vercel-labs/next-skills/next-best-practices",
+  "install_count_skills_sh": 82500,
+  "license": "MIT",
+  "description": "Next.js-specific routing, data fetching, and middleware patterns from Vercel.",
+  "fires_when": "any Next.js project, routing, data fetching, middleware",
+  "skill_md_content": "---\nname: next-best-practices\ndescription: Next.js best practices - file conventions, RSC boundaries, data patterns, async APIs, metadata, error handling, route handlers, image/font optimization, bundling\nuser-invocable: false\n---\n\n# Next.js Best Practices\n\nApply these rules when writing or reviewing Next.js code.\n\n## File Conventions\n\nSee [file-conventions.md](./file-conventions.md) for:\n- Project structure and special files\n- Route segments (dynamic, catch-all, groups)\n- Parallel and intercepting routes\n- Middleware rename in v16 (middleware → proxy)\n\n## RSC Boundaries\n\nDetect invalid React Server Component patterns.\n\nSee [rsc-boundaries.md](./rsc-boundaries.md) for:\n- Async client component detection (invalid)\n- Non-serializable props detection\n- Server Action exceptions\n\n## Async Patterns\n\nNext.js 15+ async API changes.\n\nSee [async-patterns.md](./async-patterns.md) for:\n- Async `params` and `searchParams`\n- Async `cookies()` and `headers()`\n- Migration codemod\n\n## Runtime Selection\n\nSee [runtime-selection.md](./runtime-selection.md) for:\n- Default to Node.js runtime\n- When Edge runtime is appropriate\n\n## Directives\n\nSee [directives.md](./directives.md) for:\n- `'use client'`, `'use server'` (React)\n- `'use cache'` (Next.js)\n\n## Functions\n\nSee [functions.md](./functions.md) for:\n- Navigation hooks: `useRouter`, `usePathname`, `useSearchParams`, `useParams`\n- Server functions: `cookies`, `headers`, `draftMode`, `after`\n- Generate functions: `generateStaticParams`, `generateMetadata`\n\n## Error Handling\n\nSee [error-handling.md](./error-handling.md) for:\n- `error.tsx`, `global-error.tsx`, `not-found.tsx`\n- `redirect`, `permanentRedirect`, `notFound`\n- `forbidden`, `unauthorized` (auth errors)\n- `unstable_rethrow` for catch blocks\n\n## Data Patterns\n\nSee [data-patterns.md](./data-patterns.md) for:\n- Server Components vs Server Actions vs Route Handlers\n- Avoiding data waterfalls (`Promise.all`, Suspense, preload)\n- Client component data fetching\n\n## Route Handlers\n\nSee [route-handlers.md](./route-handlers.md) for:\n- `route.ts` basics\n- GET handler conflicts with `page.tsx`\n- Environment behavior (no React DOM)\n- When to use vs Server Actions\n\n## Metadata & OG Images\n\nSee [metadata.md](./metadata.md) for:\n- Static and dynamic metadata\n- `generateMetadata` function\n- OG image generation with `next/og`\n- File-based metadata conventions\n\n## Image Optimization\n\nSee [image.md](./image.md) for:\n- Always use `next/image` over `<img>`\n- Remote images configuration\n- Responsive `sizes` attribute\n- Blur placeholders\n- Priority loading for LCP\n\n## Font Optimization\n\nSee [font.md](./font.md) for:\n- `next/font` setup\n- Google Fonts, local fonts\n- Tailwind CSS integration\n- Preloading subsets\n\n## Bundling\n\nSee [bundling.md](./bundling.md) for:\n- Server-incompatible packages\n- CSS imports (not link tags)\n- Polyfills (already included)\n- ESM/CommonJS issues\n- Bundle analysis\n\n## Scripts\n\nSee [scripts.md](./scripts.md) for:\n- `next/script` vs native script tags\n- Inline scripts need `id`\n- Loading strategies\n- Google Analytics with `@next/third-parties`\n\n## Hydration Errors\n\nSee [hydration-error.md](./hydration-error.md) for:\n- Common causes (browser APIs, dates, invalid HTML)\n- Debugging with error overlay\n- Fixes for each cause\n\n## Suspense Boundaries\n\nSee [suspense-boundaries.md](./suspense-boundaries.md) for:\n- CSR bailout with `useSearchParams` and `usePathname`\n- Which hooks require Suspense boundaries\n\n## Parallel & Intercepting Routes\n\nSee [parallel-routes.md](./parallel-routes.md) for:\n- Modal patterns with `@slot` and `(.)` interceptors\n- `default.tsx` for fallbacks\n- Closing modals correctly with `router.back()`\n\n## Self-Hosting\n\nSee [self-hosting.md](./self-hosting.md) for:\n- `output: 'standalone'` for Docker\n- Cache handlers for multi-instance ISR\n- What works vs needs extra setup\n\n## Debug Tricks\n\nSee [debug-tricks.md](./debug-tricks.md) for:\n- MCP endpoint for AI-assisted debugging\n- Rebuild specific routes with `--debug-build-paths`\n\n",
+  "skill_md_url": "https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/SKILL.md",
+  "skill_md_size_bytes": 4004,
+  "files": [
+    {
+      "name": "SKILL.md",
+      "size_bytes": 4004,
+      "type": "main"
+    },
+    {
+      "name": "async-patterns.md",
+      "size_bytes": 1664,
+      "type": "support"
+    },
+    {
+      "name": "bundling.md",
+      "size_bytes": 4456,
+      "type": "support"
+    },
+    {
+      "name": "data-patterns.md",
+      "size_bytes": 6687,
+      "type": "support"
+    },
+    {
+      "name": "debug-tricks.md",
+      "size_bytes": 2953,
+      "type": "support"
+    },
+    {
+      "name": "directives.md",
+      "size_bytes": 1476,
+      "type": "support"
+    },
+    {
+      "name": "error-handling.md",
+      "size_bytes": 4736,
+      "type": "support"
+    },
+    {
+      "name": "file-conventions.md",
+      "size_bytes": 3453,
+      "type": "support"
+    },
+    {
+      "name": "font.md",
+      "size_bytes": 5196,
+      "type": "support"
+    },
+    {
+      "name": "functions.md",
+      "size_bytes": 4388,
+      "type": "support"
+    },
+    {
+      "name": "hydration-error.md",
+      "size_bytes": 1801,
+      "type": "support"
+    },
+    {
+      "name": "image.md",
+      "size_bytes": 3882,
+      "type": "support"
+    },
+    {
+      "name": "metadata.md",
+      "size_bytes": 7140,
+      "type": "support"
+    },
+    {
+      "name": "parallel-routes.md",
+      "size_bytes": 7171,
+      "type": "support"
+    },
+    {
+      "name": "route-handlers.md",
+      "size_bytes": 3244,
+      "type": "support"
+    },
+    {
+      "name": "rsc-boundaries.md",
+      "size_bytes": 4309,
+      "type": "support"
+    },
+    {
+      "name": "runtime-selection.md",
+      "size_bytes": 985,
+      "type": "support"
+    },
+    {
+      "name": "scripts.md",
+      "size_bytes": 3326,
+      "type": "support"
+    },
+    {
+      "name": "self-hosting.md",
+      "size_bytes": 8334,
+      "type": "support"
+    },
+    {
+      "name": "suspense-boundaries.md",
+      "size_bytes": 1366,
+      "type": "support"
+    }
+  ],
+  "fetched_at": "2026-05-10T23:25:49.000963+00:00"
+}

@@ -1,0 +1,32 @@
+{
+  "slug": "internal-comms",
+  "name": "internal-comms",
+  "publisher": "anthropics",
+  "source_repo": "https://github.com/anthropics/skills",
+  "skills_sh_url": "https://skills.sh/anthropics/skills/internal-comms",
+  "install_count_skills_sh": 32900,
+  "license": "Apache-2.0",
+  "description": "Internal communication templates: status updates, meeting notes, memos.",
+  "fires_when": "\"write an internal update\", \"draft team memo\", status communications",
+  "skill_md_content": "---\nname: internal-comms\ndescription: A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).\nlicense: Complete terms in LICENSE.txt\n---\n\n## When to use this skill\nTo write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports\n\n## How to use this skill\n\nTo write any internal communication:\n\n1. **Identify the communication type** from the request\n2. **Load the appropriate guideline file** from the `examples/` directory:\n    - `examples/3p-updates.md` - For Progress/Plans/Problems team updates\n    - `examples/company-newsletter.md` - For company-wide newsletters\n    - `examples/faq-answers.md` - For answering frequently asked questions\n    - `examples/general-comms.md` - For anything else that doesn't explicitly match one of the above\n3. **Follow the specific instructions** in that file for formatting, tone, and content gathering\n\nIf the communication type doesn't match any existing guideline, ask for clarification or more context about the desired format.\n\n## Keywords\n3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms\n",
+  "skill_md_url": "https://raw.githubusercontent.com/anthropics/skills/main/skills/internal-comms/SKILL.md",
+  "skill_md_size_bytes": 1511,
+  "files": [
+    {
+      "name": "LICENSE.txt",
+      "size_bytes": 11345,
+      "type": "support"
+    },
+    {
+      "name": "SKILL.md",
+      "size_bytes": 1511,
+      "type": "main"
+    },
+    {
+      "name": "examples",
+      "size_bytes": 0,
+      "type": "example"
+    }
+  ],
+  "fetched_at": "2026-05-10T23:26:02.956245+00:00"
+}

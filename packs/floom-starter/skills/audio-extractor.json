@@ -1,0 +1,27 @@
+{
+  "slug": "audio-extractor",
+  "name": "audio-extractor",
+  "publisher": "benchflow-ai",
+  "source_repo": "https://github.com/benchflow-ai/skillsbench",
+  "skills_sh_url": null,
+  "install_count_skills_sh": null,
+  "license": "Apache-2.0",
+  "description": "Extracts audio from video to WAV format for analysis.",
+  "fires_when": "\"extract audio from this video\", \"get the audio track\"",
+  "skill_md_content": "---\nname: audio-extractor\ndescription: Extract audio from video files to WAV format. Use when you need to analyze audio from video, prepare audio for energy calculation, or convert video audio to standard format for processing.\n---\n\n# Audio Extractor\n\nExtracts audio from video files to WAV format for further analysis. Converts to mono 16kHz PCM format optimized for speech/energy analysis.\n\n## Use Cases\n\n- Extracting audio for speech analysis\n- Preparing audio for energy calculation\n- Converting video audio to standard format\n\n## Usage\n\n```bash\npython3 /root/.claude/skills/audio-extractor/scripts/extract_audio.py \\\n    --video /path/to/video.mp4 \\\n    --output /path/to/audio.wav\n```\n\n### Parameters\n\n- `--video`: Path to input video file\n- `--output`: Path to output WAV file\n- `--sample-rate`: Audio sample rate in Hz (default: 16000)\n- `--duration`: Optional duration limit in seconds (default: full video)\n\n### Output Format\n\n- Format: WAV (PCM 16-bit signed)\n- Channels: Mono\n- Sample rate: 16000 Hz (default)\n\n## Dependencies\n\n- ffmpeg\n\n## Example\n\n```bash\n# Extract first 10 minutes of audio\npython3 /root/.claude/skills/audio-extractor/scripts/extract_audio.py \\\n    --video lecture.mp4 \\\n    --duration 600 \\\n    --output audio.wav\n```\n\n## Notes\n\n- Output is always mono for consistent analysis\n- 16kHz sample rate is sufficient for speech analysis and reduces file size\n- Supports any video format that ffmpeg can read\n",
+  "skill_md_url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/main/tasks/video-silence-remover/environment/skills/audio-extractor/SKILL.md",
+  "skill_md_size_bytes": 1436,
+  "files": [
+    {
+      "name": "SKILL.md",
+      "size_bytes": 1436,
+      "type": "main"
+    },
+    {
+      "name": "scripts",
+      "size_bytes": 0,
+      "type": "support"
+    }
+  ],
+  "fetched_at": "2026-05-10T23:29:28.393261+00:00"
+}
