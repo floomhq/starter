@@ -7,7 +7,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-import { loadManifest } from "./fetch-manifest.js";
+import { loadManifest, fetchSkillDetail } from "./fetch-manifest.js";
 import { resolveAgents, detectAgents } from "./detect-agents.js";
 import { loadSkillContent, writeSkill } from "./write-skill.js";
 import { buildActivationBlock, upsertActivationBlock } from "./activation-companion.js";
@@ -30,7 +30,9 @@ function selectSkills(manifest, opts) {
     for (const pid of profileIds) {
       const profile = manifest.profiles.find((p) => p.id === pid);
       if (!profile) throw new Error(`Unknown profile: ${pid}. Valid: ${manifest.profiles.map((p) => p.id).join(", ")}`);
-      for (const slug of profile.skills) slugSet.add(slug);
+      // v0.2.0 uses skill_slugs; v0.1.x used skills (array of slugs)
+      const slugsForProfile = profile.skill_slugs || profile.skills || [];
+      for (const slug of slugsForProfile) slugSet.add(slug);
     }
   }
 
@@ -47,7 +49,8 @@ function selectSkills(manifest, opts) {
     for (const pid of manifest.defaultProfiles || ["core"]) {
       const profile = manifest.profiles.find((p) => p.id === pid);
       if (profile) {
-        for (const slug of profile.skills) slugSet.add(slug);
+        const slugsForProfile = profile.skill_slugs || profile.skills || [];
+        for (const slug of slugsForProfile) slugSet.add(slug);
       }
     }
   }
@@ -158,12 +161,40 @@ export async function install(opts = {}) {
   }
 
   // 5. Install skills to each agent
+  // Pre-fetch all per-skill detail JSONs for SKILL.md content (v0.2.0 schema).
+  // Falls back to local loadSkillContent if the remote fetch fails.
+  const skillContentCache = new Map();
+  await Promise.all(
+    skills.map(async (skill) => {
+      // Try per-skill JSON first (v0.2.0); fall back to bundled content
+      let content = null;
+      if (source === "remote") {
+        const detail = await fetchSkillDetail(skill.slug);
+        if (detail && detail.skill_md_content) {
+          content = detail.skill_md_content;
+        }
+      }
+      if (!content) {
+        try {
+          content = loadSkillContent(skill.slug);
+        } catch {
+          content = null;
+        }
+      }
+      skillContentCache.set(skill.slug, content);
+    })
+  );
+
   const results = [];
   for (const agent of agents) {
     const agentResults = [];
     for (const skill of skills) {
+      const content = skillContentCache.get(skill.slug);
+      if (!content) {
+        agentResults.push({ slug: skill.slug, action: "error", error: "No SKILL.md content available" });
+        continue;
+      }
       try {
-        const content = loadSkillContent(skill.slug);
         const result = writeSkill(agent, skill.slug, content, opts.force || false);
         agentResults.push({ slug: skill.slug, ...result });
       } catch (err) {

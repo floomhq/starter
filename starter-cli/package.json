@@ -1,6 +1,6 @@
 {
   "name": "@floomhq/starter",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Install curated AI agent skills for Claude Code, Codex, Cursor, OpenCode, and Kimi — zero dependencies, one command.",
   "type": "module",
   "bin": {
