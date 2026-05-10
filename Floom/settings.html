@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Settings - Floom</title>
+    <link rel="stylesheet" href="floom-pages.css" />
+  </head>
+  <body>
+    <main class="page">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="wordmark" href="Floom%20v0%20landing.html">
+          <strong>Floom</strong>
+          <span>Open source · MIT</span>
+        </a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="Floom%20v0%20landing.html">Home</a>
+            <a href="skill.html">Skills</a>
+            <a href="docs.html">Docs</a>
+            <a href="about.html">About</a>
+          </div>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Settings</span>
+          <h1>Control what your agents can see.</h1>
+          <p class="lead">
+            Manage MCP install, active libraries, connected agents, account
+            identity, preferences, and exports from one product surface.
+          </p>
+        </div>
+        <div class="surface panel stack" id="mcp">
+          <span class="section-label">MCP install</span>
+          <h2>Run this once per machine.</h2>
+          <p class="lead">
+            Connect any MCP-aware agent to your Floom library. The server boots
+            quickly, caches locally, and exposes only the tools your agent
+            needs.
+          </p>
+          <span class="terminal">$ npx floom mcp install</span>
+          <a class="button-secondary" href="docs.html#mcp">Read the MCP docs</a>
+        </div>
+      </section>
+
+      <section class="settings-shell">
+        <aside class="sidebar">
+          <span class="section-label">Account</span>
+          <a href="#mcp">MCP install</a>
+          <a href="#libraries">Libraries</a>
+          <a href="#agents">Connected agents</a>
+          <a href="#account">Account</a>
+          <a href="#preferences">Preferences</a>
+          <a href="#danger">Danger zone</a>
+        </aside>
+
+        <div class="settings-board">
+          <section class="settings-section" id="libraries">
+            <div class="section-header">
+              <div>
+                <span class="section-label">Libraries</span>
+                <h2>Toggle active libraries.</h2>
+              </div>
+              <a class="button-secondary" href="library.html">New library</a>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Personal</h3>
+                <p>8 skills · 2 folders</p>
+              </div>
+              <div class="setting-actions">
+                <span class="status-pill">Active</span><a href="#">Rename</a
+                ><a href="#">Export</a>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Floom Team</h3>
+                <p>15 skills · 4 folders</p>
+              </div>
+              <div class="setting-actions">
+                <span class="status-pill">Active</span><a href="#">Rename</a
+                ><a href="#">Export</a>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Acme Inc</h3>
+                <p>6 skills · 1 folder</p>
+              </div>
+              <div class="setting-actions">
+                <span class="folder-pill">Inactive</span><a href="#">Rename</a
+                ><a href="#">Archive</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="settings-section" id="agents">
+            <div class="section-header">
+              <div>
+                <span class="section-label">Connected agents</span>
+                <h2>Synced from active libraries.</h2>
+              </div>
+              <span class="status-pill">Personal · Floom Team</span>
+            </div>
+            <div class="card-grid" style="margin-top: 0">
+              <article class="agent-card">
+                <h3>Claude Code</h3>
+                <p>Synced 2 min ago</p>
+                <span class="status-pill">On</span>
+              </article>
+              <article class="agent-card">
+                <h3>Codex CLI</h3>
+                <p>Synced 2 min ago</p>
+                <span class="status-pill">On</span>
+              </article>
+              <article class="agent-card">
+                <h3>Cursor</h3>
+                <p>Synced 5 min ago</p>
+                <span class="status-pill">On</span>
+              </article>
+              <article class="agent-card">
+                <h3>Kimi</h3>
+                <p>Not connected</p>
+                <a href="#">Connect</a>
+              </article>
+              <article class="agent-card">
+                <h3>Gemini</h3>
+                <p>Not connected</p>
+                <a href="#">Connect</a>
+              </article>
+              <article class="agent-card">
+                <h3>OpenCode</h3>
+                <p>Not connected</p>
+                <a href="#">Connect</a>
+              </article>
+            </div>
+          </section>
+
+          <section class="settings-section" id="account">
+            <span class="section-label">Account</span>
+            <h2>Your Floom identity.</h2>
+            <div class="setting-row">
+              <div>
+                <h3>Email</h3>
+                <p>depontefede@gmail.com</p>
+              </div>
+              <a href="#">Change</a>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Sign-in providers</h3>
+                <p>Google · GitHub not connected</p>
+              </div>
+              <a href="#">Connect GitHub</a>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Public profile</h3>
+                <p>floom.dev/u/depontefede</p>
+              </div>
+              <a href="#">Edit</a>
+            </div>
+          </section>
+
+          <section class="settings-section" id="preferences">
+            <span class="section-label">Preferences</span>
+            <h2>Day-to-day behavior.</h2>
+            <div class="setting-row">
+              <div>
+                <h3>Library default view</h3>
+                <p>List</p>
+              </div>
+              <a href="#">Change</a>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Sync notifications</h3>
+                <p>When a skill I use is updated</p>
+              </div>
+              <a href="#">Change</a>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Email digest</h3>
+                <p>Off</p>
+              </div>
+              <a href="#">Change</a>
+            </div>
+          </section>
+
+          <section class="settings-section danger" id="danger">
+            <span class="section-label">Danger zone</span>
+            <h2>Things that cannot be undone.</h2>
+            <div class="setting-row">
+              <div>
+                <h3>Export all libraries</h3>
+                <p>
+                  Download every skill across all libraries as a ZIP. Your data
+                  is yours.
+                </p>
+              </div>
+              <a class="button-secondary" href="#">Download ZIP</a>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Disconnect all agents</h3>
+                <p>Stops sync on every machine. You can reconnect any time.</p>
+              </div>
+              <a class="button-secondary" href="#">Disconnect all</a>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Delete account</h3>
+                <p>
+                  Removes your identity, library, and synced skills permanently.
+                </p>
+              </div>
+              <a class="button-secondary" href="#">Delete account</a>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

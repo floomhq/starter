@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About · Floom</title>
+    <link rel="stylesheet" href="floom-pages.css" />
+    <style>
+      body {
+        background: var(--paper);
+      }
+
+      .about-layout {
+        display: grid;
+        grid-template-columns: 380px minmax(0, 1fr);
+        gap: 44px;
+        align-items: stretch;
+        margin-top: 54px;
+        margin-bottom: 80px;
+      }
+
+      .about-hero {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid var(--ink);
+        min-height: 0;
+        align-self: stretch;
+      }
+
+      .about-hero img {
+        display: block;
+        width: 100%;
+        flex: 1 1 auto;
+        min-height: 0;
+        object-fit: cover;
+        object-position: center 40%;
+      }
+
+      .about-body p {
+        max-width: 520px;
+        color: #242424;
+        font-size: 19px;
+        font-weight: 500;
+        line-height: 1.65;
+        margin: 0 0 20px;
+      }
+
+      .about-body p:last-child {
+        margin-bottom: 0;
+      }
+
+      .about-body a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+
+      @media (max-width: 860px) {
+        .about-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .about-hero {
+          display: block;
+        }
+
+        .about-hero img {
+          flex: none;
+          width: 100%;
+          height: auto;
+          min-height: 260px;
+          max-height: 55vh;
+          aspect-ratio: 4 / 3;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="wordmark" href="Floom%20v0%20landing.html">
+          <strong>Floom</strong>
+          <span>Open source · MIT</span>
+        </a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="Floom%20v0%20landing.html">Home</a>
+            <a href="skill.html">Skills</a>
+            <a href="docs.html">Docs</a>
+            <a href="about.html" aria-current="page">About</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="about-layout">
+        <div class="about-hero">
+          <img src="assets/about-hero.jpg" alt="Golden Gate Bridge seen from the Presidio" />
+        </div>
+
+        <div class="about-body">
+          <p>
+            Floom is being built by <a href="https://x.com/fedeponte1" target="_blank">Federico</a> and
+            <a href="https://x.com/adamthesalmon" target="_blank">Adam</a>. We wanted a way to increase our agent's task
+            performance and realized the effective use of skills is one of the best ways to do that. Once it worked for us
+            we wanted to share it with you.
+          </p>
+          <p>
+            We are just two guys in a room at
+            <a href="https://maps.app.goo.gl/RxAswngFcjRHxxxo7" target="_blank">Frontier Tower</a>
+            burning an outrageous amount of tokens per second.
+          </p>
+          <p>Many more features to come soon so you can get the most out of life and your agents.</p>
+          <p>Stay tuned!</p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

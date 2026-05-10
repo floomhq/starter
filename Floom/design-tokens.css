@@ -1,0 +1,25 @@
+/**
+ * Canonical design tokens for Paper code-to-design sync.
+ * Update these CSS variables once; the agent can read this file + mirror on canvas.
+ */
+:root {
+  --color-bg: #0c0f14;
+  --color-surface: #161b22;
+  --color-border: #30363d;
+  --color-text: #e6edf3;
+  --color-text-muted: #8b949e;
+  --color-accent: #58a6ff;
+  --color-danger: #f85149;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --text-display: clamp(2rem, 5vw, 2.75rem);
+  --text-body: 1rem;
+  --text-caption: 0.8125rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --radius-card: 12px;
+  --shadow-soft: 0 8px 30px rgb(0 0 0 / 0.35);
+}

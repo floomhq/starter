@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Floom Copy Alignment</title>
+    <style>
+      :root {
+        --paper: #fafaf7;
+        --ink: #050505;
+        --muted: #555555;
+        --line: #d9d9d4;
+        --blue: #0094ff;
+        --blue-pale: #eaf7ff;
+        --pink-pale: #fff2fb;
+        --sans:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        --mono:
+          "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas,
+          monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 84% 0%, rgba(255, 79, 216, 0.1), transparent 30rem),
+          radial-gradient(circle at 12% 10%, rgba(0, 148, 255, 0.12), transparent 28rem),
+          var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+      }
+
+      .page {
+        width: min(100%, 1180px);
+        margin: 0 auto;
+        padding: 44px 48px 72px;
+      }
+
+      .nav {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 18px;
+      }
+
+      .wordmark {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wordmark strong {
+        display: block;
+        font-size: 28px;
+        font-weight: 950;
+        letter-spacing: -0.06em;
+        line-height: 0.9;
+      }
+
+      .wordmark span,
+      .eyebrow,
+      .label,
+      .note-title,
+      .copy-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .wordmark span {
+        color: var(--muted);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      .nav-links a {
+        color: inherit;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .nav-links a:hover {
+        color: var(--blue);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(310px, 0.55fr);
+        gap: 48px;
+        padding: 58px 0 44px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        max-width: 780px;
+        font-size: clamp(48px, 7vw, 84px);
+        font-weight: 850;
+        letter-spacing: -0.06em;
+        line-height: 0.92;
+      }
+
+      .lead {
+        max-width: 760px;
+        margin-top: 22px;
+        color: #2c2c2c;
+        font-size: 20px;
+        font-weight: 560;
+        line-height: 1.45;
+      }
+
+      .review-card,
+      .copy-card {
+        border: 1px solid rgba(5, 5, 5, 0.14);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 18px 48px rgba(5, 5, 5, 0.07);
+      }
+
+      .review-card {
+        align-self: start;
+        padding: 20px;
+      }
+
+      .review-card h2 {
+        margin-bottom: 14px;
+        font-size: 22px;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+
+      .review-card ul {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding-left: 18px;
+        color: #333333;
+        font-size: 14px;
+        font-weight: 650;
+        line-height: 1.45;
+      }
+
+      .section {
+        border-top: 1px solid rgba(5, 5, 5, 0.5);
+        padding: 34px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 16px;
+      }
+
+      .section h2 {
+        font-size: clamp(30px, 4vw, 48px);
+        font-weight: 850;
+        letter-spacing: -0.055em;
+        line-height: 0.95;
+      }
+
+      .label {
+        color: #006fbf;
+      }
+
+      .copy-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .copy-grid.single {
+        grid-template-columns: 1fr;
+      }
+
+      .copy-card {
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .copy-label {
+        color: rgba(5, 5, 5, 0.5);
+        font-size: 10px;
+      }
+
+      .copy-text {
+        color: #111111;
+        font-size: 20px;
+        font-weight: 760;
+        letter-spacing: -0.025em;
+        line-height: 1.18;
+      }
+
+      .copy-text.body {
+        color: #2e2e2e;
+        font-size: 17px;
+        font-weight: 580;
+        line-height: 1.48;
+      }
+
+      .copy-text.small {
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 850;
+        letter-spacing: 0;
+      }
+
+      .note {
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+        color: #555555;
+        font-size: 13px;
+        font-weight: 650;
+        line-height: 1.4;
+      }
+
+      .note-title {
+        display: block;
+        margin-bottom: 4px;
+        color: rgba(5, 5, 5, 0.45);
+        font-size: 9px;
+      }
+
+      .decision-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .decision-row span {
+        border: 1px solid rgba(5, 5, 5, 0.13);
+        border-radius: 999px;
+        background: var(--blue-pale);
+        padding: 7px 10px;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 850;
+      }
+
+      .faq-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .faq-item {
+        border: 1px solid rgba(5, 5, 5, 0.14);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.78);
+        padding: 18px;
+      }
+
+      .faq-item h3 {
+        margin-bottom: 8px;
+        font-size: 19px;
+        letter-spacing: -0.035em;
+      }
+
+      .faq-item p {
+        color: #333333;
+        font-size: 16px;
+        font-weight: 560;
+        line-height: 1.48;
+      }
+
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        border-top: 2px solid var(--ink);
+        margin-top: 28px;
+        padding-top: 20px;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 850;
+      }
+
+      @media (max-width: 780px) {
+        .page {
+          padding: 28px 20px 48px;
+        }
+
+        .hero,
+        .copy-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          gap: 24px;
+        }
+
+        .section-head {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <nav class="nav" aria-label="Copy review navigation">
+        <a class="wordmark" href="Floom%20v0%20landing.html">
+          <strong>Floom</strong>
+          <span>Copy alignment</span>
+        </a>
+        <div class="nav-links">
+          <a href="#hero">Hero</a>
+          <a href="#sections">Sections</a>
+          <a href="#faq">FAQ</a>
+          <a href="#cta">CTA</a>
+        </div>
+      </nav>
+
+      <section class="hero" id="hero">
+        <div>
+          <span class="eyebrow">Current v0 landing copy</span>
+          <h1>Align on the story before polishing the page.</h1>
+          <p class="lead">
+            This page extracts the copy from Floom v0 landing so the team can
+            review the message, decide what stays, and mark what needs a rewrite.
+          </p>
+        </div>
+        <aside class="review-card">
+          <h2>Review lens</h2>
+          <ul>
+            <li>Is the v0 promise clear: download a starter skills pack now?</li>
+            <li>Does the page avoid implying auto-sync is already shipped?</li>
+            <li>Do we explain why skills make agents better?</li>
+            <li>Is the call to action concrete enough?</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Navigation</h2>
+          <span class="label">Header copy</span>
+        </div>
+        <div class="copy-grid">
+          <article class="copy-card">
+            <span class="copy-label">Brand</span>
+            <p class="copy-text">Floom</p>
+            <p class="copy-text small">Open source - MIT</p>
+            <p class="note">
+              <span class="note-title">Decision</span>
+              Keep open-source proof visible, or simplify to just the wordmark?
+            </p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Nav items</span>
+            <p class="copy-text small">Home / Skills / Docs / About</p>
+            <p class="note">
+              <span class="note-title">Decision</span>
+              Confirm whether Skills should go to the sample skill page or a
+              broader skills section.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Hero</h2>
+          <span class="label">First viewport</span>
+        </div>
+        <div class="copy-grid">
+          <article class="copy-card">
+            <span class="copy-label">Headline</span>
+            <p class="copy-text">
+              Make your [agent] smarter with the best agent skills.
+            </p>
+            <p class="note">
+              <span class="note-title">Note</span>
+              The live page rotates agent names: Claude, Cursor, Codex, Gemini,
+              Kimi, and OpenCode.
+            </p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Subhead</span>
+            <p class="copy-text body">
+              Floom upgrades any agent with the best skills packs. Download a
+              starter pack, install it locally, and give your agent sharper
+              workflows today.
+            </p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Primary CTA</span>
+            <p class="copy-text small">Download skills pack</p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">CTA helper</span>
+            <p class="copy-text body">
+              Get the starter pack now. Auto-sync is coming later.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Evidence</h2>
+          <span class="label">Chart module</span>
+        </div>
+        <div class="copy-grid">
+          <article class="copy-card">
+            <span class="copy-label">Kicker</span>
+            <p class="copy-text small">SkillsBench</p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Chart heading</span>
+            <p class="copy-text">Skills raise agent task success.</p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Legend</span>
+            <p class="copy-text small">without skills / with skills</p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Chart note</span>
+            <p class="copy-text body">
+              Labels show the improvement from curated skills in the SkillsBench
+              evaluation. Read the paper.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Compatibility</h2>
+          <span class="label">Works with strip</span>
+        </div>
+        <div class="copy-grid single">
+          <article class="copy-card">
+            <span class="copy-label">Supported agents line</span>
+            <p class="copy-text small">
+              Works with Claude, Cursor, Codex, Gemini, Kimi, OpenCode, + more
+            </p>
+            <p class="note">
+              <span class="note-title">Decision</span>
+              Confirm whether this should say "works with" for v0, or "skills
+              are portable to" for extra precision.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="sections">
+        <div class="section-head">
+          <h2>Product Sections</h2>
+          <span class="label">Value prop copy</span>
+        </div>
+        <div class="copy-grid">
+          <article class="copy-card">
+            <span class="copy-label">Section 1 heading</span>
+            <p class="copy-text">Upgrade your agent</p>
+            <span class="copy-label">Section 1 body</span>
+            <p class="copy-text body">
+              Skills will improve your agent's intelligence in a meaningful way.
+              Download our starter pack to get going, then explore the
+              community's skill packs.
+            </p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Visual labels</span>
+            <p class="copy-text small">
+              Floom pack / Skills ready to install / Better context / Sharper
+              work / Portable memory / intelligence +42%
+            </p>
+            <p class="note">
+              <span class="note-title">Decision</span>
+              The +42% is conceptual visual copy. Decide whether to keep,
+              qualify, or remove.
+            </p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Section 2 heading</span>
+            <p class="copy-text">Download a skills pack</p>
+            <span class="copy-label">Section 2 body</span>
+            <p class="copy-text body">
+              Start with a ready-made pack your agent can use locally. Auto-sync
+              is not part of this release yet.
+            </p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Download module copy</span>
+            <p class="copy-text small">
+              Starter skills ready to download / Download pack / Download ZIP /
+              Add to agent / Start working / No account sync required
+            </p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Section 3 heading</span>
+            <p class="copy-text">Use the best skill for the task</p>
+            <span class="copy-label">Section 3 body</span>
+            <p class="copy-text body">
+              Agents search your skill library mid-task, rank the best matches,
+              and choose the skill with the highest fit for the job.
+            </p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">Skill search visual copy</span>
+            <p class="copy-text small">
+              build out a financial model for my new business /
+              startup-financial-model / saas-forecasting / unit-economics /
+              cash-flow-planning
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="section-head">
+          <h2>FAQ</h2>
+          <span class="label">About section</span>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item">
+            <h3>What is a Floom skill?</h3>
+            <p>
+              A reusable skill package your agents can find, install, and use
+              across Claude, Codex, and more.
+            </p>
+          </article>
+          <article class="faq-item">
+            <h3>How do skills improve my agent?</h3>
+            <p>
+              Skills give your agent focused procedures, examples, and checks
+              for a task. In SkillsBench, curated skills helped agents complete
+              more tasks than running without skills.
+            </p>
+          </article>
+          <article class="faq-item">
+            <h3>What happens when I switch agents?</h3>
+            <p>
+              Your downloaded skills stay portable, so you can install the same
+              setup in the next agent instead of starting from scratch.
+            </p>
+          </article>
+          <article class="faq-item">
+            <h3>Does it work with my agent?</h3>
+            <p>
+              Yes. Floom keeps skills portable so Claude, Codex, Cursor, Kimi,
+              Gemini, OpenCode, and future agents can work from the same shared
+              library.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="cta">
+        <div class="section-head">
+          <h2>Final CTA</h2>
+          <span class="label">Close</span>
+        </div>
+        <div class="copy-grid">
+          <article class="copy-card">
+            <span class="copy-label">CTA heading</span>
+            <p class="copy-text">
+              Download the starter skills pack. Upgrade your agent today.
+            </p>
+          </article>
+          <article class="copy-card">
+            <span class="copy-label">CTA support</span>
+            <p class="copy-text body">
+              Auto-sync comes later. The pack works locally now.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Open Decisions</h2>
+          <span class="label">Alignment checklist</span>
+        </div>
+        <div class="copy-card">
+          <div class="decision-row">
+            <span>Keep "smarter"?</span>
+            <span>Use "skill packs" or "skills pack"?</span>
+            <span>Qualify SkillsBench claims?</span>
+            <span>Keep +42% visual?</span>
+            <span>Say auto-sync is later?</span>
+            <span>Define local install?</span>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>Source: Floom v0 landing.html</span>
+        <span>Purpose: copy review and teammate alignment</span>
+      </footer>
+    </main>
+  </body>
+</html>
