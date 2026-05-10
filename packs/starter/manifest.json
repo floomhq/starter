@@ -1,0 +1,134 @@
+{
+  "id": "starter",
+  "name": "Floom Starter",
+  "description": "A broad local-first starter portfolio of curated agent skills.",
+  "version": "0.1.0",
+  "defaultProfiles": ["core"],
+  "targets": ["claude", "codex", "cursor", "opencode", "kimi"],
+  "sources": {
+    "floom": {
+      "label": "Floom-authored",
+      "license": "Apache-2.0",
+      "status": "bundled"
+    },
+    "skillsbench": {
+      "label": "SkillsBench-derived",
+      "repo": "https://github.com/benchflow-ai/skillsbench",
+      "commit": "411dc68bc00887548775c534201ca43e7e35e080",
+      "license": "Apache-2.0",
+      "status": "bundled"
+    },
+    "skills-sh": {
+      "label": "skills.sh ecosystem",
+      "status": "planned-license-review"
+    },
+    "superpowers": {
+      "label": "superpowers",
+      "status": "planned-license-review"
+    },
+    "gstack": {
+      "label": "gstack",
+      "status": "planned-standalone-review"
+    }
+  },
+  "profiles": [
+    {
+      "id": "core",
+      "name": "Core",
+      "description": "Skill discovery, task framing, and project onboarding for everyone.",
+      "skills": ["local-find-skills", "task-brief", "project-onboarding"]
+    },
+    {
+      "id": "dev",
+      "name": "Dev",
+      "description": "Code review, tests, security, browser checks, and repo analysis.",
+      "skills": ["pr-review", "python-testing", "security-review", "browser-performance-debugging", "github-repo-analytics"]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "description": "Brand voice, concise drafts, documents, and presentations.",
+      "skills": ["brand-voice-writer", "outbound-email-draft", "offer-letter-generator", "ppt-reference-formatting"]
+    },
+    {
+      "id": "research",
+      "name": "Research",
+      "description": "Source-aware briefs, citations, enterprise search, and PDF extraction.",
+      "skills": ["research-brief", "citation-check", "enterprise-search", "pdf-text-parser"]
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "description": "Landing pages, positioning, customer synthesis, and brand voice.",
+      "skills": ["landing-page-review", "brand-voice-writer", "customer-interview-synthesis"]
+    },
+    {
+      "id": "sales",
+      "name": "Sales",
+      "description": "Outbound, customer context, and sales data analysis.",
+      "skills": ["outbound-email-draft", "customer-interview-synthesis", "sales-pivot-analysis"]
+    },
+    {
+      "id": "ops",
+      "name": "Ops",
+      "description": "Meetings, SOPs, onboarding, and file organization.",
+      "skills": ["meeting-notes-to-actions", "ops-sop-builder", "project-onboarding", "organize-files"]
+    },
+    {
+      "id": "founder",
+      "name": "Founder",
+      "description": "Strategy briefs, customer learning, landing pages, and decisions.",
+      "skills": ["task-brief", "research-brief", "customer-interview-synthesis", "landing-page-review", "meeting-notes-to-actions"]
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "description": "Spreadsheets, PDFs, financial QA, and table extraction.",
+      "skills": ["pdf-excel-diff", "financial-modeling-qa", "sales-pivot-analysis", "ppt-excel-table"]
+    },
+    {
+      "id": "design",
+      "name": "Design",
+      "description": "Visual QA and browser-based implementation checks.",
+      "skills": ["visual-qa-review", "browser-performance-debugging"]
+    },
+    {
+      "id": "video",
+      "name": "Video",
+      "description": "Transcript, silence, and filler-word workflows.",
+      "skills": ["video-filler-word-remover", "video-silence-remover", "video-tutorial-indexer"]
+    }
+  ],
+  "skills": [
+    { "slug": "local-find-skills", "name": "Local Find Skills", "source": "floom" },
+    { "slug": "task-brief", "name": "Task Brief", "source": "floom" },
+    { "slug": "meeting-notes-to-actions", "name": "Meeting Notes To Actions", "source": "floom" },
+    { "slug": "research-brief", "name": "Research Brief", "source": "floom" },
+    { "slug": "customer-interview-synthesis", "name": "Customer Interview Synthesis", "source": "floom" },
+    { "slug": "landing-page-review", "name": "Landing Page Review", "source": "floom" },
+    { "slug": "outbound-email-draft", "name": "Outbound Email Draft", "source": "floom" },
+    { "slug": "ops-sop-builder", "name": "Ops SOP Builder", "source": "floom" },
+    { "slug": "visual-qa-review", "name": "Visual QA Review", "source": "floom" },
+    { "slug": "brand-voice-writer", "name": "Brand Voice Writer", "source": "floom" },
+    { "slug": "pr-review", "name": "Pragmatic PR Reviewer", "source": "floom" },
+    { "slug": "project-onboarding", "name": "Project Onboarding", "source": "floom" },
+    { "slug": "citation-check", "name": "Citation Check", "source": "skillsbench", "upstream": "tasks/citation-check/environment/skills/citation-management" },
+    { "slug": "offer-letter-generator", "name": "Offer Letter Generator", "source": "skillsbench", "upstream": "tasks/offer-letter-generator/environment/skills/docx" },
+    { "slug": "organize-files", "name": "Organize Files", "source": "skillsbench", "upstream": "tasks/organize-messy-files/environment/skills/docx" },
+    { "slug": "pdf-excel-diff", "name": "PDF Excel Diff", "source": "skillsbench", "upstream": "tasks/pdf-excel-diff/environment/skills/pdf" },
+    { "slug": "sales-pivot-analysis", "name": "Sales Pivot Analysis", "source": "skillsbench", "upstream": "tasks/sales-pivot-analysis/environment/skills/pdf" },
+    { "slug": "pdf-text-parser", "name": "PDF Text Parser", "source": "skillsbench", "upstream": "tasks/edit-pdf/environment/skills/text-parser" },
+    { "slug": "ppt-excel-table", "name": "PPT Excel Table", "source": "skillsbench", "upstream": "tasks/exceltable-in-ppt/environment/skills/xlsx" },
+    { "slug": "python-testing", "name": "Python Testing", "source": "skillsbench", "upstream": "tasks/fix-build-agentops/environment/skills/testing-python" },
+    { "slug": "security-review", "name": "Security Review", "source": "skillsbench", "upstream": "tasks/fix-erlang-ssh-cve/environment/skills/senior-security" },
+    { "slug": "browser-performance-debugging", "name": "Browser Performance Debugging", "source": "skillsbench", "upstream": "tasks/react-performance-debugging/environment/skills/browser-testing" },
+    { "slug": "github-repo-analytics", "name": "GitHub Repo Analytics", "source": "skillsbench", "upstream": "tasks/gh-repo-analytics/environment/skills/gh-cli" },
+    { "slug": "video-filler-word-remover", "name": "Video Filler Word Remover", "source": "skillsbench", "upstream": "tasks/video-filler-word-remover/environment/skills/filler-word-processing" },
+    { "slug": "video-silence-remover", "name": "Video Silence Remover", "source": "skillsbench", "upstream": "tasks/video-silence-remover/environment/skills/audio-extractor" },
+    { "slug": "video-tutorial-indexer", "name": "Video Tutorial Indexer", "source": "skillsbench", "upstream": "tasks/video-tutorial-indexer/environment/skills/speech-to-text" },
+    { "slug": "ppt-reference-formatting", "name": "PPT Reference Formatting", "source": "skillsbench", "upstream": "tasks/pptx-reference-formatting/environment/skills/pptx" },
+    { "slug": "enterprise-search", "name": "Enterprise Search", "source": "skillsbench", "upstream": "tasks/enterprise-information-search/environment/skills/enterprise-artifact-search" },
+    { "slug": "financial-modeling-qa", "name": "Financial Modeling QA", "source": "skillsbench", "upstream": "tasks/financial-modeling-qa/environment/skills/pdf" }
+  ]
+}
+
