@@ -9,7 +9,7 @@ import path from "node:path";
 import fs from "node:fs";
 
 const MANIFEST_URL =
-  "https://raw.githubusercontent.com/floomhq/packs/main/packs/starter/manifest.json";
+  "https://raw.githubusercontent.com/floomhq/packs/main/packs/floom-starter/manifest.json";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FALLBACK_PATH = path.join(__dirname, "..", "data", "fallback-manifest.json");
