@@ -1,0 +1,23 @@
+name: Skill request
+description: Suggest a new skill for the curated Starter Pack.
+title: "[Skill]: "
+labels: ["skill-request"]
+body:
+  - type: input
+    id: skill-name
+    attributes:
+      label: Skill name / slug
+    validations:
+      required: true
+  - type: input
+    id: skills-sh-url
+    attributes:
+      label: skills.sh URL
+      placeholder: https://skills.sh/skills/<slug>
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this skill?
+      description: What problem does it solve? Why should it be in the curated 65?
+    validations:
+      required: true

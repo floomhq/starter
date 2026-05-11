@@ -1,0 +1,1010 @@
+{
+  "pack": "floom-starter",
+  "version": "0.2.3",
+  "updated": "2026-05-11",
+  "license": "MIT (pack); individual skills retain their own licenses \u2014 see README.md license table",
+  "profiles": [
+    {
+      "description": "Everyday agent hygiene: skill discovery, planning, quality gate, debugging, parallelism, context management.",
+      "id": "core",
+      "name": "Core",
+      "skill_slugs": [
+        "find-skills",
+        "skill-creator",
+        "brainstorming",
+        "grill-me",
+        "systematic-debugging",
+        "writing-plans",
+        "verification-before-completion",
+        "executing-plans",
+        "workplan"
+      ]
+    },
+    {
+      "description": "Code review, debugging, testing, security, browser QA, build health, deployment, parallel agents.",
+      "id": "dev",
+      "name": "Dev",
+      "skill_slugs": [
+        "vercel-react-best-practices",
+        "web-design-guidelines",
+        "next-best-practices",
+        "supabase-postgres-best-practices",
+        "tdd",
+        "improve-codebase-architecture",
+        "requesting-code-review",
+        "dispatching-parallel-agents",
+        "webapp-testing",
+        "playwright-best-practices",
+        "diagnose",
+        "finishing-a-development-branch"
+      ]
+    },
+    {
+      "description": "Brand voice, editing, rewriting, launch copy, email drafts, document polish.",
+      "id": "writing",
+      "name": "Writing",
+      "skill_slugs": [
+        "copywriting",
+        "copy-editing",
+        "content-strategy",
+        "writing-plans",
+        "verification-before-completion",
+        "brand-guidelines",
+        "doc-coauthoring",
+        "internal-comms",
+        "docx"
+      ]
+    },
+    {
+      "description": "Web research, source synthesis, reading documents, data gathering, brief generation.",
+      "id": "research",
+      "name": "Research",
+      "skill_slugs": [
+        "brainstorming",
+        "just-scrape",
+        "agent-browser",
+        "pdf",
+        "xlsx",
+        "zoom-out",
+        "fuzzy-match",
+        "writing-plans"
+      ]
+    },
+    {
+      "description": "Landing pages, SEO, positioning, campaign copy, CRO, customer research, GTM.",
+      "id": "marketing",
+      "name": "Marketing",
+      "skill_slugs": [
+        "seo-audit",
+        "copywriting",
+        "marketing-psychology",
+        "social-content",
+        "content-strategy",
+        "programmatic-seo",
+        "page-cro",
+        "analytics-tracking",
+        "launch-strategy",
+        "schema-markup",
+        "ab-test-setup",
+        "brainstorming"
+      ]
+    },
+    {
+      "description": "Lead research, outbound drafts, CRM notes, meeting prep, proposal writing, revenue ops.",
+      "id": "sales",
+      "name": "Sales",
+      "skill_slugs": [
+        "cold-email",
+        "copywriting",
+        "sales-enablement",
+        "revops",
+        "churn-prevention",
+        "brainstorming",
+        "verification-before-completion",
+        "fuzzy-match"
+      ]
+    },
+    {
+      "description": "SOPs, checklists, handoffs, process docs, incident response, postmortems, security.",
+      "id": "ops",
+      "name": "Ops",
+      "skill_slugs": [
+        "workplan",
+        "writing-plans",
+        "to-issues",
+        "triage",
+        "diagnose",
+        "verification-before-completion",
+        "dispatching-parallel-agents",
+        "internal-comms",
+        "pdf",
+        "xlsx"
+      ]
+    },
+    {
+      "description": "Investor updates, strategy memos, pitch polish, hiring, roadmap synthesis, board prep.",
+      "id": "founder",
+      "name": "Founder",
+      "skill_slugs": [
+        "brainstorming",
+        "grill-me",
+        "writing-plans",
+        "copywriting",
+        "to-prd",
+        "pricing-strategy",
+        "launch-strategy",
+        "seo-audit",
+        "product-marketing-context",
+        "pdf"
+      ]
+    },
+    {
+      "description": "CSV/XLSX/PDF extraction, analysis, data quality, fuzzy matching, performance optimization.",
+      "id": "data",
+      "name": "Data",
+      "skill_slugs": [
+        "xlsx",
+        "pdf",
+        "just-scrape",
+        "fuzzy-match",
+        "python-parallelization",
+        "memory-optimization",
+        "testing-python",
+        "zoom-out",
+        "docx"
+      ]
+    },
+    {
+      "description": "UI critique, visual QA, wireframe review, design system checks, screenshot-driven review.",
+      "id": "design",
+      "name": "Design",
+      "skill_slugs": [
+        "frontend-design",
+        "web-design-guidelines",
+        "audit",
+        "polish",
+        "critique",
+        "tailwind-design-system",
+        "brainstorming",
+        "verification-before-completion",
+        "wireframe-to-react"
+      ]
+    },
+    {
+      "description": "Audio cleanup, caption generation, silence/filler removal, frame review, transcript extraction.",
+      "id": "video",
+      "name": "Video",
+      "skill_slugs": [
+        "video-polish",
+        "remotion-best-practices",
+        "audio-extractor",
+        "video-processor",
+        "brainstorming",
+        "verification-before-completion"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "slug": "ab-test-setup",
+      "name": "ab-test-setup",
+      "publisher": "coreyhaines31",
+      "description": "A/B test design, statistical significance, and implementation guidance.",
+      "install_count_skills_sh": 49910,
+      "license": "MIT",
+      "profiles": [
+        "marketing"
+      ],
+      "detail_url": "skills/ab-test-setup.json"
+    },
+    {
+      "slug": "agent-browser",
+      "name": "agent-browser",
+      "publisher": "vercel-labs",
+      "description": "Headless browser agent for visiting pages, filling forms, and extracting content.",
+      "install_count_skills_sh": 256335,
+      "license": "MIT",
+      "profiles": [
+        "research"
+      ],
+      "detail_url": "skills/agent-browser.json"
+    },
+    {
+      "slug": "analytics-tracking",
+      "name": "analytics-tracking",
+      "publisher": "coreyhaines31",
+      "description": "Analytics setup, event tracking, and funnel analysis.",
+      "install_count_skills_sh": 55412,
+      "license": "MIT",
+      "profiles": [
+        "marketing"
+      ],
+      "detail_url": "skills/analytics-tracking.json"
+    },
+    {
+      "slug": "audio-extractor",
+      "name": "audio-extractor",
+      "publisher": "benchflow-ai",
+      "description": "Extracts audio from video to WAV format for analysis.",
+      "install_count_skills_sh": null,
+      "license": "Apache-2.0",
+      "profiles": [
+        "video"
+      ],
+      "detail_url": "skills/audio-extractor.json"
+    },
+    {
+      "slug": "audit",
+      "name": "audit",
+      "publisher": "pbakaus",
+      "description": "Systematic UX audit across accessibility, layout, and interaction patterns.",
+      "install_count_skills_sh": 82187,
+      "license": "Apache-2.0",
+      "profiles": [
+        "design"
+      ],
+      "detail_url": "skills/audit.json"
+    },
+    {
+      "slug": "brainstorming",
+      "name": "brainstorming",
+      "publisher": "obra",
+      "description": "Structured ideation and clarification before starting open-ended work.",
+      "install_count_skills_sh": 147427,
+      "license": "MIT",
+      "profiles": [
+        "core",
+        "research",
+        "marketing",
+        "sales",
+        "founder",
+        "design",
+        "video"
+      ],
+      "detail_url": "skills/brainstorming.json"
+    },
+    {
+      "slug": "brand-guidelines",
+      "name": "brand-guidelines",
+      "publisher": "anthropics",
+      "description": "Brand voice and tone guidelines for consistent external communications.",
+      "install_count_skills_sh": 37553,
+      "license": "Apache-2.0",
+      "profiles": [
+        "writing"
+      ],
+      "detail_url": "skills/brand-guidelines.json"
+    },
+    {
+      "slug": "churn-prevention",
+      "name": "churn-prevention",
+      "publisher": "coreyhaines31",
+      "description": "Retention tactics, churn analysis, and win-back strategies.",
+      "install_count_skills_sh": 42040,
+      "license": "MIT",
+      "profiles": [
+        "sales"
+      ],
+      "detail_url": "skills/churn-prevention.json"
+    },
+    {
+      "slug": "cold-email",
+      "name": "cold-email",
+      "publisher": "coreyhaines31",
+      "description": "Structured cold email sequences with personalization frameworks.",
+      "install_count_skills_sh": 44181,
+      "license": "MIT",
+      "profiles": [
+        "sales"
+      ],
+      "detail_url": "skills/cold-email.json"
+    },
+    {
+      "slug": "content-strategy",
+      "name": "content-strategy",
+      "publisher": "coreyhaines31",
+      "description": "Content planning, audience mapping, and distribution strategy.",
+      "install_count_skills_sh": 63386,
+      "license": "MIT",
+      "profiles": [
+        "writing",
+        "marketing"
+      ],
+      "detail_url": "skills/content-strategy.json"
+    },
+    {
+      "slug": "copy-editing",
+      "name": "copy-editing",
+      "publisher": "coreyhaines31",
+      "description": "Systematic editing for clarity, tone, structure, and brevity.",
+      "install_count_skills_sh": 55924,
+      "license": "MIT",
+      "profiles": [
+        "writing"
+      ],
+      "detail_url": "skills/copy-editing.json"
+    },
+    {
+      "slug": "copywriting",
+      "name": "copywriting",
+      "publisher": "coreyhaines31",
+      "description": "Professional copywriting frameworks for campaigns, landing pages, and external communications.",
+      "install_count_skills_sh": 92966,
+      "license": "MIT",
+      "profiles": [
+        "writing",
+        "marketing",
+        "sales",
+        "founder"
+      ],
+      "detail_url": "skills/copywriting.json"
+    },
+    {
+      "slug": "critique",
+      "name": "critique",
+      "publisher": "pbakaus",
+      "description": "Adversarial design critique identifying specific visual and UX weaknesses.",
+      "install_count_skills_sh": 82979,
+      "license": "Apache-2.0",
+      "profiles": [
+        "design"
+      ],
+      "detail_url": "skills/critique.json"
+    },
+    {
+      "slug": "diagnose",
+      "name": "diagnose",
+      "publisher": "mattpocock",
+      "description": "Structured debugging workflow: symptom \u2192 hypothesis \u2192 root cause \u2192 fix.",
+      "install_count_skills_sh": 54125,
+      "license": "MIT",
+      "profiles": [
+        "dev",
+        "ops"
+      ],
+      "detail_url": "skills/diagnose.json"
+    },
+    {
+      "slug": "dispatching-parallel-agents",
+      "name": "dispatching-parallel-agents",
+      "publisher": "obra",
+      "description": "Parallel agent coordination for complex tasks with independent sub-tasks.",
+      "install_count_skills_sh": 59136,
+      "license": "MIT",
+      "profiles": [
+        "dev",
+        "ops"
+      ],
+      "detail_url": "skills/dispatching-parallel-agents.json"
+    },
+    {
+      "slug": "doc-coauthoring",
+      "name": "doc-coauthoring",
+      "publisher": "anthropics",
+      "description": "Collaborative document authoring: outlines, drafts, and review cycles.",
+      "install_count_skills_sh": 38893,
+      "license": "Apache-2.0",
+      "profiles": [
+        "writing"
+      ],
+      "detail_url": "skills/doc-coauthoring.json"
+    },
+    {
+      "slug": "docx",
+      "name": "docx",
+      "publisher": "benchflow-ai",
+      "description": "Word document manipulation: placeholders, headers/footers, tables.",
+      "install_count_skills_sh": 82307,
+      "license": "Apache-2.0",
+      "profiles": [
+        "writing",
+        "data"
+      ],
+      "detail_url": "skills/docx.json"
+    },
+    {
+      "slug": "executing-plans",
+      "name": "executing-plans",
+      "publisher": "obra",
+      "description": "Structured plan execution with checkpoints; companion to writing-plans.",
+      "install_count_skills_sh": 71331,
+      "license": "MIT",
+      "profiles": [
+        "core"
+      ],
+      "detail_url": "skills/executing-plans.json"
+    },
+    {
+      "slug": "find-skills",
+      "name": "find-skills",
+      "publisher": "vercel-labs",
+      "description": "Meta-skill that helps the agent discover other skills.",
+      "install_count_skills_sh": 1435944,
+      "license": "MIT",
+      "profiles": [
+        "core"
+      ],
+      "detail_url": "skills/find-skills.json"
+    },
+    {
+      "slug": "finishing-a-development-branch",
+      "name": "finishing-a-development-branch",
+      "publisher": "obra",
+      "description": "Structured branch completion checklist; prevents half-done states.",
+      "install_count_skills_sh": 56914,
+      "license": "MIT",
+      "profiles": [
+        "dev"
+      ],
+      "detail_url": "skills/finishing-a-development-branch.json"
+    },
+    {
+      "slug": "frontend-design",
+      "name": "frontend-design",
+      "publisher": "anthropics",
+      "description": "Frontend design guidance: typography, layout, color, and component patterns.",
+      "install_count_skills_sh": 390903,
+      "license": "Apache-2.0",
+      "profiles": [
+        "design"
+      ],
+      "detail_url": "skills/frontend-design.json"
+    },
+    {
+      "slug": "fuzzy-match",
+      "name": "fuzzy-match",
+      "publisher": "benchflow-ai",
+      "description": "Reconciles entity names across datasets using fuzzy string matching.",
+      "install_count_skills_sh": null,
+      "license": "Apache-2.0",
+      "profiles": [
+        "research",
+        "sales",
+        "data"
+      ],
+      "detail_url": "skills/fuzzy-match.json"
+    },
+    {
+      "slug": "grill-me",
+      "name": "grill-me",
+      "publisher": "mattpocock",
+      "description": "Interrogates plans and assumptions with adversarial questions before implementation.",
+      "install_count_skills_sh": 109153,
+      "license": "MIT",
+      "profiles": [
+        "core",
+        "founder"
+      ],
+      "detail_url": "skills/grill-me.json"
+    },
+    {
+      "slug": "improve-codebase-architecture",
+      "name": "improve-codebase-architecture",
+      "publisher": "mattpocock",
+      "description": "Structured codebase architecture review and refactoring guidance.",
+      "install_count_skills_sh": 77885,
+      "license": "MIT",
+      "profiles": [
+        "dev"
+      ],
+      "detail_url": "skills/improve-codebase-architecture.json"
+    },
+    {
+      "slug": "internal-comms",
+      "name": "internal-comms",
+      "publisher": "anthropics",
+      "description": "Internal communication templates: status updates, meeting notes, memos.",
+      "install_count_skills_sh": 32917,
+      "license": "Apache-2.0",
+      "profiles": [
+        "writing",
+        "ops"
+      ],
+      "detail_url": "skills/internal-comms.json"
+    },
+    {
+      "slug": "just-scrape",
+      "name": "just-scrape",
+      "publisher": "scrapegraphai",
+      "description": "Zero-config web scraping with no API key required; default scraper in this pack.",
+      "install_count_skills_sh": 62521,
+      "license": "MIT",
+      "profiles": [
+        "research",
+        "data"
+      ],
+      "detail_url": "skills/just-scrape.json"
+    },
+    {
+      "slug": "launch-strategy",
+      "name": "launch-strategy",
+      "publisher": "coreyhaines31",
+      "description": "GTM planning, launch sequencing, and channel strategy.",
+      "install_count_skills_sh": 53703,
+      "license": "MIT",
+      "profiles": [
+        "marketing",
+        "founder"
+      ],
+      "detail_url": "skills/launch-strategy.json"
+    },
+    {
+      "slug": "marketing-psychology",
+      "name": "marketing-psychology",
+      "publisher": "coreyhaines31",
+      "description": "Behavioral science applied to copy and design for higher conversion.",
+      "install_count_skills_sh": 68047,
+      "license": "MIT",
+      "profiles": [
+        "marketing"
+      ],
+      "detail_url": "skills/marketing-psychology.json"
+    },
+    {
+      "slug": "memory-optimization",
+      "name": "memory-optimization",
+      "publisher": "benchflow-ai",
+      "description": "Reduces memory footprint, fixes leaks, and guides efficient data structure selection.",
+      "install_count_skills_sh": null,
+      "license": "Apache-2.0",
+      "profiles": [
+        "data"
+      ],
+      "detail_url": "skills/memory-optimization.json"
+    },
+    {
+      "slug": "next-best-practices",
+      "name": "next-best-practices",
+      "publisher": "vercel-labs",
+      "description": "Next.js-specific routing, data fetching, and middleware patterns from Vercel.",
+      "install_count_skills_sh": 82545,
+      "license": "MIT",
+      "profiles": [
+        "dev"
+      ],
+      "detail_url": "skills/next-best-practices.json"
+    },
+    {
+      "slug": "page-cro",
+      "name": "page-cro",
+      "publisher": "coreyhaines31",
+      "description": "Conversion rate optimization for landing pages.",
+      "install_count_skills_sh": 55079,
+      "license": "MIT",
+      "profiles": [
+        "marketing"
+      ],
+      "detail_url": "skills/page-cro.json"
+    },
+    {
+      "slug": "pdf",
+      "name": "pdf",
+      "publisher": "anthropics",
+      "description": "PDF reading and structured extraction for papers, reports, and documents.",
+      "install_count_skills_sh": 99071,
+      "license": "Apache-2.0",
+      "profiles": [
+        "research",
+        "ops",
+        "founder",
+        "data"
+      ],
+      "detail_url": "skills/pdf.json"
+    },
+    {
+      "slug": "playwright-best-practices",
+      "name": "playwright-best-practices",
+      "publisher": "currents-dev",
+      "description": "Official Playwright end-to-end testing patterns and best practices.",
+      "install_count_skills_sh": 37121,
+      "license": "MIT",
+      "profiles": [
+        "dev"
+      ],
+      "detail_url": "skills/playwright-best-practices.json"
+    },
+    {
+      "slug": "polish",
+      "name": "polish",
+      "publisher": "pbakaus",
+      "description": "Refines UI to a higher quality bar with specific actionable improvements.",
+      "install_count_skills_sh": 85520,
+      "license": "Apache-2.0",
+      "profiles": [
+        "design"
+      ],
+      "detail_url": "skills/polish.json"
+    },
+    {
+      "slug": "pricing-strategy",
+      "name": "pricing-strategy",
+      "publisher": "coreyhaines31",
+      "description": "Pricing model design, positioning, and packaging strategy.",
+      "install_count_skills_sh": 58873,
+      "license": "MIT",
+      "profiles": [
+        "founder"
+      ],
+      "detail_url": "skills/pricing-strategy.json"
+    },
+    {
+      "slug": "product-marketing-context",
+      "name": "product-marketing-context",
+      "publisher": "coreyhaines31",
+      "description": "Frames product in market context: messaging, positioning, and ICP definition.",
+      "install_count_skills_sh": 58840,
+      "license": "MIT",
+      "profiles": [
+        "founder"
+      ],
+      "detail_url": "skills/product-marketing-context.json"
+    },
+    {
+      "slug": "programmatic-seo",
+      "name": "programmatic-seo",
+      "publisher": "coreyhaines31",
+      "description": "Programmatic page generation and SEO at scale.",
+      "install_count_skills_sh": 62100,
+      "license": "MIT",
+      "profiles": [
+        "marketing"
+      ],
+      "detail_url": "skills/programmatic-seo.json"
+    },
+    {
+      "slug": "python-parallelization",
+      "name": "python-parallelization",
+      "publisher": "benchflow-ai",
+      "description": "CPU-bound to multiprocessing, I/O-bound to asyncio; parallelization patterns for data pipelines.",
+      "install_count_skills_sh": null,
+      "license": "Apache-2.0",
+      "profiles": [
+        "data"
+      ],
+      "detail_url": "skills/python-parallelization.json"
+    },
+    {
+      "slug": "remotion-best-practices",
+      "name": "remotion-best-practices",
+      "publisher": "remotion-dev",
+      "description": "Best practices for programmatic video generation with Remotion.",
+      "install_count_skills_sh": 299613,
+      "license": "MIT",
+      "profiles": [
+        "video"
+      ],
+      "detail_url": "skills/remotion-best-practices.json"
+    },
+    {
+      "slug": "requesting-code-review",
+      "name": "requesting-code-review",
+      "publisher": "obra",
+      "description": "Dispatches a fresh reviewer subagent with precise context for code review.",
+      "install_count_skills_sh": 77061,
+      "license": "MIT",
+      "profiles": [
+        "dev"
+      ],
+      "detail_url": "skills/requesting-code-review.json"
+    },
+    {
+      "slug": "revops",
+      "name": "revops",
+      "publisher": "coreyhaines31",
+      "description": "Revenue ops: pipeline management, reporting, and CRM cleanup.",
+      "install_count_skills_sh": 39646,
+      "license": "MIT",
+      "profiles": [
+        "sales"
+      ],
+      "detail_url": "skills/revops.json"
+    },
+    {
+      "slug": "sales-enablement",
+      "name": "sales-enablement",
+      "publisher": "coreyhaines31",
+      "description": "Sales collateral, battlecards, and objection handling frameworks.",
+      "install_count_skills_sh": 40972,
+      "license": "MIT",
+      "profiles": [
+        "sales"
+      ],
+      "detail_url": "skills/sales-enablement.json"
+    },
+    {
+      "slug": "schema-markup",
+      "name": "schema-markup",
+      "publisher": "coreyhaines31",
+      "description": "Structured data markup for SERP features (FAQ, HowTo, Product).",
+      "install_count_skills_sh": 53063,
+      "license": "MIT",
+      "profiles": [
+        "marketing"
+      ],
+      "detail_url": "skills/schema-markup.json"
+    },
+    {
+      "slug": "seo-audit",
+      "name": "seo-audit",
+      "publisher": "coreyhaines31",
+      "description": "Full SEO audit: on-page, schema, sitemap, indexability, keyword analysis.",
+      "install_count_skills_sh": 103413,
+      "license": "MIT",
+      "profiles": [
+        "marketing",
+        "founder"
+      ],
+      "detail_url": "skills/seo-audit.json"
+    },
+    {
+      "slug": "skill-creator",
+      "name": "skill-creator",
+      "publisher": "anthropics",
+      "description": "Creates reusable skill files from workflows demonstrated in the current session.",
+      "install_count_skills_sh": 195517,
+      "license": "Apache-2.0",
+      "profiles": [
+        "core"
+      ],
+      "detail_url": "skills/skill-creator.json"
+    },
+    {
+      "slug": "social-content",
+      "name": "social-content",
+      "publisher": "coreyhaines31",
+      "description": "Social media content creation across LinkedIn, X, Instagram, and more.",
+      "install_count_skills_sh": 64367,
+      "license": "MIT",
+      "profiles": [
+        "marketing"
+      ],
+      "detail_url": "skills/social-content.json"
+    },
+    {
+      "slug": "supabase-postgres-best-practices",
+      "name": "supabase-postgres-best-practices",
+      "publisher": "supabase",
+      "description": "Supabase and Postgres schema design, query optimization, and best practices.",
+      "install_count_skills_sh": 154977,
+      "license": "Apache-2.0",
+      "profiles": [
+        "dev"
+      ],
+      "detail_url": "skills/supabase-postgres-best-practices.json"
+    },
+    {
+      "slug": "systematic-debugging",
+      "name": "systematic-debugging",
+      "publisher": "obra",
+      "description": "Structured symptom-to-root-cause debugging methodology.",
+      "install_count_skills_sh": 88532,
+      "license": "MIT",
+      "profiles": [
+        "core"
+      ],
+      "detail_url": "skills/systematic-debugging.json"
+    },
+    {
+      "slug": "tailwind-design-system",
+      "name": "tailwind-design-system",
+      "publisher": "wshobson",
+      "description": "Tailwind CSS design system patterns: tokens, components, and consistency.",
+      "install_count_skills_sh": 40370,
+      "license": "MIT",
+      "profiles": [
+        "design"
+      ],
+      "detail_url": "skills/tailwind-design-system.json"
+    },
+    {
+      "slug": "tdd",
+      "name": "tdd",
+      "publisher": "mattpocock",
+      "description": "Test-driven development workflow: red-green-refactor with automated verification.",
+      "install_count_skills_sh": 77032,
+      "license": "MIT",
+      "profiles": [
+        "dev"
+      ],
+      "detail_url": "skills/tdd.json"
+    },
+    {
+      "slug": "testing-python",
+      "name": "testing-python",
+      "publisher": "benchflow-ai",
+      "description": "pytest for data pipelines: fixtures, parametrize, and mocking patterns.",
+      "install_count_skills_sh": null,
+      "license": "Apache-2.0",
+      "profiles": [
+        "data"
+      ],
+      "detail_url": "skills/testing-python.json"
+    },
+    {
+      "slug": "to-issues",
+      "name": "to-issues",
+      "publisher": "mattpocock",
+      "description": "Converts processes and discussions into tracked tasks and GitHub issues.",
+      "install_count_skills_sh": 57492,
+      "license": "MIT",
+      "profiles": [
+        "ops"
+      ],
+      "detail_url": "skills/to-issues.json"
+    },
+    {
+      "slug": "to-prd",
+      "name": "to-prd",
+      "publisher": "mattpocock",
+      "description": "Synthesizes strategy and discussions into structured PRD-style documents.",
+      "install_count_skills_sh": 60336,
+      "license": "MIT",
+      "profiles": [
+        "founder"
+      ],
+      "detail_url": "skills/to-prd.json"
+    },
+    {
+      "slug": "triage",
+      "name": "triage",
+      "publisher": "mattpocock",
+      "description": "State machine-based issue classification and incident prioritization.",
+      "install_count_skills_sh": 46999,
+      "license": "MIT",
+      "profiles": [
+        "ops"
+      ],
+      "detail_url": "skills/triage.json"
+    },
+    {
+      "slug": "vercel-react-best-practices",
+      "name": "vercel-react-best-practices",
+      "publisher": "vercel-labs",
+      "description": "40+ React/Next.js rules from Vercel; most proven React skill on skills.sh.",
+      "install_count_skills_sh": 386170,
+      "license": "MIT",
+      "profiles": [
+        "dev"
+      ],
+      "detail_url": "skills/vercel-react-best-practices.json"
+    },
+    {
+      "slug": "verification-before-completion",
+      "name": "verification-before-completion",
+      "publisher": "obra",
+      "description": "Blocks \"should work now\" completions; forces evidence before success claims.",
+      "install_count_skills_sh": 63431,
+      "license": "MIT",
+      "profiles": [
+        "core",
+        "writing",
+        "sales",
+        "ops",
+        "design",
+        "video"
+      ],
+      "detail_url": "skills/verification-before-completion.json"
+    },
+    {
+      "slug": "video-polish",
+      "name": "video-polish",
+      "publisher": "floomhq",
+      "description": "ElevenLabs audio isolation + Gemini-aligned captions; integrated audio cleanup and captioning pipeline.",
+      "install_count_skills_sh": null,
+      "license": "Proprietary (Floom team)",
+      "profiles": [
+        "video"
+      ],
+      "detail_url": "skills/video-polish.json"
+    },
+    {
+      "slug": "video-processor",
+      "name": "video-processor",
+      "publisher": "benchflow-ai",
+      "description": "Removes video segments (silences, openings) via ffmpeg filter_complex.",
+      "install_count_skills_sh": null,
+      "license": "Apache-2.0",
+      "profiles": [
+        "video"
+      ],
+      "detail_url": "skills/video-processor.json"
+    },
+    {
+      "slug": "web-design-guidelines",
+      "name": "web-design-guidelines",
+      "publisher": "vercel-labs",
+      "description": "Comprehensive frontend and UI design guidelines from Vercel.",
+      "install_count_skills_sh": 308453,
+      "license": "MIT",
+      "profiles": [
+        "dev",
+        "design"
+      ],
+      "detail_url": "skills/web-design-guidelines.json"
+    },
+    {
+      "slug": "webapp-testing",
+      "name": "webapp-testing",
+      "publisher": "anthropics",
+      "description": "Browser-based end-to-end app testing with Anthropic's testing framework.",
+      "install_count_skills_sh": 64870,
+      "license": "Apache-2.0",
+      "profiles": [
+        "dev"
+      ],
+      "detail_url": "skills/webapp-testing.json"
+    },
+    {
+      "slug": "wireframe-to-react",
+      "name": "wireframe-to-react",
+      "publisher": "floomhq",
+      "description": "4-phase workflow to convert wireframe HTML into production React with visual parity gate and screenshot verification.",
+      "install_count_skills_sh": null,
+      "license": "Proprietary (Floom team)",
+      "profiles": [
+        "design"
+      ],
+      "detail_url": "skills/wireframe-to-react.json"
+    },
+    {
+      "slug": "workplan",
+      "name": "workplan",
+      "publisher": "floomhq",
+      "description": "Context-compaction-safe external runbook; no skills.sh equivalent for this specific compaction-recovery pattern.",
+      "install_count_skills_sh": null,
+      "license": "Proprietary (Floom team)",
+      "profiles": [
+        "core",
+        "ops"
+      ],
+      "detail_url": "skills/workplan.json"
+    },
+    {
+      "slug": "writing-plans",
+      "name": "writing-plans",
+      "publisher": "obra",
+      "description": "Creates structured multi-step plans before touching code or documents.",
+      "install_count_skills_sh": 87831,
+      "license": "MIT",
+      "profiles": [
+        "core",
+        "writing",
+        "research",
+        "ops",
+        "founder"
+      ],
+      "detail_url": "skills/writing-plans.json"
+    },
+    {
+      "slug": "xlsx",
+      "name": "xlsx",
+      "publisher": "anthropics",
+      "description": "Excel/CSV spreadsheet reading, analysis, and generation.",
+      "install_count_skills_sh": 73284,
+      "license": "Apache-2.0",
+      "profiles": [
+        "research",
+        "ops",
+        "data"
+      ],
+      "detail_url": "skills/xlsx.json"
+    },
+    {
+      "slug": "zoom-out",
+      "name": "zoom-out",
+      "publisher": "mattpocock",
+      "description": "Establishes broader context before deep-diving into a topic.",
+      "install_count_skills_sh": 53778,
+      "license": "MIT",
+      "profiles": [
+        "research",
+        "data"
+      ],
+      "detail_url": "skills/zoom-out.json"
+    }
+  ],
+  "total_skills": 65,
+  "defaultProfiles": [
+    "core"
+  ]
+}
