@@ -22,7 +22,7 @@
 import { install, remove, uninstall, update, list } from "../src/install.js";
 import { runInit } from "../src/init-interactive.js";
 
-const PACKAGE_VERSION = "0.2.5";
+const PACKAGE_VERSION = "0.2.6";
 
 function usage() {
   return `

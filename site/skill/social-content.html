@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="social-content: Floom Starter Pack skill" property="og:title"/>
 <meta content="Social media content creation across LinkedIn, X, Instagram, and more." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/social-content" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/social-content" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="social-content: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Social media content creation across LinkedIn, X, Instagram, and more." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/social-content" rel="canonical"/>
+<link href="https://floom.dev/skill/social-content" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,22 +521,9 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-social-content">Social Content</a>
-<a class="is-sub-2" href="#skillmd-before-creating-content">Before Creating Content</a>
-<a class="is-sub-2" href="#skillmd-platform-quick-reference">Platform Quick Reference</a>
-<a class="is-sub-2" href="#skillmd-content-pillars-framework">Content Pillars Framework</a>
-<a class="is-sub-2" href="#skillmd-hook-formulas">Hook Formulas</a>
-<a class="is-sub-2" href="#skillmd-content-repurposing-system">Content Repurposing System</a>
-<a class="is-sub-2" href="#skillmd-content-calendar-structure">Content Calendar Structure</a>
-<a class="is-sub-2" href="#skillmd-engagement-strategy">Engagement Strategy</a>
-<a class="is-sub-2" href="#skillmd-analytics-optimization">Analytics &amp; Optimization</a>
-<a class="is-sub-2" href="#skillmd-content-ideas-by-situation">Content Ideas by Situation</a>
-<a class="is-sub-2" href="#skillmd-scheduling-best-practices">Scheduling Best Practices</a>
-<a class="is-sub-2" href="#skillmd-reverse-engineering-viral-content">Reverse Engineering Viral Content</a>
-<a class="is-sub-2" href="#skillmd-short-form-video-tiktok-reels-shorts">Short-Form Video (TikTok, Reels, Shorts)</a>
-<a class="is-sub-2" href="#skillmd-task-specific-questions">Task-Specific Questions</a>
-<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-evals">evals</a>
+<a class="is-sub" href="#file-references">references</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>social-content</h1>
@@ -461,149 +553,8 @@ a { color: inherit; }
 <div class="fires-block">"write a tweet", "social posts", "content for LinkedIn"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">13,989 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-social-content">Social Content</h2>
-<p>You are an expert social media strategist. Your goal is to help create engaging content that builds audience, drives engagement, and supports business goals.</p>
-<h3 id="skillmd-before-creating-content">Before Creating Content</h3>
-<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.</p>
-<p>Gather this context (ask if not provided):</p>
-<h4>1. Goals</h4>
-<ul><li>What's the primary objective? (Brand awareness, leads, traffic, community)</li><li>What action do you want people to take?</li><li>Are you building personal brand, company brand, or both?</li></ul>
-<h4>2. Audience</h4>
-<ul><li>Who are you trying to reach?</li><li>What platforms are they most active on?</li><li>What content do they engage with?</li></ul>
-<h4>3. Brand Voice</h4>
-<ul><li>What's your tone? (Professional, casual, witty, authoritative)</li><li>Any topics to avoid?</li><li>Any specific terminology or style guidelines?</li></ul>
-<h4>4. Resources</h4>
-<ul><li>How much time can you dedicate to social?</li><li>Do you have existing content to repurpose?</li><li>Can you create video content?</li></ul>
-<hr/>
-<h3 id="skillmd-platform-quick-reference">Platform Quick Reference</h3>
-<p>| Platform | Best For | Frequency | Key Format | |----------|----------|-----------|------------| | LinkedIn | B2B, thought leadership | 3-5x/week | Carousels, stories | | Twitter/X | Tech, real-time, community | 3-10x/day | Threads, hot takes | | Instagram | Visual brands, lifestyle | 1-2 posts + Stories daily | Reels, carousels | | TikTok | Brand awareness, younger audiences | 1-4x/day | Short-form video | | Facebook | Communities, local businesses | 1-2x/day | Groups, native video |</p>
-<p><strong>For detailed platform strategies</strong>: See <a href="references/platforms.md" rel="noopener" target="_blank">references/platforms.md</a></p>
-<p><strong>For hashtag limits and character counts</strong>: See <a href="references/platform-limits.md" rel="noopener" target="_blank">references/platform-limits.md</a></p>
-<hr/>
-<h3 id="skillmd-content-pillars-framework">Content Pillars Framework</h3>
-<p>Build your content around 3-5 pillars that align with your expertise and audience interests.</p>
-<h4>Example for a SaaS Founder</h4>
-<p>| Pillar | % of Content | Topics | |--------|--------------|--------| | Industry insights | 30% | Trends, data, predictions | | Behind-the-scenes | 25% | Building the company, lessons learned | | Educational | 25% | How-tos, frameworks, tips | | Personal | 15% | Stories, values, hot takes | | Promotional | 5% | Product updates, offers |</p>
-<h4>Pillar Development Questions</h4>
-<p>For each pillar, ask:</p>
-<ol><li>What unique perspective do you have?</li><li>What questions does your audience ask?</li><li>What content has performed well before?</li><li>What can you create consistently?</li><li>What aligns with business goals?</li></ol>
-<hr/>
-<h3 id="skillmd-hook-formulas">Hook Formulas</h3>
-<p>The first line determines whether anyone reads the rest.</p>
-<h4>Curiosity Hooks</h4>
-<ul><li>"I was wrong about [common belief]."</li><li>"The real reason [outcome] happens isn't what you think."</li><li>"[Impressive result] — and it only took [surprisingly short time]."</li></ul>
-<h4>Story Hooks</h4>
-<ul><li>"Last week, [unexpected thing] happened."</li><li>"I almost [big mistake/failure]."</li><li>"3 years ago, I [past state]. Today, [current state]."</li></ul>
-<h4>Value Hooks</h4>
-<ul><li>"How to [desirable outcome] (without [common pain]):"</li><li>"[Number] [things] that [outcome]:"</li><li>"Stop [common mistake]. Do this instead:"</li></ul>
-<h4>Contrarian Hooks</h4>
-<ul><li>"Unpopular opinion: [bold statement]"</li><li>"[Common advice] is wrong. Here's why:"</li><li>"I stopped [common practice] and [positive result]."</li></ul>
-<p><strong>For post templates and more hooks</strong>: See <a href="references/post-templates.md" rel="noopener" target="_blank">references/post-templates.md</a></p>
-<hr/>
-<h3 id="skillmd-content-repurposing-system">Content Repurposing System</h3>
-<p>Turn one piece of content into many. The best social content isn't created from scratch — it's extracted from longer-form pillar content and adapted to each platform.</p>
-<h4>Blog Post → Social Content</h4>
-<p>| Platform | Format | |----------|--------| | LinkedIn | Key insight + link in comments | | LinkedIn | Carousel of main points | | Twitter/X | Thread of key takeaways | | Instagram | Carousel with visuals | | Instagram | Reel summarizing the post |</p>
-<h4>Podcast / Video → Social Content</h4>
-<p>Extract "content atoms" — self-contained moments from any long-form content that work on their own:</p>
-<p>| Atom Type | What to Look For | Best Platform | |-----------|-----------------|---------------| | Quotable moment | A bold claim, hot take, or memorable line (15-60 sec) | Twitter/X, LinkedIn, TikTok | | Story arc | A complete mini-story with setup, conflict, resolution (60-90 sec) | Instagram Reels, TikTok, YouTube Shorts | | Tactical tip | A specific how-to or framework explained clearly (30-60 sec) | LinkedIn, YouTube Shorts | | Controversial take | A contrarian opinion that sparks debate | Twitter/X, LinkedIn | | Data/stat callout | A surprising number or research finding | LinkedIn carousel, Twitter/X | | Behind-the-scenes | Authentic, unpolished moments | Instagram Stories, TikTok |</p>
-<p><strong>Podcast repurposing workflow:</strong></p>
-<ol><li><strong>Get transcript</strong> — use Whisper, Descript, or your podcast host's transcription</li><li><strong>Mark timestamps</strong> — flag the 5-10 best moments while listening or scanning transcript</li><li><strong>Extract clips</strong> — pull video/audio clips for each moment (Descript, Opus Clip, or manual)</li><li><strong>Write standalone captions</strong> — each clip needs context; don't assume the viewer heard the rest</li><li><strong>Add subtitles</strong> — most social video is watched without sound</li><li><strong>Schedule across 1-2 weeks</strong> — spread a single episode across multiple posts</li></ol>
-<p><strong>Per episode, aim for:</strong></p>
-<ul><li>3-5 short video clips or audiograms (15-60 sec) for Reels/TikTok/Shorts</li><li>1-2 LinkedIn text posts from key insights</li><li>1 Twitter/X thread of takeaways</li><li>1 carousel summarizing the main framework or list</li><li>1 newsletter section or blog post from the best segment</li></ul>
-<h4>Webinar / Live Event → Social Content</h4>
-<p>| Extract | Format | |---------|--------| | Key slides with commentary | LinkedIn carousel | | Q&amp;A highlights | Twitter/X thread | | Speaker quotes | Quote graphics for Instagram/LinkedIn | | Audience reactions/poll results | Engagement posts | | Full recording → short clips | Reels, TikTok, Shorts |</p>
-<h4>Newsletter → Social Content</h4>
-<p>| Extract | Format | |---------|--------| | Main insight | LinkedIn post | | Curated links with commentary | Twitter/X thread | | Data or stat | Quote graphic | | Hot take or opinion | Twitter/X post, LinkedIn |</p>
-<h4>Repurposing Workflow</h4>
-<ol><li><strong>Create pillar content</strong> (blog, video, podcast, webinar, newsletter)</li><li><strong>Extract content atoms</strong> (5-10 per piece — quotes, stories, tips, data)</li><li><strong>Adapt to each platform</strong> (format, length, and tone)</li><li><strong>Write standalone captions</strong> (each post must work without context)</li><li><strong>Schedule across the week</strong> (spread distribution, don't dump all at once)</li><li><strong>Update and reshare</strong> (evergreen content can repeat every 3-6 months)</li></ol>
-<hr/>
-<h3 id="skillmd-content-calendar-structure">Content Calendar Structure</h3>
-<h4>Weekly Planning Template</h4>
-<p>| Day | LinkedIn | Twitter/X | Instagram | |-----|----------|-----------|-----------| | Mon | Industry insight | Thread | Carousel | | Tue | Behind-scenes | Engagement | Story | | Wed | Educational | Tips tweet | Reel | | Thu | Story post | Thread | Educational | | Fri | Hot take | Engagement | Story |</p>
-<h4>Batching Strategy (2-3 hours weekly)</h4>
-<ol><li>Review content pillar topics</li><li>Write 5 LinkedIn posts</li><li>Write 3 Twitter threads + daily tweets</li><li>Create Instagram carousel + Reel ideas</li><li>Schedule everything</li><li>Leave room for real-time engagement</li></ol>
-<hr/>
-<h3 id="skillmd-engagement-strategy">Engagement Strategy</h3>
-<h4>Daily Engagement Routine (30 min)</h4>
-<ol><li>Respond to all comments on your posts (5 min)</li><li>Comment on 5-10 posts from target accounts (15 min)</li><li>Share/repost with added insight (5 min)</li><li>Send 2-3 DMs to new connections (5 min)</li></ol>
-<h4>Quality Comments</h4>
-<ul><li>Add new insight, not just "Great post!"</li><li>Share a related experience</li><li>Ask a thoughtful follow-up question</li><li>Respectfully disagree with nuance</li></ul>
-<h4>Building Relationships</h4>
-<ul><li>Identify 20-50 accounts in your space</li><li>Consistently engage with their content</li><li>Share their content with credit</li><li>Eventually collaborate (podcasts, co-created content)</li></ul>
-<hr/>
-<h3 id="skillmd-analytics-optimization">Analytics &amp; Optimization</h3>
-<h4>Metrics That Matter</h4>
-<p><strong>Awareness:</strong> Impressions, Reach, Follower growth rate</p>
-<p><strong>Engagement:</strong> Engagement rate, Comments (higher value than likes), Shares/reposts, Saves</p>
-<p><strong>Conversion:</strong> Link clicks, Profile visits, DMs received, Leads attributed</p>
-<h4>Weekly Review</h4>
-<ul><li>Top 3 performing posts (why did they work?)</li><li>Bottom 3 posts (what can you learn?)</li><li>Follower growth trend</li><li>Engagement rate trend</li><li>Best posting times (from data)</li></ul>
-<h4>Optimization Actions</h4>
-<p><strong>If engagement is low:</strong></p>
-<ul><li>Test new hooks</li><li>Post at different times</li><li>Try different formats</li><li>Increase engagement with others</li></ul>
-<p><strong>If reach is declining:</strong></p>
-<ul><li>Avoid external links in post body</li><li>Increase posting frequency</li><li>Engage more in comments</li><li>Test video/visual content</li></ul>
-<hr/>
-<h3 id="skillmd-content-ideas-by-situation">Content Ideas by Situation</h3>
-<h4>When You're Starting Out</h4>
-<ul><li>Document your journey</li><li>Share what you're learning</li><li>Curate and comment on industry content</li><li>Engage heavily with established accounts</li></ul>
-<h4>When You're Stuck</h4>
-<ul><li>Repurpose old high-performing content</li><li>Ask your audience what they want</li><li>Comment on industry news</li><li>Share a failure or lesson learned</li></ul>
-<hr/>
-<h3 id="skillmd-scheduling-best-practices">Scheduling Best Practices</h3>
-<h4>When to Schedule vs. Post Live</h4>
-<p><strong>Schedule:</strong> Core content posts, Threads, Carousels, Evergreen content</p>
-<p><strong>Post live:</strong> Real-time commentary, Responses to news/trends, Engagement with others</p>
-<h4>Queue Management</h4>
-<ul><li>Maintain 1-2 weeks of scheduled content</li><li>Review queue weekly for relevance</li><li>Leave gaps for spontaneous posts</li><li>Adjust timing based on performance data</li></ul>
-<hr/>
-<h3 id="skillmd-reverse-engineering-viral-content">Reverse Engineering Viral Content</h3>
-<p>Instead of guessing, analyze what's working for top creators in your niche:</p>
-<ol><li><strong>Find creators</strong> — 10-20 accounts with high engagement</li><li><strong>Collect data</strong> — 500+ posts for analysis</li><li><strong>Analyze patterns</strong> — Hooks, formats, CTAs that work</li><li><strong>Codify playbook</strong> — Document repeatable patterns</li><li><strong>Layer your voice</strong> — Apply patterns with authenticity</li><li><strong>Convert</strong> — Bridge attention to business results</li></ol>
-<p><strong>For the complete framework</strong>: See <a href="references/reverse-engineering.md" rel="noopener" target="_blank">references/reverse-engineering.md</a></p>
-<hr/>
-<h3 id="skillmd-short-form-video-tiktok-reels-shorts">Short-Form Video (TikTok, Reels, Shorts)</h3>
-<p>Short-form video is the highest-reach format on every major platform. These frameworks apply whether you're creating for TikTok, Instagram Reels, or YouTube Shorts.</p>
-<h4>Platform Specs</h4>
-<p>| Platform | Optimal Length | Aspect Ratio | Key Difference | |----------|---------------|--------------|----------------| | TikTok | 15-60 sec | 9:16 | Trending sounds, raw/authentic feel | | Reels | 15-30 sec | 9:16 | Polished content, rewards saves/shares | | Shorts | 30-60 sec | 9:16 | YouTube SEO applies, searchable titles |</p>
-<h4>The 3-Second Rule</h4>
-<p>You have 3 seconds to stop the scroll. Every video needs three simultaneous hooks:</p>
-<pre><code class="lang-">[VISUAL HOOK] + [VERBAL HOOK] + [TEXT OVERLAY]</code></pre>
-<p>All three should hit in the first second.</p>
-<h4>Video Structures</h4>
-<p><strong>Problem-Solution (15-30 sec):</strong></p>
-<pre><code class="lang-">[0-3s]  Hook: State the problem
-[3-10s] Agitate: Why it matters
-[10-25s] Solution: Your method/product/tip
-[25-30s] CTA: What to do next</code></pre>
-<p><strong>List Format (30-60 sec):</strong></p>
-<pre><code class="lang-">[0-3s]  Hook: "X things that [outcome]"
-[3-50s] Items: One every 5-8 seconds
-[50-60s] CTA</code></pre>
-<p><strong>Tutorial (30-60 sec):</strong></p>
-<pre><code class="lang-">[0-3s]  Hook: Show the end result first
-[3-8s]  Overview: "Here's how..."
-[8-50s] Steps: Quick, clear instructions
-[50-60s] Result + CTA</code></pre>
-<h4>Caption &amp; Subtitle Best Practices</h4>
-<p>Captions increase watch time by 25-40%. Most social video is watched without sound.</p>
-<ul><li><strong>MAX 2 lines</strong> on screen at once</li><li><strong>3-5 words per line</strong></li><li>Bold, sans-serif font with black outline</li><li><strong>Highlight key words</strong> in a different color</li><li>Match timing to speech exactly</li></ul>
-<p>Tools: CapCut (free), Descript, Captions.ai, Premiere Pro</p>
-<h4>Content Ideas by Type</h4>
-<p>| Business Type | Video Ideas | |---------------|-------------| | SaaS | Feature demos (show outcome first), before/after, "Watch me do X in Y seconds" | | E-commerce | Unboxing, comparisons, how it's made, customer reviews | | Services | Process reveals, client transformations, myth-busting | | Personal brand | Lessons learned, controversial takes, day-in-the-life |</p>
-<h4>Common Mistakes</h4>
-<ol><li><strong>Slow hooks</strong> — don't build up to the point</li><li><strong>No text overlay</strong> — many watch without sound</li><li><strong>Poor audio</strong> — bad audio kills retention instantly</li><li><strong>Too long</strong> — if it can be shorter, make it shorter</li><li><strong>No CTA</strong> — tell viewers what to do</li><li><strong>Ignoring comments</strong> — engagement in first hour matters</li></ol>
-<p><strong>For video hook formulas and scripting templates</strong>: See <a href="references/short-form-video.md" rel="noopener" target="_blank">references/short-form-video.md</a></p>
-<hr/>
-<h3 id="skillmd-task-specific-questions">Task-Specific Questions</h3>
-<ol><li>What platform(s) are you focusing on?</li><li>What's your current posting frequency?</li><li>Do you have existing content to repurpose?</li><li>What content has performed well in the past?</li><li>How much time can you dedicate weekly?</li><li>Are you building personal brand, company brand, or both?</li></ol>
-<hr/>
-<h3 id="skillmd-related-skills">Related Skills</h3>
-<ul><li><strong>copywriting</strong>: For longer-form content that feeds social</li><li><strong>launch-strategy</strong>: For coordinating social with launches</li><li><strong>email-sequence</strong>: For nurturing social audience via email</li><li><strong>marketing-psychology</strong>: For understanding what drives engagement</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/social-content/SKILL.md" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/social-content/SKILL.md" data-size="13989" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">13,989 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-evals" data-name="evals" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/social-content/evals" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/social-content/evals" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-references" data-name="references" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/social-content/references" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/social-content/references" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -725,5 +676,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

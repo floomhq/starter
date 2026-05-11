@@ -6,15 +6,15 @@
     <meta name="theme-color" content="#fafaf7" />
     <meta name="color-scheme" content="light" />
     <title>About — Floom Starter Pack</title>
-    <meta name="description" content="Built and curated by Federico de Ponte and Adam Beaudoin. Open source, MIT licensed. From the Presidio." />
+    <meta name="description" content="Built and curated by Federico de Ponte and Adam Beaudoin. 65 hand-picked AI agent skills, MIT open source, from the Presidio." />
 
     <!-- Open Graph -->
     <meta property="og:site_name" content="Floom Starter Pack" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="About — Floom Starter Pack" />
-    <meta property="og:description" content="Built and curated by Federico de Ponte and Adam Beaudoin. Open source, MIT licensed. From the Presidio." />
+    <meta property="og:description" content="Built and curated by Federico de Ponte and Adam Beaudoin. 65 hand-picked AI agent skills, MIT open source, from the Presidio." />
     <meta property="og:url" content="https://starter.floom.dev/about" />
-    <meta property="og:image" content="https://starter.floom.dev/og-image-v2.png" />
+    <meta property="og:image" content="https://starter.floom.dev/og-image-v3.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
@@ -22,8 +22,8 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="About — Floom Starter Pack" />
-    <meta name="twitter:description" content="Built and curated by Federico de Ponte and Adam Beaudoin. Open source, MIT licensed. From the Presidio." />
-    <meta name="twitter:image" content="https://starter.floom.dev/og-image-v2.png" />
+    <meta name="twitter:description" content="Built and curated by Federico de Ponte and Adam Beaudoin. 65 hand-picked AI agent skills, MIT open source, from the Presidio." />
+    <meta name="twitter:image" content="https://starter.floom.dev/og-image-v3.png" />
     <meta name="twitter:creator" content="@floomhq" />
     <meta name="twitter:site" content="@floomhq" />
 
@@ -42,89 +42,22 @@
       "@type": "Organization",
       "name": "Floom",
       "url": "https://floom.dev",
-      "logo": "https://starter.floom.dev/og-image-v2.png",
+      "logo": "https://starter.floom.dev/og-image-v3.png",
+      "founder": [
+        { "@type": "Person", "name": "Federico de Ponte" },
+        { "@type": "Person", "name": "Adam Beaudoin" }
+      ],
       "sameAs": [
         "https://github.com/floomhq/starter",
         "https://x.com/floomhq"
       ]
     }
     </script>
+    <!-- Design system (canonical tokens, base, nav, button, install-cta, footer) -->
+    <link rel="stylesheet" href="assets/design-system.css" />
+
     <style>
-      :root {
-        --paper: #fafaf7;
-        --ink: #050505;
-        --muted: #333333;
-        --blue: #0094ff;
-        --blue-soft: #bfe6ff;
-        --blue-pale: #eaf7ff;
-        --cloud-pink: #ff4fd8;
-        --line: 2px solid var(--ink);
-        --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
-      }
-
-      * { box-sizing: border-box; }
-      html { scrollbar-gutter: stable; overflow-y: scroll; }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        background: var(--paper);
-        color: var(--ink);
-        font-family: var(--sans);
-      }
-
-      a { color: inherit; }
-
-      .page {
-        width: min(100%, 1440px);
-        margin: 0 auto;
-        padding: 44px 70px 72px;
-      }
-
-      .nav {
-        display: flex;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: flex-start;
-        border-bottom: var(--line);
-        padding-bottom: 18px;
-      }
-
-      .wordmark {
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
-      .wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
-
-      .nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 34px;
-        row-gap: 10px;
-        line-height: 1;
-        font-size: 12px;
-        font-weight: 900;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-
-      .nav-links a { text-decoration: none; }
-      .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
-
-      h1, h2, h3, p { margin: 0; }
-
-      /* About layout: 380px image sidebar + body content */
+      /* Page-specific: about layout (Adam exact: 380px image sidebar + body) */
       .about-layout {
         display: grid;
         grid-template-columns: 380px minmax(0, 1fr);
@@ -161,16 +94,16 @@
 
       .about-eyebrow {
         font-size: 12px;
-        font-weight: 900;
-        letter-spacing: 0.16em;
+        font-weight: var(--fw-strong);
+        letter-spacing: var(--ls-section-label);
         text-transform: uppercase;
-        color: #006fbf;
+        color: var(--blue-deep);
         margin-bottom: 18px;
       }
 
       .about-h1 {
         font-size: clamp(40px, 4.4vw, 60px);
-        font-weight: 700;
+        font-weight: var(--fw-display);
         letter-spacing: -0.04em;
         line-height: 1;
         margin-bottom: 28px;
@@ -180,20 +113,13 @@
         max-width: 520px;
         color: #242424;
         font-size: 19px;
-        font-weight: 500;
+        font-weight: var(--fw-body);
         line-height: 1.65;
         margin: 0 0 20px;
       }
 
-      .about-body p:last-of-type {
-        margin-bottom: 0;
-      }
-
-      .about-body a {
-        color: var(--blue);
-        text-decoration: none;
-      }
-
+      .about-body p:last-of-type { margin-bottom: 0; }
+      .about-body a { color: var(--blue); text-decoration: none; }
       .about-body a:hover { text-decoration: underline; }
 
       .photo-caption {
@@ -203,7 +129,7 @@
         background: rgba(255, 255, 255, 0.6);
         font-family: var(--mono);
         font-size: 11px;
-        font-weight: 900;
+        font-weight: var(--fw-strong);
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--ink);
@@ -219,106 +145,20 @@
         margin-top: 36px;
       }
 
-      .cta-row .terminal-wrap {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
-        position: relative;
-      }
+      /* About uses 13px button padding (slightly larger than the system default 12/16) */
+      .about-body .button-secondary,
+      .about-body .button-primary { padding: 13px 18px; white-space: nowrap; }
 
-      .button-secondary, .button-primary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid var(--ink);
-        border-radius: 14px;
-        padding: 13px 18px;
-        font: 900 12px/1 var(--sans);
-        letter-spacing: 0.12em;
-        text-decoration: none;
-        text-transform: uppercase;
-        white-space: nowrap;
-        transition: background 150ms ease, box-shadow 150ms ease, color 150ms ease, transform 150ms ease;
-      }
-
-      .button-secondary { background: #ffffff; color: var(--ink); }
-      .button-primary { background: var(--ink); color: #ffffff; }
-
-      .button-secondary:hover, .button-primary:hover {
-        box-shadow: 0 12px 26px rgba(5,5,5,0.14), 0 0 0 4px rgba(0,148,255,0.14);
-        transform: translateY(-2px);
-      }
-
-      .terminal {
-        display: inline-flex;
-        align-items: center;
-        gap: 14px;
-        min-height: 48px;
-        border-radius: 14px;
-        background: var(--ink);
-        color: #ffffff;
-        padding: 0 12px 0 16px;
-        font-family: var(--mono);
-        font-size: 13px;
-        font-weight: 800;
-        line-height: 1;
-        box-shadow: 0 10px 24px rgba(5,5,5,0.14);
-        cursor: pointer;
-        text-decoration: none;
-        text-align: left;
-        border: none;
-        transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
-      }
-
-      .terminal::after {
-        content: "⧉";
-        display: grid;
-        width: 28px;
-        height: 28px;
-        place-items: center;
-        border-radius: 8px;
-        background: rgba(255,255,255,0.12);
-        font-family: var(--sans);
-        font-size: 14px;
-        font-weight: 800;
-      }
-
-      .terminal:hover {
-        background: #111111;
-        box-shadow: 0 14px 30px rgba(5,5,5,0.18), 0 0 0 4px rgba(240,166,223,0.18);
-        transform: translateY(-2px);
-      }
-
-      .terminal.is-copied::after { content: "✓"; background: var(--blue); color: #ffffff; }
-
-      .terminal-tooltip {
-        font-size: 11px;
-        font-weight: 700;
-        color: #4b4b4b;
-        letter-spacing: 0.04em;
-      }
-
-      @media (max-width: 980px) and (min-width: 641px) {
-        .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; }
-        .wordmark span { font-size: 9px; letter-spacing: 0.12em; }
-        .nav-right { gap: 18px; }
-      }
-
+      /* Adam's responsive: 860px collapses to single column */
       @media (max-width: 860px) {
         .page { padding: 30px 22px 52px; }
-
         .about-layout {
           grid-template-columns: 1fr;
           gap: 28px;
           margin-top: 32px;
           margin-bottom: 52px;
         }
-
-        .about-hero {
-          display: block;
-        }
-
+        .about-hero { display: block; }
         .about-hero img {
           flex: none;
           width: 100%;
@@ -327,168 +167,12 @@
           max-height: 55vh;
           aspect-ratio: 4 / 3;
         }
-
         .cta-row { gap: 10px; }
       }
 
       @media (max-width: 640px) {
-        .page { padding: 22px 16px 44px; }
-        .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; }
-        .wordmark span { font-size: 9px; letter-spacing: 0.12em; }
         .about-h1 { font-size: clamp(34px, 9vw, 44px); }
       }
-
-      /* Install CTA + tooltip (matches index.html) */
-      .install-cta-wrap { position: relative; display: inline-block; }
-
-      .install-cta {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid var(--ink);
-        border-radius: 14px;
-        background: var(--ink);
-        color: #ffffff;
-        padding: 14px 22px;
-        font: 900 13px/1 var(--sans);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        gap: 8px;
-      }
-
-      .install-cta:hover,
-      .install-cta:focus-visible {
-        box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
-        transform: translateY(-1px);
-        outline: none;
-      }
-      .install-cta:hover .install-cta-icon,
-      .install-cta:focus-visible .install-cta-icon {
-        transform: translateY(2px);
-      }
-      .install-cta-icon {
-        width: 16px;
-        height: 16px;
-        flex: 0 0 16px;
-        color: currentColor;
-        transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .install-cta.is-copied { background: var(--blue); }
-      .install-cta.is-copied .install-cta-label::after { content: " \2713"; }
-
-      .install-cta-tooltip {
-        position: absolute;
-        top: calc(100% + 12px);
-        left: 0;
-        min-width: 360px;
-        max-width: 420px;
-        background: var(--paper);
-        color: var(--ink);
-        border: 2px solid var(--ink);
-        border-radius: 14px;
-        padding: 14px 16px;
-        font-family: var(--sans);
-        font-size: 13px;
-        font-weight: 500;
-        line-height: 1.45;
-        letter-spacing: normal;
-        text-transform: none;
-        text-align: left;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
-        transform: translateY(-4px);
-        z-index: 100;
-        box-shadow: 0 14px 30px rgba(5,5,5,0.18);
-      }
-
-      .install-cta:hover .install-cta-tooltip,
-      .install-cta:focus-visible .install-cta-tooltip,
-      .install-cta:focus-within .install-cta-tooltip {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
-      }
-
-      /* Connector arrow from button up to tooltip */
-      .install-cta-tooltip::before {
-        content: '';
-        position: absolute;
-        top: -8px;
-        left: 28px;
-        width: 14px;
-        height: 14px;
-        background: var(--paper);
-        border-left: 2px solid var(--ink);
-        border-top: 2px solid var(--ink);
-        transform: rotate(45deg);
-        border-radius: 2px;
-      }
-
-      /* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
-      @media (hover: none) {
-        .install-cta-tooltip { display: none; }
-      }
-
-      .tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
-
-      .tooltip-cmd {
-        display: block;
-        font-family: var(--mono);
-        font-size: 13px;
-        font-weight: 700;
-        background: var(--ink);
-        color: #ffffff;
-        padding: 8px 10px;
-        border-radius: 8px;
-        margin-bottom: 6px;
-        white-space: nowrap;
-        overflow-x: auto;
-      }
-
-      .tooltip-hint {
-        display: block;
-        color: var(--muted);
-        font-size: 11px;
-        font-family: var(--mono);
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-      }
-
-      @media (max-width: 640px) {
-        .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
-      }
-
-      /* SHARED FOOTER */
-      .site-footer {
-        border-top: 2px solid var(--ink);
-        background: var(--paper);
-        padding: 48px 70px 0;
-      }
-      .site-footer-inner {
-        width: min(100%, 1440px);
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr;
-        gap: 48px;
-        padding-bottom: 36px;
-      }
-      .footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
-      .footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
-      .footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
-      .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-      .footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
-      .footer-col a:hover { color: var(--blue); }
-      .footer-bottom { width: min(100%, 1440px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
-      .footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
-      @media (max-width: 860px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
-      @media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
     </style>
   </head>
   <body>
@@ -535,7 +219,7 @@
             Built and curated by
             <a href="https://x.com/fedeponte1" target="_blank" rel="noopener">Federico de Ponte</a>
             and
-            <a href="https://x.com/adamthesalmon" target="_blank" rel="noopener">Adam Beaudoin</a>.
+            <a href="https://x.com/adamthesalmon" target="_blank" rel="noopener">Adam Beaudoin</a>, both Founder Floom.
           </p>
           <p>
             The image: Golden Gate Bridge from the Presidio. Where the work started.
@@ -544,7 +228,7 @@
           <div class="cta-row">
             <a class="button-secondary" href="https://github.com/floomhq/starter" target="_blank" rel="noopener">GitHub repo</a>
             <div class="install-cta-wrap">
-              <button class="install-cta button" type="button" data-copy="npx @floomhq/starter install" aria-label="Add to your agent: copies the install command to clipboard">
+              <button class="install-cta" type="button" data-copy="npx @floomhq/starter install" aria-label="Add to your agent: copies the install command to clipboard">
                 <svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
                 <span class="install-cta-tooltip" role="tooltip">
                   <span class="tooltip-line">Copies a command that installs 65 curated skills into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
@@ -557,8 +241,6 @@
           </div>
         </div>
       </div>
-
-      <!-- FOOTER -->
     </main>
 
     <footer class="site-footer" aria-label="Site footer">
@@ -593,7 +275,7 @@
     </footer>
 
     <script>
-      document.querySelectorAll(".copy-command, .install-cta").forEach((button) => {
+      document.querySelectorAll(".install-cta").forEach((button) => {
         button.addEventListener("click", async () => {
           const command = button.dataset.copy;
           try {
@@ -608,8 +290,6 @@
             document.execCommand("copy");
             ta.remove();
           }
-
-          // For install-cta, swap the label text only (preserve tooltip child).
           const labelEl = button.querySelector(".install-cta-label");
           if (labelEl) {
             const originalLabel = labelEl.textContent;
@@ -619,14 +299,6 @@
               labelEl.textContent = originalLabel;
               button.classList.remove("is-copied");
             }, 2000);
-          } else {
-            const original = button.textContent;
-            button.textContent = "Copied!";
-            button.classList.add("is-copied");
-            setTimeout(() => {
-              button.textContent = original;
-              button.classList.remove("is-copied");
-            }, 1400);
           }
         });
       });

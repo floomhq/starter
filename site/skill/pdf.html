@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="pdf: Floom Starter Pack skill" property="og:title"/>
 <meta content="PDF reading and structured extraction for papers, reports, and documents." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/pdf" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/pdf" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="pdf: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="PDF reading and structured extraction for papers, reports, and documents." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/pdf" rel="canonical"/>
+<link href="https://floom.dev/skill/pdf" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,15 +521,11 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-pdf-processing-guide">PDF Processing Guide</a>
-<a class="is-sub-2" href="#skillmd-overview">Overview</a>
-<a class="is-sub-2" href="#skillmd-quick-start">Quick Start</a>
-<a class="is-sub-2" href="#skillmd-python-libraries">Python Libraries</a>
-<a class="is-sub-2" href="#skillmd-command-line-tools">Command-Line Tools</a>
-<a class="is-sub-2" href="#skillmd-common-tasks">Common Tasks</a>
-<a class="is-sub-2" href="#skillmd-quick-reference">Quick Reference</a>
-<a class="is-sub-2" href="#skillmd-next-steps">Next Steps</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-license-txt">LICENSE.txt</a>
+<a class="is-sub" href="#file-forms-md">forms.md</a>
+<a class="is-sub" href="#file-reference-md">reference.md</a>
+<a class="is-sub" href="#file-scripts">scripts</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>pdf</h1>
@@ -454,235 +555,8 @@ a { color: inherit; }
 <div class="fires-block">any PDF input, "read this paper", "extract from this report"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">LICENSE.txt</span><span class="file-size">1,467 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">8,072 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">forms.md</span><span class="file-size">11,854 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">reference.md</span><span class="file-size">16,692 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">scripts</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-pdf-processing-guide">PDF Processing Guide</h2>
-<h3 id="skillmd-overview">Overview</h3>
-<p>This guide covers essential PDF processing operations using Python libraries and command-line tools. For advanced features, JavaScript libraries, and detailed examples, see REFERENCE.md. If you need to fill out a PDF form, read FORMS.md and follow its instructions.</p>
-<h3 id="skillmd-quick-start">Quick Start</h3>
-<pre><code class="lang-python">from pypdf import PdfReader, PdfWriter
-
-# Read a PDF
-reader = PdfReader("document.pdf")
-print(f"Pages: {len(reader.pages)}")
-
-# Extract text
-text = ""
-for page in reader.pages:
-    text += page.extract_text()</code></pre>
-<h3 id="skillmd-python-libraries">Python Libraries</h3>
-<h4>pypdf - Basic Operations</h4>
-<h4>Merge PDFs</h4>
-<pre><code class="lang-python">from pypdf import PdfWriter, PdfReader
-
-writer = PdfWriter()
-for pdf_file in ["doc1.pdf", "doc2.pdf", "doc3.pdf"]:
-    reader = PdfReader(pdf_file)
-    for page in reader.pages:
-        writer.add_page(page)
-
-with open("merged.pdf", "wb") as output:
-    writer.write(output)</code></pre>
-<h4>Split PDF</h4>
-<pre><code class="lang-python">reader = PdfReader("input.pdf")
-for i, page in enumerate(reader.pages):
-    writer = PdfWriter()
-    writer.add_page(page)
-    with open(f"page_{i+1}.pdf", "wb") as output:
-        writer.write(output)</code></pre>
-<h4>Extract Metadata</h4>
-<pre><code class="lang-python">reader = PdfReader("document.pdf")
-meta = reader.metadata
-print(f"Title: {meta.title}")
-print(f"Author: {meta.author}")
-print(f"Subject: {meta.subject}")
-print(f"Creator: {meta.creator}")</code></pre>
-<h4>Rotate Pages</h4>
-<pre><code class="lang-python">reader = PdfReader("input.pdf")
-writer = PdfWriter()
-
-page = reader.pages[0]
-page.rotate(90)  # Rotate 90 degrees clockwise
-writer.add_page(page)
-
-with open("rotated.pdf", "wb") as output:
-    writer.write(output)</code></pre>
-<h4>pdfplumber - Text and Table Extraction</h4>
-<h4>Extract Text with Layout</h4>
-<pre><code class="lang-python">import pdfplumber
-
-with pdfplumber.open("document.pdf") as pdf:
-    for page in pdf.pages:
-        text = page.extract_text()
-        print(text)</code></pre>
-<h4>Extract Tables</h4>
-<pre><code class="lang-python">with pdfplumber.open("document.pdf") as pdf:
-    for i, page in enumerate(pdf.pages):
-        tables = page.extract_tables()
-        for j, table in enumerate(tables):
-            print(f"Table {j+1} on page {i+1}:")
-            for row in table:
-                print(row)</code></pre>
-<h4>Advanced Table Extraction</h4>
-<pre><code class="lang-python">import pandas as pd
-
-with pdfplumber.open("document.pdf") as pdf:
-    all_tables = []
-    for page in pdf.pages:
-        tables = page.extract_tables()
-        for table in tables:
-            if table:  # Check if table is not empty
-                df = pd.DataFrame(table[1:], columns=table[0])
-                all_tables.append(df)
-
-# Combine all tables
-if all_tables:
-    combined_df = pd.concat(all_tables, ignore_index=True)
-    combined_df.to_excel("extracted_tables.xlsx", index=False)</code></pre>
-<h4>reportlab - Create PDFs</h4>
-<h4>Basic PDF Creation</h4>
-<pre><code class="lang-python">from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-
-c = canvas.Canvas("hello.pdf", pagesize=letter)
-width, height = letter
-
-# Add text
-c.drawString(100, height - 100, "Hello World!")
-c.drawString(100, height - 120, "This is a PDF created with reportlab")
-
-# Add a line
-c.line(100, height - 140, 400, height - 140)
-
-# Save
-c.save()</code></pre>
-<h4>Create PDF with Multiple Pages</h4>
-<pre><code class="lang-python">from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
-from reportlab.lib.styles import getSampleStyleSheet
-
-doc = SimpleDocTemplate("report.pdf", pagesize=letter)
-styles = getSampleStyleSheet()
-story = []
-
-# Add content
-title = Paragraph("Report Title", styles['Title'])
-story.append(title)
-story.append(Spacer(1, 12))
-
-body = Paragraph("This is the body of the report. " * 20, styles['Normal'])
-story.append(body)
-story.append(PageBreak())
-
-# Page 2
-story.append(Paragraph("Page 2", styles['Heading1']))
-story.append(Paragraph("Content for page 2", styles['Normal']))
-
-# Build PDF
-doc.build(story)</code></pre>
-<h4>Subscripts and Superscripts</h4>
-<p><strong>IMPORTANT</strong>: Never use Unicode subscript/superscript characters (₀₁₂₃₄₅₆₇₈₉, ⁰¹²³⁴⁵⁶⁷⁸⁹) in ReportLab PDFs. The built-in fonts do not include these glyphs, causing them to render as solid black boxes.</p>
-<p>Instead, use ReportLab's XML markup tags in Paragraph objects:</p>
-<pre><code class="lang-python">from reportlab.platypus import Paragraph
-from reportlab.lib.styles import getSampleStyleSheet
-
-styles = getSampleStyleSheet()
-
-# Subscripts: use &lt;sub&gt; tag
-chemical = Paragraph("H&lt;sub&gt;2&lt;/sub&gt;O", styles['Normal'])
-
-# Superscripts: use &lt;super&gt; tag
-squared = Paragraph("x&lt;super&gt;2&lt;/super&gt; + y&lt;super&gt;2&lt;/super&gt;", styles['Normal'])</code></pre>
-<p>For canvas-drawn text (not Paragraph objects), manually adjust font the size and position rather than using Unicode subscripts/superscripts.</p>
-<h3 id="skillmd-command-line-tools">Command-Line Tools</h3>
-<h4>pdftotext (poppler-utils)</h4>
-<pre><code class="lang-bash"># Extract text
-pdftotext input.pdf output.txt
-
-# Extract text preserving layout
-pdftotext -layout input.pdf output.txt
-
-# Extract specific pages
-pdftotext -f 1 -l 5 input.pdf output.txt  # Pages 1-5</code></pre>
-<h4>qpdf</h4>
-<pre><code class="lang-bash"># Merge PDFs
-qpdf --empty --pages file1.pdf file2.pdf -- merged.pdf
-
-# Split pages
-qpdf input.pdf --pages . 1-5 -- pages1-5.pdf
-qpdf input.pdf --pages . 6-10 -- pages6-10.pdf
-
-# Rotate pages
-qpdf input.pdf output.pdf --rotate=+90:1  # Rotate page 1 by 90 degrees
-
-# Remove password
-qpdf --password=mypassword --decrypt encrypted.pdf decrypted.pdf</code></pre>
-<h4>pdftk (if available)</h4>
-<pre><code class="lang-bash"># Merge
-pdftk file1.pdf file2.pdf cat output merged.pdf
-
-# Split
-pdftk input.pdf burst
-
-# Rotate
-pdftk input.pdf rotate 1east output rotated.pdf</code></pre>
-<h3 id="skillmd-common-tasks">Common Tasks</h3>
-<h4>Extract Text from Scanned PDFs</h4>
-<pre><code class="lang-python"># Requires: pip install pytesseract pdf2image
-import pytesseract
-from pdf2image import convert_from_path
-
-# Convert PDF to images
-images = convert_from_path('scanned.pdf')
-
-# OCR each page
-text = ""
-for i, image in enumerate(images):
-    text += f"Page {i+1}:\n"
-    text += pytesseract.image_to_string(image)
-    text += "\n\n"
-
-print(text)</code></pre>
-<h4>Add Watermark</h4>
-<pre><code class="lang-python">from pypdf import PdfReader, PdfWriter
-
-# Create watermark (or load existing)
-watermark = PdfReader("watermark.pdf").pages[0]
-
-# Apply to all pages
-reader = PdfReader("document.pdf")
-writer = PdfWriter()
-
-for page in reader.pages:
-    page.merge_page(watermark)
-    writer.add_page(page)
-
-with open("watermarked.pdf", "wb") as output:
-    writer.write(output)</code></pre>
-<h4>Extract Images</h4>
-<pre><code class="lang-bash"># Using pdfimages (poppler-utils)
-pdfimages -j input.pdf output_prefix
-
-# This extracts all images as output_prefix-000.jpg, output_prefix-001.jpg, etc.</code></pre>
-<h4>Password Protection</h4>
-<pre><code class="lang-python">from pypdf import PdfReader, PdfWriter
-
-reader = PdfReader("input.pdf")
-writer = PdfWriter()
-
-for page in reader.pages:
-    writer.add_page(page)
-
-# Add password
-writer.encrypt("userpassword", "ownerpassword")
-
-with open("encrypted.pdf", "wb") as output:
-    writer.write(output)</code></pre>
-<h3 id="skillmd-quick-reference">Quick Reference</h3>
-<p>| Task | Best Tool | Command/Code | |------|-----------|--------------| | Merge PDFs | pypdf | <code>writer.add_page(page)</code> | | Split PDFs | pypdf | One page per file | | Extract text | pdfplumber | <code>page.extract_text()</code> | | Extract tables | pdfplumber | <code>page.extract_tables()</code> | | Create PDFs | reportlab | Canvas or Platypus | | Command line merge | qpdf | <code>qpdf --empty --pages ...</code> | | OCR scanned PDFs | pytesseract | Convert to image first | | Fill PDF forms | pdf-lib or pypdf (see FORMS.md) | See FORMS.md |</p>
-<h3 id="skillmd-next-steps">Next Steps</h3>
-<ul><li>For advanced pypdfium2 usage, see REFERENCE.md</li><li>For JavaScript libraries (pdf-lib), see REFERENCE.md</li><li>If you need to fill out a PDF form, follow the instructions in FORMS.md</li><li>For troubleshooting guides, see REFERENCE.md</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/anthropics/skills/main/skills/pdf/SKILL.md" data-github="https://github.com/anthropics/skills/main/skills/pdf/SKILL.md" data-size="8072" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">8,072 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-license-txt" data-name="LICENSE.txt" data-url="https://raw.githubusercontent.com/anthropics/skills/main/skills/pdf/LICENSE.txt" data-github="https://github.com/anthropics/skills/main/skills/pdf/LICENSE.txt" data-size="1467" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">LICENSE.txt</span><span class="file-size">1,467 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-forms-md" data-name="forms.md" data-url="https://raw.githubusercontent.com/anthropics/skills/main/skills/pdf/forms.md" data-github="https://github.com/anthropics/skills/main/skills/pdf/forms.md" data-size="11854" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">forms.md</span><span class="file-size">11,854 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-reference-md" data-name="reference.md" data-url="https://raw.githubusercontent.com/anthropics/skills/main/skills/pdf/reference.md" data-github="https://github.com/anthropics/skills/main/skills/pdf/reference.md" data-size="16692" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">reference.md</span><span class="file-size">16,692 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-scripts" data-name="scripts" data-url="https://raw.githubusercontent.com/anthropics/skills/main/skills/pdf/scripts" data-github="https://github.com/anthropics/skills/main/skills/pdf/scripts" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">scripts</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -804,5 +678,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

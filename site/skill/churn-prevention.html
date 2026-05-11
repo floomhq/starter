@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="churn-prevention: Floom Starter Pack skill" property="og:title"/>
 <meta content="Retention tactics, churn analysis, and win-back strategies." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/churn-prevention" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/churn-prevention" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="churn-prevention: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Retention tactics, churn analysis, and win-back strategies." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/churn-prevention" rel="canonical"/>
+<link href="https://floom.dev/skill/churn-prevention" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,17 +521,9 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-churn-prevention">Churn Prevention</a>
-<a class="is-sub-2" href="#skillmd-before-starting">Before Starting</a>
-<a class="is-sub-2" href="#skillmd-how-this-skill-works">How This Skill Works</a>
-<a class="is-sub-2" href="#skillmd-cancel-flow-design">Cancel Flow Design</a>
-<a class="is-sub-2" href="#skillmd-churn-prediction-proactive-retention">Churn Prediction &amp; Proactive Retention</a>
-<a class="is-sub-2" href="#skillmd-involuntary-churn-payment-recovery">Involuntary Churn: Payment Recovery</a>
-<a class="is-sub-2" href="#skillmd-metrics-measurement">Metrics &amp; Measurement</a>
-<a class="is-sub-2" href="#skillmd-common-mistakes">Common Mistakes</a>
-<a class="is-sub-2" href="#skillmd-tool-integrations">Tool Integrations</a>
-<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-evals">evals</a>
+<a class="is-sub" href="#file-references">references</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>churn-prevention</h1>
@@ -456,164 +553,8 @@ a { color: inherit; }
 <div class="fires-block">"reduce churn", "win back users", "retention campaign"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">18,457 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-churn-prevention">Churn Prevention</h2>
-<p>You are an expert in SaaS retention and churn prevention. Your goal is to help reduce both voluntary churn (customers choosing to cancel) and involuntary churn (failed payments) through well-designed cancel flows, dynamic save offers, proactive retention, and dunning strategies.</p>
-<h3 id="skillmd-before-starting">Before Starting</h3>
-<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.</p>
-<p>Gather this context (ask if not provided):</p>
-<h4>1. Current Churn Situation</h4>
-<ul><li>What's your monthly churn rate? (Voluntary vs. involuntary if known)</li><li>How many active subscribers?</li><li>What's the average MRR per customer?</li><li>Do you have a cancel flow today, or does cancel happen instantly?</li></ul>
-<h4>2. Billing &amp; Platform</h4>
-<ul><li>What billing provider? (Stripe, Chargebee, Paddle, Recurly, Braintree)</li><li>Monthly, annual, or both billing intervals?</li><li>Do you support plan pausing or downgrades?</li><li>Any existing retention tooling? (Churnkey, ProsperStack, Raaft)</li></ul>
-<h4>3. Product &amp; Usage Data</h4>
-<ul><li>Do you track feature usage per user?</li><li>Can you identify engagement drop-offs?</li><li>Do you have cancellation reason data from past churns?</li><li>What's your activation metric? (What do retained users do that churned users don't?)</li></ul>
-<h4>4. Constraints</h4>
-<ul><li>B2B or B2C? (Affects flow design)</li><li>Self-serve cancellation required? (Some regulations mandate easy cancel)</li><li>Brand tone for offboarding? (Empathetic, direct, playful)</li></ul>
-<hr/>
-<h3 id="skillmd-how-this-skill-works">How This Skill Works</h3>
-<p>Churn has two types requiring different strategies:</p>
-<p>| Type | Cause | Solution | |------|-------|----------| | <strong>Voluntary</strong> | Customer chooses to cancel | Cancel flows, save offers, exit surveys | | <strong>Involuntary</strong> | Payment fails | Dunning emails, smart retries, card updaters |</p>
-<p>Voluntary churn is typically 50-70% of total churn. Involuntary churn is 30-50% but is often easier to fix.</p>
-<p>This skill supports three modes:</p>
-<ol><li><strong>Build a cancel flow</strong> — Design from scratch with survey, save offers, and confirmation</li><li><strong>Optimize an existing flow</strong> — Analyze cancel data and improve save rates</li><li><strong>Set up dunning</strong> — Failed payment recovery with retries and email sequences</li></ol>
-<hr/>
-<h3 id="skillmd-cancel-flow-design">Cancel Flow Design</h3>
-<h4>The Cancel Flow Structure</h4>
-<p>Every cancel flow follows this sequence:</p>
-<pre><code class="lang-">Trigger → Survey → Dynamic Offer → Confirmation → Post-Cancel</code></pre>
-<p><strong>Step 1: Trigger</strong> Customer clicks "Cancel subscription" in account settings.</p>
-<p><strong>Step 2: Exit Survey</strong> Ask why they're cancelling. This determines which save offer to show.</p>
-<p><strong>Step 3: Dynamic Save Offer</strong> Present a targeted offer based on their reason (discount, pause, downgrade, etc.)</p>
-<p><strong>Step 4: Confirmation</strong> If they still want to cancel, confirm clearly with end-of-billing-period messaging.</p>
-<p><strong>Step 5: Post-Cancel</strong> Set expectations, offer easy reactivation path, trigger win-back sequence.</p>
-<h4>Exit Survey Design</h4>
-<p>The exit survey is the foundation. Good reason categories:</p>
-<p>| Reason | What It Tells You | |--------|-------------------| | Too expensive | Price sensitivity, may respond to discount or downgrade | | Not using it enough | Low engagement, may respond to pause or onboarding help | | Missing a feature | Product gap, show roadmap or workaround | | Switching to competitor | Competitive pressure, understand what they offer | | Technical issues / bugs | Product quality, escalate to support | | Temporary / seasonal need | Usage pattern, offer pause | | Business closed / changed | Unavoidable, learn and let go gracefully | | Other | Catch-all, include free text field |</p>
-<p><strong>Survey best practices:</strong></p>
-<ul><li>1 question, single-select with optional free text</li><li>5-8 reason options max (avoid decision fatigue)</li><li>Put most common reasons first (review data quarterly)</li><li>Don't make it feel like a guilt trip</li><li>"Help us improve" framing works better than "Why are you leaving?"</li></ul>
-<h4>Dynamic Save Offers</h4>
-<p>The key insight: <strong>match the offer to the reason.</strong> A discount won't save someone who isn't using the product. A feature roadmap won't save someone who can't afford it.</p>
-<p><strong>Offer-to-reason mapping:</strong></p>
-<p>| Cancel Reason | Primary Offer | Fallback Offer | |---------------|---------------|----------------| | Too expensive | Discount (20-30% for 2-3 months) | Downgrade to lower plan | | Not using it enough | Pause (1-3 months) | Free onboarding session | | Missing feature | Roadmap preview + timeline | Workaround guide | | Switching to competitor | Competitive comparison + discount | Feedback session | | Technical issues | Escalate to support immediately | Credit + priority fix | | Temporary / seasonal | Pause subscription | Downgrade temporarily | | Business closed | Skip offer (respect the situation) | — |</p>
-<h4>Save Offer Types</h4>
-<p><strong>Discount</strong></p>
-<ul><li>20-30% off for 2-3 months is the sweet spot</li><li>Avoid 50%+ discounts (trains customers to cancel for deals)</li><li>Time-limit the offer ("This offer expires when you leave this page")</li><li>Show the dollar amount saved, not just the percentage</li></ul>
-<p><strong>Pause subscription</strong></p>
-<ul><li>1-3 month pause maximum (longer pauses rarely reactivate)</li><li>60-80% of pausers eventually return to active</li><li>Auto-reactivation with advance notice email</li><li>Keep their data and settings intact</li></ul>
-<p><strong>Plan downgrade</strong></p>
-<ul><li>Offer a lower tier instead of full cancellation</li><li>Show what they keep vs. what they lose</li><li>Position as "right-size your plan" not "downgrade"</li><li>Easy path back up when ready</li></ul>
-<p><strong>Feature unlock / extension</strong></p>
-<ul><li>Unlock a premium feature they haven't tried</li><li>Extend trial of a higher tier</li><li>Works best for "not getting enough value" reasons</li></ul>
-<p><strong>Personal outreach</strong></p>
-<ul><li>For high-value accounts (top 10-20% by MRR)</li><li>Route to customer success for a call</li><li>Personal email from founder for smaller companies</li></ul>
-<h4>Cancel Flow UI Patterns</h4>
-<pre><code class="lang-">┌─────────────────────────────────────┐
-│  We're sorry to see you go          │
-│                                     │
-│  What's the main reason you're      │
-│  cancelling?                        │
-│                                     │
-│  ○ Too expensive                    │
-│  ○ Not using it enough              │
-│  ○ Missing a feature I need         │
-│  ○ Switching to another tool        │
-│  ○ Technical issues                 │
-│  ○ Temporary / don't need right now │
-│  ○ Other: [____________]            │
-│                                     │
-│  [Continue]                         │
-│  [Never mind, keep my subscription] │
-└─────────────────────────────────────┘
-         ↓ (selects "Too expensive")
-┌─────────────────────────────────────┐
-│  What if we could help?             │
-│                                     │
-│  We'd love to keep you. Here's a    │
-│  special offer:                     │
-│                                     │
-│  ┌───────────────────────────────┐  │
-│  │  25% off for the next 3 months│  │
-│  │  Save $XX/month               │  │
-│  │                               │  │
-│  │  [Accept Offer]               │  │
-│  └───────────────────────────────┘  │
-│                                     │
-│  Or switch to [Basic Plan] at       │
-│  $X/month →                         │
-│                                     │
-│  [No thanks, continue cancelling]   │
-└─────────────────────────────────────┘</code></pre>
-<p><strong>UI principles:</strong></p>
-<ul><li>Keep the "continue cancelling" option visible (no dark patterns)</li><li>One primary offer + one fallback, not a wall of options</li><li>Show specific dollar savings, not abstract percentages</li><li>Use the customer's name and account data when possible</li><li>Mobile-friendly (many cancellations happen on mobile)</li></ul>
-<p>For detailed cancel flow patterns by industry and billing provider, see <a href="references/cancel-flow-patterns.md" rel="noopener" target="_blank">references/cancel-flow-patterns.md</a>.</p>
-<hr/>
-<h3 id="skillmd-churn-prediction-proactive-retention">Churn Prediction &amp; Proactive Retention</h3>
-<p>The best save happens before the customer ever clicks "Cancel."</p>
-<h4>Risk Signals</h4>
-<p>Track these leading indicators of churn:</p>
-<p>| Signal | Risk Level | Timeframe | |--------|-----------|-----------| | Login frequency drops 50%+ | High | 2-4 weeks before cancel | | Key feature usage stops | High | 1-3 weeks before cancel | | Support tickets spike then stop | High | 1-2 weeks before cancel | | Email open rates decline | Medium | 2-6 weeks before cancel | | Billing page visits increase | High | Days before cancel | | Team seats removed | High | 1-2 weeks before cancel | | Data export initiated | Critical | Days before cancel | | NPS score drops below 6 | Medium | 1-3 months before cancel |</p>
-<h4>Health Score Model</h4>
-<p>Build a simple health score (0-100) from weighted signals:</p>
-<pre><code class="lang-">Health Score = (
-  Login frequency score × 0.30 +
-  Feature usage score   × 0.25 +
-  Support sentiment     × 0.15 +
-  Billing health        × 0.15 +
-  Engagement score      × 0.15
-)</code></pre>
-<p>| Score | Status | Action | |-------|--------|--------| | 80-100 | Healthy | Upsell opportunities | | 60-79 | Needs attention | Proactive check-in | | 40-59 | At risk | Intervention campaign | | 0-39 | Critical | Personal outreach |</p>
-<h4>Proactive Interventions</h4>
-<p><strong>Before they think about cancelling:</strong></p>
-<p>| Trigger | Intervention | |---------|-------------| | Usage drop &gt;50% for 2 weeks | "We noticed you haven't used [feature]. Need help?" email | | Approaching plan limit | Upgrade nudge (not a wall — paywall-upgrade-cro handles this) | | No login for 14 days | Re-engagement email with recent product updates | | NPS detractor (0-6) | Personal follow-up within 24 hours | | Support ticket unresolved &gt;48h | Escalation + proactive status update | | Annual renewal in 30 days | Value recap email + renewal confirmation |</p>
-<hr/>
-<h3 id="skillmd-involuntary-churn-payment-recovery">Involuntary Churn: Payment Recovery</h3>
-<p>Failed payments cause 30-50% of all churn but are the most recoverable.</p>
-<h4>The Dunning Stack</h4>
-<pre><code class="lang-">Pre-dunning → Smart retry → Dunning emails → Grace period → Hard cancel</code></pre>
-<h4>Pre-Dunning (Prevent Failures)</h4>
-<ul><li><strong>Card expiry alerts</strong>: Email 30, 15, and 7 days before card expires</li><li><strong>Backup payment method</strong>: Prompt for a second payment method at signup</li><li><strong>Card updater services</strong>: Visa/Mastercard auto-update programs (reduces hard declines 30-50%)</li><li><strong>Pre-billing notification</strong>: Email 3-5 days before charge for annual plans</li></ul>
-<h4>Smart Retry Logic</h4>
-<p>Not all failures are the same. Retry strategy by decline type:</p>
-<p>| Decline Type | Examples | Retry Strategy | |-------------|----------|----------------| | Soft decline (temporary) | Insufficient funds, processor timeout | Retry 3-5 times over 7-10 days | | Hard decline (permanent) | Card stolen, account closed | Don't retry — ask for new card | | Authentication required | 3D Secure, SCA | Send customer to update payment |</p>
-<p><strong>Retry timing best practices:</strong></p>
-<ul><li>Retry 1: 24 hours after failure</li><li>Retry 2: 3 days after failure</li><li>Retry 3: 5 days after failure</li><li>Retry 4: 7 days after failure (with dunning email escalation)</li><li>After 4 retries: Hard cancel with reactivation path</li></ul>
-<p><strong>Smart retry tip:</strong> Retry on the day of the month the payment originally succeeded (if Day 1 worked before, retry on Day 1). Stripe Smart Retries handles this automatically.</p>
-<h4>Dunning Email Sequence</h4>
-<p>| Email | Timing | Tone | Content | |-------|--------|------|---------| | 1 | Day 0 (failure) | Friendly alert | "Your payment didn't go through. Update your card." | | 2 | Day 3 | Helpful reminder | "Quick reminder — update your payment to keep access." | | 3 | Day 7 | Urgency | "Your account will be paused in 3 days. Update now." | | 4 | Day 10 | Final warning | "Last chance to keep your account active." |</p>
-<p><strong>Dunning email best practices:</strong></p>
-<ul><li>Direct link to payment update page (no login required if possible)</li><li>Show what they'll lose (their data, their team's access)</li><li>Don't blame ("your payment failed" not "you failed to pay")</li><li>Include support contact for help</li><li>Plain text performs better than designed emails for dunning</li></ul>
-<h4>Recovery Benchmarks</h4>
-<p>| Metric | Poor | Average | Good | |--------|------|---------|------| | Soft decline recovery | &lt;40% | 50-60% | 70%+ | | Hard decline recovery | &lt;10% | 20-30% | 40%+ | | Overall payment recovery | &lt;30% | 40-50% | 60%+ | | Pre-dunning prevention | None | 10-15% | 20-30% |</p>
-<p>For the complete dunning playbook with provider-specific setup, see <a href="references/dunning-playbook.md" rel="noopener" target="_blank">references/dunning-playbook.md</a>.</p>
-<hr/>
-<h3 id="skillmd-metrics-measurement">Metrics &amp; Measurement</h3>
-<h4>Key Churn Metrics</h4>
-<p>| Metric | Formula | Target | |--------|---------|--------| | Monthly churn rate | Churned customers / Start-of-month customers | &lt;5% B2C, &lt;2% B2B | | Revenue churn (net) | (Lost MRR - Expansion MRR) / Start MRR | Negative (net expansion) | | Cancel flow save rate | Saved / Total cancel sessions | 25-35% | | Offer acceptance rate | Accepted offers / Shown offers | 15-25% | | Pause reactivation rate | Reactivated / Total paused | 60-80% | | Dunning recovery rate | Recovered / Total failed payments | 50-60% | | Time to cancel | Days from first churn signal to cancel | Track trend |</p>
-<h4>Cohort Analysis</h4>
-<p>Segment churn by:</p>
-<ul><li><strong>Acquisition channel</strong> — Which channels bring stickier customers?</li><li><strong>Plan type</strong> — Which plans churn most?</li><li><strong>Tenure</strong> — When do most cancellations happen? (30, 60, 90 days?)</li><li><strong>Cancel reason</strong> — Which reasons are growing?</li><li><strong>Save offer type</strong> — Which offers work best for which segments?</li></ul>
-<h4>Cancel Flow A/B Tests</h4>
-<p>Test one variable at a time:</p>
-<p>| Test | Hypothesis | Metric | |------|-----------|--------| | Discount % (20% vs 30%) | Higher discount saves more | Save rate, LTV impact | | Pause duration (1 vs 3 months) | Longer pause increases return rate | Reactivation rate | | Survey placement (before vs after offer) | Survey-first personalizes offers | Save rate | | Offer presentation (modal vs full page) | Full page gets more attention | Save rate | | Copy tone (empathetic vs direct) | Empathetic reduces friction | Save rate |</p>
-<p><strong>How to run cancel flow experiments:</strong> Use the <strong>ab-test-setup</strong> skill to design statistically rigorous tests. PostHog is a good fit for cancel flow experiments — its feature flags can split users into different flows server-side, and its funnel analytics track each step of the cancel flow (survey → offer → accept/decline → confirm). See the <a href="../../tools/integrations/posthog.md" rel="noopener" target="_blank">PostHog integration guide</a> for setup.</p>
-<hr/>
-<h3 id="skillmd-common-mistakes">Common Mistakes</h3>
-<ul><li><strong>No cancel flow at all</strong> — Instant cancel leaves money on the table. Even a simple survey + one offer saves 10-15%</li><li><strong>Making cancellation hard to find</strong> — Hidden cancel buttons breed resentment and bad reviews. Many jurisdictions require easy cancellation (FTC Click-to-Cancel rule)</li><li><strong>Same offer for every reason</strong> — A blanket discount doesn't address "missing feature" or "not using it"</li><li><strong>Discounts too deep</strong> — 50%+ discounts train customers to cancel-and-return for deals</li><li><strong>Ignoring involuntary churn</strong> — Often 30-50% of total churn and the easiest to fix</li><li><strong>No dunning emails</strong> — Letting payment failures silently cancel accounts</li><li><strong>Guilt-trip copy</strong> — "Are you sure you want to abandon us?" damages brand trust</li><li><strong>Not tracking save offer LTV</strong> — A "saved" customer who churns 30 days later wasn't really saved</li><li><strong>Pausing too long</strong> — Pauses beyond 3 months rarely reactivate. Set limits.</li><li><strong>No post-cancel path</strong> — Make reactivation easy and trigger win-back emails, because some churned users will want to come back</li></ul>
-<hr/>
-<h3 id="skillmd-tool-integrations">Tool Integrations</h3>
-<p>For implementation, see the <a href="../../tools/REGISTRY.md" rel="noopener" target="_blank">tools registry</a>.</p>
-<h4>Retention Platforms</h4>
-<p>| Tool | Best For | Key Feature | |------|----------|-------------| | <strong>Churnkey</strong> | Full cancel flow + dunning | AI-powered adaptive offers, 34% avg save rate | | <strong>ProsperStack</strong> | Cancel flows with analytics | Advanced rules engine, Stripe/Chargebee integration | | <strong>Raaft</strong> | Simple cancel flow builder | Easy setup, good for early-stage | | <strong>Chargebee Retention</strong> | Chargebee customers | Native integration, was Brightback |</p>
-<h4>Billing Providers (Dunning)</h4>
-<p>| Provider | Smart Retries | Dunning Emails | Card Updater | |----------|:------------:|:--------------:|:------------:| | <strong>Stripe</strong> | Built-in (Smart Retries) | Built-in | Automatic | | <strong>Chargebee</strong> | Built-in | Built-in | Via gateway | | <strong>Paddle</strong> | Built-in | Built-in | Managed | | <strong>Recurly</strong> | Built-in | Built-in | Built-in | | <strong>Braintree</strong> | Manual config | Manual | Via gateway |</p>
-<h4>Related CLI Tools</h4>
-<p>| Tool | Use For | |------|---------| | <code>stripe</code> | Subscription management, dunning config, payment retries | | <code>customer-io</code> | Dunning email sequences, retention campaigns | | <code>posthog</code> | Cancel flow A/B tests via feature flags, funnel analytics | | <code>mixpanel</code> / <code>ga4</code> | Usage tracking, churn signal analysis | | <code>segment</code> | Event routing for health scoring |</p>
-<hr/>
-<h3 id="skillmd-related-skills">Related Skills</h3>
-<ul><li><strong>email-sequence</strong>: For win-back email sequences after cancellation</li><li><strong>paywall-upgrade-cro</strong>: For in-app upgrade moments and trial expiration</li><li><strong>pricing-strategy</strong>: For plan structure and annual discount strategy</li><li><strong>onboarding-cro</strong>: For activation to prevent early churn</li><li><strong>analytics-tracking</strong>: For setting up churn signal events</li><li><strong>ab-test-setup</strong>: For testing cancel flow variations with statistical rigor</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/churn-prevention/SKILL.md" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/churn-prevention/SKILL.md" data-size="18457" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">18,457 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-evals" data-name="evals" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/churn-prevention/evals" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/churn-prevention/evals" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-references" data-name="references" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/churn-prevention/references" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/churn-prevention/references" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -735,5 +676,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

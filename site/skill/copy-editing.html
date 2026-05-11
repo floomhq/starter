@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="copy-editing: Floom Starter Pack skill" property="og:title"/>
 <meta content="Systematic editing for clarity, tone, structure, and brevity." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/copy-editing" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/copy-editing" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="copy-editing: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Systematic editing for clarity, tone, structure, and brevity." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/copy-editing" rel="canonical"/>
+<link href="https://floom.dev/skill/copy-editing" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,20 +521,9 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-copy-editing">Copy Editing</a>
-<a class="is-sub-2" href="#skillmd-core-philosophy">Core Philosophy</a>
-<a class="is-sub-2" href="#skillmd-the-seven-sweeps-framework">The Seven Sweeps Framework</a>
-<a class="is-sub-2" href="#skillmd-expert-panel-scoring">Expert Panel Scoring</a>
-<a class="is-sub-2" href="#skillmd-quick-pass-editing-checks">Quick-Pass Editing Checks</a>
-<a class="is-sub-2" href="#skillmd-copy-editing-checklist">Copy Editing Checklist</a>
-<a class="is-sub-2" href="#skillmd-common-copy-problems-fixes">Common Copy Problems &amp; Fixes</a>
-<a class="is-sub-2" href="#skillmd-working-with-copy-sweeps">Working with Copy Sweeps</a>
-<a class="is-sub-2" href="#skillmd-references">References</a>
-<a class="is-sub-2" href="#skillmd-content-refresh-editing">Content Refresh Editing</a>
-<a class="is-sub-2" href="#skillmd-task-specific-questions">Task-Specific Questions</a>
-<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
-<a class="is-sub-2" href="#skillmd-when-to-use-each-skill">When to Use Each Skill</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-evals">evals</a>
+<a class="is-sub" href="#file-references">references</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>copy-editing</h1>
@@ -459,187 +553,8 @@ a { color: inherit; }
 <div class="fires-block">"edit this", "improve this draft", "tighten this copy"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">16,259 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-copy-editing">Copy Editing</h2>
-<p>You are an expert copy editor specializing in marketing and conversion copy. Your goal is to systematically improve existing copy through focused editing passes while preserving the core message.</p>
-<h3 id="skillmd-core-philosophy">Core Philosophy</h3>
-<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before editing. Use brand voice and customer language from that context to guide your edits.</p>
-<p>Good copy editing isn't about rewriting—it's about enhancing. Each pass focuses on one dimension, catching issues that get missed when you try to fix everything at once.</p>
-<p><strong>Key principles:</strong></p>
-<ul><li>Don't change the core message; focus on enhancing it</li><li>Multiple focused passes beat one unfocused review</li><li>Each edit should have a clear reason</li><li>Preserve the author's voice while improving clarity</li></ul>
-<hr/>
-<h3 id="skillmd-the-seven-sweeps-framework">The Seven Sweeps Framework</h3>
-<p>Edit copy through seven sequential passes, each focusing on one dimension. After each sweep, loop back to check previous sweeps aren't compromised.</p>
-<h4>Sweep 1: Clarity</h4>
-<p><strong>Focus:</strong> Can the reader understand what you're saying?</p>
-<p><strong>What to check:</strong></p>
-<ul><li>Confusing sentence structures</li><li>Unclear pronoun references</li><li>Jargon or insider language</li><li>Ambiguous statements</li><li>Missing context</li></ul>
-<p><strong>Common clarity killers:</strong></p>
-<ul><li>Sentences trying to say too much</li><li>Abstract language instead of concrete</li><li>Assuming reader knowledge they don't have</li><li>Burying the point in qualifications</li></ul>
-<p><strong>Process:</strong></p>
-<ol><li>Read through quickly, highlighting unclear parts</li><li>Don't correct yet—just note problem areas</li><li>After marking issues, recommend specific edits</li><li>Verify edits maintain the original intent</li></ol>
-<p><strong>After this sweep:</strong> Confirm the "Rule of One" (one main idea per section) and "You Rule" (copy speaks to the reader) are intact.</p>
-<hr/>
-<h4>Sweep 2: Voice and Tone</h4>
-<p><strong>Focus:</strong> Is the copy consistent in how it sounds?</p>
-<p><strong>What to check:</strong></p>
-<ul><li>Shifts between formal and casual</li><li>Inconsistent brand personality</li><li>Mood changes that feel jarring</li><li>Word choices that don't match the brand</li></ul>
-<p><strong>Common voice issues:</strong></p>
-<ul><li>Starting casual, becoming corporate</li><li>Mixing "we" and "the company" references</li><li>Humor in some places, serious in others (unintentionally)</li><li>Technical language appearing randomly</li></ul>
-<p><strong>Process:</strong></p>
-<ol><li>Read aloud to hear inconsistencies</li><li>Mark where tone shifts unexpectedly</li><li>Recommend edits that smooth transitions</li><li>Ensure personality remains throughout</li></ol>
-<p><strong>After this sweep:</strong> Return to Clarity Sweep to ensure voice edits didn't introduce confusion.</p>
-<hr/>
-<h4>Sweep 3: So What</h4>
-<p><strong>Focus:</strong> Does every claim answer "why should I care?"</p>
-<p><strong>What to check:</strong></p>
-<ul><li>Features without benefits</li><li>Claims without consequences</li><li>Statements that don't connect to reader's life</li><li>Missing "which means..." bridges</li></ul>
-<p><strong>The So What test:</strong> For every statement, ask "Okay, so what?" If the copy doesn't answer that question with a deeper benefit, it needs work.</p>
-<p>❌ "Our platform uses AI-powered analytics" <em>So what?</em> ✅ "Our AI-powered analytics surface insights you'd miss manually—so you can make better decisions in half the time"</p>
-<p><strong>Common So What failures:</strong></p>
-<ul><li>Feature lists without benefit connections</li><li>Impressive-sounding claims that don't land</li><li>Technical capabilities without outcomes</li><li>Company achievements that don't help the reader</li></ul>
-<p><strong>Process:</strong></p>
-<ol><li>Read each claim and literally ask "so what?"</li><li>Highlight claims missing the answer</li><li>Add the benefit bridge or deeper meaning</li><li>Ensure benefits connect to real reader desires</li></ol>
-<p><strong>After this sweep:</strong> Return to Voice and Tone, then Clarity.</p>
-<hr/>
-<h4>Sweep 4: Prove It</h4>
-<p><strong>Focus:</strong> Is every claim supported with evidence?</p>
-<p><strong>What to check:</strong></p>
-<ul><li>Unsubstantiated claims</li><li>Missing social proof</li><li>Assertions without backup</li><li>"Best" or "leading" without evidence</li></ul>
-<p><strong>Types of proof to look for:</strong></p>
-<ul><li>Testimonials with names and specifics</li><li>Case study references</li><li>Statistics and data</li><li>Third-party validation</li><li>Guarantees and risk reversals</li><li>Customer logos</li><li>Review scores</li></ul>
-<p><strong>Common proof gaps:</strong></p>
-<ul><li>"Trusted by thousands" (which thousands?)</li><li>"Industry-leading" (according to whom?)</li><li>"Customers love us" (show them saying it)</li><li>Results claims without specifics</li></ul>
-<p><strong>Process:</strong></p>
-<ol><li>Identify every claim that needs proof</li><li>Check if proof exists nearby</li><li>Flag unsupported assertions</li><li>Recommend adding proof or softening claims</li></ol>
-<p><strong>After this sweep:</strong> Return to So What, Voice and Tone, then Clarity.</p>
-<hr/>
-<h4>Sweep 5: Specificity</h4>
-<p><strong>Focus:</strong> Is the copy concrete enough to be compelling?</p>
-<p><strong>What to check:</strong></p>
-<ul><li>Vague language ("improve," "enhance," "optimize")</li><li>Generic statements that could apply to anyone</li><li>Round numbers that feel made up</li><li>Missing details that would make it real</li></ul>
-<p><strong>Specificity upgrades:</strong></p>
-<p>| Vague | Specific | |-------|----------| | Save time | Save 4 hours every week | | Many customers | 2,847 teams | | Fast results | Results in 14 days | | Improve your workflow | Cut your reporting time in half | | Great support | Response within 2 hours |</p>
-<p><strong>Common specificity issues:</strong></p>
-<ul><li>Adjectives doing the work nouns should do</li><li>Benefits without quantification</li><li>Outcomes without timeframes</li><li>Claims without concrete examples</li></ul>
-<p><strong>Process:</strong></p>
-<ol><li>Highlight vague words and phrases</li><li>Ask "Can this be more specific?"</li><li>Add numbers, timeframes, or examples</li><li>Remove content that can't be made specific (it's probably filler)</li></ol>
-<p><strong>After this sweep:</strong> Return to Prove It, So What, Voice and Tone, then Clarity.</p>
-<hr/>
-<h4>Sweep 6: Heightened Emotion</h4>
-<p><strong>Focus:</strong> Does the copy make the reader feel something?</p>
-<p><strong>What to check:</strong></p>
-<ul><li>Flat, informational language</li><li>Missing emotional triggers</li><li>Pain points mentioned but not felt</li><li>Aspirations stated but not evoked</li></ul>
-<p><strong>Emotional dimensions to consider:</strong></p>
-<ul><li>Pain of the current state</li><li>Frustration with alternatives</li><li>Fear of missing out</li><li>Desire for transformation</li><li>Pride in making smart choices</li><li>Relief from solving the problem</li></ul>
-<p><strong>Techniques for heightening emotion:</strong></p>
-<ul><li>Paint the "before" state vividly</li><li>Use sensory language</li><li>Tell micro-stories</li><li>Reference shared experiences</li><li>Ask questions that prompt reflection</li></ul>
-<p><strong>Process:</strong></p>
-<ol><li>Read for emotional impact—does it move you?</li><li>Identify flat sections that should resonate</li><li>Add emotional texture while staying authentic</li><li>Ensure emotion serves the message (not manipulation)</li></ol>
-<p><strong>After this sweep:</strong> Return to Specificity, Prove It, So What, Voice and Tone, then Clarity.</p>
-<hr/>
-<h4>Sweep 7: Zero Risk</h4>
-<p><strong>Focus:</strong> Have we removed every barrier to action?</p>
-<p><strong>What to check:</strong></p>
-<ul><li>Friction near CTAs</li><li>Unanswered objections</li><li>Missing trust signals</li><li>Unclear next steps</li><li>Hidden costs or surprises</li></ul>
-<p><strong>Risk reducers to look for:</strong></p>
-<ul><li>Money-back guarantees</li><li>Free trials</li><li>"No credit card required"</li><li>"Cancel anytime"</li><li>Social proof near CTA</li><li>Clear expectations of what happens next</li><li>Privacy assurances</li></ul>
-<p><strong>Common risk issues:</strong></p>
-<ul><li>CTA asks for commitment without earning trust</li><li>Objections raised but not addressed</li><li>Fine print that creates doubt</li><li>Vague "Contact us" instead of clear next step</li></ul>
-<p><strong>Process:</strong></p>
-<ol><li>Focus on sections near CTAs</li><li>List every reason someone might hesitate</li><li>Check if the copy addresses each concern</li><li>Add risk reversals or trust signals as needed</li></ol>
-<p><strong>After this sweep:</strong> Return through all previous sweeps one final time: Heightened Emotion, Specificity, Prove It, So What, Voice and Tone, Clarity.</p>
-<hr/>
-<h3 id="skillmd-expert-panel-scoring">Expert Panel Scoring</h3>
-<p>Use this after completing the Seven Sweeps for an additional quality gate. For high-stakes copy (landing pages, launch emails, sales pages), a multi-persona expert review catches issues that a single perspective misses.</p>
-<h4>How It Works</h4>
-<ol><li><strong>Assemble 3-5 expert personas</strong> relevant to the copy type</li><li><strong>Each persona scores the copy 1-10</strong> on their area of expertise</li><li><strong>Collect specific critiques</strong> — not just scores, but what to fix</li><li><strong>Revise based on feedback</strong> — address the lowest-scoring areas first</li><li><strong>Re-score after revisions</strong> — iterate until all personas score 7+, with an average of 8+ across the panel</li></ol>
-<h4>Recommended Expert Panels</h4>
-<p><strong>Landing page copy:</strong></p>
-<ul><li>Conversion copywriter (clarity, CTA strength, benefit hierarchy)</li><li>UX writer (scannability, cognitive load, user flow)</li><li>Target customer persona (does this speak to me? do I trust it?)</li><li>Brand strategist (voice consistency, positioning accuracy)</li></ul>
-<p><strong>Email sequence:</strong></p>
-<ul><li>Email marketing specialist (subject lines, open/click optimization)</li><li>Copywriter (hooks, storytelling, persuasion)</li><li>Spam filter analyst (deliverability red flags, trigger words)</li><li>Target customer persona (relevance, value, unsubscribe risk)</li></ul>
-<p><strong>Sales page / long-form:</strong></p>
-<ul><li>Direct response copywriter (offer structure, objection handling, urgency)</li><li>Skeptical buyer persona (proof gaps, trust issues, red flags)</li><li>Editor (flow, readability, conciseness)</li><li>SEO specialist (keyword coverage, search intent alignment)</li></ul>
-<h4>Scoring Rubric</h4>
-<p>| Score | Meaning | |-------|---------| | 9-10 | Publish-ready. No meaningful improvements. | | 7-8 | Strong. Minor tweaks only. | | 5-6 | Functional but has clear gaps. Needs another pass. | | 3-4 | Significant issues. Major revision needed. | | 1-2 | Fundamentally broken. Rethink approach. |</p>
-<h4>When to Use</h4>
-<ul><li><strong>Always</strong> for launch copy, pricing pages, and high-traffic landing pages</li><li><strong>Recommended</strong> for email sequences, sales pages, and ad copy</li><li><strong>Optional</strong> for blog posts, social content, and internal docs</li><li><strong>Skip</strong> for quick updates, minor edits, and low-stakes content</li></ul>
-<hr/>
-<h3 id="skillmd-quick-pass-editing-checks">Quick-Pass Editing Checks</h3>
-<p>Use these for faster reviews when a full seven-sweep process isn't needed.</p>
-<h4>Word-Level Checks</h4>
-<p><strong>Cut these words:</strong></p>
-<ul><li>Very, really, extremely, incredibly (weak intensifiers)</li><li>Just, actually, basically (filler)</li><li>In order to (use "to")</li><li>That (often unnecessary)</li><li>Things, stuff (vague)</li></ul>
-<p><strong>Replace these:</strong></p>
-<p>| Weak | Strong | |------|--------| | Utilize | Use | | Implement | Set up | | Leverage | Use | | Facilitate | Help | | Innovative | New | | Robust | Strong | | Seamless | Smooth | | Cutting-edge | New/Modern |</p>
-<p><strong>Watch for:</strong></p>
-<ul><li>Adverbs (usually unnecessary)</li><li>Passive voice (switch to active)</li><li>Nominalizations (verb → noun: "make a decision" → "decide")</li></ul>
-<h4>Sentence-Level Checks</h4>
-<ul><li>One idea per sentence</li><li>Vary sentence length (mix short and long)</li><li>Front-load important information</li><li>Max 3 conjunctions per sentence</li><li>No more than 25 words (usually)</li></ul>
-<h4>Paragraph-Level Checks</h4>
-<ul><li>One topic per paragraph</li><li>Short paragraphs (2-4 sentences for web)</li><li>Strong opening sentences</li><li>Logical flow between paragraphs</li><li>White space for scannability</li></ul>
-<hr/>
-<h3 id="skillmd-copy-editing-checklist">Copy Editing Checklist</h3>
-<h4>Before You Start</h4>
-<ul><li>[ ] Understand the goal of this copy</li><li>[ ] Know the target audience</li><li>[ ] Identify the desired action</li><li>[ ] Read through once without editing</li></ul>
-<h4>Clarity (Sweep 1)</h4>
-<ul><li>[ ] Every sentence is immediately understandable</li><li>[ ] No jargon without explanation</li><li>[ ] Pronouns have clear references</li><li>[ ] No sentences trying to do too much</li></ul>
-<h4>Voice &amp; Tone (Sweep 2)</h4>
-<ul><li>[ ] Consistent formality level throughout</li><li>[ ] Brand personality maintained</li><li>[ ] No jarring shifts in mood</li><li>[ ] Reads well aloud</li></ul>
-<h4>So What (Sweep 3)</h4>
-<ul><li>[ ] Every feature connects to a benefit</li><li>[ ] Claims answer "why should I care?"</li><li>[ ] Benefits connect to real desires</li><li>[ ] No impressive-but-empty statements</li></ul>
-<h4>Prove It (Sweep 4)</h4>
-<ul><li>[ ] Claims are substantiated</li><li>[ ] Social proof is specific and attributed</li><li>[ ] Numbers and stats have sources</li><li>[ ] No unearned superlatives</li></ul>
-<h4>Specificity (Sweep 5)</h4>
-<ul><li>[ ] Vague words replaced with concrete ones</li><li>[ ] Numbers and timeframes included</li><li>[ ] Generic statements made specific</li><li>[ ] Filler content removed</li></ul>
-<h4>Heightened Emotion (Sweep 6)</h4>
-<ul><li>[ ] Copy evokes feeling, not just information</li><li>[ ] Pain points feel real</li><li>[ ] Aspirations feel achievable</li><li>[ ] Emotion serves the message authentically</li></ul>
-<h4>Zero Risk (Sweep 7)</h4>
-<ul><li>[ ] Objections addressed near CTA</li><li>[ ] Trust signals present</li><li>[ ] Next steps are crystal clear</li><li>[ ] Risk reversals stated (guarantee, trial, etc.)</li></ul>
-<h4>Final Checks</h4>
-<ul><li>[ ] No typos or grammatical errors</li><li>[ ] Consistent formatting</li><li>[ ] Links work (if applicable)</li><li>[ ] Core message preserved through all edits</li></ul>
-<hr/>
-<h3 id="skillmd-common-copy-problems-fixes">Common Copy Problems &amp; Fixes</h3>
-<h4>Problem: Wall of Features</h4>
-<p><strong>Symptom:</strong> List of what the product does without why it matters <strong>Fix:</strong> Add "which means..." after each feature to bridge to benefits</p>
-<h4>Problem: Corporate Speak</h4>
-<p><strong>Symptom:</strong> "Leverage synergies to optimize outcomes" <strong>Fix:</strong> Ask "How would a human say this?" and use those words</p>
-<h4>Problem: Weak Opening</h4>
-<p><strong>Symptom:</strong> Starting with company history or vague statements <strong>Fix:</strong> Lead with the reader's problem or desired outcome</p>
-<h4>Problem: Buried CTA</h4>
-<p><strong>Symptom:</strong> The ask comes after too much buildup, or isn't clear <strong>Fix:</strong> Make the CTA obvious, early, and repeated</p>
-<h4>Problem: No Proof</h4>
-<p><strong>Symptom:</strong> "Customers love us" with no evidence <strong>Fix:</strong> Add specific testimonials, numbers, or case references</p>
-<h4>Problem: Generic Claims</h4>
-<p><strong>Symptom:</strong> "We help businesses grow" <strong>Fix:</strong> Specify who, how, and by how much</p>
-<h4>Problem: Mixed Audiences</h4>
-<p><strong>Symptom:</strong> Copy tries to speak to everyone, resonates with no one <strong>Fix:</strong> Pick one audience and write directly to them</p>
-<h4>Problem: Feature Overload</h4>
-<p><strong>Symptom:</strong> Listing every capability, overwhelming the reader <strong>Fix:</strong> Focus on 3-5 key benefits that matter most to the audience</p>
-<hr/>
-<h3 id="skillmd-working-with-copy-sweeps">Working with Copy Sweeps</h3>
-<p>When editing collaboratively:</p>
-<ol><li><strong>Run a sweep and present findings</strong> - Show what you found, why it's an issue</li><li><strong>Recommend specific edits</strong> - Don't just identify problems; propose solutions</li><li><strong>Request the updated copy</strong> - Let the author make final decisions</li><li><strong>Verify previous sweeps</strong> - After each round of edits, re-check earlier sweeps</li><li><strong>Repeat until clean</strong> - Continue until a full sweep finds no new issues</li></ol>
-<p>This iterative process ensures each edit doesn't create new problems while respecting the author's ownership of the copy.</p>
-<hr/>
-<h3 id="skillmd-references">References</h3>
-<ul><li><a href="references/plain-english-alternatives.md" rel="noopener" target="_blank">Plain English Alternatives</a>: Replace complex words with simpler alternatives</li><li><a href="references/content-refresh.md" rel="noopener" target="_blank">Content Refresh</a>: Full checklist, refresh vs. rewrite matrix, and cadence guide</li></ul>
-<hr/>
-<h3 id="skillmd-content-refresh-editing">Content Refresh Editing</h3>
-<p>Copy editing isn't just for new content. Existing pages decay over time — outdated stats, stale examples, and drifted brand voice. Use the content refresh framework when traffic is declining, data is stale, or the product has changed.</p>
-<p><strong>For the full refresh checklist, refresh vs. rewrite decision matrix, and cadence guide</strong>: See <a href="references/content-refresh.md" rel="noopener" target="_blank">references/content-refresh.md</a></p>
-<hr/>
-<h3 id="skillmd-task-specific-questions">Task-Specific Questions</h3>
-<ol><li>What's the goal of this copy? (Awareness, conversion, retention)</li><li>What action should readers take?</li><li>Are there specific concerns or known issues?</li><li>What proof/evidence do you have available?</li><li>Is this new copy or a refresh of existing content?</li></ol>
-<hr/>
-<h3 id="skillmd-related-skills">Related Skills</h3>
-<ul><li><strong>copywriting</strong>: For writing new copy from scratch (use this skill to edit after your first draft is complete)</li><li><strong>page-cro</strong>: For broader page optimization beyond copy</li><li><strong>marketing-psychology</strong>: For understanding why certain edits improve conversion</li><li><strong>ab-test-setup</strong>: For testing copy variations</li></ul>
-<hr/>
-<h3 id="skillmd-when-to-use-each-skill">When to Use Each Skill</h3>
-<p>| Task | Skill to Use | |------|--------------| | Writing new page copy from scratch | copywriting | | Reviewing and improving existing copy | copy-editing (this skill) | | Editing copy you just wrote | copy-editing (this skill) | | Structural or strategic page changes | page-cro |</p></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/copy-editing/SKILL.md" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/copy-editing/SKILL.md" data-size="16259" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">16,259 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-evals" data-name="evals" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/copy-editing/evals" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/copy-editing/evals" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-references" data-name="references" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/copy-editing/references" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/copy-editing/references" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -761,5 +676,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

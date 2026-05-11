@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="launch-strategy: Floom Starter Pack skill" property="og:title"/>
 <meta content="GTM planning, launch sequencing, and channel strategy." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/launch-strategy" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/launch-strategy" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="launch-strategy: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="GTM planning, launch sequencing, and channel strategy." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/launch-strategy" rel="canonical"/>
+<link href="https://floom.dev/skill/launch-strategy" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,18 +521,8 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-launch-strategy">Launch Strategy</a>
-<a class="is-sub-2" href="#skillmd-before-starting">Before Starting</a>
-<a class="is-sub-2" href="#skillmd-core-philosophy">Core Philosophy</a>
-<a class="is-sub-2" href="#skillmd-the-orb-framework">The ORB Framework</a>
-<a class="is-sub-2" href="#skillmd-five-phase-launch-approach">Five-Phase Launch Approach</a>
-<a class="is-sub-2" href="#skillmd-product-hunt-launch-strategy">Product Hunt Launch Strategy</a>
-<a class="is-sub-2" href="#skillmd-post-launch-product-marketing">Post-Launch Product Marketing</a>
-<a class="is-sub-2" href="#skillmd-ongoing-launch-strategy">Ongoing Launch Strategy</a>
-<a class="is-sub-2" href="#skillmd-launch-checklist">Launch Checklist</a>
-<a class="is-sub-2" href="#skillmd-task-specific-questions">Task-Specific Questions</a>
-<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-evals">evals</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>launch-strategy</h1>
@@ -457,142 +552,8 @@ a { color: inherit; }
 <div class="fires-block">"launch plan", "how do we launch this"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">12,863 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-launch-strategy">Launch Strategy</h2>
-<p>You are an expert in SaaS product launches and feature announcements. Your goal is to help users plan launches that build momentum, capture attention, and convert interest into users.</p>
-<h3 id="skillmd-before-starting">Before Starting</h3>
-<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.</p>
-<hr/>
-<h3 id="skillmd-core-philosophy">Core Philosophy</h3>
-<p>The best companies don't just launch once—they launch again and again. Every new feature, improvement, and update is an opportunity to capture attention and engage your audience.</p>
-<p>A strong launch isn't about a single moment. It's about:</p>
-<ul><li>Getting your product into users' hands early</li><li>Learning from real feedback</li><li>Making a splash at every stage</li><li>Building momentum that compounds over time</li></ul>
-<hr/>
-<h3 id="skillmd-the-orb-framework">The ORB Framework</h3>
-<p>Structure your launch marketing across three channel types. Everything should ultimately lead back to owned channels.</p>
-<h4>Owned Channels</h4>
-<p>You own the channel (though not the audience). Direct access without algorithms or platform rules.</p>
-<p><strong>Examples:</strong></p>
-<ul><li>Email list</li><li>Blog</li><li>Podcast</li><li>Branded community (Slack, Discord)</li><li>Website/product</li></ul>
-<p><strong>Why they matter:</strong></p>
-<ul><li>Get more effective over time</li><li>No algorithm changes or pay-to-play</li><li>Direct relationship with audience</li><li>Compound value from content</li></ul>
-<p><strong>Start with 1-2 based on audience:</strong></p>
-<ul><li>Industry lacks quality content → Start a blog</li><li>People want direct updates → Focus on email</li><li>Engagement matters → Build a community</li></ul>
-<p><strong>Example - Superhuman:</strong> Built demand through an invite-only waitlist and one-on-one onboarding sessions. Every new user got a 30-minute live demo. This created exclusivity, FOMO, and word-of-mouth—all through owned relationships. Years later, their original onboarding materials still drive engagement.</p>
-<h4>Rented Channels</h4>
-<p>Platforms that provide visibility but you don't control. Algorithms shift, rules change, pay-to-play increases.</p>
-<p><strong>Examples:</strong></p>
-<ul><li>Social media (Twitter/X, LinkedIn, Instagram)</li><li>App stores and marketplaces</li><li>YouTube</li><li>Reddit</li></ul>
-<p><strong>How to use correctly:</strong></p>
-<ul><li>Pick 1-2 platforms where your audience is active</li><li>Use them to drive traffic to owned channels</li><li>Don't rely on them as your only strategy</li></ul>
-<p><strong>Example - Notion:</strong> Hacked virality through Twitter, YouTube, and Reddit where productivity enthusiasts were active. Encouraged community to share templates and workflows. But they funneled all visibility into owned assets—every viral post led to signups, then targeted email onboarding.</p>
-<p><strong>Platform-specific tactics:</strong></p>
-<ul><li>Twitter/X: Threads that spark conversation → link to newsletter</li><li>LinkedIn: High-value posts → lead to gated content or email signup</li><li>Marketplaces (Shopify, Slack): Optimize listing → drive to site for more</li></ul>
-<p>Rented channels give speed, not stability. Capture momentum by bringing users into your owned ecosystem.</p>
-<h4>Borrowed Channels</h4>
-<p>Tap into someone else's audience to shortcut the hardest part—getting noticed.</p>
-<p><strong>Examples:</strong></p>
-<ul><li>Guest content (blog posts, podcast interviews, newsletter features)</li><li>Collaborations (webinars, co-marketing, social takeovers)</li><li>Speaking engagements (conferences, panels, virtual summits)</li><li>Influencer partnerships</li></ul>
-<p><strong>Be proactive, not passive:</strong></p>
-<ol><li>List industry leaders your audience follows</li><li>Pitch win-win collaborations</li><li>Use tools like SparkToro or Listen Notes to find audience overlap</li><li>Set up affiliate/referral incentives (for channel partner launches, use <a href="../../tools/integrations/introw.md" rel="noopener" target="_blank">Introw</a> to manage deal registration and commissions)</li></ol>
-<p><strong>Example - TRMNL:</strong> Sent a free e-ink display to YouTuber Snazzy Labs—not a paid sponsorship, just hoping he'd like it. He created an in-depth review that racked up 500K+ views and drove $500K+ in sales. They also set up an affiliate program for ongoing promotion.</p>
-<p>Borrowed channels give instant credibility, but only work if you convert borrowed attention into owned relationships.</p>
-<hr/>
-<h3 id="skillmd-five-phase-launch-approach">Five-Phase Launch Approach</h3>
-<p>Launching isn't a one-day event. It's a phased process that builds momentum.</p>
-<h4>Phase 1: Internal Launch</h4>
-<p>Gather initial feedback and iron out major issues before going public.</p>
-<p><strong>Actions:</strong></p>
-<ul><li>Recruit early users one-on-one to test for free</li><li>Collect feedback on usability gaps and missing features</li><li>Ensure prototype is functional enough to demo (doesn't need to be production-ready)</li></ul>
-<p><strong>Goal:</strong> Validate core functionality with friendly users.</p>
-<h4>Phase 2: Alpha Launch</h4>
-<p>Put the product in front of external users in a controlled way.</p>
-<p><strong>Actions:</strong></p>
-<ul><li>Create landing page with early access signup form</li><li>Announce the product exists</li><li>Invite users individually to start testing</li><li>MVP should be working in production (even if still evolving)</li></ul>
-<p><strong>Goal:</strong> First external validation and initial waitlist building.</p>
-<h4>Phase 3: Beta Launch</h4>
-<p>Scale up early access while generating external buzz.</p>
-<p><strong>Actions:</strong></p>
-<ul><li>Work through early access list (some free, some paid)</li><li>Start marketing with teasers about problems you solve</li><li>Recruit friends, investors, and influencers to test and share</li></ul>
-<p><strong>Consider adding:</strong></p>
-<ul><li>Coming soon landing page or waitlist</li><li>"Beta" sticker in dashboard navigation</li><li>Email invites to early access list</li><li>Early access toggle in settings for experimental features</li></ul>
-<p><strong>Goal:</strong> Build buzz and refine product with broader feedback.</p>
-<h4>Phase 4: Early Access Launch</h4>
-<p>Shift from small-scale testing to controlled expansion.</p>
-<p><strong>Actions:</strong></p>
-<ul><li>Leak product details: screenshots, feature GIFs, demos</li><li>Gather quantitative usage data and qualitative feedback</li><li>Run user research with engaged users (incentivize with credits)</li><li>Optionally run product/market fit survey to refine messaging</li></ul>
-<p><strong>Expansion options:</strong></p>
-<ul><li>Option A: Throttle invites in batches (5-10% at a time)</li><li>Option B: Invite all users at once under "early access" framing</li></ul>
-<p><strong>Goal:</strong> Validate at scale and prepare for full launch.</p>
-<h4>Phase 5: Full Launch</h4>
-<p>Open the floodgates.</p>
-<p><strong>Actions:</strong></p>
-<ul><li>Open self-serve signups</li><li>Start charging (if not already)</li><li>Announce general availability across all channels</li></ul>
-<p><strong>Launch touchpoints:</strong></p>
-<ul><li>Customer emails</li><li>In-app popups and product tours</li><li>Website banner linking to launch assets</li><li>"New" sticker in dashboard navigation</li><li>Blog post announcement</li><li>Social posts across platforms</li><li>Product Hunt, BetaList, Hacker News, etc.</li></ul>
-<p><strong>Goal:</strong> Maximum visibility and conversion to paying users.</p>
-<hr/>
-<h3 id="skillmd-product-hunt-launch-strategy">Product Hunt Launch Strategy</h3>
-<p>Product Hunt can be powerful for reaching early adopters, but it's not magic—it requires preparation.</p>
-<h4>Pros</h4>
-<ul><li>Exposure to tech-savvy early adopter audience</li><li>Credibility bump (especially if Product of the Day)</li><li>Potential PR coverage and backlinks</li></ul>
-<h4>Cons</h4>
-<ul><li>Very competitive to rank well</li><li>Short-lived traffic spikes</li><li>Requires significant pre-launch planning</li></ul>
-<h4>How to Launch Successfully</h4>
-<p><strong>Before launch day:</strong></p>
-<ol><li>Build relationships with influential supporters, content hubs, and communities</li><li>Optimize your listing: compelling tagline, polished visuals, short demo video</li><li>Study successful launches to identify what worked</li><li>Engage in relevant communities—provide value before pitching</li><li>Prepare your team for all-day engagement</li></ol>
-<p><strong>On launch day:</strong></p>
-<ol><li>Treat it as an all-day event</li><li>Respond to every comment in real-time</li><li>Answer questions and spark discussions</li><li>Encourage your existing audience to engage</li><li>Direct traffic back to your site to capture signups</li></ol>
-<p><strong>After launch day:</strong></p>
-<ol><li>Follow up with everyone who engaged</li><li>Convert Product Hunt traffic into owned relationships (email signups)</li><li>Continue momentum with post-launch content</li></ol>
-<h4>Case Studies</h4>
-<p><strong>SavvyCal</strong> (Scheduling tool):</p>
-<ul><li>Optimized landing page and onboarding before launch</li><li>Built relationships with productivity/SaaS influencers in advance</li><li>Responded to every comment on launch day</li><li>Result: #2 Product of the Month</li></ul>
-<p><strong>Reform</strong> (Form builder):</p>
-<ul><li>Studied successful launches and applied insights</li><li>Crafted clear tagline, polished visuals, demo video</li><li>Engaged in communities before launch (provided value first)</li><li>Treated launch as all-day engagement event</li><li>Directed traffic to capture signups</li><li>Result: #1 Product of the Day</li></ul>
-<hr/>
-<h3 id="skillmd-post-launch-product-marketing">Post-Launch Product Marketing</h3>
-<p>Your launch isn't over when the announcement goes live. Now comes adoption and retention work.</p>
-<h4>Immediate Post-Launch Actions</h4>
-<p><strong>Educate new users:</strong> Set up automated onboarding email sequence introducing key features and use cases.</p>
-<p><strong>Reinforce the launch:</strong> Include announcement in your weekly/biweekly/monthly roundup email to catch people who missed it.</p>
-<p><strong>Differentiate against competitors:</strong> Publish comparison pages highlighting why you're the obvious choice.</p>
-<p><strong>Update web pages:</strong> Add dedicated sections about the new feature/product across your site.</p>
-<p><strong>Offer hands-on preview:</strong> Create no-code interactive demo (using tools like Navattic) so visitors can explore before signing up.</p>
-<h4>Keep Momentum Going</h4>
-<p>It's easier to build on existing momentum than start from scratch. Every touchpoint reinforces the launch.</p>
-<hr/>
-<h3 id="skillmd-ongoing-launch-strategy">Ongoing Launch Strategy</h3>
-<p>Don't rely on a single launch event. Regular updates and feature rollouts sustain engagement.</p>
-<h4>How to Prioritize What to Announce</h4>
-<p>Use this matrix to decide how much marketing each update deserves:</p>
-<p><strong>Major updates</strong> (new features, product overhauls):</p>
-<ul><li>Full campaign across multiple channels</li><li>Blog post, email campaign, in-app messages, social media</li><li>Maximize exposure</li></ul>
-<p><strong>Medium updates</strong> (new integrations, UI enhancements):</p>
-<ul><li>Targeted announcement</li><li>Email to relevant segments, in-app banner</li><li>Don't need full fanfare</li></ul>
-<p><strong>Minor updates</strong> (bug fixes, small tweaks):</p>
-<ul><li>Changelog and release notes</li><li>Signal that product is improving</li><li>Don't dominate marketing</li></ul>
-<h4>Announcement Tactics</h4>
-<p><strong>Space out releases:</strong> Instead of shipping everything at once, stagger announcements to maintain momentum.</p>
-<p><strong>Reuse high-performing tactics:</strong> If a previous announcement resonated, apply those insights to future updates.</p>
-<p><strong>Keep engaging:</strong> Continue using email, social, and in-app messaging to highlight improvements.</p>
-<p><strong>Signal active development:</strong> Even small changelog updates remind customers your product is evolving. This builds retention and word-of-mouth—customers feel confident you'll be around.</p>
-<hr/>
-<h3 id="skillmd-launch-checklist">Launch Checklist</h3>
-<h4>Pre-Launch</h4>
-<ul><li>[ ] Landing page with clear value proposition</li><li>[ ] Email capture / waitlist signup</li><li>[ ] Early access list built</li><li>[ ] Owned channels established (email, blog, community)</li><li>[ ] Rented channel presence (social profiles optimized)</li><li>[ ] Borrowed channel opportunities identified (podcasts, influencers)</li><li>[ ] Product Hunt listing prepared (if using)</li><li>[ ] Launch assets created (screenshots, demo video, GIFs)</li><li>[ ] Onboarding flow ready</li><li>[ ] Analytics/tracking in place</li></ul>
-<h4>Launch Day</h4>
-<ul><li>[ ] Announcement email to list</li><li>[ ] Blog post published</li><li>[ ] Social posts scheduled and posted</li><li>[ ] Product Hunt listing live (if using)</li><li>[ ] In-app announcement for existing users</li><li>[ ] Website banner/notification active</li><li>[ ] Team ready to engage and respond</li><li>[ ] Monitor for issues and feedback</li></ul>
-<h4>Post-Launch</h4>
-<ul><li>[ ] Onboarding email sequence active</li><li>[ ] Follow-up with engaged prospects</li><li>[ ] Roundup email includes announcement</li><li>[ ] Comparison pages published</li><li>[ ] Interactive demo created</li><li>[ ] Gather and act on feedback</li><li>[ ] Plan next launch moment</li></ul>
-<hr/>
-<h3 id="skillmd-task-specific-questions">Task-Specific Questions</h3>
-<ol><li>What are you launching? (New product, major feature, minor update)</li><li>What's your current audience size and engagement?</li><li>What owned channels do you have? (Email list size, blog traffic, community)</li><li>What's your timeline for launch?</li><li>Have you launched before? What worked/didn't work?</li><li>Are you considering Product Hunt? What's your preparation status?</li></ol>
-<hr/>
-<h3 id="skillmd-related-skills">Related Skills</h3>
-<ul><li><strong>marketing-ideas</strong>: For additional launch tactics (#22 Product Hunt, #23 Early Access Referrals)</li><li><strong>email-sequence</strong>: For launch and onboarding email sequences</li><li><strong>page-cro</strong>: For optimizing launch landing pages</li><li><strong>marketing-psychology</strong>: For psychology behind waitlists and exclusivity</li><li><strong>programmatic-seo</strong>: For comparison pages mentioned in post-launch</li><li><strong>sales-enablement</strong>: For launch sales collateral and enablement materials</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/launch-strategy/SKILL.md" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/launch-strategy/SKILL.md" data-size="12863" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">12,863 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-evals" data-name="evals" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/launch-strategy/evals" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/launch-strategy/evals" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -714,5 +675,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="video-polish: Floom Starter Pack skill" property="og:title"/>
 <meta content="ElevenLabs audio isolation + Gemini-aligned captions; integrated audio cleanup and captioning pipeline." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/video-polish" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/video-polish" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="video-polish: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="ElevenLabs audio isolation + Gemini-aligned captions; integrated audio cleanup and captioning pipeline." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/video-polish" rel="canonical"/>
+<link href="https://floom.dev/skill/video-polish" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,20 +521,7 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-video-polish">video-polish</a>
-<a class="is-sub-2" href="#skillmd-default-invocation">Default invocation</a>
-<a class="is-sub-2" href="#skillmd-required-env-vars">Required env vars</a>
-<a class="is-sub-2" href="#skillmd-optional-flags">Optional flags</a>
-<a class="is-sub-2" href="#skillmd-pipeline-stages">Pipeline stages</a>
-<a class="is-sub-2" href="#skillmd-cache">Cache</a>
-<a class="is-sub-2" href="#skillmd-verification-mandatory-before-claiming-done">Verification (mandatory before claiming done)</a>
-<a class="is-sub-2" href="#skillmd-automatic-introoutro-with---with-remotion">Automatic intro/outro with --with-remotion</a>
-<a class="is-sub-2" href="#skillmd-adding-remotion-visuals-b-roll-motion-graphics-branded-scenes">Adding Remotion visuals (b-roll, motion graphi…</a>
-<a class="is-sub-2" href="#skillmd-common-follow-ups">Common follow-ups</a>
-<a class="is-sub-2" href="#skillmd-auto-review">Auto-review</a>
-<a class="is-sub-2" href="#skillmd-constraints">Constraints</a>
-<a class="is-sub-2" href="#skillmd-reference-run">Reference run</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>video-polish</h1>
@@ -459,97 +551,8 @@ a { color: inherit; }
 <div class="fires-block">"polish this video", "clean the audio", "add captions"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">13,079 bytes</span><span class="file-type">main</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-video-polish">video-polish</h2>
-<p>Cleans a video's audio with ElevenLabs Audio Isolation and burns in narratively-grouped, word-level-aligned captions generated by Gemini 3.1 Pro.</p>
-<p>The canonical library lives at <code>/root/scripts/video_polish/video_polish.py</code>. This skill wraps it. Do NOT modify the canonical lib from this skill — open a PR against <code>/root/scripts/video_polish/</code> instead.</p>
-<h3 id="skillmd-default-invocation">Default invocation</h3>
-<pre><code class="lang-bash">ELEVENLABS_API_KEY=&lt;key&gt; \
-  python3 ~/.claude/skills/video-polish/scripts/video_polish.py \
-    --input  &lt;path-in&gt; \
-    --output &lt;path-out&gt;</code></pre>
-<p>For Floom team videos, the default <code>--known-names</code> covers Federico, Falco, Floom, etc. Override only when the cast is different.</p>
-<p>By default the pipeline speeds the audio + video up by <strong>1.15x</strong> (pitch preserved via rubberband), which matches Federico's standard pacing for Rocketlist + Floom launch videos. Override with <code>--speed 1.0</code> to keep the original tempo, or <code>--speed 1.2</code> for tighter pacing.</p>
-<h3 id="skillmd-required-env-vars">Required env vars</h3>
-<p>| Var | Source | |-----|--------| | <code>ELEVENLABS_API_KEY</code> | Pass in env or <code>--eleven-key</code>. Federico's key in <code>~/.config/elevenlabs.env</code> if present, else ask. | | <code>GEMINI_API_KEY</code> | Auto-loaded from <code>/root/.config/gemini/floom.env</code>. Override path with <code>--gemini-env</code>. |</p>
-<p>If either is missing the script will fail fast at stage 2 (ElevenLabs) or stage 5 (Gemini name correction). Do not retry — surface to Federico.</p>
-<h3 id="skillmd-optional-flags">Optional flags</h3>
-<p>| Flag | Default | When to change | |------|---------|---------------| | <code>--known-names</code> | <code>Fede,Federico,Falco,Floom,YC,UltraRelevant,Max,Mahir</code> | Add cast names + product names + acronyms specific to this video. Passing <code>""</code> disables correction. | | <code>--speed</code> | <code>1.15</code> | Pitch-preserving playback speed (rubberband). 1.15x is Federico's standard pacing for Rocketlist + Floom launch videos. Pass <code>1.0</code> to skip the speedup stage entirely. The audio is sped up BEFORE Whisper transcribes, so all caption timestamps are natively at the output speed; no scaling needed downstream. | | <code>--no-captions</code> | off | Skip caption burn-in but still compute + cache <code>captions.json</code>. Use when downstream tooling (the Remotion starter) will render its own caption track. See REMOTION_PROTOCOL.md. | | <code>--whisper-model</code> | <code>small</code> | Use <code>base</code> or <code>tiny</code> if the speaker is clear and you want speed. NEVER use <code>medium</code> or <code>large</code> on AX41 — they OOM-crash tmux (per CLAUDE.md). | | <code>--gemini-model</code> | <code>gemini-3.1-pro-preview</code> | Use <code>gemini-3-flash-preview</code> only if Pro is throttled. Never drop to 2.x — global rule. | | <code>--workdir</code> | <code>/tmp/video_polish_work</code> | Override only if /tmp is full or you want a different cache namespace. | | <code>--eleven-key</code> | env <code>ELEVENLABS_API_KEY</code> | Use to scope a specific key per run. | | <code>--with-remotion</code> | off | Auto-generate Remotion intro + outro bookends via Gemini storyboard. Wraps final output as <code>intro.mp4 + body.mp4 + outro.mp4</code>. | | <code>--cta-url</code> | None | CTA URL for the Remotion outro EndCard (e.g. <code>github.com/you/repo</code>). Passed to <code>storyboard.py</code> and overrides Gemini's guess. | | <code>--brand-name</code> | None | Brand name for the outro EndCard. Overrides Gemini's guess. | | <code>--storyboard-json</code> | None | Path to a pre-built <code>storyboard.json</code> to skip Gemini storyboard generation entirely. | | <code>--no-review</code> | off | Skip Gemini quality review after polish. By default the review runs automatically and prints a scored summary to stdout. |</p>
-<h3 id="skillmd-pipeline-stages">Pipeline stages</h3>
-<p>| # | Stage | Output | |---|-------|--------| | 1 | <code>extract_audio</code> | mono mp3 48kHz | | 2 | <code>isolate_voice</code> | ElevenLabs voice-isolated mp3 (HTTP API call) | | 3 | <code>normalize_voice</code> | ffmpeg loudnorm I=-14 TP=-1 LRA=9 wav | | 3.5 | <code>speedup_voice</code> | rubberband pitch-preserving tempo at <code>--speed</code> (skipped when 1.0) | | 4 | <code>transcribe</code> | faster-whisper word-timestamped JSON (timestamps already at output speed) | | 5 | <code>correct_transcription</code> | Gemini fixes proper nouns + tech terms + number tokenization | | 6 | <code>ai_caption_groups</code> | Gemini 3.1 Pro narrative-grouped windows + emphasis words | | 7 | <code>render_ass</code> | Aegisub <code>.ass</code> with karaoke emphasis tags (skipped with <code>--no-captions</code>) | | 8 | <code>assemble_video</code> | ffmpeg burn-in subs + replace audio + setpts retime to match speed | | 9 | <code>storyboard</code> | Gemini-driven scene decision: palette, intro headline/subline, outro brand/tagline/cta (skipped without <code>--with-remotion</code>) | | 10 | <code>render_remotion</code> | Remotion renders AutoIntro + AutoOutro, then ffmpeg-concats intro + body + outro (skipped without <code>--with-remotion</code>) | | 11 | <code>review</code> | Gemini multimodal quality review: 8 strategic frames + LUFS + freeze probe -&gt; scored JSON + terminal summary (skip with <code>--no-review</code>) |</p>
-<p>Each stage caches independently. Re-running the same input skips completed stages. The cache key includes the speed factor, so different <code>--speed</code> values keep separate caches and never collide.</p>
-<h3 id="skillmd-cache">Cache</h3>
-<p>Layout: <code>&lt;workdir&gt;/.video_polish_cache/v&lt;CACHE_VERSION&gt;/&lt;sha8(input_bytes)&gt;/[speed_&lt;S&gt;/]</code></p>
-<p>Top level (per-input, speed-independent):</p>
-<p><code>.isolation_method</code></p>
-<ul><li><code>audio.mp3</code>, <code>voice-isolated.mp3</code>, <code>voice-clean.wav</code>,</li></ul>
-<p>Per-speed subdir (<code>speed_&lt;S&gt;/</code>):</p>
-<p><code>transcript.raw.json</code>, <code>transcript.json</code>, <code>captions.json</code>,   <code>captions.ass</code></p>
-<ul><li><code>voice-clean_s&lt;NN&gt;.wav</code> (sped-up audio, when speed != 1.0),</li></ul>
-<p>Cache version is bumped to v2 in May 2026 (added <code>--speed</code>). Old v1 caches are untouched until manually deleted; they will not be reused.</p>
-<p>To force re-isolation on the same input (for example, to consume a fresh ElevenLabs run):</p>
-<pre><code class="lang-bash">rm /tmp/video_polish_work/.video_polish_cache/v2/&lt;hash&gt;/voice-isolated.mp3</code></pre>
-<p>To nuke the whole cache for an input:</p>
-<pre><code class="lang-bash">rm -rf /tmp/video_polish_work/.video_polish_cache/v2/&lt;hash&gt;</code></pre>
-<h3 id="skillmd-verification-mandatory-before-claiming-done">Verification (mandatory before claiming done)</h3>
-<p>(within 100ms). At default <code>--speed 1.15</code>, a 65s source becomes ~56.5s.</p>
-<p>rubberband can pull it slightly low; if more than 2 LUFS off, re-run    loudnorm with two-pass (not yet wired).</p>
-<p>says <code>ffmpeg-arnndn</code> the API call failed; surface and stop.</p>
-<p>at varied timestamps (~10%, 50%, 90% of duration), READ them with the    Read tool, confirm captions are visible AND match the transcript at    those timestamps.</p>
-<p>vs visible mouth motion. Off by &gt;150ms = stop and surface.</p>
-<ol><li><strong>Duration parity</strong> — <code>ffprobe</code> output ≈ <code>source_duration / speed</code></li><li><strong>LUFS</strong> — <code>info["lufs"]</code> should land in <code>-14 ± 2</code>. Speed-up via</li><li><strong>Isolation method</strong> — <code>info["isolation_method"] == "elevenlabs"</code>. If it</li><li><strong>Caption visibility</strong> (when captions are burned in) — extract 3 frames</li><li><strong>Lip-sync sanity</strong> — pick one random timestamp, check the audio peak</li></ol>
-<pre><code class="lang-bash"># extract 3 frames
-ffmpeg -ss &lt;t&gt; -i &lt;output&gt; -frames:v 1 -y /tmp/frame_&lt;t&gt;s.png</code></pre>
-<h3 id="skillmd-automatic-introoutro-with---with-remotion">Automatic intro/outro with --with-remotion</h3>
-<p>Pass <code>--with-remotion</code> (plus optionally <code>--brand-name</code> and <code>--cta-url</code>) to get a fully rendered final video with animated bookends in one command:</p>
-<pre><code class="lang-bash">python3 video_polish.py \
-  --input source.mov \
-  --output final.mp4 \
-  --with-remotion \
-  --brand-name "iContext" \
-  --cta-url "github.com/you/repo"</code></pre>
-<h4>How storyboard auto-decision works</h4>
-<p><code>scripts/storyboard.py</code> calls Gemini 3 Pro with a JSON-schema-enforced prompt that reads the full transcript and outputs:</p>
-<pre><code class="lang-json">{
-  "palette": "dark-orange",
-  "intro": {"headline": "I solved *AI memory*.", "subline": "AI forgets everything until it doesn't.", "duration_s": 3.0},
-  "outro": {"brand": "iContext", "tagline": "Your AI will never forget anything again.", "cta": "github.com/federicodeponte/icontext", "duration_s": 3.0}
-}</code></pre>
-<ul><li><code>palette</code>: one of <code>dark-orange | dark-green | cream | ink</code>. Gemini picks based on content topic.</li><li><code>intro.headline</code>: hook extracted from first 3 sentences. Words wrapped in <code><em>asterisks</em></code> render in accent color.</li><li><code>outro.cta</code>: overridden by <code>--cta-url</code> if passed; otherwise Gemini guesses from transcript.</li><li>Result cached at <code>&lt;cache&gt;/&lt;speed_dir&gt;/storyboard.json</code> (idempotent via sha256 of inputs).</li></ul>
-<p><code>scripts/render_remotion.py</code> then copies the remotion-starter, writes <code>Root.tsx</code> + <code>index.ts</code>, runs <code>npx remotion render</code> for AutoIntro + AutoOutro, and ffmpeg-concats the three segments. Remotion render output cached at <code>&lt;workdir&gt;/.remotion_render/&lt;hash&gt;/</code> with a <code>.done</code> stamp.</p>
-<h4>Verification checklist (--with-remotion)</h4>
-<ol><li><strong>Duration</strong> = <code>source_duration / speed + intro_duration_s + outro_duration_s</code> (within 200ms)</li><li><strong>Intro frame</strong> at t=1.5s — shows headline in large type with accent color on emphasized word</li><li><strong>Body frame</strong> at t=(intro_dur + 2)s — facecam with captions</li><li><strong>Outro frame</strong> at t=(total - 1.5)s — brand name, tagline, and cta visible</li></ol>
-<h3 id="skillmd-adding-remotion-visuals-b-roll-motion-graphics-branded-scenes">Adding Remotion visuals (b-roll, motion graphics, branded scenes)</h3>
-<p>When Federico wants the polished video to feel "more produced" — animated problem cards, terminal reveals, demo stills, shareable-link moments, end cards — bolt a Remotion layer on top of the polished facecam.</p>
-<p>The starter project at <code>/root/scripts/video_polish/remotion-starter/</code> ships six scene components, a circular face-cam PIP overlay, and an optional Remotion-rendered caption track. Follow <code>REMOTION_PROTOCOL.md</code> (in this skill's directory) step by step. It is reproducible: any agent can author visuals without inventing the structure each time.</p>
-<p>When using Remotion, decide up front whether to keep captions burned into the polished video (default, simpler) or to render captions in Remotion (cleaner control). For the latter, run <code>video_polish.py --no-captions</code> and enable the caption overlay in <code>Composition.tsx</code>.</p>
-<h3 id="skillmd-common-follow-ups">Common follow-ups</h3>
-<p>separately then concat. Re-run the polish per cut.</p>
-<p>cross-correlation block in the canonical README at   <code>/root/scripts/video_polish/README.md</code>. Matching codec/fps/resolution is   mandatory or concat will stutter.</p>
-<p>baked in so they will recenter — if margin gets ugly, re-run with a   vertical-aware ASS style override (not yet wired into the lib; surface it).</p>
-<p><code>polish_video()</code> is the handler-shaped entry point.</p>
-<ul><li><strong>Per-speaker resync</strong>: if the input was multi-camera, polish each angle</li><li><strong>Intro/outro bookends from a parallel recording</strong>: see the audio</li><li><strong>Vertical reformat (9:16)</strong>: pad/scale the polished output. Captions are</li><li><strong>Floom-app wrapping</strong>: see <code>/root/scripts/video_polish/floom-app/</code>.</li><li><strong>Adding b-roll / motion graphics</strong>: see REMOTION_PROTOCOL.md.</li></ul>
-<h3 id="skillmd-auto-review">Auto-review</h3>
-<p>Every polish run automatically scores the output with <code>scripts/review_video.py</code>. The review:</p>
-<ol><li>Probes metadata (duration, dimensions, LUFS integrated, freeze detection).</li><li>Extracts <strong>8 strategic frames</strong> (intro mid, intro/body seam, body 25/50/75%, body/outro seam, outro mid, end).</li><li>Calls <strong>Gemini 3.1 Pro multimodal</strong> with all frames + metadata + storyboard + transcript excerpt.</li><li>Enforces <code>score = MIN(all 6 dimension scores)</code> client-side (anti-anchoring).</li><li>Applies verdict rules: <code>ship</code> if MIN&gt;=9 and no critical flaws; <code>fail</code> if MIN&lt;6 or any critical; else <code>iterate</code>.</li><li>Writes <code>&lt;output&gt;.review.json</code> and prints a terminal summary.</li></ol>
-<p>To run standalone (without re-running the full pipeline):</p>
-<pre><code class="lang-bash">python3 ~/.claude/skills/video-polish/scripts/review_video.py \
-  --video /path/to/output.mp4 \
-  --storyboard /path/to/storyboard.json \
-  --out /path/to/review.json</code></pre>
-<p>To skip (e.g. when iterating quickly):</p>
-<pre><code class="lang-bash">python3 video_polish.py --input source.mov --output final.mp4 --no-review</code></pre>
-<h3 id="skillmd-constraints">Constraints</h3>
-<p>the log. Common causes: ElevenLabs credits exhausted, Gemini throttle,   fonts missing, <code>rubberband</code> not on PATH (fallback to ffmpeg filter is   automatic).</p>
-<p><code>/root/scripts/video_polish/</code>.</p>
-<p>over input bytes — different videos = different caches automatically.</p>
-<p>makes a fresh cache subdir; old caches stay until manually deleted.</p>
-<ul><li><strong>No <code>medium</code>/<code>large</code> Whisper on AX41</strong> — OOM kills tmux.</li><li><strong>Don't loop on stage failure.</strong> If a stage fails twice, STOP and surface</li><li><strong>Don't modify the canonical lib from this skill.</strong> All edits go to</li><li><strong>Cache hash collisions across projects are impossible</strong> because hash is</li><li><strong>Speed is part of the cache key.</strong> Re-running with a different <code>--speed</code></li></ul>
-<h3 id="skillmd-reference-run">Reference run</h3>
-<p>The <code>introducing-icontext.mov</code> polish (May 2026) ran a 65s 1620x1080 H264 input through the full pipeline at <code>--speed 1.15</code> in ~140s wallclock with whisper-small + Gemini 3.1 Pro. Output landed at 56.5s, LUFS -17.8, isolation_method elevenlabs, 16 caption groups.</p>
-<p>The same video was then processed with <code>--with-remotion --brand-name iContext --cta-url github.com/federicodeponte/icontext</code> in ~92s additional wallclock. Final output: 62.6s total (3s intro + 56.5s body + 3s outro), LUFS -15.4, dark-orange palette, headline "I solved <em>AI memory</em>.", outro brand "iContext".</p></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/floomhq/floom/main/examples/video-polish/SKILL.md" data-github="https://github.com/floomhq/floom/main/examples/video-polish/SKILL.md" data-size="13079" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">13,079 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -671,5 +674,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

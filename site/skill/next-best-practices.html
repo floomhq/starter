@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="next-best-practices: Floom Starter Pack skill" property="og:title"/>
 <meta content="Next.js-specific routing, data fetching, and middleware patterns from Vercel." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/next-best-practices" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/next-best-practices" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="next-best-practices: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Next.js-specific routing, data fetching, and middleware patterns from Vercel." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/next-best-practices" rel="canonical"/>
+<link href="https://floom.dev/skill/next-best-practices" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,27 +521,26 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-nextjs-best-practices">Next.js Best Practices</a>
-<a class="is-sub-2" href="#skillmd-file-conventions">File Conventions</a>
-<a class="is-sub-2" href="#skillmd-rsc-boundaries">RSC Boundaries</a>
-<a class="is-sub-2" href="#skillmd-async-patterns">Async Patterns</a>
-<a class="is-sub-2" href="#skillmd-runtime-selection">Runtime Selection</a>
-<a class="is-sub-2" href="#skillmd-directives">Directives</a>
-<a class="is-sub-2" href="#skillmd-functions">Functions</a>
-<a class="is-sub-2" href="#skillmd-error-handling">Error Handling</a>
-<a class="is-sub-2" href="#skillmd-data-patterns">Data Patterns</a>
-<a class="is-sub-2" href="#skillmd-route-handlers">Route Handlers</a>
-<a class="is-sub-2" href="#skillmd-metadata-og-images">Metadata &amp; OG Images</a>
-<a class="is-sub-2" href="#skillmd-image-optimization">Image Optimization</a>
-<a class="is-sub-2" href="#skillmd-font-optimization">Font Optimization</a>
-<a class="is-sub-2" href="#skillmd-bundling">Bundling</a>
-<a class="is-sub-2" href="#skillmd-scripts">Scripts</a>
-<a class="is-sub-2" href="#skillmd-hydration-errors">Hydration Errors</a>
-<a class="is-sub-2" href="#skillmd-suspense-boundaries">Suspense Boundaries</a>
-<a class="is-sub-2" href="#skillmd-parallel-intercepting-routes">Parallel &amp; Intercepting Routes</a>
-<a class="is-sub-2" href="#skillmd-self-hosting">Self-Hosting</a>
-<a class="is-sub-2" href="#skillmd-debug-tricks">Debug Tricks</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-async-patterns-md">async-patterns.md</a>
+<a class="is-sub" href="#file-bundling-md">bundling.md</a>
+<a class="is-sub" href="#file-data-patterns-md">data-patterns.md</a>
+<a class="is-sub" href="#file-debug-tricks-md">debug-tricks.md</a>
+<a class="is-sub" href="#file-directives-md">directives.md</a>
+<a class="is-sub" href="#file-error-handling-md">error-handling.md</a>
+<a class="is-sub" href="#file-file-conventions-md">file-conventions.md</a>
+<a class="is-sub" href="#file-font-md">font.md</a>
+<a class="is-sub" href="#file-functions-md">functions.md</a>
+<a class="is-sub" href="#file-hydration-error-md">hydration-error.md</a>
+<a class="is-sub" href="#file-image-md">image.md</a>
+<a class="is-sub" href="#file-metadata-md">metadata.md</a>
+<a class="is-sub" href="#file-parallel-routes-md">parallel-routes.md</a>
+<a class="is-sub" href="#file-route-handlers-md">route-handlers.md</a>
+<a class="is-sub" href="#file-rsc-boundaries-md">rsc-boundaries.md</a>
+<a class="is-sub" href="#file-runtime-selection-md">runtime-selection.md</a>
+<a class="is-sub" href="#file-scripts-md">scripts.md</a>
+<a class="is-sub" href="#file-self-hosting-md">self-hosting.md</a>
+<a class="is-sub" href="#file-suspense-boundaries-md">suspense-boundaries.md</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>next-best-practices</h1>
@@ -466,70 +570,8 @@ a { color: inherit; }
 <div class="fires-block">any Next.js project, routing, data fetching, middleware</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">4,004 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">async-patterns.md</span><span class="file-size">1,664 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">bundling.md</span><span class="file-size">4,456 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">data-patterns.md</span><span class="file-size">6,687 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">debug-tricks.md</span><span class="file-size">2,953 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">directives.md</span><span class="file-size">1,476 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">error-handling.md</span><span class="file-size">4,736 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">file-conventions.md</span><span class="file-size">3,453 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">font.md</span><span class="file-size">5,196 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">functions.md</span><span class="file-size">4,388 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">hydration-error.md</span><span class="file-size">1,801 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">image.md</span><span class="file-size">3,882 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">metadata.md</span><span class="file-size">7,140 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">parallel-routes.md</span><span class="file-size">7,171 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">route-handlers.md</span><span class="file-size">3,244 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">rsc-boundaries.md</span><span class="file-size">4,309 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">runtime-selection.md</span><span class="file-size">985 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">scripts.md</span><span class="file-size">3,326 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">self-hosting.md</span><span class="file-size">8,334 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">suspense-boundaries.md</span><span class="file-size">1,366 bytes</span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-nextjs-best-practices">Next.js Best Practices</h2>
-<p>Apply these rules when writing or reviewing Next.js code.</p>
-<h3 id="skillmd-file-conventions">File Conventions</h3>
-<p>See <a href="./file-conventions.md" rel="noopener" target="_blank">file-conventions.md</a> for:</p>
-<ul><li>Project structure and special files</li><li>Route segments (dynamic, catch-all, groups)</li><li>Parallel and intercepting routes</li><li>Middleware rename in v16 (middleware → proxy)</li></ul>
-<h3 id="skillmd-rsc-boundaries">RSC Boundaries</h3>
-<p>Detect invalid React Server Component patterns.</p>
-<p>See <a href="./rsc-boundaries.md" rel="noopener" target="_blank">rsc-boundaries.md</a> for:</p>
-<ul><li>Async client component detection (invalid)</li><li>Non-serializable props detection</li><li>Server Action exceptions</li></ul>
-<h3 id="skillmd-async-patterns">Async Patterns</h3>
-<p>Next.js 15+ async API changes.</p>
-<p>See <a href="./async-patterns.md" rel="noopener" target="_blank">async-patterns.md</a> for:</p>
-<ul><li>Async <code>params</code> and <code>searchParams</code></li><li>Async <code>cookies()</code> and <code>headers()</code></li><li>Migration codemod</li></ul>
-<h3 id="skillmd-runtime-selection">Runtime Selection</h3>
-<p>See <a href="./runtime-selection.md" rel="noopener" target="_blank">runtime-selection.md</a> for:</p>
-<ul><li>Default to Node.js runtime</li><li>When Edge runtime is appropriate</li></ul>
-<h3 id="skillmd-directives">Directives</h3>
-<p>See <a href="./directives.md" rel="noopener" target="_blank">directives.md</a> for:</p>
-<ul><li><code>'use client'</code>, <code>'use server'</code> (React)</li><li><code>'use cache'</code> (Next.js)</li></ul>
-<h3 id="skillmd-functions">Functions</h3>
-<p>See <a href="./functions.md" rel="noopener" target="_blank">functions.md</a> for:</p>
-<ul><li>Navigation hooks: <code>useRouter</code>, <code>usePathname</code>, <code>useSearchParams</code>, <code>useParams</code></li><li>Server functions: <code>cookies</code>, <code>headers</code>, <code>draftMode</code>, <code>after</code></li><li>Generate functions: <code>generateStaticParams</code>, <code>generateMetadata</code></li></ul>
-<h3 id="skillmd-error-handling">Error Handling</h3>
-<p>See <a href="./error-handling.md" rel="noopener" target="_blank">error-handling.md</a> for:</p>
-<ul><li><code>error.tsx</code>, <code>global-error.tsx</code>, <code>not-found.tsx</code></li><li><code>redirect</code>, <code>permanentRedirect</code>, <code>notFound</code></li><li><code>forbidden</code>, <code>unauthorized</code> (auth errors)</li><li><code>unstable_rethrow</code> for catch blocks</li></ul>
-<h3 id="skillmd-data-patterns">Data Patterns</h3>
-<p>See <a href="./data-patterns.md" rel="noopener" target="_blank">data-patterns.md</a> for:</p>
-<ul><li>Server Components vs Server Actions vs Route Handlers</li><li>Avoiding data waterfalls (<code>Promise.all</code>, Suspense, preload)</li><li>Client component data fetching</li></ul>
-<h3 id="skillmd-route-handlers">Route Handlers</h3>
-<p>See <a href="./route-handlers.md" rel="noopener" target="_blank">route-handlers.md</a> for:</p>
-<ul><li><code>route.ts</code> basics</li><li>GET handler conflicts with <code>page.tsx</code></li><li>Environment behavior (no React DOM)</li><li>When to use vs Server Actions</li></ul>
-<h3 id="skillmd-metadata-og-images">Metadata &amp; OG Images</h3>
-<p>See <a href="./metadata.md" rel="noopener" target="_blank">metadata.md</a> for:</p>
-<ul><li>Static and dynamic metadata</li><li><code>generateMetadata</code> function</li><li>OG image generation with <code>next/og</code></li><li>File-based metadata conventions</li></ul>
-<h3 id="skillmd-image-optimization">Image Optimization</h3>
-<p>See <a href="./image.md" rel="noopener" target="_blank">image.md</a> for:</p>
-<ul><li>Always use <code>next/image</code> over <code>&lt;img&gt;</code></li><li>Remote images configuration</li><li>Responsive <code>sizes</code> attribute</li><li>Blur placeholders</li><li>Priority loading for LCP</li></ul>
-<h3 id="skillmd-font-optimization">Font Optimization</h3>
-<p>See <a href="./font.md" rel="noopener" target="_blank">font.md</a> for:</p>
-<ul><li><code>next/font</code> setup</li><li>Google Fonts, local fonts</li><li>Tailwind CSS integration</li><li>Preloading subsets</li></ul>
-<h3 id="skillmd-bundling">Bundling</h3>
-<p>See <a href="./bundling.md" rel="noopener" target="_blank">bundling.md</a> for:</p>
-<ul><li>Server-incompatible packages</li><li>CSS imports (not link tags)</li><li>Polyfills (already included)</li><li>ESM/CommonJS issues</li><li>Bundle analysis</li></ul>
-<h3 id="skillmd-scripts">Scripts</h3>
-<p>See <a href="./scripts.md" rel="noopener" target="_blank">scripts.md</a> for:</p>
-<ul><li><code>next/script</code> vs native script tags</li><li>Inline scripts need <code>id</code></li><li>Loading strategies</li><li>Google Analytics with <code>@next/third-parties</code></li></ul>
-<h3 id="skillmd-hydration-errors">Hydration Errors</h3>
-<p>See <a href="./hydration-error.md" rel="noopener" target="_blank">hydration-error.md</a> for:</p>
-<ul><li>Common causes (browser APIs, dates, invalid HTML)</li><li>Debugging with error overlay</li><li>Fixes for each cause</li></ul>
-<h3 id="skillmd-suspense-boundaries">Suspense Boundaries</h3>
-<p>See <a href="./suspense-boundaries.md" rel="noopener" target="_blank">suspense-boundaries.md</a> for:</p>
-<ul><li>CSR bailout with <code>useSearchParams</code> and <code>usePathname</code></li><li>Which hooks require Suspense boundaries</li></ul>
-<h3 id="skillmd-parallel-intercepting-routes">Parallel &amp; Intercepting Routes</h3>
-<p>See <a href="./parallel-routes.md" rel="noopener" target="_blank">parallel-routes.md</a> for:</p>
-<ul><li>Modal patterns with <code>@slot</code> and <code>(.)</code> interceptors</li><li><code>default.tsx</code> for fallbacks</li><li>Closing modals correctly with <code>router.back()</code></li></ul>
-<h3 id="skillmd-self-hosting">Self-Hosting</h3>
-<p>See <a href="./self-hosting.md" rel="noopener" target="_blank">self-hosting.md</a> for:</p>
-<ul><li><code>output: 'standalone'</code> for Docker</li><li>Cache handlers for multi-instance ISR</li><li>What works vs needs extra setup</li></ul>
-<h3 id="skillmd-debug-tricks">Debug Tricks</h3>
-<p>See <a href="./debug-tricks.md" rel="noopener" target="_blank">debug-tricks.md</a> for:</p>
-<ul><li>MCP endpoint for AI-assisted debugging</li><li>Rebuild specific routes with <code>--debug-build-paths</code></li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/SKILL.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/SKILL.md" data-size="4004" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">4,004 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-async-patterns-md" data-name="async-patterns.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/async-patterns.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/async-patterns.md" data-size="1664" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">async-patterns.md</span><span class="file-size">1,664 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-bundling-md" data-name="bundling.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/bundling.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/bundling.md" data-size="4456" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">bundling.md</span><span class="file-size">4,456 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-data-patterns-md" data-name="data-patterns.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/data-patterns.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/data-patterns.md" data-size="6687" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">data-patterns.md</span><span class="file-size">6,687 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-debug-tricks-md" data-name="debug-tricks.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/debug-tricks.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/debug-tricks.md" data-size="2953" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">debug-tricks.md</span><span class="file-size">2,953 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-directives-md" data-name="directives.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/directives.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/directives.md" data-size="1476" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">directives.md</span><span class="file-size">1,476 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-error-handling-md" data-name="error-handling.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/error-handling.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/error-handling.md" data-size="4736" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">error-handling.md</span><span class="file-size">4,736 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-file-conventions-md" data-name="file-conventions.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/file-conventions.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/file-conventions.md" data-size="3453" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">file-conventions.md</span><span class="file-size">3,453 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-font-md" data-name="font.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/font.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/font.md" data-size="5196" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">font.md</span><span class="file-size">5,196 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-functions-md" data-name="functions.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/functions.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/functions.md" data-size="4388" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">functions.md</span><span class="file-size">4,388 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-hydration-error-md" data-name="hydration-error.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/hydration-error.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/hydration-error.md" data-size="1801" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">hydration-error.md</span><span class="file-size">1,801 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-image-md" data-name="image.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/image.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/image.md" data-size="3882" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">image.md</span><span class="file-size">3,882 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-metadata-md" data-name="metadata.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/metadata.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/metadata.md" data-size="7140" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">metadata.md</span><span class="file-size">7,140 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-parallel-routes-md" data-name="parallel-routes.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/parallel-routes.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/parallel-routes.md" data-size="7171" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">parallel-routes.md</span><span class="file-size">7,171 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-route-handlers-md" data-name="route-handlers.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/route-handlers.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/route-handlers.md" data-size="3244" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">route-handlers.md</span><span class="file-size">3,244 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-rsc-boundaries-md" data-name="rsc-boundaries.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/rsc-boundaries.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/rsc-boundaries.md" data-size="4309" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">rsc-boundaries.md</span><span class="file-size">4,309 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-runtime-selection-md" data-name="runtime-selection.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/runtime-selection.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/runtime-selection.md" data-size="985" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">runtime-selection.md</span><span class="file-size">985 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-scripts-md" data-name="scripts.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/scripts.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/scripts.md" data-size="3326" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">scripts.md</span><span class="file-size">3,326 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-self-hosting-md" data-name="self-hosting.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/self-hosting.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/self-hosting.md" data-size="8334" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">self-hosting.md</span><span class="file-size">8,334 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-suspense-boundaries-md" data-name="suspense-boundaries.md" data-url="https://raw.githubusercontent.com/vercel-labs/next-skills/main/skills/next-best-practices/suspense-boundaries.md" data-github="https://github.com/vercel-labs/next-skills/main/skills/next-best-practices/suspense-boundaries.md" data-size="1366" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">suspense-boundaries.md</span><span class="file-size">1,366 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -651,5 +693,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

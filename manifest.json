@@ -1,6 +1,6 @@
 {
   "pack": "floom-starter",
-  "version": "0.2.3",
+  "version": "0.2.6",
   "updated": "2026-05-11",
   "license": "MIT (pack); individual skills retain their own licenses \u2014 see README.md license table",
   "profiles": [
@@ -889,7 +889,7 @@
       "slug": "video-polish",
       "name": "video-polish",
       "publisher": "floomhq",
-      "description": "ElevenLabs audio isolation + Gemini-aligned captions; integrated audio cleanup and captioning pipeline.",
+      "description": "ElevenLabs audio isolation plus AI-aligned word-level captions, integrated audio cleanup and captioning pipeline.",
       "install_count_skills_sh": null,
       "license": "Proprietary (Floom team)",
       "profiles": [

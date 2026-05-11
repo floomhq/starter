@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="sales-enablement: Floom Starter Pack skill" property="og:title"/>
 <meta content="Sales collateral, battlecards, and objection handling frameworks." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/sales-enablement" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/sales-enablement" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="sales-enablement: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Sales collateral, battlecards, and objection handling frameworks." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/sales-enablement" rel="canonical"/>
+<link href="https://floom.dev/skill/sales-enablement" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,23 +521,9 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-sales-enablement">Sales Enablement</a>
-<a class="is-sub-2" href="#skillmd-before-starting">Before Starting</a>
-<a class="is-sub-2" href="#skillmd-core-principles">Core Principles</a>
-<a class="is-sub-2" href="#skillmd-sales-deck-pitch-deck">Sales Deck / Pitch Deck</a>
-<a class="is-sub-2" href="#skillmd-one-pagers-leave-behinds">One-Pagers / Leave-Behinds</a>
-<a class="is-sub-2" href="#skillmd-objection-handling-docs">Objection Handling Docs</a>
-<a class="is-sub-2" href="#skillmd-roi-calculators-value-props">ROI Calculators &amp; Value Props</a>
-<a class="is-sub-2" href="#skillmd-demo-scripts-talk-tracks">Demo Scripts &amp; Talk Tracks</a>
-<a class="is-sub-2" href="#skillmd-case-study-briefs-sales-format">Case Study Briefs (Sales Format)</a>
-<a class="is-sub-2" href="#skillmd-proposal-templates">Proposal Templates</a>
-<a class="is-sub-2" href="#skillmd-sales-playbooks">Sales Playbooks</a>
-<a class="is-sub-2" href="#skillmd-buyer-persona-cards">Buyer Persona Cards</a>
-<a class="is-sub-2" href="#skillmd-output-format">Output Format</a>
-<a class="is-sub-2" href="#skillmd-task-specific-questions">Task-Specific Questions</a>
-<a class="is-sub-2" href="#skillmd-tool-integrations">Tool Integrations</a>
-<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-evals">evals</a>
+<a class="is-sub" href="#file-references">references</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>sales-enablement</h1>
@@ -462,128 +553,8 @@ a { color: inherit; }
 <div class="fires-block">"objection handling", "competitive battlecard", "sales deck"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">14,643 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-sales-enablement">Sales Enablement</h2>
-<p>You are an expert in B2B sales enablement. Your goal is to create sales collateral that reps actually use — decks, one-pagers, objection docs, demo scripts, and playbooks that help close deals.</p>
-<h3 id="skillmd-before-starting">Before Starting</h3>
-<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.</p>
-<p>Gather this context (ask if not provided):</p>
-<p>- What do you sell and who is it for?    - What makes you different from the next best alternative?    - What outcomes can you prove?</p>
-<ol><li><strong>Value Proposition &amp; Differentiators</strong></li></ol>
-<p>- How do you sell? (self-serve, inside sales, field sales, hybrid)    - Average deal size and sales cycle length    - Key personas involved in the buying decision</p>
-<ol><li><strong>Sales Motion</strong></li></ol>
-<p>- What specific assets do you need?    - What stage of the funnel are they for?    - Who will use them? (AE, SDR, champion, prospect)</p>
-<ol><li><strong>Collateral Needs</strong></li></ol>
-<p>- What materials exist today?    - What's working and what's not?    - What do reps ask for most?</p>
-<ol><li><strong>Current State</strong></li></ol>
-<hr/>
-<h3 id="skillmd-core-principles">Core Principles</h3>
-<h4>Sales Uses What Sales Trusts</h4>
-<p>Involve reps in creation. Use their language, not marketing's. If reps rewrite your deck before sending it, you wrote the wrong deck. Test drafts with your top performers first.</p>
-<h4>Situation-Specific, Not Generic</h4>
-<p>Tailor to persona, deal stage, and use case. A deck for a CTO should look different from one for a VP of Sales. A one-pager for post-meeting follow-up serves a different purpose than one for a trade show.</p>
-<h4>Scannable Over Comprehensive</h4>
-<p>Reps need information in 3 seconds, not 30. Use bold headers, short bullets, and visual hierarchy. If a rep can't find the answer mid-call, the doc has failed.</p>
-<h4>Tie Back to Business Outcomes</h4>
-<p>Every claim connects to revenue, efficiency, or risk reduction. Features mean nothing without the "so what." Replace "AI-powered analytics" with "cut reporting time by 80%."</p>
-<hr/>
-<h3 id="skillmd-sales-deck-pitch-deck">Sales Deck / Pitch Deck</h3>
-<h4>10-12 Slide Framework</h4>
-<ol><li><strong>Current World Problem</strong> — The pain your buyer lives with today</li><li><strong>Cost of the Problem</strong> — What inaction costs (time, money, risk)</li><li><strong>The Shift Happening</strong> — Market or technology change creating urgency</li><li><strong>Your Approach</strong> — How you solve it differently</li><li><strong>Product Walkthrough</strong> — 3-4 key workflows, not a feature tour</li><li><strong>Proof Points</strong> — Metrics, logos, analyst recognition</li><li><strong>Case Study</strong> — One customer story told well</li><li><strong>Implementation / Timeline</strong> — How they get from here to live</li><li><strong>ROI / Value</strong> — Expected return and payback period</li><li><strong>Pricing Overview</strong> — Transparent, tiered if applicable</li><li><strong>Next Steps / CTA</strong> — Clear action with timeline</li></ol>
-<h4>Deck Principles</h4>
-<ul><li><strong>Story arc, not feature tour.</strong> Every deck tells a story: the world has a problem, there's a better way, here's proof, here's how to get there.</li><li><strong>One idea per slide.</strong> If you need two points, use two slides.</li><li><strong>Design for presenting, not reading.</strong> Slides support the conversation — they don't replace it. Minimal text, strong visuals.</li></ul>
-<h4>Customization by Buyer Type</h4>
-<p>| Buyer | Emphasize | De-emphasize | |-------|-----------|--------------| | Technical buyer | Architecture, security, integrations, API | ROI calculations, business metrics | | Economic buyer | ROI, payback period, total cost, risk | Technical details, implementation specifics | | Champion | Internal selling points, quick wins, peer proof | Deep technical or financial detail |</p>
-<p><strong>For full slide-by-slide guidance</strong>: See <a href="references/deck-frameworks.md" rel="noopener" target="_blank">references/deck-frameworks.md</a></p>
-<hr/>
-<h3 id="skillmd-one-pagers-leave-behinds">One-Pagers / Leave-Behinds</h3>
-<h4>When to Use</h4>
-<ul><li><strong>Post-meeting recap</strong> — Reinforce what you discussed, keep momentum</li><li><strong>Champion internal selling</strong> — Arm your champion to sell for you</li><li><strong>Trade show handout</strong> — Quick intro that drives follow-up</li></ul>
-<h4>Structure</h4>
-<ol><li><strong>Problem statement</strong> — The pain in one sentence</li><li><strong>Your solution</strong> — What you do and how</li><li><strong>3 differentiators</strong> — Why you vs. alternatives</li><li><strong>Proof point</strong> — One strong metric or customer quote</li><li><strong>CTA</strong> — Clear next step with contact info</li></ol>
-<h4>Design Principles</h4>
-<ul><li>One page, literally. Front only, or front and back maximum.</li><li>Scannable in 30 seconds. Bold headers, short bullets, whitespace.</li><li>Include your logo, website, and a specific contact (not info@).</li><li>Match your brand but keep it clean — this is a sales tool, not a brand piece.</li></ul>
-<p><strong>For templates by use case</strong>: See <a href="references/one-pager-templates.md" rel="noopener" target="_blank">references/one-pager-templates.md</a></p>
-<hr/>
-<h3 id="skillmd-objection-handling-docs">Objection Handling Docs</h3>
-<h4>Objection Categories</h4>
-<p>| Category | Examples | |----------|----------| | Price | "Too expensive," "No budget this quarter," "Competitor is cheaper" | | Timing | "Not the right time," "Maybe next quarter," "Too busy to implement" | | Competition | "We already use X," "What makes you different?" | | Authority | "I need to check with my boss," "The committee decides" | | Status quo | "What we have works fine," "Not broken, don't fix it" | | Technical | "Does it integrate with X?," "Security concerns," "Can it scale?" |</p>
-<h4>Response Framework</h4>
-<p>For each objection, document:</p>
-<ol><li><strong>Objection statement</strong> — Exactly how reps hear it</li><li><strong>Why they say it</strong> — The real concern behind the words</li><li><strong>Response approach</strong> — How to acknowledge and redirect</li><li><strong>Proof point</strong> — Specific evidence that addresses the concern</li><li><strong>Follow-up question</strong> — Keep the conversation moving forward</li></ol>
-<h4>Two Formats</h4>
-<ul><li><strong>Quick-reference table</strong> for live calls — objection, one-line response, proof point. Fits on one screen.</li><li><strong>Detailed doc</strong> for prep and training — full context, talk tracks, role-play scenarios.</li></ul>
-<p><strong>For the full objection library</strong>: See <a href="references/objection-library.md" rel="noopener" target="_blank">references/objection-library.md</a></p>
-<hr/>
-<h3 id="skillmd-roi-calculators-value-props">ROI Calculators &amp; Value Props</h3>
-<h4>Calculator Design</h4>
-<p><strong>Inputs</strong> (current state metrics the prospect provides):</p>
-<ul><li>Time spent on manual processes</li><li>Current tool costs</li><li>Error rates or inefficiency metrics</li><li>Team size</li></ul>
-<p><strong>Calculations</strong> (your formula for value):</p>
-<ul><li>Time saved per week/month/year</li><li>Cost reduction (tools, headcount, errors)</li><li>Revenue impact (faster deals, higher conversion)</li></ul>
-<p><strong>Outputs</strong> (what the prospect sees):</p>
-<ul><li>Annual ROI percentage</li><li>Payback period in months</li><li>Total 3-year value</li></ul>
-<h4>Value Prop by Persona</h4>
-<p>| Persona | Cares About | Lead With | |---------|-------------|-----------| | CTO / VP Eng | Architecture, scale, security, team velocity | Technical superiority, integration depth | | VP Sales | Pipeline, quota attainment, rep productivity | Revenue impact, time savings per rep | | CFO | Total cost, payback period, risk | ROI, cost reduction, financial predictability | | End user | Ease of use, daily workflow, learning curve | Time saved, frustration eliminated |</p>
-<h4>Implementation Options</h4>
-<ul><li><strong>Spreadsheet</strong> — Fastest to build, easy to customize per deal. Works for inside sales.</li><li><strong>Web tool</strong> — More polished, captures leads, scales better. Worth building if deal volume is high.</li><li><strong>Slide-based</strong> — ROI story embedded in the deck. Good for executive presentations.</li></ul>
-<hr/>
-<h3 id="skillmd-demo-scripts-talk-tracks">Demo Scripts &amp; Talk Tracks</h3>
-<h4>Script Structure</h4>
-<ol><li><strong>Opening</strong> (2 min) — Context setting, agenda, confirm goals for the call</li><li><strong>Discovery recap</strong> (3 min) — Summarize what you learned, confirm priorities</li><li><strong>Solution walkthrough</strong> (15-20 min) — 3-4 key workflows mapped to their pain</li><li><strong>Interaction points</strong> — Questions to ask during the demo, not just at the end</li><li><strong>Close</strong> (5 min) — Summarize value, propose next steps with timeline</li></ol>
-<h4>Talk Track Types</h4>
-<p>| Type | Duration | Focus | |------|----------|-------| | Discovery call | 30 min | Qualify, understand pain, map buying process | | First demo | 30-45 min | Show 3-4 workflows tied to their pain | | Technical deep-dive | 45-60 min | Architecture, security, integrations, API | | Executive overview | 20-30 min | Business outcomes, ROI, strategic alignment |</p>
-<h4>Key Principles</h4>
-<ul><li><strong>Demo after discovery, not before.</strong> If you don't know their pain, you're guessing which features matter.</li><li><strong>Customize to their use case.</strong> Use their terminology, their data (if possible), their workflow.</li><li><strong>Leave time for questions.</strong> A demo where the prospect doesn't talk is a demo that doesn't close.</li></ul>
-<p><strong>For full script templates</strong>: See <a href="references/demo-scripts.md" rel="noopener" target="_blank">references/demo-scripts.md</a></p>
-<hr/>
-<h3 id="skillmd-case-study-briefs-sales-format">Case Study Briefs (Sales Format)</h3>
-<h4>How Sales Case Studies Differ</h4>
-<p>Marketing case studies tell a story. Sales case studies arm reps with fast-access proof. Keep them short, outcome-focused, and tagged for retrieval.</p>
-<h4>Structure</h4>
-<ol><li><strong>Customer profile</strong> — Industry, company size, buyer role</li><li><strong>Challenge</strong> — What they were struggling with (2-3 sentences)</li><li><strong>Solution</strong> — What they implemented (1-2 sentences)</li><li><strong>Results</strong> — 3 specific metrics (before/after)</li><li><strong>Pull quote</strong> — One sentence from the customer</li><li><strong>Tags</strong> — Industry, use case, company size, persona</li></ol>
-<h4>Organization</h4>
-<p>Organize case studies so reps can find the right one instantly:</p>
-<ul><li><strong>By industry</strong> — "Show me a case study for healthcare"</li><li><strong>By use case</strong> — "Show me someone who used us for X"</li><li><strong>By company size</strong> — "Show me an enterprise example"</li></ul>
-<hr/>
-<h3 id="skillmd-proposal-templates">Proposal Templates</h3>
-<h4>Structure</h4>
-<ol><li><strong>Executive summary</strong> — Their challenge, your solution, expected outcome (1 page max)</li><li><strong>Proposed solution</strong> — What you'll deliver, mapped to their requirements</li><li><strong>Implementation plan</strong> — Timeline, milestones, responsibilities</li><li><strong>Investment</strong> — Pricing, payment terms, what's included</li><li><strong>Next steps</strong> — How to move forward, decision timeline</li></ol>
-<h4>Customization Guidance</h4>
-<ul><li>Mirror their language from discovery calls</li><li>Reference specific pain points they mentioned</li><li>Include only relevant case studies (same industry or use case)</li><li>Name the stakeholders you've spoken with</li></ul>
-<h4>Common Mistakes</h4>
-<ul><li><strong>Too long</strong> — If it's over 10 pages, it won't get read. Aim for 5-7.</li><li><strong>Too generic</strong> — Templated proposals signal low effort. Customize the exec summary at minimum.</li><li><strong>Burying the price</strong> — Don't make them hunt for it. Be transparent and confident.</li></ul>
-<hr/>
-<h3 id="skillmd-sales-playbooks">Sales Playbooks</h3>
-<h4>What Goes in a Playbook</h4>
-<ul><li><strong>Buyer profile</strong> — Who you're selling to, their goals and pains</li><li><strong>Qualification criteria</strong> — BANT, MEDDIC, or your framework</li><li><strong>Discovery questions</strong> — Organized by topic, not a script</li><li><strong>Objection handling</strong> — Top 10 objections with responses</li><li><strong>Competitive positioning</strong> — How you win against each competitor</li><li><strong>Demo flow</strong> — Recommended sequence for each persona</li><li><strong>Email templates</strong> — Follow-up, proposal, check-in, breakup</li></ul>
-<h4>When to Build</h4>
-<ul><li><strong>New product launch</strong> — Reps need a single source of truth</li><li><strong>New market segment</strong> — Different buyers need different approaches</li><li><strong>New hire ramp</strong> — Playbooks cut ramp time significantly</li></ul>
-<h4>Keeping It Living</h4>
-<p>Playbooks die when they're not updated. Review quarterly, get input from top reps, and remove anything outdated. Assign an owner — if nobody owns it, it rots.</p>
-<hr/>
-<h3 id="skillmd-buyer-persona-cards">Buyer Persona Cards</h3>
-<h4>Card Structure</h4>
-<p>| Field | Description | |-------|-------------| | Role / title | Common titles and reporting structure | | Goals | What success looks like for them | | Pains | What frustrates them daily | | Top objections | The 3-5 objections you'll hear from this role | | Evaluation criteria | How they judge solutions | | Buying process | Their role in the decision, who they influence | | Messaging angle | The one sentence that resonates most |</p>
-<h4>Persona Types</h4>
-<ul><li><strong>Economic buyer</strong> — Signs the check. Cares about ROI and risk.</li><li><strong>Technical buyer</strong> — Evaluates the product. Cares about capabilities and integration.</li><li><strong>End user</strong> — Uses it daily. Cares about ease and workflow fit.</li><li><strong>Champion</strong> — Advocates internally. Needs ammunition to sell for you.</li><li><strong>Blocker</strong> — Opposes the purchase. Understand their concern to neutralize it.</li></ul>
-<hr/>
-<h3 id="skillmd-output-format">Output Format</h3>
-<p>Deliver the right format for each asset type:</p>
-<p>| Asset | Deliverable | |-------|-------------| | Sales deck | Slide-by-slide outline with headline, body copy, and speaker notes | | One-pager | Full copy with layout guidance (visual hierarchy, sections) | | Objection doc | Table format: objection, response, proof point, follow-up | | Demo script | Scene-by-scene with timing, talk track, and interaction points | | ROI calculator | Input fields, formulas, output display with sample data | | Playbook | Structured document with table of contents and sections | | Persona card | One-page card format per persona | | Proposal | Section-by-section copy with customization notes |</p>
-<hr/>
-<h3 id="skillmd-task-specific-questions">Task-Specific Questions</h3>
-<p>If context is missing, ask:</p>
-<ol><li>What collateral do you need? (deck, one-pager, objection doc, etc.)</li><li>Who will use it? (AE, SDR, champion, prospect)</li><li>What sales stage is it for? (prospecting, discovery, demo, negotiation, close)</li><li>Who is the target persona? (title, seniority, department)</li><li>What are the top 3 objections you hear most?</li></ol>
-<hr/>
-<h3 id="skillmd-tool-integrations">Tool Integrations</h3>
-<p>For partner sales enablement, see the <a href="../../tools/REGISTRY.md" rel="noopener" target="_blank">tools registry</a>:</p>
-<p>| Tool | What It Does | Guide | |------|-------------|-------| | <strong>Introw</strong> | Partner engagement tracking, deal registration, mutual action plans | <a href="../../tools/integrations/introw.md" rel="noopener" target="_blank">introw.md</a> |</p>
-<hr/>
-<h3 id="skillmd-related-skills">Related Skills</h3>
-<ul><li><strong>competitor-alternatives</strong>: For public-facing comparison and alternative pages</li><li><strong>copywriting</strong>: For marketing website copy</li><li><strong>cold-email</strong>: For outbound prospecting emails</li><li><strong>revops</strong>: For lead lifecycle, scoring, routing, and pipeline management</li><li><strong>pricing-strategy</strong>: For pricing decisions and packaging</li><li><strong>product-marketing-context</strong>: For foundational positioning and messaging</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/sales-enablement/SKILL.md" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/sales-enablement/SKILL.md" data-size="14643" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">14,643 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-evals" data-name="evals" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/sales-enablement/evals" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/sales-enablement/evals" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-references" data-name="references" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/sales-enablement/references" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/sales-enablement/references" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -705,5 +676,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

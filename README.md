@@ -13,7 +13,7 @@ Works with Claude Code, Codex, Cursor, Kimi, OpenCode.
 [![License: MIT](https://img.shields.io/badge/License-MIT-0094ff.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/floomhq/starter?color=0094ff&style=flat-square)](https://github.com/floomhq/starter)
 
-[Install](#install) · [What you get](#what-you-get) · [How it works](#how-it-works) · [Docs](https://starter.floom.dev/docs) · [Browse skills](https://starter.floom.dev/library)
+[Install](#install) · [What you get](#what-you-get) · [How it works](#how-it-works) · [Docs](https://floom.dev/docs) · [Browse skills](https://floom.dev/library)
 
 </div>
 
@@ -45,7 +45,7 @@ That installs the Core profile (9 hand-picked skills) into the AI agent you use.
 | Design | 9 | frontend-design, web-design-guidelines, audit, polish, critique, tailwind-design-system |
 | Video | 6 | video-polish, remotion-best-practices, audio-extractor, video-processor |
 
-[Browse the full library](https://starter.floom.dev/library)
+[Browse the full library](https://floom.dev/library)
 
 ## How it works
 
@@ -114,8 +114,8 @@ Pull requests welcome.
 
 ## Links
 
-- Site: [starter.floom.dev](https://starter.floom.dev)
+- Site: [floom.dev](https://floom.dev)
 - npm: [@floomhq/starter](https://www.npmjs.com/package/@floomhq/starter)
-- Library: [Browse all 65 skills](https://starter.floom.dev/library)
-- Docs: [starter.floom.dev/docs](https://starter.floom.dev/docs)
+- Library: [Browse all 65 skills](https://floom.dev/library)
+- Docs: [floom.dev/docs](https://floom.dev/docs)
 - X: [@floomhq](https://x.com/floomhq)

@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="xlsx: Floom Starter Pack skill" property="og:title"/>
 <meta content="Excel/CSV spreadsheet reading, analysis, and generation." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/xlsx" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/xlsx" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="xlsx: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Excel/CSV spreadsheet reading, analysis, and generation." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/xlsx" rel="canonical"/>
+<link href="https://floom.dev/skill/xlsx" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,21 +521,9 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-requirements-for-outputs">Requirements for Outputs</a>
-<a class="is-sub-2" href="#skillmd-all-excel-files">All Excel files</a>
-<a class="is-sub-2" href="#skillmd-financial-models">Financial models</a>
-<a class="is-sub" href="#skillmd-xlsx-creation-editing-and-analysis">XLSX creation, editing, and analysis</a>
-<a class="is-sub-2" href="#skillmd-overview">Overview</a>
-<a class="is-sub-2" href="#skillmd-important-requirements">Important Requirements</a>
-<a class="is-sub-2" href="#skillmd-reading-and-analyzing-data">Reading and analyzing data</a>
-<a class="is-sub-2" href="#skillmd-excel-file-workflows">Excel File Workflows</a>
-<a class="is-sub-2" href="#skillmd-critical-use-formulas-not-hardcoded-values">CRITICAL: Use Formulas, Not Hardcoded Values</a>
-<a class="is-sub-2" href="#skillmd-common-workflow">Common Workflow</a>
-<a class="is-sub-2" href="#skillmd-recalculating-formulas">Recalculating formulas</a>
-<a class="is-sub-2" href="#skillmd-formula-verification-checklist">Formula Verification Checklist</a>
-<a class="is-sub-2" href="#skillmd-best-practices">Best Practices</a>
-<a class="is-sub-2" href="#skillmd-code-style-guidelines">Code Style Guidelines</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-license-txt">LICENSE.txt</a>
+<a class="is-sub" href="#file-scripts">scripts</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>xlsx</h1>
@@ -460,171 +553,8 @@ a { color: inherit; }
 <div class="fires-block">"put this research in a spreadsheet", "compare these sources"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">LICENSE.txt</span><span class="file-size">1,467 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">11,463 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">scripts</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-requirements-for-outputs">Requirements for Outputs</h2>
-<h3 id="skillmd-all-excel-files">All Excel files</h3>
-<h4>Professional Font</h4>
-<ul><li>Use a consistent, professional font (e.g., Arial, Times New Roman) for all deliverables unless otherwise instructed by the user</li></ul>
-<h4>Zero Formula Errors</h4>
-<ul><li>Every Excel model MUST be delivered with ZERO formula errors (#REF!, #DIV/0!, #VALUE!, #N/A, #NAME?)</li></ul>
-<h4>Preserve Existing Templates (when updating templates)</h4>
-<ul><li>Study and EXACTLY match existing format, style, and conventions when modifying files</li><li>Never impose standardized formatting on files with established patterns</li><li>Existing template conventions ALWAYS override these guidelines</li></ul>
-<h3 id="skillmd-financial-models">Financial models</h3>
-<h4>Color Coding Standards</h4>
-<p>Unless otherwise stated by the user or existing template</p>
-<h4>Industry-Standard Color Conventions</h4>
-<ul><li><strong>Blue text (RGB: 0,0,255)</strong>: Hardcoded inputs, and numbers users will change for scenarios</li><li><strong>Black text (RGB: 0,0,0)</strong>: ALL formulas and calculations</li><li><strong>Green text (RGB: 0,128,0)</strong>: Links pulling from other worksheets within same workbook</li><li><strong>Red text (RGB: 255,0,0)</strong>: External links to other files</li><li><strong>Yellow background (RGB: 255,255,0)</strong>: Key assumptions needing attention or cells that need to be updated</li></ul>
-<h4>Number Formatting Standards</h4>
-<h4>Required Format Rules</h4>
-<ul><li><strong>Years</strong>: Format as text strings (e.g., "2024" not "2,024")</li><li><strong>Currency</strong>: Use $#,##0 format; ALWAYS specify units in headers ("Revenue ($mm)")</li><li><strong>Zeros</strong>: Use number formatting to make all zeros "-", including percentages (e.g., "$#,##0;($#,##0);-")</li><li><strong>Percentages</strong>: Default to 0.0% format (one decimal)</li><li><strong>Multiples</strong>: Format as 0.0x for valuation multiples (EV/EBITDA, P/E)</li><li><strong>Negative numbers</strong>: Use parentheses (123) not minus -123</li></ul>
-<h4>Formula Construction Rules</h4>
-<h4>Assumptions Placement</h4>
-<ul><li>Place ALL assumptions (growth rates, margins, multiples, etc.) in separate assumption cells</li><li>Use cell references instead of hardcoded values in formulas</li><li>Example: Use =B5*(1+$B$6) instead of =B5*1.05</li></ul>
-<h4>Formula Error Prevention</h4>
-<ul><li>Verify all cell references are correct</li><li>Check for off-by-one errors in ranges</li><li>Ensure consistent formulas across all projection periods</li><li>Test with edge cases (zero values, negative numbers)</li><li>Verify no unintended circular references</li></ul>
-<h4>Documentation Requirements for Hardcodes</h4>
-<p>- "Source: Company 10-K, FY2024, Page 45, Revenue Note, [SEC EDGAR URL]"   - "Source: Company 10-Q, Q2 2025, Exhibit 99.1, [SEC EDGAR URL]"   - "Source: Bloomberg Terminal, 8/15/2025, AAPL US Equity"   - "Source: FactSet, 8/20/2025, Consensus Estimates Screen"</p>
-<ul><li>Comment or in cells beside (if end of table). Format: "Source: [System/Document], [Date], [Specific Reference], [URL if applicable]"</li><li>Examples:</li></ul>
-<h2 id="skillmd-xlsx-creation-editing-and-analysis">XLSX creation, editing, and analysis</h2>
-<h3 id="skillmd-overview">Overview</h3>
-<p>A user may ask you to create, edit, or analyze the contents of an .xlsx file. You have different tools and workflows available for different tasks.</p>
-<h3 id="skillmd-important-requirements">Important Requirements</h3>
-<p><strong>LibreOffice Required for Formula Recalculation</strong>: You can assume LibreOffice is installed for recalculating formula values using the <code>scripts/recalc.py</code> script. The script automatically configures LibreOffice on first run, including in sandboxed environments where Unix sockets are restricted (handled by <code>scripts/office/soffice.py</code>)</p>
-<h3 id="skillmd-reading-and-analyzing-data">Reading and analyzing data</h3>
-<h4>Data analysis with pandas</h4>
-<p>For data analysis, visualization, and basic operations, use <strong>pandas</strong> which provides powerful data manipulation capabilities:</p>
-<pre><code class="lang-python">import pandas as pd
-
-# Read Excel
-df = pd.read_excel('file.xlsx')  # Default: first sheet
-all_sheets = pd.read_excel('file.xlsx', sheet_name=None)  # All sheets as dict
-
-# Analyze
-df.head()      # Preview data
-df.info()      # Column info
-df.describe()  # Statistics
-
-# Write Excel
-df.to_excel('output.xlsx', index=False)</code></pre>
-<h3 id="skillmd-excel-file-workflows">Excel File Workflows</h3>
-<h3 id="skillmd-critical-use-formulas-not-hardcoded-values">CRITICAL: Use Formulas, Not Hardcoded Values</h3>
-<p><strong>Always use Excel formulas instead of calculating values in Python and hardcoding them.</strong> This ensures the spreadsheet remains dynamic and updateable.</p>
-<h4>❌ WRONG - Hardcoding Calculated Values</h4>
-<pre><code class="lang-python"># Bad: Calculating in Python and hardcoding result
-total = df['Sales'].sum()
-sheet['B10'] = total  # Hardcodes 5000
-
-# Bad: Computing growth rate in Python
-growth = (df.iloc[-1]['Revenue'] - df.iloc[0]['Revenue']) / df.iloc[0]['Revenue']
-sheet['C5'] = growth  # Hardcodes 0.15
-
-# Bad: Python calculation for average
-avg = sum(values) / len(values)
-sheet['D20'] = avg  # Hardcodes 42.5</code></pre>
-<h4>✅ CORRECT - Using Excel Formulas</h4>
-<pre><code class="lang-python"># Good: Let Excel calculate the sum
-sheet['B10'] = '=SUM(B2:B9)'
-
-# Good: Growth rate as Excel formula
-sheet['C5'] = '=(C4-C2)/C2'
-
-# Good: Average using Excel function
-sheet['D20'] = '=AVERAGE(D2:D19)'</code></pre>
-<p>This applies to ALL calculations - totals, percentages, ratios, differences, etc. The spreadsheet should be able to recalculate when source data changes.</p>
-<h3 id="skillmd-common-workflow">Common Workflow</h3>
-<p>``<code>bash    python scripts/recalc.py output.xlsx    </code>``</p>
-<p>- The script returns JSON with error details    - If <code>status</code> is <code>errors_found</code>, check <code>error_summary</code> for specific error types and locations    - Fix the identified errors and recalculate again    - Common errors to fix:      - <code>#REF!</code>: Invalid cell references      - <code>#DIV/0!</code>: Division by zero      - <code>#VALUE!</code>: Wrong data type in formula      - <code>#NAME?</code>: Unrecognized formula name</p>
-<ol><li><strong>Choose tool</strong>: pandas for data, openpyxl for formulas/formatting</li><li><strong>Create/Load</strong>: Create new workbook or load existing file</li><li><strong>Modify</strong>: Add/edit data, formulas, and formatting</li><li><strong>Save</strong>: Write to file</li><li><strong>Recalculate formulas (MANDATORY IF USING FORMULAS)</strong>: Use the scripts/recalc.py script</li><li><strong>Verify and fix any errors</strong>:</li></ol>
-<h4>Creating new Excel files</h4>
-<pre><code class="lang-python"># Using openpyxl for formulas and formatting
-from openpyxl import Workbook
-from openpyxl.styles import Font, PatternFill, Alignment
-
-wb = Workbook()
-sheet = wb.active
-
-# Add data
-sheet['A1'] = 'Hello'
-sheet['B1'] = 'World'
-sheet.append(['Row', 'of', 'data'])
-
-# Add formula
-sheet['B2'] = '=SUM(A1:A10)'
-
-# Formatting
-sheet['A1'].font = Font(bold=True, color='FF0000')
-sheet['A1'].fill = PatternFill('solid', start_color='FFFF00')
-sheet['A1'].alignment = Alignment(horizontal='center')
-
-# Column width
-sheet.column_dimensions['A'].width = 20
-
-wb.save('output.xlsx')</code></pre>
-<h4>Editing existing Excel files</h4>
-<pre><code class="lang-python"># Using openpyxl to preserve formulas and formatting
-from openpyxl import load_workbook
-
-# Load existing file
-wb = load_workbook('existing.xlsx')
-sheet = wb.active  # or wb['SheetName'] for specific sheet
-
-# Working with multiple sheets
-for sheet_name in wb.sheetnames:
-    sheet = wb[sheet_name]
-    print(f"Sheet: {sheet_name}")
-
-# Modify cells
-sheet['A1'] = 'New Value'
-sheet.insert_rows(2)  # Insert row at position 2
-sheet.delete_cols(3)  # Delete column 3
-
-# Add new sheet
-new_sheet = wb.create_sheet('NewSheet')
-new_sheet['A1'] = 'Data'
-
-wb.save('modified.xlsx')</code></pre>
-<h3 id="skillmd-recalculating-formulas">Recalculating formulas</h3>
-<p>Excel files created or modified by openpyxl contain formulas as strings but not calculated values. Use the provided <code>scripts/recalc.py</code> script to recalculate formulas:</p>
-<pre><code class="lang-bash">python scripts/recalc.py &lt;excel_file&gt; [timeout_seconds]</code></pre>
-<p>Example:</p>
-<pre><code class="lang-bash">python scripts/recalc.py output.xlsx 30</code></pre>
-<p>The script:</p>
-<ul><li>Automatically sets up LibreOffice macro on first run</li><li>Recalculates all formulas in all sheets</li><li>Scans ALL cells for Excel errors (#REF!, #DIV/0!, etc.)</li><li>Returns JSON with detailed error locations and counts</li><li>Works on both Linux and macOS</li></ul>
-<h3 id="skillmd-formula-verification-checklist">Formula Verification Checklist</h3>
-<p>Quick checks to ensure formulas work correctly:</p>
-<h4>Essential Verification</h4>
-<ul><li>[ ] <strong>Test 2-3 sample references</strong>: Verify they pull correct values before building full model</li><li>[ ] <strong>Column mapping</strong>: Confirm Excel columns match (e.g., column 64 = BL, not BK)</li><li>[ ] <strong>Row offset</strong>: Remember Excel rows are 1-indexed (DataFrame row 5 = Excel row 6)</li></ul>
-<h4>Common Pitfalls</h4>
-<ul><li>[ ] <strong>NaN handling</strong>: Check for null values with <code>pd.notna()</code></li><li>[ ] <strong>Far-right columns</strong>: FY data often in columns 50+</li><li>[ ] <strong>Multiple matches</strong>: Search all occurrences, not just first</li><li>[ ] <strong>Division by zero</strong>: Check denominators before using <code>/</code> in formulas (#DIV/0!)</li><li>[ ] <strong>Wrong references</strong>: Verify all cell references point to intended cells (#REF!)</li><li>[ ] <strong>Cross-sheet references</strong>: Use correct format (Sheet1!A1) for linking sheets</li></ul>
-<h4>Formula Testing Strategy</h4>
-<ul><li>[ ] <strong>Start small</strong>: Test formulas on 2-3 cells before applying broadly</li><li>[ ] <strong>Verify dependencies</strong>: Check all cells referenced in formulas exist</li><li>[ ] <strong>Test edge cases</strong>: Include zero, negative, and very large values</li></ul>
-<h4>Interpreting scripts/recalc.py Output</h4>
-<p>The script returns JSON with error details:</p>
-<pre><code class="lang-json">{
-  "status": "success",           // or "errors_found"
-  "total_errors": 0,              // Total error count
-  "total_formulas": 42,           // Number of formulas in file
-  "error_summary": {              // Only present if errors found
-    "#REF!": {
-      "count": 2,
-      "locations": ["Sheet1!B5", "Sheet1!C10"]
-    }
-  }
-}</code></pre>
-<h3 id="skillmd-best-practices">Best Practices</h3>
-<h4>Library Selection</h4>
-<ul><li><strong>pandas</strong>: Best for data analysis, bulk operations, and simple data export</li><li><strong>openpyxl</strong>: Best for complex formatting, formulas, and Excel-specific features</li></ul>
-<h4>Working with openpyxl</h4>
-<ul><li>Cell indices are 1-based (row=1, column=1 refers to cell A1)</li><li>Use <code>data_only=True</code> to read calculated values: <code>load_workbook('file.xlsx', data_only=True)</code></li><li><strong>Warning</strong>: If opened with <code>data_only=True</code> and saved, formulas are replaced with values and permanently lost</li><li>For large files: Use <code>read_only=True</code> for reading or <code>write_only=True</code> for writing</li><li>Formulas are preserved but not evaluated - use scripts/recalc.py to update values</li></ul>
-<h4>Working with pandas</h4>
-<ul><li>Specify data types to avoid inference issues: <code>pd.read_excel('file.xlsx', dtype={'id': str})</code></li><li>For large files, read specific columns: <code>pd.read_excel('file.xlsx', usecols=['A', 'C', 'E'])</code></li><li>Handle dates properly: <code>pd.read_excel('file.xlsx', parse_dates=['date_column'])</code></li></ul>
-<h3 id="skillmd-code-style-guidelines">Code Style Guidelines</h3>
-<p><strong>IMPORTANT</strong>: When generating Python code for Excel operations:</p>
-<ul><li>Write minimal, concise Python code without unnecessary comments</li><li>Avoid verbose variable names and redundant operations</li><li>Avoid unnecessary print statements</li></ul>
-<p><strong>For Excel files themselves</strong>:</p>
-<ul><li>Add comments to cells with complex formulas or important assumptions</li><li>Document data sources for hardcoded values</li><li>Include notes for key calculations and model sections</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/anthropics/skills/main/skills/xlsx/SKILL.md" data-github="https://github.com/anthropics/skills/main/skills/xlsx/SKILL.md" data-size="11463" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">11,463 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-license-txt" data-name="LICENSE.txt" data-url="https://raw.githubusercontent.com/anthropics/skills/main/skills/xlsx/LICENSE.txt" data-github="https://github.com/anthropics/skills/main/skills/xlsx/LICENSE.txt" data-size="1467" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">LICENSE.txt</span><span class="file-size">1,467 bytes</span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-scripts" data-name="scripts" data-url="https://raw.githubusercontent.com/anthropics/skills/main/skills/xlsx/scripts" data-github="https://github.com/anthropics/skills/main/skills/xlsx/scripts" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">scripts</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -746,5 +676,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

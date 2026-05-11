@@ -14,7 +14,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Not found — Floom Starter Pack" />
     <meta property="og:description" content="This page doesn't exist. Try the skill library." />
-    <meta property="og:image" content="https://starter.floom.dev/og-image-v2.png" />
+    <meta property="og:image" content="https://floom.dev/og-image-v3.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
@@ -23,7 +23,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Not found — Floom Starter Pack" />
     <meta name="twitter:description" content="This page doesn't exist. Try the skill library." />
-    <meta name="twitter:image" content="https://starter.floom.dev/og-image-v2.png" />
+    <meta name="twitter:image" content="https://floom.dev/og-image-v3.png" />
     <meta name="twitter:creator" content="@floomhq" />
     <meta name="twitter:site" content="@floomhq" />
 
@@ -31,33 +31,14 @@
     <link rel="icon" href="favicon.ico" sizes="any" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <!-- Design system (canonical tokens, base, nav, button, install-cta, footer) -->
+    <link rel="stylesheet" href="assets/design-system.css" />
+
     <style>
-      :root {
-        --paper: #fafaf7;
-        --ink: #050505;
-        --muted: #333333;
-        --blue: #0094ff;
-        --blue-soft: #bfe6ff;
-        --blue-pale: #eaf7ff;
-        --cloud-pink: #ff4fd8;
-        --line: 2px solid var(--ink);
-        --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
-      }
-      * { box-sizing: border-box; }
-      html { scrollbar-gutter: stable; overflow-y: scroll; }
-      body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; }
-      a { color: inherit; }
-      .page { width: min(100%, 1440px); margin: 0 auto; padding: 44px 70px 72px; flex: 1; display: flex; flex-direction: column; }
-      .nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; border-bottom: var(--line); padding-bottom: 18px; }
-      .wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
-      .wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
-      .wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
-      .nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
-      .nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
-      .nav-links a { text-decoration: none; }
-      .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
-      h1, h2, p { margin: 0; }
+      /* Page-specific: 404 layout */
+      body { display: flex; flex-direction: column; }
+      .page { flex: 1; display: flex; flex-direction: column; }
       .error-body {
         flex: 1;
         display: flex;
@@ -79,15 +60,15 @@
       }
       .error-title {
         font-size: clamp(36px, 5vw, 58px);
-        font-weight: 700;
+        font-weight: var(--fw-display);
         letter-spacing: -0.04em;
         line-height: 1;
         margin-top: -60px;
       }
       .error-body p {
         font-size: 18px;
-        font-weight: 500;
-        color: #4b4b4b;
+        font-weight: var(--fw-body);
+        color: var(--muted-soft);
         line-height: 1.6;
       }
       .error-links {
@@ -96,48 +77,7 @@
         gap: 12px;
         margin-top: 8px;
       }
-      .button, .button-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid var(--ink);
-        border-radius: 14px;
-        padding: 12px 16px;
-        font: 900 12px/1 var(--sans);
-        letter-spacing: 0.12em;
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: background 150ms ease, box-shadow 150ms ease, color 150ms ease, transform 150ms ease;
-      }
-      .button { background: var(--ink); color: #ffffff; }
-      .button-secondary { background: #ffffff; color: var(--ink); }
-      .button:hover, .button-secondary:hover { box-shadow: 0 12px 26px rgba(5,5,5,0.14), 0 0 0 4px rgba(0,148,255,0.14); transform: translateY(-2px); }
-
-      /* SHARED FOOTER */
-      .site-footer {
-        border-top: 2px solid var(--ink);
-        background: var(--paper);
-        padding: 48px 70px 0;
-      }
-      .site-footer-inner {
-        width: min(100%, 1440px);
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr;
-        gap: 48px;
-        padding-bottom: 36px;
-      }
-      .footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
-      .footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
-      .footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
-      .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-      .footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
-      .footer-col a:hover { color: var(--blue); }
-      .footer-bottom { width: min(100%, 1440px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
-      .footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
-      @media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
-      @media (max-width: 860px) { .page { padding: 30px 22px 52px; } .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
-      @media (max-width: 640px) { .page { padding: 22px 16px 44px; } .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .error-code { font-size: 80px; } .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
+      @media (max-width: 640px) { .error-code { font-size: 80px; } }
     </style>
   </head>
   <body>

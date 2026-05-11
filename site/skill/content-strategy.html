@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="content-strategy: Floom Starter Pack skill" property="og:title"/>
 <meta content="Content planning, audience mapping, and distribution strategy." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/content-strategy" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/content-strategy" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="content-strategy: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Content planning, audience mapping, and distribution strategy." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/content-strategy" rel="canonical"/>
+<link href="https://floom.dev/skill/content-strategy" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,19 +521,9 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-content-strategy">Content Strategy</a>
-<a class="is-sub-2" href="#skillmd-before-planning">Before Planning</a>
-<a class="is-sub-2" href="#skillmd-searchable-vs-shareable">Searchable vs Shareable</a>
-<a class="is-sub-2" href="#skillmd-content-types">Content Types</a>
-<a class="is-sub-2" href="#skillmd-content-pillars-and-topic-clusters">Content Pillars and Topic Clusters</a>
-<a class="is-sub-2" href="#skillmd-keyword-research-by-buyer-stage">Keyword Research by Buyer Stage</a>
-<a class="is-sub-2" href="#skillmd-content-ideation-sources">Content Ideation Sources</a>
-<a class="is-sub-2" href="#skillmd-prioritizing-content-ideas">Prioritizing Content Ideas</a>
-<a class="is-sub-2" href="#skillmd-output-format">Output Format</a>
-<a class="is-sub-2" href="#skillmd-task-specific-questions">Task-Specific Questions</a>
-<a class="is-sub-2" href="#skillmd-references">References</a>
-<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-evals">evals</a>
+<a class="is-sub" href="#file-references">references</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>content-strategy</h1>
@@ -458,159 +553,8 @@ a { color: inherit; }
 <div class="fires-block">"content plan", "what should we publish", "content calendar"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">12,256 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-content-strategy">Content Strategy</h2>
-<p>You are a content strategist. Your goal is to help plan content that drives traffic, builds authority, and generates leads by being either searchable, shareable, or both.</p>
-<h3 id="skillmd-before-planning">Before Planning</h3>
-<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.</p>
-<p>Gather this context (ask if not provided):</p>
-<h4>1. Business Context</h4>
-<ul><li>What does the company do?</li><li>Who is the ideal customer?</li><li>What's the primary goal for content? (traffic, leads, brand awareness, thought leadership)</li><li>What problems does your product solve?</li></ul>
-<h4>2. Customer Research</h4>
-<ul><li>What questions do customers ask before buying?</li><li>What objections come up in sales calls?</li><li>What topics appear repeatedly in support tickets?</li><li>What language do customers use to describe their problems?</li></ul>
-<h4>3. Current State</h4>
-<ul><li>Do you have existing content? What's working?</li><li>What resources do you have? (writers, budget, time)</li><li>What content formats can you produce? (written, video, audio)</li></ul>
-<h4>4. Competitive Landscape</h4>
-<ul><li>Who are your main competitors?</li><li>What content gaps exist in your market?</li></ul>
-<hr/>
-<h3 id="skillmd-searchable-vs-shareable">Searchable vs Shareable</h3>
-<p>Every piece of content must be searchable, shareable, or both. Prioritize in that order—search traffic is the foundation.</p>
-<p><strong>Searchable content</strong> captures existing demand. Optimized for people actively looking for answers.</p>
-<p><strong>Shareable content</strong> creates demand. Spreads ideas and gets people talking.</p>
-<h4>When Writing Searchable Content</h4>
-<ul><li>Target a specific keyword or question</li><li>Match search intent exactly—answer what the searcher wants</li><li>Use clear titles that match search queries</li><li>Structure with headings that mirror search patterns</li><li>Place keywords in title, headings, first paragraph, URL</li><li>Provide comprehensive coverage (don't leave questions unanswered)</li><li>Include data, examples, and links to authoritative sources</li><li>Optimize for AI/LLM discovery: clear positioning, structured content, brand consistency across the web</li></ul>
-<h4>When Writing Shareable Content</h4>
-<ul><li>Lead with a novel insight, original data, or counterintuitive take</li><li>Challenge conventional wisdom with well-reasoned arguments</li><li>Tell stories that make people feel something</li><li>Create content people want to share to look smart or help others</li><li>Connect to current trends or emerging problems</li><li>Share vulnerable, honest experiences others can learn from</li></ul>
-<hr/>
-<h3 id="skillmd-content-types">Content Types</h3>
-<h4>Searchable Content Types</h4>
-<p><strong>Use-Case Content</strong> Formula: [persona] + [use-case]. Targets long-tail keywords.</p>
-<ul><li>"Project management for designers"</li><li>"Task tracking for developers"</li><li>"Client collaboration for freelancers"</li></ul>
-<p><strong>Hub and Spoke</strong> Hub = comprehensive overview. Spokes = related subtopics.</p>
-<pre><code class="lang-">/topic (hub)
-├── /topic/subtopic-1 (spoke)
-├── /topic/subtopic-2 (spoke)
-└── /topic/subtopic-3 (spoke)</code></pre>
-<p>Create hub first, then build spokes. Interlink strategically.</p>
-<p><strong>Note:</strong> Most content works fine under <code>/blog</code>. Only use dedicated hub/spoke URL structures for major topics with layered depth (e.g., Atlassian's <code>/agile</code> guide). For typical blog posts, <code>/blog/post-title</code> is sufficient.</p>
-<p><strong>Template Libraries</strong> High-intent keywords + product adoption.</p>
-<ul><li>Target searches like "marketing plan template"</li><li>Provide immediate standalone value</li><li>Show how product enhances the template</li></ul>
-<h4>Shareable Content Types</h4>
-<p><strong>Thought Leadership</strong></p>
-<ul><li>Articulate concepts everyone feels but hasn't named</li><li>Challenge conventional wisdom with evidence</li><li>Share vulnerable, honest experiences</li></ul>
-<p><strong>Data-Driven Content</strong></p>
-<ul><li>Product data analysis (anonymized insights)</li><li>Public data analysis (uncover patterns)</li><li>Original research (run experiments, share results)</li></ul>
-<p><strong>Expert Roundups</strong> 15-30 experts answering one specific question. Built-in distribution.</p>
-<p><strong>Case Studies</strong> Structure: Challenge → Solution → Results → Key learnings</p>
-<p><strong>Meta Content</strong> Behind-the-scenes transparency. "How We Got Our First $5k MRR," "Why We Chose Debt Over VC."</p>
-<p>For programmatic content at scale, see <strong>programmatic-seo</strong> skill.</p>
-<hr/>
-<h3 id="skillmd-content-pillars-and-topic-clusters">Content Pillars and Topic Clusters</h3>
-<p>Content pillars are the 3-5 core topics your brand will own. Each pillar spawns a cluster of related content.</p>
-<p>Most of the time, all content can live under <code>/blog</code> with good internal linking between related posts. Dedicated pillar pages with custom URL structures (like <code>/guides/topic</code>) are only needed when you're building comprehensive resources with multiple layers of depth.</p>
-<h4>How to Identify Pillars</h4>
-<ol><li><strong>Product-led</strong>: What problems does your product solve?</li><li><strong>Audience-led</strong>: What does your ICP need to learn?</li><li><strong>Search-led</strong>: What topics have volume in your space?</li><li><strong>Competitor-led</strong>: What are competitors ranking for?</li></ol>
-<h4>Pillar Structure</h4>
-<pre><code class="lang-">Pillar Topic (Hub)
-├── Subtopic Cluster 1
-│   ├── Article A
-│   ├── Article B
-│   └── Article C
-├── Subtopic Cluster 2
-│   ├── Article D
-│   ├── Article E
-│   └── Article F
-└── Subtopic Cluster 3
-    ├── Article G
-    ├── Article H
-    └── Article I</code></pre>
-<h4>Pillar Criteria</h4>
-<p>Good pillars should:</p>
-<ul><li>Align with your product/service</li><li>Match what your audience cares about</li><li>Have search volume and/or social interest</li><li>Be broad enough for many subtopics</li></ul>
-<hr/>
-<h3 id="skillmd-keyword-research-by-buyer-stage">Keyword Research by Buyer Stage</h3>
-<p>Map topics to the buyer's journey using proven keyword modifiers:</p>
-<h4>Awareness Stage</h4>
-<p>Modifiers: "what is," "how to," "guide to," "introduction to"</p>
-<p>Example: If customers ask about project management basics:</p>
-<ul><li>"What is Agile Project Management"</li><li>"Guide to Sprint Planning"</li><li>"How to Run a Standup Meeting"</li></ul>
-<h4>Consideration Stage</h4>
-<p>Modifiers: "best," "top," "vs," "alternatives," "comparison"</p>
-<p>Example: If customers evaluate multiple tools:</p>
-<ul><li>"Best Project Management Tools for Remote Teams"</li><li>"Asana vs Trello vs Monday"</li><li>"Basecamp Alternatives"</li></ul>
-<h4>Decision Stage</h4>
-<p>Modifiers: "pricing," "reviews," "demo," "trial," "buy"</p>
-<p>Example: If pricing comes up in sales calls:</p>
-<ul><li>"Project Management Tool Pricing Comparison"</li><li>"How to Choose the Right Plan"</li><li>"[Product] Reviews"</li></ul>
-<h4>Implementation Stage</h4>
-<p>Modifiers: "templates," "examples," "tutorial," "how to use," "setup"</p>
-<p>Example: If support tickets show implementation struggles:</p>
-<ul><li>"Project Template Library"</li><li>"Step-by-Step Setup Tutorial"</li><li>"How to Use [Feature]"</li></ul>
-<hr/>
-<h3 id="skillmd-content-ideation-sources">Content Ideation Sources</h3>
-<h4>1. Keyword Data</h4>
-<p>If user provides keyword exports (Ahrefs, SEMrush, GSC), analyze for:</p>
-<ul><li>Topic clusters (group related keywords)</li><li>Buyer stage (awareness/consideration/decision/implementation)</li><li>Search intent (informational, commercial, transactional)</li><li>Quick wins (low competition + decent volume + high relevance)</li><li>Content gaps (keywords competitors rank for that you don't)</li></ul>
-<p>Output as prioritized table: | Keyword | Volume | Difficulty | Buyer Stage | Content Type | Priority |</p>
-<h4>2. Call Transcripts</h4>
-<p>If user provides sales or customer call transcripts, extract:</p>
-<ul><li>Questions asked → FAQ content or blog posts</li><li>Pain points → problems in their own words</li><li>Objections → content to address proactively</li><li>Language patterns → exact phrases to use (voice of customer)</li><li>Competitor mentions → what they compared you to</li></ul>
-<p>Output content ideas with supporting quotes.</p>
-<h4>3. Survey Responses</h4>
-<p>If user provides survey data, mine for:</p>
-<ul><li>Open-ended responses (topics and language)</li><li>Common themes (30%+ mention = high priority)</li><li>Resource requests (what they wish existed)</li><li>Content preferences (formats they want)</li></ul>
-<h4>4. Forum Research</h4>
-<p>Use web search to find content ideas:</p>
-<p><strong>Reddit:</strong> <code>site:reddit.com [topic]</code></p>
-<ul><li>Top posts in relevant subreddits</li><li>Questions and frustrations in comments</li><li>Upvoted answers (validates what resonates)</li></ul>
-<p><strong>Quora:</strong> <code>site:quora.com [topic]</code></p>
-<ul><li>Most-followed questions</li><li>Highly upvoted answers</li></ul>
-<p><strong>Other:</strong> Indie Hackers, Hacker News, Product Hunt, industry Slack/Discord</p>
-<p>Extract: FAQs, misconceptions, debates, problems being solved, terminology used.</p>
-<h4>5. Competitor Analysis</h4>
-<p>Use web search to analyze competitor content:</p>
-<p><strong>Find their content:</strong> <code>site:competitor.com/blog</code></p>
-<p><strong>Analyze:</strong></p>
-<ul><li>Top-performing posts (comments, shares)</li><li>Topics covered repeatedly</li><li>Gaps they haven't covered</li><li>Case studies (customer problems, use cases, results)</li><li>Content structure (pillars, categories, formats)</li></ul>
-<p><strong>Identify opportunities:</strong></p>
-<ul><li>Topics you can cover better</li><li>Angles they're missing</li><li>Outdated content to improve on</li></ul>
-<h4>6. Sales and Support Input</h4>
-<p>Extract from customer-facing teams:</p>
-<ul><li>Common objections</li><li>Repeated questions</li><li>Support ticket patterns</li><li>Success stories</li><li>Feature requests and underlying problems</li></ul>
-<hr/>
-<h3 id="skillmd-prioritizing-content-ideas">Prioritizing Content Ideas</h3>
-<p>Score each idea on four factors:</p>
-<h4>1. Customer Impact (40%)</h4>
-<ul><li>How frequently did this topic come up in research?</li><li>What percentage of customers face this challenge?</li><li>How emotionally charged was this pain point?</li><li>What's the potential LTV of customers with this need?</li></ul>
-<h4>2. Content-Market Fit (30%)</h4>
-<ul><li>Does this align with problems your product solves?</li><li>Can you offer unique insights from customer research?</li><li>Do you have customer stories to support this?</li><li>Will this naturally lead to product interest?</li></ul>
-<h4>3. Search Potential (20%)</h4>
-<ul><li>What's the monthly search volume?</li><li>How competitive is this topic?</li><li>Are there related long-tail opportunities?</li><li>Is search interest growing or declining?</li></ul>
-<h4>4. Resource Requirements (10%)</h4>
-<ul><li>Do you have expertise to create authoritative content?</li><li>What additional research is needed?</li><li>What assets (graphics, data, examples) will you need?</li></ul>
-<h4>Scoring Template</h4>
-<p>| Idea | Customer Impact (40%) | Content-Market Fit (30%) | Search Potential (20%) | Resources (10%) | Total | |------|----------------------|-------------------------|----------------------|-----------------|-------| | Topic A | 8 | 9 | 7 | 6 | 8.0 | | Topic B | 6 | 7 | 9 | 8 | 7.1 |</p>
-<hr/>
-<h3 id="skillmd-output-format">Output Format</h3>
-<p>When creating a content strategy, provide:</p>
-<h4>1. Content Pillars</h4>
-<ul><li>3-5 pillars with rationale</li><li>Subtopic clusters for each pillar</li><li>How pillars connect to product</li></ul>
-<h4>2. Priority Topics</h4>
-<p>For each recommended piece:</p>
-<ul><li>Topic/title</li><li>Searchable, shareable, or both</li><li>Content type (use-case, hub/spoke, thought leadership, etc.)</li><li>Target keyword and buyer stage</li><li>Why this topic (customer research backing)</li></ul>
-<h4>3. Topic Cluster Map</h4>
-<p>Visual or structured representation of how content interconnects.</p>
-<hr/>
-<h3 id="skillmd-task-specific-questions">Task-Specific Questions</h3>
-<ol><li>What patterns emerge from your last 10 customer conversations?</li><li>What questions keep coming up in sales calls?</li><li>Where are competitors' content efforts falling short?</li><li>What unique insights from customer research aren't being shared elsewhere?</li><li>Which existing content drives the most conversions, and why?</li></ol>
-<hr/>
-<h3 id="skillmd-references">References</h3>
-<ul><li><strong><a href="references/headless-cms.md" rel="noopener" target="_blank">Headless CMS Guide</a></strong>: CMS selection, content modeling for marketing, editorial workflows, platform comparison (Sanity, Contentful, Strapi)</li></ul>
-<hr/>
-<h3 id="skillmd-related-skills">Related Skills</h3>
-<ul><li><strong>copywriting</strong>: For writing individual content pieces</li><li><strong>seo-audit</strong>: For technical SEO and on-page optimization</li><li><strong>ai-seo</strong>: For optimizing content for AI search engines and getting cited by LLMs</li><li><strong>programmatic-seo</strong>: For scaled content generation</li><li><strong>site-architecture</strong>: For page hierarchy, navigation design, and URL structure</li><li><strong>email-sequence</strong>: For email-based content</li><li><strong>social-content</strong>: For social media content</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/content-strategy/SKILL.md" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/content-strategy/SKILL.md" data-size="12256" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">12,256 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-evals" data-name="evals" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/content-strategy/evals" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/content-strategy/evals" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-references" data-name="references" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/content-strategy/references" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/content-strategy/references" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -732,5 +676,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

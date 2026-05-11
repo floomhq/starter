@@ -1,6 +1,6 @@
 # Website Integration
 
-This document is the data contract for `starter.floom.dev`.
+This document is the data contract for `floom.dev`.
 
 The public site treats this repository as the source of truth. The package name,
 repo links, supported agents, and skill counts must match the files in this repo.

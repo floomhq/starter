@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="tailwind-design-system: Floom Starter Pack skill" property="og:title"/>
 <meta content="Tailwind CSS design system patterns: tokens, components, and consistency." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/tailwind-design-system" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/tailwind-design-system" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="tailwind-design-system: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Tailwind CSS design system patterns: tokens, components, and consistency." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/tailwind-design-system" rel="canonical"/>
+<link href="https://floom.dev/skill/tailwind-design-system" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,14 +521,8 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-tailwind-design-system-v4">Tailwind Design System (v4)</a>
-<a class="is-sub-2" href="#skillmd-when-to-use-this-skill">When to Use This Skill</a>
-<a class="is-sub-2" href="#skillmd-key-v4-changes">Key v4 Changes</a>
-<a class="is-sub-2" href="#skillmd-quick-start">Quick Start</a>
-<a class="is-sub-2" href="#skillmd-core-concepts">Core Concepts</a>
-<a class="is-sub-2" href="#skillmd-patterns">Patterns</a>
-<a class="is-sub-2" href="#skillmd-utility-functions">Utility Functions</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-references">references</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>tailwind-design-system</h1>
@@ -453,507 +552,8 @@ a { color: inherit; }
 <div class="fires-block">any Tailwind project, design system work, "improve the design system"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">15,730 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-tailwind-design-system-v4">Tailwind Design System (v4)</h2>
-<p>Build production-ready design systems with Tailwind CSS v4, including CSS-first configuration, design tokens, component variants, responsive patterns, and accessibility.</p>
-<blockquote><strong>Note</strong>: This skill targets Tailwind CSS v4 (2024+). For v3 projects, refer to the <a href="https://tailwindcss.com/docs/upgrade-guide" rel="noopener" target="_blank">upgrade guide</a>.</blockquote>
-<h3 id="skillmd-when-to-use-this-skill">When to Use This Skill</h3>
-<ul><li>Creating a component library with Tailwind v4</li><li>Implementing design tokens and theming with CSS-first configuration</li><li>Building responsive and accessible components</li><li>Standardizing UI patterns across a codebase</li><li>Migrating from Tailwind v3 to v4</li><li>Setting up dark mode with native CSS features</li></ul>
-<h3 id="skillmd-key-v4-changes">Key v4 Changes</h3>
-<p>| v3 Pattern                            | v4 Pattern                                                            | | ------------------------------------- | --------------------------------------------------------------------- | | <code>tailwind.config.ts</code>                  | <code>@theme</code> in CSS                                                       | | <code>@tailwind base/components/utilities</code> | <code>@import "tailwindcss"</code>                                               | | <code>darkMode: "class"</code>                   | <code>@custom-variant dark (&amp;:where(.dark, .dark <em>))</em></code>                      | | <code>theme.extend.colors</code>                 | <code>@theme { --color-: value }</code>                                         | | <code>require("tailwindcss-animate")</code>      | CSS <code>@keyframes</code> in <code>@theme</code> + <code>@starting-style</code> for entry animations |</p>
-<h3 id="skillmd-quick-start">Quick Start</h3>
-<pre><code class="lang-css">/* app.css - Tailwind v4 CSS-first configuration */
-@import "tailwindcss";
-
-/* Define your theme with @theme */
-@theme {
-  /* Semantic color tokens using OKLCH for better color perception */
-  --color-background: oklch(100% 0 0);
-  --color-foreground: oklch(14.5% 0.025 264);
-
-  --color-primary: oklch(14.5% 0.025 264);
-  --color-primary-foreground: oklch(98% 0.01 264);
-
-  --color-secondary: oklch(96% 0.01 264);
-  --color-secondary-foreground: oklch(14.5% 0.025 264);
-
-  --color-muted: oklch(96% 0.01 264);
-  --color-muted-foreground: oklch(46% 0.02 264);
-
-  --color-accent: oklch(96% 0.01 264);
-  --color-accent-foreground: oklch(14.5% 0.025 264);
-
-  --color-destructive: oklch(53% 0.22 27);
-  --color-destructive-foreground: oklch(98% 0.01 264);
-
-  --color-border: oklch(91% 0.01 264);
-  --color-ring: oklch(14.5% 0.025 264);
-
-  --color-card: oklch(100% 0 0);
-  --color-card-foreground: oklch(14.5% 0.025 264);
-
-  /* Ring offset for focus states */
-  --color-ring-offset: oklch(100% 0 0);
-
-  /* Radius tokens */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-
-  /* Animation tokens - keyframes inside @theme are output when referenced by --animate-* variables */
-  --animate-fade-in: fade-in 0.2s ease-out;
-  --animate-fade-out: fade-out 0.2s ease-in;
-  --animate-slide-in: slide-in 0.3s ease-out;
-  --animate-slide-out: slide-out 0.3s ease-in;
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fade-out {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @keyframes slide-in {
-    from {
-      transform: translateY(-0.5rem);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes slide-out {
-    from {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(-0.5rem);
-      opacity: 0;
-    }
-  }
-}
-
-/* Dark mode variant - use @custom-variant for class-based dark mode */
-@custom-variant dark (&amp;:where(.dark, .dark *));
-
-/* Dark mode theme overrides */
-.dark {
-  --color-background: oklch(14.5% 0.025 264);
-  --color-foreground: oklch(98% 0.01 264);
-
-  --color-primary: oklch(98% 0.01 264);
-  --color-primary-foreground: oklch(14.5% 0.025 264);
-
-  --color-secondary: oklch(22% 0.02 264);
-  --color-secondary-foreground: oklch(98% 0.01 264);
-
-  --color-muted: oklch(22% 0.02 264);
-  --color-muted-foreground: oklch(65% 0.02 264);
-
-  --color-accent: oklch(22% 0.02 264);
-  --color-accent-foreground: oklch(98% 0.01 264);
-
-  --color-destructive: oklch(42% 0.15 27);
-  --color-destructive-foreground: oklch(98% 0.01 264);
-
-  --color-border: oklch(22% 0.02 264);
-  --color-ring: oklch(83% 0.02 264);
-
-  --color-card: oklch(14.5% 0.025 264);
-  --color-card-foreground: oklch(98% 0.01 264);
-
-  --color-ring-offset: oklch(14.5% 0.025 264);
-}
-
-/* Base styles */
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground antialiased;
-  }
-}</code></pre>
-<h3 id="skillmd-core-concepts">Core Concepts</h3>
-<h4>1. Design Token Hierarchy</h4>
-<pre><code class="lang-">Brand Tokens (abstract)
-    └── Semantic Tokens (purpose)
-        └── Component Tokens (specific)
-
-Example:
-    oklch(45% 0.2 260) → --color-primary → bg-primary</code></pre>
-<h4>2. Component Architecture</h4>
-<pre><code class="lang-">Base styles → Variants → Sizes → States → Overrides</code></pre>
-<h3 id="skillmd-patterns">Patterns</h3>
-<h4>Pattern 1: CVA (Class Variance Authority) Components</h4>
-<pre><code class="lang-typescript">// components/ui/button.tsx
-import { Slot } from '@radix-ui/react-slot'
-import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
-
-const buttonVariants = cva(
-  // Base styles - v4 uses native CSS variables
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-  {
-    variants: {
-      variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline: 'border border-border bg-background hover:bg-accent hover:text-accent-foreground',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
-      },
-      size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-        icon: 'size-10',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-      size: 'default',
-    },
-  }
-)
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;,
-    VariantProps&lt;typeof buttonVariants&gt; {
-  asChild?: boolean
-}
-
-// React 19: No forwardRef needed
-export function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ref,
-  ...props
-}: ButtonProps &amp; { ref?: React.Ref&lt;HTMLButtonElement&gt; }) {
-  const Comp = asChild ? Slot : 'button'
-  return (
-    &lt;Comp
-      className={cn(buttonVariants({ variant, size, className }))}
-      ref={ref}
-      {...props}
-    /&gt;
-  )
-}
-
-// Usage
-&lt;Button variant="destructive" size="lg"&gt;Delete&lt;/Button&gt;
-&lt;Button variant="outline"&gt;Cancel&lt;/Button&gt;
-&lt;Button asChild&gt;&lt;Link href="/home"&gt;Home&lt;/Link&gt;&lt;/Button&gt;</code></pre>
-<h4>Pattern 2: Compound Components (React 19)</h4>
-<pre><code class="lang-typescript">// components/ui/card.tsx
-import { cn } from '@/lib/utils'
-
-// React 19: ref is a regular prop, no forwardRef
-export function Card({
-  className,
-  ref,
-  ...props
-}: React.HTMLAttributes&lt;HTMLDivElement&gt; &amp; { ref?: React.Ref&lt;HTMLDivElement&gt; }) {
-  return (
-    &lt;div
-      ref={ref}
-      className={cn(
-        'rounded-lg border border-border bg-card text-card-foreground shadow-sm',
-        className
-      )}
-      {...props}
-    /&gt;
-  )
-}
-
-export function CardHeader({
-  className,
-  ref,
-  ...props
-}: React.HTMLAttributes&lt;HTMLDivElement&gt; &amp; { ref?: React.Ref&lt;HTMLDivElement&gt; }) {
-  return (
-    &lt;div
-      ref={ref}
-      className={cn('flex flex-col space-y-1.5 p-6', className)}
-      {...props}
-    /&gt;
-  )
-}
-
-export function CardTitle({
-  className,
-  ref,
-  ...props
-}: React.HTMLAttributes&lt;HTMLHeadingElement&gt; &amp; { ref?: React.Ref&lt;HTMLHeadingElement&gt; }) {
-  return (
-    &lt;h3
-      ref={ref}
-      className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
-      {...props}
-    /&gt;
-  )
-}
-
-export function CardDescription({
-  className,
-  ref,
-  ...props
-}: React.HTMLAttributes&lt;HTMLParagraphElement&gt; &amp; { ref?: React.Ref&lt;HTMLParagraphElement&gt; }) {
-  return (
-    &lt;p
-      ref={ref}
-      className={cn('text-sm text-muted-foreground', className)}
-      {...props}
-    /&gt;
-  )
-}
-
-export function CardContent({
-  className,
-  ref,
-  ...props
-}: React.HTMLAttributes&lt;HTMLDivElement&gt; &amp; { ref?: React.Ref&lt;HTMLDivElement&gt; }) {
-  return (
-    &lt;div ref={ref} className={cn('p-6 pt-0', className)} {...props} /&gt;
-  )
-}
-
-export function CardFooter({
-  className,
-  ref,
-  ...props
-}: React.HTMLAttributes&lt;HTMLDivElement&gt; &amp; { ref?: React.Ref&lt;HTMLDivElement&gt; }) {
-  return (
-    &lt;div
-      ref={ref}
-      className={cn('flex items-center p-6 pt-0', className)}
-      {...props}
-    /&gt;
-  )
-}
-
-// Usage
-&lt;Card&gt;
-  &lt;CardHeader&gt;
-    &lt;CardTitle&gt;Account&lt;/CardTitle&gt;
-    &lt;CardDescription&gt;Manage your account settings&lt;/CardDescription&gt;
-  &lt;/CardHeader&gt;
-  &lt;CardContent&gt;
-    &lt;form&gt;...&lt;/form&gt;
-  &lt;/CardContent&gt;
-  &lt;CardFooter&gt;
-    &lt;Button&gt;Save&lt;/Button&gt;
-  &lt;/CardFooter&gt;
-&lt;/Card&gt;</code></pre>
-<h4>Pattern 3: Form Components</h4>
-<pre><code class="lang-typescript">// components/ui/input.tsx
-import { cn } from '@/lib/utils'
-
-export interface InputProps extends React.InputHTMLAttributes&lt;HTMLInputElement&gt; {
-  error?: string
-  ref?: React.Ref&lt;HTMLInputElement&gt;
-}
-
-export function Input({ className, type, error, ref, ...props }: InputProps) {
-  return (
-    &lt;div className="relative"&gt;
-      &lt;input
-        type={type}
-        className={cn(
-          'flex h-10 w-full rounded-md border border-border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-          error &amp;&amp; 'border-destructive focus-visible:ring-destructive',
-          className
-        )}
-        ref={ref}
-        aria-invalid={!!error}
-        aria-describedby={error ? `${props.id}-error` : undefined}
-        {...props}
-      /&gt;
-      {error &amp;&amp; (
-        &lt;p
-          id={`${props.id}-error`}
-          className="mt-1 text-sm text-destructive"
-          role="alert"
-        &gt;
-          {error}
-        &lt;/p&gt;
-      )}
-    &lt;/div&gt;
-  )
-}
-
-// components/ui/label.tsx
-import { cva, type VariantProps } from 'class-variance-authority'
-
-const labelVariants = cva(
-  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-)
-
-export function Label({
-  className,
-  ref,
-  ...props
-}: React.LabelHTMLAttributes&lt;HTMLLabelElement&gt; &amp; { ref?: React.Ref&lt;HTMLLabelElement&gt; }) {
-  return (
-    &lt;label ref={ref} className={cn(labelVariants(), className)} {...props} /&gt;
-  )
-}
-
-// Usage with React Hook Form + Zod
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-
-const schema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-})
-
-function LoginForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: zodResolver(schema),
-  })
-
-  return (
-    &lt;form onSubmit={handleSubmit(onSubmit)} className="space-y-4"&gt;
-      &lt;div className="space-y-2"&gt;
-        &lt;Label htmlFor="email"&gt;Email&lt;/Label&gt;
-        &lt;Input
-          id="email"
-          type="email"
-          {...register('email')}
-          error={errors.email?.message}
-        /&gt;
-      &lt;/div&gt;
-      &lt;div className="space-y-2"&gt;
-        &lt;Label htmlFor="password"&gt;Password&lt;/Label&gt;
-        &lt;Input
-          id="password"
-          type="password"
-          {...register('password')}
-          error={errors.password?.message}
-        /&gt;
-      &lt;/div&gt;
-      &lt;Button type="submit" className="w-full"&gt;Sign In&lt;/Button&gt;
-    &lt;/form&gt;
-  )
-}</code></pre>
-<h4>Pattern 4: Responsive Grid System</h4>
-<pre><code class="lang-typescript">// components/ui/grid.tsx
-import { cn } from '@/lib/utils'
-import { cva, type VariantProps } from 'class-variance-authority'
-
-const gridVariants = cva('grid', {
-  variants: {
-    cols: {
-      1: 'grid-cols-1',
-      2: 'grid-cols-1 sm:grid-cols-2',
-      3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
-      4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
-      5: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5',
-      6: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6',
-    },
-    gap: {
-      none: 'gap-0',
-      sm: 'gap-2',
-      md: 'gap-4',
-      lg: 'gap-6',
-      xl: 'gap-8',
-    },
-  },
-  defaultVariants: {
-    cols: 3,
-    gap: 'md',
-  },
-})
-
-interface GridProps
-  extends React.HTMLAttributes&lt;HTMLDivElement&gt;,
-    VariantProps&lt;typeof gridVariants&gt; {}
-
-export function Grid({ className, cols, gap, ...props }: GridProps) {
-  return (
-    &lt;div className={cn(gridVariants({ cols, gap, className }))} {...props} /&gt;
-  )
-}
-
-// Container component
-const containerVariants = cva('mx-auto w-full px-4 sm:px-6 lg:px-8', {
-  variants: {
-    size: {
-      sm: 'max-w-screen-sm',
-      md: 'max-w-screen-md',
-      lg: 'max-w-screen-lg',
-      xl: 'max-w-screen-xl',
-      '2xl': 'max-w-screen-2xl',
-      full: 'max-w-full',
-    },
-  },
-  defaultVariants: {
-    size: 'xl',
-  },
-})
-
-interface ContainerProps
-  extends React.HTMLAttributes&lt;HTMLDivElement&gt;,
-    VariantProps&lt;typeof containerVariants&gt; {}
-
-export function Container({ className, size, ...props }: ContainerProps) {
-  return (
-    &lt;div className={cn(containerVariants({ size, className }))} {...props} /&gt;
-  )
-}
-
-// Usage
-&lt;Container&gt;
-  &lt;Grid cols={4} gap="lg"&gt;
-    {products.map((product) =&gt; (
-      &lt;ProductCard key={product.id} product={product} /&gt;
-    ))}
-  &lt;/Grid&gt;
-&lt;/Container&gt;</code></pre>
-<p>For advanced animation and dark mode patterns, see <a href="references/advanced-patterns.md" rel="noopener" target="_blank">references/advanced-patterns.md</a>:</p>
-<ul><li><strong>Pattern 5: Native CSS Animations</strong> — dialog <code>@keyframes</code>, native popover API with <code>@starting-style</code>, <code>allow-discrete</code> transitions, and a full <code>DialogContent</code>/<code>DialogOverlay</code> implementation using Radix UI</li><li><strong>Pattern 6: Dark Mode</strong> — <code>ThemeProvider</code> context with <code>localStorage</code> persistence, <code>prefers-color-scheme</code> detection, meta <code>theme-color</code> update, and a <code>ThemeToggle</code> button component</li></ul>
-<h3 id="skillmd-utility-functions">Utility Functions</h3>
-<pre><code class="lang-typescript">// lib/utils.ts
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-// Focus ring utility
-export const focusRing = cn(
-  "focus-visible:outline-none focus-visible:ring-2",
-  "focus-visible:ring-ring focus-visible:ring-offset-2",
-);
-
-// Disabled utility
-export const disabled = "disabled:pointer-events-none disabled:opacity-50";</code></pre>
-<p>For advanced v4 CSS patterns, the full v3-to-v4 migration checklist, and complete best practices, see <a href="references/advanced-patterns.md" rel="noopener" target="_blank">references/advanced-patterns.md</a>:</p>
-<ul><li><strong>Custom <code>@utility</code></strong> — reusable CSS utilities for decorative lines and text gradients</li><li><strong>Theme modifiers</strong> — <code>@theme inline</code> (reference other CSS vars), <code>@theme static</code> (always output), <code>@import "tailwindcss" theme(static)</code></li><li><strong>Namespace overrides</strong> — clearing default Tailwind color scales with <code>--color-*: initial</code></li><li><strong>Semi-transparent variants</strong> — <code>color-mix()</code> for alpha scale generation</li><li><strong>Container queries</strong> — <code>--container-*</code> token definitions</li><li><strong>v3→v4 migration checklist</strong> — 10-item checklist covering config, directives, colors, dark mode, animations, React 19 ref changes</li><li><strong>Best practices</strong> — full Do's and Don'ts list</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/wshobson/agents/main/plugins/frontend-mobile-development/skills/tailwind-design-system/SKILL.md" data-github="https://github.com/wshobson/agents/main/plugins/frontend-mobile-development/skills/tailwind-design-system/SKILL.md" data-size="15730" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">15,730 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-references" data-name="references" data-url="https://raw.githubusercontent.com/wshobson/agents/main/plugins/frontend-mobile-development/skills/tailwind-design-system/references" data-github="https://github.com/wshobson/agents/main/plugins/frontend-mobile-development/skills/tailwind-design-system/references" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -1075,5 +675,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

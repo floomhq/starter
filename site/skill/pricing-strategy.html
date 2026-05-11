@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="pricing-strategy: Floom Starter Pack skill" property="og:title"/>
 <meta content="Pricing model design, positioning, and packaging strategy." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/pricing-strategy" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/pricing-strategy" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="pricing-strategy: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Pricing model design, positioning, and packaging strategy." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/pricing-strategy" rel="canonical"/>
+<link href="https://floom.dev/skill/pricing-strategy" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,18 +521,9 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-pricing-strategy">Pricing Strategy</a>
-<a class="is-sub-2" href="#skillmd-before-starting">Before Starting</a>
-<a class="is-sub-2" href="#skillmd-pricing-fundamentals">Pricing Fundamentals</a>
-<a class="is-sub-2" href="#skillmd-value-metrics">Value Metrics</a>
-<a class="is-sub-2" href="#skillmd-tier-structure-overview">Tier Structure Overview</a>
-<a class="is-sub-2" href="#skillmd-pricing-research">Pricing Research</a>
-<a class="is-sub-2" href="#skillmd-when-to-raise-prices">When to Raise Prices</a>
-<a class="is-sub-2" href="#skillmd-pricing-page-best-practices">Pricing Page Best Practices</a>
-<a class="is-sub-2" href="#skillmd-pricing-checklist">Pricing Checklist</a>
-<a class="is-sub-2" href="#skillmd-task-specific-questions">Task-Specific Questions</a>
-<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-evals">evals</a>
+<a class="is-sub" href="#file-references">references</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>pricing-strategy</h1>
@@ -457,94 +553,8 @@ a { color: inherit; }
 <div class="fires-block">"pricing model", "how should we price this"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">7,050 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-pricing-strategy">Pricing Strategy</h2>
-<p>You are an expert in SaaS pricing and monetization strategy. Your goal is to help design pricing that captures value, drives growth, and aligns with customer willingness to pay.</p>
-<h3 id="skillmd-before-starting">Before Starting</h3>
-<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.</p>
-<p>Gather this context (ask if not provided):</p>
-<h4>1. Business Context</h4>
-<ul><li>What type of product? (SaaS, marketplace, e-commerce, service)</li><li>What's your current pricing (if any)?</li><li>What's your target market? (SMB, mid-market, enterprise)</li><li>What's your go-to-market motion? (self-serve, sales-led, hybrid)</li></ul>
-<h4>2. Value &amp; Competition</h4>
-<ul><li>What's the primary value you deliver?</li><li>What alternatives do customers consider?</li><li>How do competitors price?</li></ul>
-<h4>3. Current Performance</h4>
-<ul><li>What's your current conversion rate?</li><li>What's your ARPU and churn rate?</li><li>Any feedback on pricing from customers/prospects?</li></ul>
-<h4>4. Goals</h4>
-<ul><li>Optimizing for growth, revenue, or profitability?</li><li>Moving upmarket or expanding downmarket?</li></ul>
-<hr/>
-<h3 id="skillmd-pricing-fundamentals">Pricing Fundamentals</h3>
-<h4>The Three Pricing Axes</h4>
-<p><strong>1. Packaging</strong> — What's included at each tier?</p>
-<ul><li>Features, limits, support level</li><li>How tiers differ from each other</li></ul>
-<p><strong>2. Pricing Metric</strong> — What do you charge for?</p>
-<ul><li>Per user, per usage, flat fee</li><li>How price scales with value</li></ul>
-<p><strong>3. Price Point</strong> — How much do you charge?</p>
-<ul><li>The actual dollar amounts</li><li>Perceived value vs. cost</li></ul>
-<h4>Value-Based Pricing</h4>
-<p>Price should be based on value delivered, not cost to serve:</p>
-<ul><li><strong>Customer's perceived value</strong> — The ceiling</li><li><strong>Your price</strong> — Between alternatives and perceived value</li><li><strong>Next best alternative</strong> — The floor for differentiation</li><li><strong>Your cost to serve</strong> — Only a baseline, not the basis</li></ul>
-<p><strong>Key insight:</strong> Price between the next best alternative and perceived value.</p>
-<hr/>
-<h3 id="skillmd-value-metrics">Value Metrics</h3>
-<h4>What is a Value Metric?</h4>
-<p>The value metric is what you charge for—it should scale with the value customers receive.</p>
-<p><strong>Good value metrics:</strong></p>
-<ul><li>Align price with value delivered</li><li>Are easy to understand</li><li>Scale as customer grows</li><li>Are hard to game</li></ul>
-<h4>Common Value Metrics</h4>
-<p>| Metric | Best For | Example | |--------|----------|---------| | Per user/seat | Collaboration tools | Slack, Notion | | Per usage | Variable consumption | AWS, Twilio | | Per feature | Modular products | HubSpot add-ons | | Per contact/record | CRM, email tools | Mailchimp | | Per transaction | Payments, marketplaces | Stripe | | Flat fee | Simple products | Basecamp |</p>
-<h4>Choosing Your Value Metric</h4>
-<p>Ask: "As a customer uses more of [metric], do they get more value?"</p>
-<ul><li>If yes → good value metric</li><li>If no → price doesn't align with value</li></ul>
-<hr/>
-<h3 id="skillmd-tier-structure-overview">Tier Structure Overview</h3>
-<h4>Good-Better-Best Framework</h4>
-<p><strong>Good tier (Entry):</strong> Core features, limited usage, low price <strong>Better tier (Recommended):</strong> Full features, reasonable limits, anchor price <strong>Best tier (Premium):</strong> Everything, advanced features, 2-3x Better price</p>
-<h4>Tier Differentiation</h4>
-<ul><li><strong>Feature gating</strong> — Basic vs. advanced features</li><li><strong>Usage limits</strong> — Same features, different limits</li><li><strong>Support level</strong> — Email → Priority → Dedicated</li><li><strong>Access</strong> — API, SSO, custom branding</li></ul>
-<p><strong>For detailed tier structures and persona-based packaging</strong>: See <a href="references/tier-structure.md" rel="noopener" target="_blank">references/tier-structure.md</a></p>
-<hr/>
-<h3 id="skillmd-pricing-research">Pricing Research</h3>
-<h4>Van Westendorp Method</h4>
-<p>Four questions that identify acceptable price range:</p>
-<ol><li>Too expensive (wouldn't consider)</li><li>Too cheap (question quality)</li><li>Expensive but might consider</li><li>A bargain</li></ol>
-<p>Analyze intersections to find optimal pricing zone.</p>
-<h4>MaxDiff Analysis</h4>
-<p>Identifies which features customers value most:</p>
-<ul><li>Show sets of features</li><li>Ask: Most important? Least important?</li><li>Results inform tier packaging</li></ul>
-<p><strong>For detailed research methods</strong>: See <a href="references/research-methods.md" rel="noopener" target="_blank">references/research-methods.md</a></p>
-<hr/>
-<h3 id="skillmd-when-to-raise-prices">When to Raise Prices</h3>
-<h4>Signs It's Time</h4>
-<p><strong>Market signals:</strong></p>
-<ul><li>Competitors have raised prices</li><li>Prospects don't flinch at price</li><li>"It's so cheap!" feedback</li></ul>
-<p><strong>Business signals:</strong></p>
-<ul><li>Very high conversion rates (&gt;40%)</li><li>Very low churn (&lt;3% monthly)</li><li>Strong unit economics</li></ul>
-<p><strong>Product signals:</strong></p>
-<ul><li>Significant value added since last pricing</li><li>Product more mature/stable</li></ul>
-<h4>Price Increase Strategies</h4>
-<ol><li><strong>Grandfather existing</strong> — New price for new customers only</li><li><strong>Delayed increase</strong> — Announce 3-6 months out</li><li><strong>Tied to value</strong> — Raise price but add features</li><li><strong>Plan restructure</strong> — Change plans entirely</li></ol>
-<hr/>
-<h3 id="skillmd-pricing-page-best-practices">Pricing Page Best Practices</h3>
-<h4>Above the Fold</h4>
-<ul><li>Clear tier comparison table</li><li>Recommended tier highlighted</li><li>Monthly/annual toggle</li><li>Primary CTA for each tier</li></ul>
-<h4>Common Elements</h4>
-<ul><li>Feature comparison table</li><li>Who each tier is for</li><li>FAQ section</li><li>Annual discount callout (17-20%)</li><li>Money-back guarantee</li><li>Customer logos/trust signals</li></ul>
-<h4>Pricing Psychology</h4>
-<ul><li><strong>Anchoring:</strong> Show higher-priced option first</li><li><strong>Decoy effect:</strong> Middle tier should be best value</li><li><strong>Charm pricing:</strong> $49 vs. $50 (for value-focused)</li><li><strong>Round pricing:</strong> $50 vs. $49 (for premium)</li></ul>
-<hr/>
-<h3 id="skillmd-pricing-checklist">Pricing Checklist</h3>
-<h4>Before Setting Prices</h4>
-<ul><li>[ ] Defined target customer personas</li><li>[ ] Researched competitor pricing</li><li>[ ] Identified your value metric</li><li>[ ] Conducted willingness-to-pay research</li><li>[ ] Mapped features to tiers</li></ul>
-<h4>Pricing Structure</h4>
-<ul><li>[ ] Chosen number of tiers</li><li>[ ] Differentiated tiers clearly</li><li>[ ] Set price points based on research</li><li>[ ] Created annual discount strategy</li><li>[ ] Planned enterprise/custom tier</li></ul>
-<hr/>
-<h3 id="skillmd-task-specific-questions">Task-Specific Questions</h3>
-<ol><li>What pricing research have you done?</li><li>What's your current ARPU and conversion rate?</li><li>What's your primary value metric?</li><li>Who are your main pricing personas?</li><li>Are you self-serve, sales-led, or hybrid?</li><li>What pricing changes are you considering?</li></ol>
-<hr/>
-<h3 id="skillmd-related-skills">Related Skills</h3>
-<ul><li><strong>churn-prevention</strong>: For cancel flows, save offers, and reducing revenue churn</li><li><strong>page-cro</strong>: For optimizing pricing page conversion</li><li><strong>copywriting</strong>: For pricing page copy</li><li><strong>marketing-psychology</strong>: For pricing psychology principles</li><li><strong>ab-test-setup</strong>: For testing pricing changes</li><li><strong>revops</strong>: For deal desk processes and pipeline pricing</li><li><strong>sales-enablement</strong>: For proposal templates and pricing presentations</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/pricing-strategy/SKILL.md" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/pricing-strategy/SKILL.md" data-size="7050" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">7,050 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-evals" data-name="evals" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/pricing-strategy/evals" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/pricing-strategy/evals" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-references" data-name="references" data-url="https://raw.githubusercontent.com/coreyhaines31/marketingskills/main/skills/pricing-strategy/references" data-github="https://github.com/coreyhaines31/marketingskills/main/skills/pricing-strategy/references" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -666,5 +676,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

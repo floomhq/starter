@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="critique: Floom Starter Pack skill" property="og:title"/>
 <meta content="Adversarial design critique identifying specific visual and UX weaknesses." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/critique" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/critique" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="critique: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Adversarial design critique identifying specific visual and UX weaknesses." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/critique" rel="canonical"/>
+<link href="https://floom.dev/skill/critique" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,11 +521,9 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub-2" href="#skillmd-setup-non-optional">Setup (non-optional)</a>
-<a class="is-sub-2" href="#skillmd-shared-design-laws">Shared design laws</a>
-<a class="is-sub-2" href="#skillmd-commands">Commands</a>
-<a class="is-sub-2" href="#skillmd-pin-unpin">Pin / Unpin</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
+<a class="is-sub" href="#file-reference">reference</a>
+<a class="is-sub" href="#file-scripts">scripts</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>critique</h1>
@@ -450,67 +553,8 @@ a { color: inherit; }
 <div class="fires-block">"critique this design", "what's wrong with this UI"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">14,145 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">reference</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">scripts</span><span class="file-size"></span><span class="file-type">support</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><p>Designs and iterates production-grade frontend interfaces. Real working code, committed design choices, exceptional craft.</p>
-<h3 id="skillmd-setup-non-optional">Setup (non-optional)</h3>
-<p>Before any design work or file edits, pass these gates. Skipping them produces generic output that ignores the project.</p>
-<p>| Gate | Required check | If fail | |---|---|---| | Context | The PRODUCT.md / DESIGN.md loader result is known from <code>node {{scripts_path}}/load-context.mjs</code>. | Run the loader before continuing. | | Product | PRODUCT.md exists and is not empty or placeholder (<code>[TODO]</code> markers, &lt;200 chars). | Run <code>{{command_prefix}}impeccable teach</code>, refresh context, then resume. Never synthesize PRODUCT.md from the user's original prompt alone. | | Command | The matching command reference is loaded when a sub-command is used. | Load the reference before continuing. | | Craft | <code>{{command_prefix}}impeccable craft</code> has a user-confirmed shape brief for this task. <code>teach</code> / PRODUCT.md never counts as shape. | Run <code>{{command_prefix}}impeccable shape</code> and wait for explicit brief confirmation. | | Image | Required visual probes / mocks are generated or skipped with a reason. | Resolve the image-generation gate in <code>shape.md</code> or <code>craft.md</code> before code. | | Mutation | All active gates above pass. | Do not edit project files yet. |</p>
-<p>Codex-style agents must state this before editing files:</p>
-<pre><code class="lang-text">IMPECCABLE_PREFLIGHT: context=pass product=pass command_reference=pass shape=pass|not_required image_gate=pass|skipped:&lt;reason&gt; mutation=open</code></pre>
-<p>For <code>{{command_prefix}}impeccable craft</code>, <code>shape=pass</code> is only valid after a separate user response approving the shape design brief, or when the user provided an already-confirmed brief in the request. Do not mark <code>shape=pass</code> after writing PRODUCT.md, summarizing assumptions, or drafting an unconfirmed brief yourself.</p>
-<p>Other harnesses should follow the same checklist when they can expose this state.</p>
-<h4>1. Context gathering</h4>
-<p>Two files, case-insensitive. The loader looks at the project root by default and falls back to <code>.agents/context/</code> and <code>docs/</code> if the root is clean. Override with <code>IMPECCABLE_CONTEXT_DIR=path/to/dir</code> (absolute or relative to cwd).</p>
-<ul><li><strong>PRODUCT.md</strong>: required. Users, brand, tone, anti-references, strategic principles.</li><li><strong>DESIGN.md</strong>: optional, strongly recommended. Colors, typography, elevation, components.</li></ul>
-<p>Load both in one call:</p>
-<pre><code class="lang-bash">node {{scripts_path}}/load-context.mjs</code></pre>
-<p>Consume the full JSON output. Never pipe through <code>head</code>, <code>tail</code>, <code>grep</code>, or <code>jq</code>. The output's <code>contextDir</code> field tells you where the files were resolved from.</p>
-<p>If the output is already in this session's conversation history, don't re-run. Exceptions requiring a fresh load: you just ran <code>{{command_prefix}}impeccable teach</code> or <code>{{command_prefix}}impeccable document</code> (they rewrite the files), or the user manually edited one.</p>
-<p><code>{{command_prefix}}impeccable live</code> already warms context via <code>live.mjs</code>. If you've run <code>live.mjs</code>, don't also run <code>load-context.mjs</code> this session.</p>
-<p>If PRODUCT.md is missing, empty, or placeholder (<code>[TODO]</code> markers, &lt;200 chars): run <code>{{command_prefix}}impeccable teach</code>, then resume the user's original task with the fresh context. If the original task was <code>{{command_prefix}}impeccable craft</code>, resume into <code>{{command_prefix}}impeccable shape</code> before any implementation work.</p>
-<p>If DESIGN.md is missing: nudge once per session (<em>"Run <code>{{command_prefix}}impeccable document</code> for more on-brand output"</em>), then proceed.</p>
-<h4>2. Register</h4>
-<p>Every design task is <strong>brand</strong> (marketing, landing, campaign, long-form content, portfolio: design IS the product) or <strong>product</strong> (app UI, admin, dashboard, tool: design SERVES the product).</p>
-<p>Identify before designing. Priority: (1) cue in the task itself ("landing page" vs "dashboard"); (2) the surface in focus (the page, file, or route being worked on); (3) <code>register</code> field in PRODUCT.md. First match wins.</p>
-<p>If PRODUCT.md lacks the <code>register</code> field (legacy), infer it once from its "Users" and "Product Purpose" sections, then cache the inferred value for the session. Suggest the user run <code>{{command_prefix}}impeccable teach</code> to add the field explicitly.</p>
-<p>Load the matching reference: <a href="reference/brand.md" rel="noopener" target="_blank">reference/brand.md</a> or <a href="reference/product.md" rel="noopener" target="_blank">reference/product.md</a>. The shared design laws below apply to both.</p>
-<h3 id="skillmd-shared-design-laws">Shared design laws</h3>
-<p>Apply to every design, both registers. Match implementation complexity to the aesthetic vision: maximalism needs elaborate code, minimalism needs precision. Interpret creatively. Vary across projects; never converge on the same choices. {{model}} is capable of extraordinary work. Don't hold back.</p>
-<h4>Color</h4>
-<p>- <strong>Restrained</strong>: tinted neutrals + one accent ≤10%. Product default; brand minimalism.   - <strong>Committed</strong>: one saturated color carries 30–60% of the surface. Brand default for identity-driven pages.   - <strong>Full palette</strong>: 3–4 named roles, each used deliberately. Brand campaigns; product data viz.   - <strong>Drenched</strong>: the surface IS the color. Brand heroes, campaign pages.</p>
-<ul><li>Use OKLCH. Reduce chroma as lightness approaches 0 or 100; high chroma at extremes looks garish.</li><li>Never use <code>#000</code> or <code>#fff</code>. Tint every neutral toward the brand hue (chroma 0.005–0.01 is enough).</li><li>Pick a <strong>color strategy</strong> before picking colors. Four steps on the commitment axis:</li><li>The "one accent ≤10%" rule is Restrained only. Committed / Full palette / Drenched exceed it on purpose. Don't collapse every design to Restrained by reflex.</li></ul>
-<h4>Theme</h4>
-<p>Dark vs. light is never a default. Not dark "because tools look cool dark." Not light "to be safe."</p>
-<p>Before choosing, write one sentence of physical scene: who uses this, where, under what ambient light, in what mood. If the sentence doesn't force the answer, it's not concrete enough. Add detail until it does.</p>
-<p>"Observability dashboard" does not force an answer. "SRE glancing at incident severity on a 27-inch monitor at 2am in a dim room" does. Run the sentence, not the category.</p>
-<h4>Typography</h4>
-<ul><li>Cap body line length at 65–75ch.</li><li>Hierarchy through scale + weight contrast (≥1.25 ratio between steps). Avoid flat scales.</li></ul>
-<h4>Layout</h4>
-<ul><li>Vary spacing for rhythm. Same padding everywhere is monotony.</li><li>Cards are the lazy answer. Use them only when they're truly the best affordance. Nested cards are always wrong.</li><li>Don't wrap everything in a container. Most things don't need one.</li></ul>
-<h4>Motion</h4>
-<ul><li>Don't animate CSS layout properties.</li><li>Ease out with exponential curves (ease-out-quart / quint / expo). No bounce, no elastic.</li></ul>
-<h4>Absolute bans</h4>
-<p>Match-and-refuse. If you're about to write any of these, rewrite the element with different structure.</p>
-<ul><li><strong>Side-stripe borders.</strong> <code>border-left</code> or <code>border-right</code> greater than 1px as a colored accent on cards, list items, callouts, or alerts. Never intentional. Rewrite with full borders, background tints, leading numbers/icons, or nothing.</li><li><strong>Gradient text.</strong> <code>background-clip: text</code> combined with a gradient background. Decorative, never meaningful. Use a single solid color. Emphasis via weight or size.</li><li><strong>Glassmorphism as default.</strong> Blurs and glass cards used decoratively. Rare and purposeful, or nothing.</li><li><strong>The hero-metric template.</strong> Big number, small label, supporting stats, gradient accent. SaaS cliché.</li><li><strong>Identical card grids.</strong> Same-sized cards with icon + heading + text, repeated endlessly.</li><li><strong>Modal as first thought.</strong> Modals are usually laziness. Exhaust inline / progressive alternatives first.</li></ul>
-<h4>Copy</h4>
-<ul><li>Every word earns its place. No restated headings, no intros that repeat the title.</li><li><strong>No em dashes.</strong> Use commas, colons, semicolons, periods, or parentheses. Also not <code>--</code>.</li></ul>
-<h4>The AI slop test</h4>
-<p>If someone could look at this interface and say "AI made that" without doubt, it's failed. Cross-register failures are the absolute bans above. Register-specific failures live in each reference.</p>
-<p><strong>Category-reflex check.</strong> Run at two altitudes; the second one catches what the first one misses.</p>
-<ul><li><strong>First-order:</strong> if someone could guess the theme + palette from the category alone ("observability → dark blue", "healthcare → white + teal", "finance → navy + gold", "crypto → neon on black"), it's the first training-data reflex. Rework the scene sentence and color strategy until the answer isn't obvious from the domain.</li><li><strong>Second-order:</strong> if someone could guess the aesthetic family from category-plus-anti-references ("AI workflow tool that's not SaaS-cream → editorial-typographic", "fintech that's not navy-and-gold → terminal-native dark mode"), it's the trap one tier deeper. The first reflex was avoided; the second wasn't. Rework until both answers are not obvious. The brand register's <a href="reference/brand.md" rel="noopener" target="_blank">reflex-reject aesthetic lanes</a> list catches the currently-saturated families.</li></ul>
-<h3 id="skillmd-commands">Commands</h3>
-<p>| Command | Category | Description | Reference | |---|---|---|---| | <code>craft [feature]</code> | Build | Shape, then build a feature end-to-end | <a href="reference/craft.md" rel="noopener" target="_blank">reference/craft.md</a> | | <code>shape [feature]</code> | Build | Plan UX/UI before writing code | <a href="reference/shape.md" rel="noopener" target="_blank">reference/shape.md</a> | | <code>teach</code> | Build | Set up PRODUCT.md and DESIGN.md context | <a href="reference/teach.md" rel="noopener" target="_blank">reference/teach.md</a> | | <code>document</code> | Build | Generate DESIGN.md from existing project code | <a href="reference/document.md" rel="noopener" target="_blank">reference/document.md</a> | | <code>extract [target]</code> | Build | Pull reusable tokens and components into design system | <a href="reference/extract.md" rel="noopener" target="_blank">reference/extract.md</a> | | <code>critique [target]</code> | Evaluate | UX design review with heuristic scoring | <a href="reference/critique.md" rel="noopener" target="_blank">reference/critique.md</a> | | <code>audit [target]</code> | Evaluate | Technical quality checks (a11y, perf, responsive) | <a href="reference/audit.md" rel="noopener" target="_blank">reference/audit.md</a> | | <code>polish [target]</code> | Refine | Final quality pass before shipping | <a href="reference/polish.md" rel="noopener" target="_blank">reference/polish.md</a> | | <code>bolder [target]</code> | Refine | Amplify safe or bland designs | <a href="reference/bolder.md" rel="noopener" target="_blank">reference/bolder.md</a> | | <code>quieter [target]</code> | Refine | Tone down aggressive or overstimulating designs | <a href="reference/quieter.md" rel="noopener" target="_blank">reference/quieter.md</a> | | <code>distill [target]</code> | Refine | Strip to essence, remove complexity | <a href="reference/distill.md" rel="noopener" target="_blank">reference/distill.md</a> | | <code>harden [target]</code> | Refine | Production-ready: errors, i18n, edge cases | <a href="reference/harden.md" rel="noopener" target="_blank">reference/harden.md</a> | | <code>onboard [target]</code> | Refine | Design first-run flows, empty states, activation | <a href="reference/onboard.md" rel="noopener" target="_blank">reference/onboard.md</a> | | <code>animate [target]</code> | Enhance | Add purposeful animations and motion | <a href="reference/animate.md" rel="noopener" target="_blank">reference/animate.md</a> | | <code>colorize [target]</code> | Enhance | Add strategic color to monochromatic UIs | <a href="reference/colorize.md" rel="noopener" target="_blank">reference/colorize.md</a> | | <code>typeset [target]</code> | Enhance | Improve typography hierarchy and fonts | <a href="reference/typeset.md" rel="noopener" target="_blank">reference/typeset.md</a> | | <code>layout [target]</code> | Enhance | Fix spacing, rhythm, and visual hierarchy | <a href="reference/layout.md" rel="noopener" target="_blank">reference/layout.md</a> | | <code>delight [target]</code> | Enhance | Add personality and memorable touches | <a href="reference/delight.md" rel="noopener" target="_blank">reference/delight.md</a> | | <code>overdrive [target]</code> | Enhance | Push past conventional limits | <a href="reference/overdrive.md" rel="noopener" target="_blank">reference/overdrive.md</a> | | <code>clarify [target]</code> | Fix | Improve UX copy, labels, and error messages | <a href="reference/clarify.md" rel="noopener" target="_blank">reference/clarify.md</a> | | <code>adapt [target]</code> | Fix | Adapt for different devices and screen sizes | <a href="reference/adapt.md" rel="noopener" target="_blank">reference/adapt.md</a> | | <code>optimize [target]</code> | Fix | Diagnose and fix UI performance | <a href="reference/optimize.md" rel="noopener" target="_blank">reference/optimize.md</a> | | <code>live</code> | Iterate | Visual variant mode: pick elements in the browser, generate alternatives | <a href="reference/live.md" rel="noopener" target="_blank">reference/live.md</a> |</p>
-<p>Plus two management commands: <code>pin &lt;command&gt;</code> and <code>unpin &lt;command&gt;</code>, detailed below.</p>
-<h4>Routing rules</h4>
-<ol><li><strong>No argument</strong>: render the table above as the user-facing command menu, grouped by category. Ask what they'd like to do.</li><li><strong>First word matches a command</strong>: load its reference file and follow its instructions. Everything after the command name is the target.</li><li><strong>First word doesn't match</strong>: general design invocation. Apply the setup steps, shared design laws, and the loaded register reference, using the full argument as context.</li></ol>
-<p>Setup (context gathering, register) is already loaded by then; sub-commands don't re-invoke <code>{{command_prefix}}impeccable</code>.</p>
-<p>If the first word is <code>craft</code>, setup still runs first, but <a href="reference/craft.md" rel="noopener" target="_blank">reference/craft.md</a> owns the rest of the flow. If setup invokes <code>teach</code> as a blocker, finish teach, refresh context, then resume the original command and target.</p>
-<h3 id="skillmd-pin-unpin">Pin / Unpin</h3>
-<p><strong>Pin</strong> creates a standalone shortcut so <code>{{command_prefix}}&lt;command&gt;</code> invokes <code>{{command_prefix}}impeccable &lt;command&gt;</code> directly. <strong>Unpin</strong> removes it. The script writes to every harness directory present in the project.</p>
-<pre><code class="lang-bash">node {{scripts_path}}/pin.mjs &lt;pin|unpin&gt; &lt;command&gt;</code></pre>
-<p>Valid <code>&lt;command&gt;</code> is any command from the table above. Report the script's result concisely. Confirm the new shortcut on success, relay stderr verbatim on error.</p></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/pbakaus/impeccable/main/skill/SKILL.md" data-github="https://github.com/pbakaus/impeccable/main/skill/SKILL.md" data-size="14145" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">14,145 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-reference" data-name="reference" data-url="https://raw.githubusercontent.com/pbakaus/impeccable/main/skill/reference" data-github="https://github.com/pbakaus/impeccable/main/skill/reference" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">reference</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div><div class="file-accordion-row" id="file-scripts" data-name="scripts" data-url="https://raw.githubusercontent.com/pbakaus/impeccable/main/skill/scripts" data-github="https://github.com/pbakaus/impeccable/main/skill/scripts" data-size="0" data-open="false" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="false"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">scripts</span><span class="file-size"></span><span class="file-type">support</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -632,5 +676,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>

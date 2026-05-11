@@ -1,0 +1,483 @@
+/* ============================================================
+   Floom Starter Pack — Design System
+   Single source of truth. Every page links this file.
+   Page-specific overrides stay in page's <style> block but MUST
+   use the tokens defined here.
+   ------------------------------------------------------------
+   DO NOT MODIFY tokens without updating ALL pages.
+   Adding a new token? Document it here AND test on all pages.
+   Removing a token? Search every page for usage first.
+   ============================================================ */
+
+/* ============================================================
+   1. TOKENS
+   ============================================================ */
+:root {
+  /* Color */
+  --paper:          #fafaf7;
+  --ink:            #050505;
+  --muted:          #333333;
+  --muted-soft:     #4b4b4b;
+  --muted-mute:     #6b6b6b;
+  --muted-rule:     #e0dfdb;
+  --blue:           #0094ff;
+  --blue-deep:      #006fbf;
+  --blue-soft:      #bfe6ff;
+  --blue-pale:      #eaf7ff;
+  --cloud-pink:     #ff4fd8;
+
+  /* Brand colors (for agent logos / hero accents) */
+  --brand-claude:   #d97757;
+  --brand-codex:    var(--blue);
+  --brand-cursor:   var(--ink);
+  --brand-kimi:     var(--ink);
+
+  /* Lines */
+  --line:           2px solid var(--ink);
+  --line-light:     1px solid var(--muted-rule);
+  --line-soft:      1px solid rgba(5, 5, 5, 0.12);
+  --line-faint:     1px solid rgba(5, 5, 5, 0.06);
+
+  /* Fonts */
+  --sans:           Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:           "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+
+  /* Type weights */
+  --fw-display:     700;
+  --fw-strong:      900;
+  --fw-h2:          800;
+  --fw-body-emph:   600;
+  --fw-body:        500;
+
+  /* Letter spacing */
+  --ls-display:     -0.035em;
+  --ls-h3:          -0.02em;
+  --ls-section-label: 0.16em;
+  --ls-button:      0.12em;
+  --ls-wordmark:    -0.06em;
+
+  /* Radii */
+  --radius-card:    18px;
+  --radius-card-lg: 22px;
+  --radius-button:  14px;
+  --radius-pill:    999px;
+  --radius-input:   16px;
+  --radius-code:    14px;
+
+  /* Spacing */
+  --space-page-x:       70px;
+  --space-page-y-top:   44px;
+  --space-page-y-bot:   72px;
+  --space-section:      56px;
+
+  /* Page widths */
+  --max-page:           1440px;
+  --max-content:        720px;
+
+  /* Shadows */
+  --shadow-button-hover: 0 12px 26px rgba(5, 5, 5, 0.14), 0 0 0 4px rgba(0, 148, 255, 0.14);
+  --shadow-cta-hover:    0 8px 22px rgba(5, 5, 5, 0.16), 0 0 0 3px rgba(0, 148, 255, 0.10);
+  --shadow-card-hover:   0 14px 30px rgba(5, 5, 5, 0.18);
+  --shadow-tooltip:      0 14px 30px rgba(5, 5, 5, 0.18);
+}
+
+/* ============================================================
+   2. BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+h1, h2, h3, p { margin: 0; }
+
+/* ============================================================
+   3. PAGE CONTAINER
+   ============================================================ */
+.page {
+  width: min(100%, var(--max-page));
+  margin: 0 auto;
+  padding: var(--space-page-y-top) var(--space-page-x) var(--space-page-y-bot);
+}
+
+/* ============================================================
+   4. NAV (shared across all pages)
+   ============================================================ */
+.nav {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+  border-bottom: var(--line);
+  padding-bottom: 18px;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.wordmark strong {
+  font-size: 28px;
+  font-weight: var(--fw-strong);
+  letter-spacing: var(--ls-wordmark);
+  line-height: 0.9;
+}
+
+.wordmark span {
+  color: var(--muted-soft);
+  font-size: 10px;
+  font-weight: var(--fw-strong);
+  letter-spacing: var(--ls-section-label);
+  text-transform: uppercase;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 30px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 34px;
+  row-gap: 10px;
+  line-height: 1;
+  font-size: 12px;
+  font-weight: var(--fw-strong);
+  letter-spacing: var(--ls-section-label);
+  text-transform: uppercase;
+}
+
+.nav-links a { text-decoration: none; }
+.nav-links a:hover,
+.nav-links a[aria-current="page"] { color: var(--blue); }
+
+/* ============================================================
+   5. SECTION LABELS / EYEBROWS
+   ============================================================ */
+.eyebrow,
+.section-label,
+.meta-label {
+  font-size: 12px;
+  font-weight: var(--fw-strong);
+  letter-spacing: var(--ls-section-label);
+  text-transform: uppercase;
+}
+
+.eyebrow { color: var(--blue-deep); }
+
+/* ============================================================
+   6. BUTTONS
+   ============================================================ */
+.button,
+.button-secondary,
+.button-primary,
+.nav-sign-in {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--line);
+  border-radius: var(--radius-button);
+  padding: 12px 16px;
+  font: var(--fw-strong) 12px/1 var(--sans);
+  letter-spacing: var(--ls-button);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 150ms ease, box-shadow 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.button,
+.button-primary,
+.nav-sign-in { background: var(--ink); color: #ffffff; }
+
+.button-secondary { background: #ffffff; color: var(--ink); }
+
+.button:hover,
+.button-secondary:hover,
+.button-primary:hover,
+.nav-sign-in:hover {
+  box-shadow: var(--shadow-button-hover);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   7. INSTALL CTA + tooltip (canonical)
+   ============================================================ */
+.install-cta-wrap { position: relative; display: inline-block; }
+
+.install-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: var(--line);
+  border-radius: var(--radius-button);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 14px 22px;
+  font: var(--fw-strong) 13px/1 var(--sans);
+  letter-spacing: var(--ls-button);
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  transition: background 200ms ease,
+              box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.install-cta:hover,
+.install-cta:focus-visible {
+  box-shadow: var(--shadow-cta-hover);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.install-cta-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.install-cta:hover .install-cta-icon,
+.install-cta:focus-visible .install-cta-icon { transform: translateY(2px); }
+
+.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied .install-cta-label::after { content: " \2713"; }
+
+.install-cta-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 360px;
+  max-width: 420px;
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--line);
+  border-radius: var(--radius-button);
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: var(--fw-body);
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 180ms ease 60ms,
+              visibility 0s linear 240ms,
+              transform 180ms ease 60ms;
+  z-index: 100;
+  box-shadow: var(--shadow-tooltip);
+}
+
+.install-cta:hover .install-cta-tooltip,
+.install-cta:focus-visible .install-cta-tooltip,
+.install-cta:focus-within .install-cta-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
+}
+
+.install-cta-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-left: var(--line);
+  border-top: var(--line);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+.tooltip-line {
+  display: block;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.tooltip-cmd {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.tooltip-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (hover: none) {
+  .install-cta-tooltip { display: none; }
+}
+
+/* ============================================================
+   8. SITE FOOTER (canonical)
+   ============================================================ */
+.site-footer {
+  border-top: var(--line);
+  background: var(--paper);
+  padding: 48px var(--space-page-x) 0;
+}
+
+.site-footer-inner {
+  width: min(100%, var(--max-page));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 36px;
+}
+
+.footer-brand .footer-wordmark {
+  display: block;
+  font-size: 28px;
+  font-weight: var(--fw-strong);
+  letter-spacing: var(--ls-wordmark);
+  line-height: 0.9;
+  color: var(--ink);
+  text-decoration: none;
+  margin-bottom: 6px;
+}
+
+.footer-brand small {
+  font-size: 11px;
+  font-weight: var(--fw-strong);
+  letter-spacing: var(--ls-section-label);
+  text-transform: uppercase;
+  color: var(--muted-soft);
+}
+
+.footer-col-label {
+  display: block;
+  margin: 0 0 14px;
+  font-size: 12px;
+  font-weight: var(--fw-strong);
+  letter-spacing: var(--ls-section-label);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.footer-col a {
+  font-size: 14px;
+  font-weight: var(--fw-body-emph);
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+
+.footer-col a:hover { color: var(--blue); }
+
+.footer-bottom {
+  width: min(100%, var(--max-page));
+  margin: 0 auto;
+  border-top: 1px solid rgba(5, 5, 5, 0.12);
+  padding: 18px 0 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: var(--fw-body-emph);
+  color: var(--muted-soft);
+}
+
+.footer-bottom .footer-mit {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: var(--fw-strong);
+  letter-spacing: var(--ls-button);
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  background: var(--paper);
+}
+
+/* ============================================================
+   9. RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px) and (min-width: 641px) {
+  .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; }
+  .wordmark span { font-size: 9px; letter-spacing: 0.12em; }
+  .nav-right { gap: 18px; }
+}
+
+@media (max-width: 980px) {
+  .page { padding: 30px 22px 52px; }
+  .site-footer { padding: 40px 22px 0; }
+  .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; }
+}
+
+@media (max-width: 860px) {
+  .site-footer { padding: 40px 22px 0; }
+  .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; }
+}
+
+@media (max-width: 640px) {
+  .page { padding: 22px 16px 44px; }
+  .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; }
+  .wordmark span { font-size: 9px; letter-spacing: 0.12em; }
+  .site-footer { padding: 36px 16px 0; }
+  .footer-bottom { padding: 16px 0 24px; }
+  .install-cta-tooltip {
+    min-width: 280px;
+    max-width: calc(100vw - 40px);
+    right: 0;
+    left: auto;
+  }
+}

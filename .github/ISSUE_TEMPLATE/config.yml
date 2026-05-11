@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Skill discovery
-    url: https://starter.floom.dev/library
+    url: https://floom.dev/library
     about: Browse all 65 curated skills
   - name: Documentation
-    url: https://starter.floom.dev/docs
+    url: https://floom.dev/docs
     about: How to install, update, uninstall, and use the pack

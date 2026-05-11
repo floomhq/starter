@@ -13,8 +13,8 @@
 <meta content="article" property="og:type"/>
 <meta content="finishing-a-development-branch: Floom Starter Pack skill" property="og:title"/>
 <meta content="Structured branch completion checklist; prevents half-done states." property="og:description"/>
-<meta content="https://starter.floom.dev/skill/finishing-a-development-branch" property="og:url"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="https://floom.dev/skill/finishing-a-development-branch" property="og:url"/>
+<meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="en_US" property="og:locale"/>
@@ -22,7 +22,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="finishing-a-development-branch: Floom Starter Pack skill" name="twitter:title"/>
 <meta content="Structured branch completion checklist; prevents half-done states." name="twitter:description"/>
-<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
 <!-- Favicon -->
@@ -30,7 +30,7 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
 <!-- Canonical -->
-<link href="https://starter.floom.dev/skill/finishing-a-development-branch" rel="canonical"/>
+<link href="https://floom.dev/skill/finishing-a-development-branch" rel="canonical"/>
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "isPartOf": {
     "@type": "SoftwareApplication",
     "name": "Floom Starter Pack",
-    "url": "https://starter.floom.dev/"
+    "url": "https://floom.dev/"
   }
 }
 </script>
@@ -385,6 +385,111 @@ a { color: inherit; }
 .final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
 .final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+
+/* === Stage A file browser === */
+.file-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+}
+.file-accordion-row {
+  border: 1px solid #e0dfdb;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+.file-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-align: left;
+}
+.file-accordion-toggle:hover { background: #f0efeb; }
+.file-accordion-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.file-accordion-row[data-open="true"] .file-accordion-toggle { background: #f0efeb; border-bottom: 1px solid #e0dfdb; }
+.file-accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  color: var(--muted);
+}
+.file-accordion-row[data-open="true"] .file-accordion-arrow { transform: rotate(90deg); }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; font-weight: 500; }
+.file-size { color: var(--muted); flex-shrink: 0; font-size: 11px; }
+.file-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.file-content {
+  display: none;
+  padding: 16px 18px;
+  background: #fafaf7;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-height: 720px;
+  overflow-y: auto;
+}
+.file-accordion-row[data-open="true"] .file-content { display: block; }
+.file-content--md { font-size: 14px; }
+.file-content--md h2, .file-content--md h3, .file-content--md h4 { font-weight: 700; margin: 14px 0 6px; letter-spacing: -0.01em; }
+.file-content--md h2 { font-size: 18px; }
+.file-content--md h3 { font-size: 15px; }
+.file-content--md h4 { font-size: 14px; }
+.file-content--md p { margin: 6px 0; }
+.file-content--md ul, .file-content--md ol { margin: 6px 0 6px 22px; }
+.file-content--md li { margin: 2px 0; }
+.file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
+.file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
+.file-content--md pre code { background: none; padding: 0; }
+.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
+.file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
+.file-content--code, .file-content--text {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #fafaf7;
+  padding: 14px 16px;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.file-content--loading {
+  color: var(--muted);
+  font-style: italic;
+  padding: 12px 14px;
+}
+.file-content--error {
+  color: #b3002d;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.file-content--binary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.file-content--binary a { color: var(--blue); text-decoration: underline; }
+
 </style>
 </head>
 <body>
@@ -416,13 +521,7 @@ a { color: inherit; }
 <a href="#install">Install</a>
 <a href="#fires-when">Fires when</a>
 <a href="#files">Files</a>
-<a href="#skill-md">SKILL.md</a>
-<a class="is-sub" href="#skillmd-finishing-a-development-branch">Finishing a Development Branch</a>
-<a class="is-sub-2" href="#skillmd-overview">Overview</a>
-<a class="is-sub-2" href="#skillmd-the-process">The Process</a>
-<a class="is-sub-2" href="#skillmd-quick-reference">Quick Reference</a>
-<a class="is-sub-2" href="#skillmd-common-mistakes">Common Mistakes</a>
-<a class="is-sub-2" href="#skillmd-red-flags">Red Flags</a>
+<a class="is-sub" href="#file-skill-md">SKILL.md</a>
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>finishing-a-development-branch</h1>
@@ -452,138 +551,8 @@ a { color: inherit; }
 <div class="fires-block">"I'm done with this feature", "how do I land this"</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
-<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">7,061 bytes</span><span class="file-type">main</span></div></div>
-</section><section class="section" id="skill-md">
-<div class="section-label">SKILL.md</div>
-<div class="md-block"><h2 id="skillmd-finishing-a-development-branch">Finishing a Development Branch</h2>
-<h3 id="skillmd-overview">Overview</h3>
-<p>Guide completion of development work by presenting clear options and handling chosen workflow.</p>
-<p><strong>Core principle:</strong> Verify tests → Detect environment → Present options → Execute choice → Clean up.</p>
-<p><strong>Announce at start:</strong> "I'm using the finishing-a-development-branch skill to complete this work."</p>
-<h3 id="skillmd-the-process">The Process</h3>
-<h4>Step 1: Verify Tests</h4>
-<p><strong>Before presenting options, verify tests pass:</strong></p>
-<pre><code class="lang-bash"># Run project's test suite
-npm test / cargo test / pytest / go test ./...</code></pre>
-<p><strong>If tests fail:</strong></p>
-<pre><code class="lang-">Tests failing (&lt;N&gt; failures). Must fix before completing:
-
-[Show failures]
-
-Cannot proceed with merge/PR until tests pass.</code></pre>
-<p>Stop. Don't proceed to Step 2.</p>
-<p><strong>If tests pass:</strong> Continue to Step 2.</p>
-<h4>Step 2: Detect Environment</h4>
-<p><strong>Determine workspace state before presenting options:</strong></p>
-<pre><code class="lang-bash">GIT_DIR=$(cd "$(git rev-parse --git-dir)" 2&gt;/dev/null &amp;&amp; pwd -P)
-GIT_COMMON=$(cd "$(git rev-parse --git-common-dir)" 2&gt;/dev/null &amp;&amp; pwd -P)</code></pre>
-<p>This determines which menu to show and how cleanup works:</p>
-<p>| State | Menu | Cleanup | |-------|------|---------| | <code>GIT_DIR == GIT_COMMON</code> (normal repo) | Standard 4 options | No worktree to clean up | | <code>GIT_DIR != GIT_COMMON</code>, named branch | Standard 4 options | Provenance-based (see Step 6) | | <code>GIT_DIR != GIT_COMMON</code>, detached HEAD | Reduced 3 options (no merge) | No cleanup (externally managed) |</p>
-<h4>Step 3: Determine Base Branch</h4>
-<pre><code class="lang-bash"># Try common base branches
-git merge-base HEAD main 2&gt;/dev/null || git merge-base HEAD master 2&gt;/dev/null</code></pre>
-<p>Or ask: "This branch split from main - is that correct?"</p>
-<h4>Step 4: Present Options</h4>
-<p><strong>Normal repo and named-branch worktree — present exactly these 4 options:</strong></p>
-<pre><code class="lang-">Implementation complete. What would you like to do?
-
-1. Merge back to &lt;base-branch&gt; locally
-2. Push and create a Pull Request
-3. Keep the branch as-is (I'll handle it later)
-4. Discard this work
-
-Which option?</code></pre>
-<p><strong>Detached HEAD — present exactly these 3 options:</strong></p>
-<pre><code class="lang-">Implementation complete. You're on a detached HEAD (externally managed workspace).
-
-1. Push as new branch and create a Pull Request
-2. Keep as-is (I'll handle it later)
-3. Discard this work
-
-Which option?</code></pre>
-<p><strong>Don't add explanation</strong> - keep options concise.</p>
-<h4>Step 5: Execute Choice</h4>
-<h4>Option 1: Merge Locally</h4>
-<pre><code class="lang-bash"># Get main repo root for CWD safety
-MAIN_ROOT=$(git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-toplevel)
-cd "$MAIN_ROOT"
-
-# Merge first — verify success before removing anything
-git checkout &lt;base-branch&gt;
-git pull
-git merge &lt;feature-branch&gt;
-
-# Verify tests on merged result
-&lt;test command&gt;
-
-# Only after merge succeeds: cleanup worktree (Step 6), then delete branch</code></pre>
-<p>Then: Cleanup worktree (Step 6), then delete branch:</p>
-<pre><code class="lang-bash">git branch -d &lt;feature-branch&gt;</code></pre>
-<h4>Option 2: Push and Create PR</h4>
-<pre><code class="lang-bash"># Push branch
-git push -u origin &lt;feature-branch&gt;
-
-# Create PR
-gh pr create --title "&lt;title&gt;" --body "$(cat &lt;&lt;'EOF'
-## Summary
-&lt;2-3 bullets of what changed&gt;
-
-## Test Plan
-- [ ] &lt;verification steps&gt;
-EOF
-)"</code></pre>
-<p><strong>Do NOT clean up worktree</strong> — user needs it alive to iterate on PR feedback.</p>
-<h4>Option 3: Keep As-Is</h4>
-<p>Report: "Keeping branch &lt;name&gt;. Worktree preserved at &lt;path&gt;."</p>
-<p><strong>Don't cleanup worktree.</strong></p>
-<h4>Option 4: Discard</h4>
-<p><strong>Confirm first:</strong></p>
-<pre><code class="lang-">This will permanently delete:
-- Branch &lt;name&gt;
-- All commits: &lt;commit-list&gt;
-- Worktree at &lt;path&gt;
-
-Type 'discard' to confirm.</code></pre>
-<p>Wait for exact confirmation.</p>
-<p>If confirmed:</p>
-<pre><code class="lang-bash">MAIN_ROOT=$(git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-toplevel)
-cd "$MAIN_ROOT"</code></pre>
-<p>Then: Cleanup worktree (Step 6), then force-delete branch:</p>
-<pre><code class="lang-bash">git branch -D &lt;feature-branch&gt;</code></pre>
-<h4>Step 6: Cleanup Workspace</h4>
-<p><strong>Only runs for Options 1 and 4.</strong> Options 2 and 3 always preserve the worktree.</p>
-<pre><code class="lang-bash">GIT_DIR=$(cd "$(git rev-parse --git-dir)" 2&gt;/dev/null &amp;&amp; pwd -P)
-GIT_COMMON=$(cd "$(git rev-parse --git-common-dir)" 2&gt;/dev/null &amp;&amp; pwd -P)
-WORKTREE_PATH=$(git rev-parse --show-toplevel)</code></pre>
-<p><strong>If <code>GIT_DIR == GIT_COMMON</code>:</strong> Normal repo, no worktree to clean up. Done.</p>
-<p><strong>If worktree path is under <code>.worktrees/</code>, <code>worktrees/</code>, or <code>~/.config/superpowers/worktrees/</code>:</strong> Superpowers created this worktree — we own cleanup.</p>
-<pre><code class="lang-bash">MAIN_ROOT=$(git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-toplevel)
-cd "$MAIN_ROOT"
-git worktree remove "$WORKTREE_PATH"
-git worktree prune  # Self-healing: clean up any stale registrations</code></pre>
-<p><strong>Otherwise:</strong> The host environment (harness) owns this workspace. Do NOT remove it. If your platform provides a workspace-exit tool, use it. Otherwise, leave the workspace in place.</p>
-<h3 id="skillmd-quick-reference">Quick Reference</h3>
-<p>| Option | Merge | Push | Keep Worktree | Cleanup Branch | |--------|-------|------|---------------|----------------| | 1. Merge locally | yes | - | - | yes | | 2. Create PR | - | yes | yes | - | | 3. Keep as-is | - | - | yes | - | | 4. Discard | - | - | - | yes (force) |</p>
-<h3 id="skillmd-common-mistakes">Common Mistakes</h3>
-<p><strong>Skipping test verification</strong></p>
-<ul><li><strong>Problem:</strong> Merge broken code, create failing PR</li><li><strong>Fix:</strong> Always verify tests before offering options</li></ul>
-<p><strong>Open-ended questions</strong></p>
-<ul><li><strong>Problem:</strong> "What should I do next?" is ambiguous</li><li><strong>Fix:</strong> Present exactly 4 structured options (or 3 for detached HEAD)</li></ul>
-<p><strong>Cleaning up worktree for Option 2</strong></p>
-<ul><li><strong>Problem:</strong> Remove worktree user needs for PR iteration</li><li><strong>Fix:</strong> Only cleanup for Options 1 and 4</li></ul>
-<p><strong>Deleting branch before removing worktree</strong></p>
-<ul><li><strong>Problem:</strong> <code>git branch -d</code> fails because worktree still references the branch</li><li><strong>Fix:</strong> Merge first, remove worktree, then delete branch</li></ul>
-<p><strong>Running git worktree remove from inside the worktree</strong></p>
-<ul><li><strong>Problem:</strong> Command fails silently when CWD is inside the worktree being removed</li><li><strong>Fix:</strong> Always <code>cd</code> to main repo root before <code>git worktree remove</code></li></ul>
-<p><strong>Cleaning up harness-owned worktrees</strong></p>
-<ul><li><strong>Problem:</strong> Removing a worktree the harness created causes phantom state</li><li><strong>Fix:</strong> Only clean up worktrees under <code>.worktrees/</code>, <code>worktrees/</code>, or <code>~/.config/superpowers/worktrees/</code></li></ul>
-<p><strong>No confirmation for discard</strong></p>
-<ul><li><strong>Problem:</strong> Accidentally delete work</li><li><strong>Fix:</strong> Require typed "discard" confirmation</li></ul>
-<h3 id="skillmd-red-flags">Red Flags</h3>
-<p><strong>Never:</strong></p>
-<ul><li>Proceed with failing tests</li><li>Merge without verifying tests on result</li><li>Delete work without confirmation</li><li>Force-push without explicit request</li><li>Remove a worktree before confirming merge success</li><li>Clean up worktrees you didn't create (provenance check)</li><li>Run <code>git worktree remove</code> from inside the worktree</li></ul>
-<p><strong>Always:</strong></p>
-<ul><li>Verify tests before offering options</li><li>Detect environment before presenting menu</li><li>Present exactly 4 options (or 3 for detached HEAD)</li><li>Get typed confirmation for Option 4</li><li>Clean up worktree for Options 1 &amp; 4 only</li><li><code>cd</code> to main repo root before worktree removal</li><li>Run <code>git worktree prune</code> after removal</li></ul></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/obra/superpowers/main/skills/finishing-a-development-branch/SKILL.md" data-github="https://github.com/obra/superpowers/main/skills/finishing-a-development-branch/SKILL.md" data-size="7061" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">7,061 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">
@@ -705,5 +674,204 @@ document.querySelectorAll(".install-cta").forEach((button) => {
   }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
   sections.forEach((s) => observer.observe(s));
 })();
-</script></body>
+</script><script>
+// === Stage A: File browser (lazy-fetch + sessionStorage cache) ===
+(function () {
+  const ROWS = document.querySelectorAll(".file-accordion-row");
+  if (!ROWS.length) return;
+
+  // Tiny markdown renderer. Not a full implementation but handles the common
+  // SKILL.md shapes: headings, paragraphs, lists, fenced code, inline code,
+  // bold, italic, links, blockquotes, hr.
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function renderInline(line) {
+    // links
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold
+    line = line.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // italic (not inside word)
+    line = line.replace(/(^|\s)\*([^*\s][^*]*?)\*(\s|$|[.,;:!?])/g, "$1<em>$2</em>$3");
+    // inline code
+    line = line.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return line;
+  }
+  function renderMarkdown(src) {
+    const lines = src.split(/\r?\n/);
+    const out = [];
+    let inCode = false;
+    let codeBuf = [];
+    let listType = null;  // "ul" | "ol" | null
+    let paraBuf = [];
+
+    function flushPara() {
+      if (paraBuf.length) {
+        const text = paraBuf.join(" ").trim();
+        if (text) out.push("<p>" + renderInline(escapeHtml(text)) + "</p>");
+        paraBuf = [];
+      }
+    }
+    function flushList() {
+      if (listType) {
+        out.push("</" + listType + ">");
+        listType = null;
+      }
+    }
+
+    for (let raw of lines) {
+      // fenced code
+      if (raw.match(/^```/)) {
+        if (inCode) {
+          out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+          codeBuf = [];
+          inCode = false;
+        } else {
+          flushPara(); flushList();
+          inCode = true;
+        }
+        continue;
+      }
+      if (inCode) { codeBuf.push(raw); continue; }
+
+      // hr
+      if (raw.match(/^---+\s*$/) || raw.match(/^\*\*\*+\s*$/)) {
+        flushPara(); flushList();
+        out.push("<hr>");
+        continue;
+      }
+
+      // headings
+      const h = raw.match(/^(#{1,6})\s+(.+)$/);
+      if (h) {
+        flushPara(); flushList();
+        const lvl = Math.min(h[1].length + 1, 4);  // h1 -> h2, etc., cap at h4
+        out.push("<h" + lvl + ">" + renderInline(escapeHtml(h[2])) + "</h" + lvl + ">");
+        continue;
+      }
+
+      // blockquote
+      if (raw.match(/^>\s?/)) {
+        flushPara(); flushList();
+        out.push("<blockquote>" + renderInline(escapeHtml(raw.replace(/^>\s?/, ""))) + "</blockquote>");
+        continue;
+      }
+
+      // ul
+      const ul = raw.match(/^[-*]\s+(.+)$/);
+      if (ul) {
+        flushPara();
+        if (listType !== "ul") { flushList(); out.push("<ul>"); listType = "ul"; }
+        out.push("<li>" + renderInline(escapeHtml(ul[1])) + "</li>");
+        continue;
+      }
+
+      // ol
+      const ol = raw.match(/^\d+\.\s+(.+)$/);
+      if (ol) {
+        flushPara();
+        if (listType !== "ol") { flushList(); out.push("<ol>"); listType = "ol"; }
+        out.push("<li>" + renderInline(escapeHtml(ol[1])) + "</li>");
+        continue;
+      }
+
+      // blank line: end paragraph + list
+      if (raw.trim() === "") {
+        flushPara(); flushList();
+        continue;
+      }
+
+      // accumulate paragraph
+      flushList();
+      paraBuf.push(raw);
+    }
+    flushPara(); flushList();
+    if (inCode && codeBuf.length) {
+      out.push("<pre><code>" + escapeHtml(codeBuf.join("\n")) + "</code></pre>");
+    }
+    return out.join("\n");
+  }
+
+  function classifyFile(name) {
+    const lower = name.toLowerCase();
+    if (lower.endsWith(".md") || lower.endsWith(".mdx") || lower.endsWith(".markdown")) return "md";
+    if (lower.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|pdf|zip|gz|tar|wasm|woff|woff2|ttf|otf|mp3|mp4|webm|mov)$/)) return "binary";
+    if (lower.match(/\.(json|yaml|yml|toml|xml|html?|css|scss|sass|less|js|jsx|ts|tsx|mjs|cjs|py|rb|rs|go|java|kt|swift|c|h|cpp|hpp|cc|sh|bash|zsh|fish|ps1|sql|dockerfile|env|gitignore|prettierrc|eslintrc)$/)) return "code";
+    return "text";
+  }
+
+  function setLoading(content) {
+    content.innerHTML = '<div class="file-content--loading">Loading from upstream…</div>';
+  }
+  function setError(content, msg) {
+    content.innerHTML = '<div class="file-content--error">' + msg + '</div>';
+  }
+
+  async function loadFile(row) {
+    const url = row.dataset.url;
+    const name = row.dataset.name || "";
+    const githubUrl = row.dataset.github || url;
+    const content = row.querySelector(".file-content");
+    if (!content) return;
+    if (row.dataset.loaded === "true") return;
+
+    const cacheKey = "floom-file:" + url;
+    let body;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        body = cached;
+      } else {
+        setLoading(content);
+        const resp = await fetch(url, { cache: "no-store" });
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError(content, "File not available in upstream repo at the time it was indexed. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          } else {
+            setError(content, "Failed to load (" + resp.status + "). <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+          }
+          row.dataset.loaded = "true";
+          return;
+        }
+        body = await resp.text();
+        try { sessionStorage.setItem(cacheKey, body); } catch (e) { /* quota */ }
+      }
+    } catch (e) {
+      setError(content, "Network error loading file. <a href=\"" + githubUrl + "\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--blue);text-decoration:underline\">View on GitHub</a>");
+      row.dataset.loaded = "true";
+      return;
+    }
+
+    const kind = classifyFile(name);
+    let html;
+    if (kind === "md") {
+      html = '<div class="file-content--md">' + renderMarkdown(body) + '</div>';
+    } else if (kind === "binary") {
+      html = '<div class="file-content--binary">Binary file (' + (body.length || row.dataset.size || 0) + ' bytes). <a href="' + githubUrl + '" target="_blank" rel="noopener">View on GitHub</a></div>';
+    } else if (kind === "code") {
+      html = '<pre class="file-content--code">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    } else {
+      html = '<pre class="file-content--text">' + body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</pre>';
+    }
+    content.innerHTML = html;
+    row.dataset.loaded = "true";
+  }
+
+  function toggle(row) {
+    const isOpen = row.dataset.open === "true";
+    row.dataset.open = isOpen ? "false" : "true";
+    if (!isOpen) loadFile(row);
+  }
+
+  ROWS.forEach((row) => {
+    const toggleBtn = row.querySelector(".file-accordion-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", function () { toggle(row); });
+    }
+    // Auto-load + auto-open if data-open="true" at render time (SKILL.md)
+    if (row.dataset.open === "true") loadFile(row);
+  });
+})();
+</script>
+</body>
 </html>
