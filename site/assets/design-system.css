@@ -25,6 +25,7 @@
   --blue-soft:      #bfe6ff;
   --blue-pale:      #eaf7ff;
   --cloud-pink:     #ff4fd8;
+  --link:           #b8299a;
 
   /* Brand colors (for agent logos / hero accents) */
   --brand-claude:   #d97757;
@@ -172,7 +173,7 @@ h1, h2, h3, p { margin: 0; }
 
 .nav-links a { text-decoration: none; }
 .nav-links a:hover,
-.nav-links a[aria-current="page"] { color: var(--blue); }
+.nav-links a[aria-current="page"] { color: var(--link); }
 
 /* ============================================================
    5. SECTION LABELS / EYEBROWS
@@ -416,7 +417,7 @@ h1, h2, h3, p { margin: 0; }
   transition: color 120ms ease;
 }
 
-.footer-col a:hover { color: var(--blue); }
+.footer-col a:hover { color: var(--link); }
 
 .footer-bottom {
   width: min(100%, var(--max-page));
