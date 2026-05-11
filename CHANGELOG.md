@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.2.5 - 2026-05-11
+
+- CLI: activation block strips trailing `.` from skill descriptions before appending `. Path:` (no more `..` in CLAUDE.md/AGENTS.md bullets).
+- CLI: activation block instructs agent to use `find-skills` (was incorrectly `local-find-skills`).
+
 ## v0.2.4 - 2026-05-11
 
 ### Repo
@@ -26,7 +31,9 @@
 - Bundled fallback rebuilt with current curated slug set.
 - README rewritten (high-trust badges, profile breakdown, install + update + uninstall flows).
 
-## v0.2.2 (skipped) - patch reserved.
+## v0.2.2 - 2026-05-11
+
+- Pre-flight P0 fix snapshot (test publish during repo rename + URL bump). See v0.2.3 release notes for the consolidated fixes.
 
 ## v0.2.1 - 2026-05-10
 

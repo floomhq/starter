@@ -30,11 +30,12 @@ export function buildActivationBlock(agent, skills) {
     } else {
       skillPath = path.join(agent.skillsDir, skill.slug, "SKILL.md");
     }
-    lines.push(`- **${skill.name || skill.slug}**: ${skill.description || skill.slug}. Path: \`${skillPath}\``);
+    const desc = (skill.description || skill.slug).replace(/\.+\s*$/, "");
+    lines.push(`- **${skill.name || skill.slug}**: ${desc}. Path: \`${skillPath}\``);
   }
 
   lines.push(``);
-  lines.push(`Use \`local-find-skills\` first when you're not sure which skill applies.`);
+  lines.push(`Use \`find-skills\` first when you're not sure which skill applies.`);
   lines.push(BLOCK_END);
   return lines.join("\n");
 }

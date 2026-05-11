@@ -23,7 +23,7 @@ Works with Claude Code, Codex, Cursor, Kimi, OpenCode.
 npx @floomhq/starter install
 ```
 
-Installs 65 curated skills into the AI agent you use. Auto-detects Claude Code, Codex, Cursor, Kimi, or OpenCode.
+That installs the Core profile (9 hand-picked skills) into the AI agent you use. Use `--all` for all 65 across 11 profiles, or `--profiles dev,writing` for specific ones. Auto-detects Claude Code, Codex, Cursor, Kimi, or OpenCode.
 
 ## What you get
 
