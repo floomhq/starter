@@ -96,7 +96,7 @@
         background: rgba(250, 250, 247, 0.94);
         backdrop-filter: blur(12px);
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         flex-wrap: wrap;
         gap: 12px;
         justify-content: flex-start;
@@ -993,45 +993,41 @@
             <h2>Methodology</h2>
             <p>Why we built it this way: curation, activation, and what Floom adds versus upstream catalogs.</p>
 
-            <h3 id="curation-from-catalog">How we curated 65 skills from 91,000</h3>
+            <h3 id="curation-from-catalog">How we curated the 65-skill pack</h3>
             <p>
-              <a href="https://skills.sh/" style="color: var(--blue)">skills.sh</a> indexes on the order of 91,035 skills. This pack ships a curated subset of 65. Selection rules:
+              Floom starts from the public skills ecosystem, including <a href="https://skills.sh/" style="color: var(--blue)">skills.sh</a>, which indexes on the order of 91,000 skills, plus a small set of licensed benchmark and workflow sources. This pack ships 65 skills selected for broad usefulness, clean provenance, and zero-setup installation.
             </p>
             <ol class="step-list">
               <li>
-                <strong>Install count floor (32,900+):</strong> every skills.sh skill in the pack has been installed by at least 32,900 agents as a proxy for real-world validation. The median in the pack is about 75,000 installs.
+                <strong>Usage signal:</strong> skills from skills.sh have strong install counts as a proxy for real-world validation. The pack favors skills with broad adoption over niche personal dotfiles.
               </li>
               <li>
-                <strong>License compliance:</strong> MIT, Apache 2.0, or Floom-owned. Skills requiring an API key are excluded. gstack skills were excluded when no redistributable license was confirmed.
+                <strong>License compliance:</strong> bundled skills must have a redistributable license or be Floom-maintained. Skills with unclear redistribution rights stay out of the public pack.
               </li>
               <li>
                 <strong>Description quality:</strong> skills need a clear "when it fires" trigger. Skills without an obvious trigger waste context and are not invoked reliably.
               </li>
               <li>
-                <strong>No API-key-required skills:</strong> the pack should work with zero setup; skills that need external credentials are excluded or replaced with free alternatives.
+                <strong>Zero setup:</strong> skills that require external credentials, paid services, or narrow cloud/vendor assumptions are excluded or replaced with simpler alternatives.
               </li>
             </ol>
-            <p>The four source tiers, in priority order:</p>
+            <p>The source tiers, in priority order:</p>
             <div class="table-wrap" role="region" aria-label="Source tiers in the pack">
               <table>
                 <thead>
                   <tr>
                     <th scope="col">Source</th>
-                    <th scope="col">Skills in pack</th>
                     <th scope="col">Why this tier</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>skills.sh</td><td>59 skills (91%)</td><td>Battle-tested install counts, diverse publishers</td></tr>
-                  <tr><td>Superpowers (obra, MIT)</td><td>8 (sub-source of skills.sh)</td><td>High install counts in workflow and planning</td></tr>
-                  <tr><td>SkillsBench (Apache 2.0)</td><td>7 skills</td><td>Academic validation on real benchmarks</td></tr>
-                  <tr><td>Floom proprietary</td><td>3 skills</td><td>Last resort: workplan, wireframe-to-react, video-polish where no proven equivalent exists</td></tr>
+                  <tr><td>High-usage public skills</td><td>Broad adoption, clear task triggers, and source links users can inspect.</td></tr>
+                  <tr><td>Research-backed skills</td><td>SkillsBench entries with Apache 2.0 provenance and benchmark evidence.</td></tr>
+                  <tr><td>Well-scoped workflow skills</td><td>Licensed workflow skills for planning, review, writing, and execution.</td></tr>
+                  <tr><td>Floom-maintained additions</td><td>Small bridge set where no broad, zero-setup open equivalent was available.</td></tr>
                 </tbody>
               </table>
             </div>
-            <p class="doc-note">
-              <strong>From 22 Floom-proprietary to 3.</strong> Earlier packs included more Floom-authored skills. Recent packs narrow proprietary additions as open equivalents appear.
-            </p>
 
             <h3 id="activation-pattern">How activation works (the 100% pattern from Vercel)</h3>
             <p>
@@ -1081,8 +1077,8 @@
               Irrelevant skills widen the option space the model must search. Kitchen-sink installs can force evaluation of hundreds of options per task, increasing latency and errors. Profile tags narrow what lands in activation so the agent sees relevant triggers first; <code>find-skills</code> can reach the rest when needed.
             </p>
 
-            <h3 id="what-floom-adds">What Floom adds to skills.sh skills</h3>
-            <p>Floom does not author most skills in the pack. Floom curates from the open ecosystem (mostly skills.sh) and adds five things on top:</p>
+            <h3 id="what-floom-adds">What Floom adds to upstream skills</h3>
+            <p>Floom does not author most skills in the pack. Floom curates from the open ecosystem and adds five things on top:</p>
             <ol>
               <li>
                 <strong>Activation rules</strong> per skill in <code>AGENTS.md</code> / <code>CLAUDE.md</code> so they fire. Vercel reported this lifts activation from about 53% to 100% in their setup.

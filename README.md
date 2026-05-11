@@ -58,7 +58,7 @@ That installs all 65 curated skills machine-wide into all eligible agents on you
 
 ## Why curated
 
-skills.sh has 91,000+ AI agent skills. Most agents drown in choice or pick wrong. We picked 65 high-signal skills with real usage, clear licenses, broad applicability, and low setup friction. We filtered out narrow cloud-vendor skills, API-key-heavy skills, duplicate prompts, and personal dotfile snippets that do not belong in a general starter pack.
+The public skills ecosystem is already huge. skills.sh alone indexes 91,000+ AI agent skills. Most agents drown in choice or pick wrong. We picked 65 high-signal skills from public catalogs, research-backed sources, and licensed workflow repos with real usage, clear licenses, broad applicability, and low setup friction. We filtered out narrow cloud-vendor skills, API-key-heavy skills, duplicate prompts, and personal dotfile snippets that do not belong in a general starter pack.
 
 **+16.2pp average pass-rate lift** on SkillsBench when agents use curated skills. **-2.9pp** for a kitchen-sink public-index install. Curation matters.
 
