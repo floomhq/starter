@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Floom Starter Pack — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #fafaf7;
+    --ink: #050505;
+    --muted: #4b4b4b;
+    --line: #e5e5e0;
+    --blue: #0094ff;
+    --blue-pale: #eaf7ff;
+    --green: #16a34a;
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1280px;
+    height: 800px;
+    overflow: hidden;
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--ink);
+    background: var(--paper);
+  }
+  body {
+    position: relative;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(0,148,255,0.08), transparent 32rem),
+      radial-gradient(circle at 92% 92%, rgba(0,148,255,0.06), transparent 28rem),
+      var(--paper);
+  }
+
+  .brand {
+    position: absolute;
+    top: 28px;
+    left: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+  }
+  .brand-mark {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .brand-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-left: 2px solid var(--ink);
+    padding-left: 12px;
+    line-height: 1.1;
+  }
+  .brand-url {
+    position: absolute;
+    top: 28px;
+    right: 36px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .brand-url b { color: var(--ink); }
+
+  .subtitle {
+    position: absolute;
+    bottom: 36px;
+    left: 36px;
+    right: 36px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    opacity: 0;
+    z-index: 10;
+  }
+  .subtitle b {
+    color: var(--blue);
+    font-weight: 800;
+  }
+  .subtitle .src {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 14px;
+    margin-left: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .stage {
+    position: absolute;
+    top: 96px;
+    left: 56px;
+    right: 56px;
+    bottom: 92px;
+    display: grid;
+    place-items: center;
+  }
+
+  .window {
+    width: 1080px;
+    background: #ffffff;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    box-shadow: 0 18px 48px rgba(5,5,5,0.10), 0 4px 12px rgba(5,5,5,0.04);
+    overflow: hidden;
+    transform-origin: center center;
+  }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    background: #f6f6f1;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 999px; background: #d8d8d2; }
+  .dot.r { background: #ff5f56; }
+  .dot.y { background: #ffbd2e; }
+  .dot.g { background: #27c93f; }
+  .titlebar .label {
+    margin-left: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  .term {
+    padding: 28px 28px 32px;
+    font-family: var(--mono);
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink);
+    background: #ffffff;
+    min-height: 540px;
+  }
+  .term .line { display: flex; gap: 0; align-items: baseline; white-space: pre; min-height: 28px; }
+  .term .prompt { color: var(--muted); font-weight: 700; }
+  .term .prompt b { color: var(--ink); }
+  .term .cmd { color: var(--ink); font-weight: 700; }
+  .term .out { color: var(--ink); }
+  .term .out.dim { color: var(--muted); }
+  .term .out.blue { color: var(--blue); font-weight: 700; }
+  .term .out.green { color: var(--green); font-weight: 700; }
+  .term .out.bold { font-weight: 800; }
+  .term .check { color: var(--green); font-weight: 800; }
+
+  .caret {
+    display: inline-block;
+    width: 11px;
+    height: 22px;
+    background: var(--ink);
+    margin-left: 2px;
+    vertical-align: -3px;
+  }
+  .caret.hidden { visibility: hidden; }
+
+  .chat {
+    padding: 0;
+    background: #ffffff;
+    min-height: 540px;
+    display: flex;
+    flex-direction: column;
+  }
+  .chat-header {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fafaf7;
+  }
+  .chat-header .agent-name {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .chat-header .agent-badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    border: 1.5px solid var(--blue);
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--blue-pale);
+  }
+  .chat-body {
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+    font-family: var(--mono);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .msg-user { color: var(--ink); font-weight: 700; }
+  .msg-user .arrow { color: var(--blue); margin-right: 10px; font-weight: 800; }
+  .msg-assistant {
+    color: var(--ink);
+    border-left: 3px solid var(--blue);
+    padding-left: 16px;
+    font-weight: 500;
+  }
+  .msg-assistant .activate {
+    display: inline-block;
+    background: var(--blue-pale);
+    color: var(--blue);
+    border: 1.5px solid var(--blue);
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin-right: 6px;
+  }
+  .msg-assistant .skill-tag {
+    color: var(--ink);
+    font-weight: 800;
+    background: #f1f1ec;
+    padding: 1px 8px;
+    border-radius: 4px;
+  }
+  .msg-assistant .dim { color: var(--muted); }
+  .msg-assistant b { color: var(--ink); font-weight: 800; }
+
+  .scene { display: none; }
+  .scene.active { display: block; }
+</style>
+</head>
+<body>
+  <div class="brand">
+    <div class="brand-mark">floom</div>
+    <div class="brand-tag">Starter<br>Pack</div>
+  </div>
+  <div class="brand-url"><b>floom.dev</b></div>
+
+  <div class="stage">
+    <div class="window scene scene-1" id="scene1">
+      <div class="titlebar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">~/my-project</span>
+      </div>
+      <div class="term">
+        <div class="line">
+          <span class="prompt"><b>~/my-project</b> $&nbsp;</span><span class="cmd" id="typed-cmd"></span><span class="caret" id="caret1"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="window scene scene-2" id="scene2">
+      <div class="titlebar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">~/my-project</span>
+      </div>
+      <div class="term" id="installOut">
+        <div class="line"><span class="prompt"><b>~/my-project</b> $&nbsp;</span><span class="cmd">npx @floomhq/starter install</span></div>
+      </div>
+    </div>
+
+    <div class="window scene scene-3" id="scene3">
+      <div class="titlebar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">Claude Code &nbsp;&middot;&nbsp; ~/my-project</span>
+      </div>
+      <div class="chat">
+        <div class="chat-header">
+          <div class="agent-name">Claude Code</div>
+          <div class="agent-badge">Floom Starter active</div>
+        </div>
+        <div class="chat-body" id="chatBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subtitle" id="subtitle">
+    <b>+18.6pp pass-rate lift</b> on real benchmarks <span class="src">SkillsBench, vs unconfigured agent</span>
+  </div>
+
+<script>
+  // FRAME-DRIVEN ANIMATION
+  // Externally call window.__renderAt(t_ms) to set the page state for time t.
+  // No setTimeout / setInterval. Pure function of time.
+  //
+  // Total duration: 13000ms
+  //
+  // Scene 1: 0..3200   typing the install command
+  // Scene 2: 3200..8800  install output streaming
+  // Scene 3: 8800..13000 Claude Code chat + subtitle reveal
+
+  const COMMAND = 'npx @floomhq/starter install';
+  // Per-character key timings in ms (cumulative chosen for natural rhythm)
+  const KEY_DELAYS_MS = (() => {
+    const base = 60;
+    const arr = [];
+    let acc = 200; // initial pause
+    for (let i = 0; i < COMMAND.length; i++) {
+      const ch = COMMAND[i];
+      let d = base + (i % 5) * 6;
+      if (ch === ' ') d += 80;
+      if (ch === '@' || ch === '/') d += 40;
+      acc += d;
+      arr.push(acc);
+    }
+    return arr;
+  })();
+  const TYPE_END_MS = KEY_DELAYS_MS[KEY_DELAYS_MS.length - 1] + 380; // hold after typing
+  // We will compress scene 1 to fit 0..3000ms
+  const SCENE1_START = 0;
+  const SCENE1_END = 3000;
+
+  const SCENE2_START = 3000;
+  const SCENE2_END = 8800;
+
+  const SCENE3_START = 8800;
+  const SCENE3_END = 13000;
+
+  const SKILLS = [
+    'find-skills',
+    'skill-creator',
+    'brainstorming',
+    'grill-me',
+    'systematic-debugging',
+    'writing-plans',
+    'verification-before-completion',
+    'executing-plans',
+    'workplan',
+  ];
+
+  // Scene 2 internal timeline (relative to SCENE2_START). Total budget 5800ms.
+  const S2 = {
+    detect:        220,   // "Detecting agent..." appears
+    detected:      560,   // "Claude Code detected..." appears
+    spacer:        780,
+    header:        920,   // "Floom Starter, installing..."
+    skillsStart:  1180,
+    skillsStep:    280,   // each skill appears
+    spacer2:      1180 + 9*280 + 220,  // = 3920
+    summary:      1180 + 9*280 + 480,  // = 4180
+    hint:         1180 + 9*280 + 760,  // = 4460
+    end:          5800,
+  };
+
+  // Scene 3 internal timeline (relative to SCENE3_START). Total 4200ms.
+  const S3 = {
+    user:          200,
+    activate:      900,
+    work:         1700,
+    result:       2600,
+    subtitle:     3300,
+    end:          4200,
+  };
+
+  const scenes = {
+    s1: document.getElementById('scene1'),
+    s2: document.getElementById('scene2'),
+    s3: document.getElementById('scene3'),
+  };
+  const typedCmd = document.getElementById('typed-cmd');
+  const caret1 = document.getElementById('caret1');
+  const installOut = document.getElementById('installOut');
+  const chatBody = document.getElementById('chatBody');
+  const subtitle = document.getElementById('subtitle');
+
+  function setActive(name) {
+    Object.entries(scenes).forEach(([k, el]) => {
+      if (k === name) el.classList.add('active');
+      else el.classList.remove('active');
+    });
+  }
+
+  // Stable line builder: re-render the install scene from scratch each tick
+  function renderScene2(t) {
+    // t relative to SCENE2_START
+    const lines = [];
+    lines.push(`<div class="line"><span class="prompt"><b>~/my-project</b> $&nbsp;</span><span class="cmd">npx @floomhq/starter install</span></div>`);
+    if (t >= S2.detect) lines.push(`<div class="line"><span class="out dim">Detecting agent...</span></div>`);
+    if (t >= S2.detected) lines.push(`<div class="line"><span class="out"><span class="check">&check;</span> Claude Code detected at <span class="bold">.claude/</span></span></div>`);
+    if (t >= S2.spacer) lines.push(`<div class="line"><span class="out">&nbsp;</span></div>`);
+    if (t >= S2.header) lines.push(`<div class="line"><span class="out blue bold">Floom Starter, installing Core profile...</span></div>`);
+    for (let i = 0; i < SKILLS.length; i++) {
+      const tShow = S2.skillsStart + i * S2.skillsStep;
+      if (t >= tShow) {
+        lines.push(`<div class="line"><span class="out"><span class="check">&check;</span> <span class="bold">${SKILLS[i]}</span></span></div>`);
+      }
+    }
+    if (t >= S2.spacer2) lines.push(`<div class="line"><span class="out">&nbsp;</span></div>`);
+    if (t >= S2.summary) lines.push(`<div class="line"><span class="out green bold">9 skills installed, 0 skipped (your custom versions kept)</span></div>`);
+    if (t >= S2.hint) lines.push(`<div class="line"><span class="out dim">Use <span class="bold" style="color:var(--ink);">find-skills</span> first when you are not sure which skill applies.</span></div>`);
+    installOut.innerHTML = lines.join('');
+  }
+
+  function renderScene3(t) {
+    const blocks = [];
+    if (t >= S3.user) {
+      blocks.push(`<div class="msg-user"><span class="arrow">&gt;</span>review my pull request</div>`);
+    }
+    if (t >= S3.activate) {
+      blocks.push(`<div class="msg-assistant"><span class="activate">SKILL</span>Activating <span class="skill-tag">pr-review</span> from Floom Starter Pack...</div>`);
+    }
+    if (t >= S3.work) {
+      blocks.push(`<div class="msg-assistant">Reading PR diff... <span class="dim">checking for code quality issues, security risks, and missing tests.</span></div>`);
+    }
+    if (t >= S3.result) {
+      blocks.push(`<div class="msg-assistant"><b>3 issues</b> flagged: <span class="dim">missing input validation, unbounded loop, no test for the new branch.</span></div>`);
+    }
+    chatBody.innerHTML = blocks.join('');
+
+    if (t >= S3.subtitle) {
+      subtitle.style.opacity = '1';
+    } else {
+      subtitle.style.opacity = '0';
+    }
+  }
+
+  function renderTypedCmd(t) {
+    // Compute how many chars are visible at time t (within SCENE1)
+    let visible = 0;
+    for (let i = 0; i < KEY_DELAYS_MS.length; i++) {
+      if (t >= KEY_DELAYS_MS[i]) visible = i + 1;
+    }
+    typedCmd.textContent = COMMAND.slice(0, visible);
+    // Caret blink: 500ms cycle, hidden during second half
+    const cycle = Math.floor(t / 500);
+    caret1.classList.toggle('hidden', cycle % 2 === 1);
+    // Hide caret entirely once typing is done + small hold
+    if (t >= TYPE_END_MS) {
+      caret1.style.display = 'none';
+    } else {
+      caret1.style.display = '';
+    }
+  }
+
+  window.__renderAt = function(globalMs) {
+    if (globalMs < SCENE2_START) {
+      setActive('s1');
+      renderTypedCmd(globalMs);
+    } else if (globalMs < SCENE3_START) {
+      setActive('s2');
+      renderScene2(globalMs - SCENE2_START);
+      // reset scene 3 state
+      chatBody.innerHTML = '';
+      subtitle.style.opacity = '0';
+    } else {
+      setActive('s3');
+      renderScene3(globalMs - SCENE3_START);
+    }
+  };
+
+  // Initial render at t=0
+  window.__renderAt(0);
+  window.__demoReady = true;
+</script>
+</body>
+</html>

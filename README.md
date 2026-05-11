@@ -6,6 +6,8 @@
 
 Works with Claude Code, Codex, Cursor, Kimi, OpenCode.
 
+<img src="site/demo.gif" alt="Floom Starter Pack install demo" width="640" />
+
 [![npm version](https://img.shields.io/npm/v/@floomhq/starter?color=0094ff&style=flat-square)](https://www.npmjs.com/package/@floomhq/starter)
 [![npm downloads](https://img.shields.io/npm/dm/@floomhq/starter?color=0094ff&style=flat-square)](https://www.npmjs.com/package/@floomhq/starter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0094ff.svg?style=flat-square)](https://opensource.org/licenses/MIT)
