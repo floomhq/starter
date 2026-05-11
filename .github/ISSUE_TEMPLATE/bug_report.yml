@@ -1,0 +1,42 @@
+name: Bug report
+description: Something broke. Help us reproduce and fix.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: input
+    id: agent
+    attributes:
+      label: Which agent?
+      description: Claude Code, Codex, Cursor, Kimi, OpenCode
+      placeholder: e.g., Claude Code 2.0.5 on macOS 14.5
+    validations:
+      required: true
+  - type: input
+    id: cli-version
+    attributes:
+      label: Floom Starter version
+      description: Output of `npx @floomhq/starter --version`
+      placeholder: 0.2.4
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: install-log
+    attributes:
+      label: Install log
+      description: Output of `npx @floomhq/starter install` (paste full output, redact any private paths)
+      render: shell
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      placeholder: |
+        OS: macOS 14.5
+        Node: v20.10.0
+        Shell: zsh

@@ -85,10 +85,9 @@ Removes the skill directories and the activation block from your agent's config.
 
 ```
 floomhq/starter (this repo)
-├── packs/floom-starter/
-│   ├── manifest.json           slim index (65 skills + 11 profiles)
-│   └── skills/<slug>.json      full per-skill data (SKILL.md content, files, source)
-└── starter-cli/
+├── manifest.json           slim index (65 skills + 11 profiles)
+├── skills/<slug>.json      full per-skill data (SKILL.md content, files, source)
+└── cli/
     └── @floomhq/starter (npm)  the CLI users install
 ```
 
