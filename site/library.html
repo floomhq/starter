@@ -90,7 +90,8 @@ body {
 }
 
 .nav {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 80;
   background: var(--paper);
   display: flex;
@@ -111,8 +112,8 @@ body {
   min-width: 0;
   flex-shrink: 1;
 }
-.wordmark { display: grid; grid-template-columns: 24px auto; grid-template-areas: "mark name" ". meta"; column-gap: 8px; row-gap: 2px; align-items: center; color: inherit; text-decoration: none; }
-.wordmark::before { content: ""; grid-area: mark; width: 24px; height: 24px; background: var(--ink); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat; }
+.wordmark { display: grid; grid-template-columns: 28px auto; grid-template-areas: "mark name" "meta meta"; column-gap: 4px; row-gap: 2px; align-items: center; color: inherit; text-decoration: none; }
+.wordmark::before { content: ""; grid-area: mark; width: 28px; height: 28px; background: var(--ink); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat; }
 .wordmark strong { grid-area: name; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
 .wordmark span { grid-area: meta; color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
 .nav-links {
@@ -154,7 +155,7 @@ body {
   flex: 1;
   min-height: calc(100vh + 900px);
   align-items: start;
-  --library-sticky-top: 0px;
+  --library-sticky-top: 72px;
   --library-chrome-height: 102px;
 }
 
@@ -166,7 +167,7 @@ body {
   border-right: var(--line);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .panel-left-header {
@@ -195,6 +196,7 @@ body {
   flex: 1;
   overflow-y: auto;
   padding: 6px 0;
+  min-height: 0;
 }
 
 .cat-item {
@@ -331,6 +333,41 @@ body {
   flex-wrap: wrap;
   min-height: 66px;
 }
+.toolbar-spacer { flex: 1 1 auto; min-width: 12px; }
+
+.quick-cmd {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #d8d7d2;
+  border-radius: 10px;
+  background: #fff;
+  min-height: 36px;
+  min-width: 280px;
+  max-width: 480px;
+  overflow: hidden;
+}
+.quick-cmd-text {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #4f4f4f;
+  padding: 0 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.quick-cmd-copy {
+  border: 0;
+  border-left: 1px solid #e4e3df;
+  background: #fff;
+  color: var(--ink);
+  font: 800 10px/1 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  height: 100%;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.quick-cmd-copy:hover { background: #f5f5f2; }
 
 .search-wrap {
   position: relative;
@@ -1049,6 +1086,8 @@ body {
   .panel-left { position: static; height: auto; border-right: none; border-bottom: var(--line); max-height: 420px; overflow-y: auto; }
   .toolbar, .results-bar { top: 0; }
   .toolbar { padding: 12px 16px; }
+  .toolbar-spacer { display: none; }
+  .quick-cmd { order: 10; min-width: 100%; max-width: none; }
   .results-bar { padding: 10px 16px; }
   .grid-view { grid-template-columns: 1fr; padding: 16px; }
   .list-view { padding: 0 16px; }
@@ -1128,6 +1167,11 @@ body {
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="0" y="1" width="12" height="2" rx="1" fill="currentColor"/><rect x="0" y="5" width="12" height="2" rx="1" fill="currentColor"/><rect x="0" y="9" width="12" height="2" rx="1" fill="currentColor"/></svg>
             List
           </button>
+        </div>
+        <div class="toolbar-spacer" aria-hidden="true"></div>
+        <div class="quick-cmd" id="quickCmd" aria-live="polite">
+          <div class="quick-cmd-text" id="quickCmdText">npx @floomhq/starter install --global</div>
+          <button class="quick-cmd-copy" id="quickCmdCopy" type="button" onclick="copyQuickCmd()">Copy</button>
         </div>
         <button class="select-btn" id="selectBtn" onclick="toggleSelectMode()">Select</button>
         <button class="install-btn toolbar-install" id="installToolbarBtn" type="button" onclick="copyInstall(this, 'npx @floomhq/starter install --global')" aria-label="Copy install command">
@@ -2493,6 +2537,7 @@ function toggleSelectMode() {
   if (!selectMode) { selectedSkills.clear(); document.getElementById('cmdBar').classList.remove('visible'); }
   document.body.classList.toggle('select-mode', selectMode);
   updateSelectUI();
+  updateQuickCmd();
   render();
 }
 function cancelSelectMode() {
@@ -2501,17 +2546,20 @@ function cancelSelectMode() {
   document.getElementById('selectStatus').classList.remove('visible');
   document.getElementById('cmdBar').classList.remove('visible');
   document.body.classList.remove('select-mode');
+  updateQuickCmd();
   render();
 }
 function toggleSelect(slug) {
   if (selectedSkills.has(slug)) selectedSkills.delete(slug); else selectedSkills.add(slug);
   updateSelectUI();
+  updateQuickCmd();
   document.querySelectorAll(`[data-name="${slug}"]`).forEach(el => el.classList.toggle('selected', selectedSkills.has(slug)));
   updateCmdBar();
 }
 function selectAllVisible() {
   filterAndSort().forEach(s => selectedSkills.add(s.slug));
   updateSelectUI();
+  updateQuickCmd();
   render();
   updateCmdBar();
 }
@@ -2532,6 +2580,23 @@ function updateCmdBar() {
     : selectedSkills.size + ' skill' + (selectedSkills.size === 1 ? '' : 's') + ' selected - install command:';
 }
 function showGeneratedCmd() { updateCmdBar(); }
+function getInstallCommand() {
+  if (!selectMode || !selectedSkills.size) return 'npx ' + STARTER_VERSION + ' install --global';
+  const selected = Array.from(selectedSkills);
+  const allSelected = selected.length === ALL_SKILLS.length && ALL_SKILLS.every(s => selectedSkills.has(s.slug));
+  return allSelected
+    ? 'npx ' + STARTER_VERSION + ' install --global'
+    : 'npx ' + STARTER_VERSION + ' install --global --skills ' + selected.join(',');
+}
+function updateQuickCmd() {
+  document.getElementById('quickCmdText').textContent = getInstallCommand();
+}
+function copyQuickCmd() {
+  const b = document.getElementById('quickCmdCopy');
+  copyText(getInstallCommand());
+  b.textContent = 'Copied';
+  setTimeout(() => { b.textContent = 'Copy'; }, 1800);
+}
 function copyText(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
@@ -2751,19 +2816,22 @@ function setSort(order) {
   closeSortMenu();
   visibleCount = 25;
   render();
+  updateQuickCmd();
 }
 function applyFilters() {
   searchQuery = document.getElementById('searchInput').value;
   visibleCount = 25;
   render();
+  updateQuickCmd();
 }
-function showMore() { visibleCount += 25; render(); }
+function showMore() { visibleCount += 25; render(); updateQuickCmd(); }
 
 document.addEventListener('click', e => {
   if (!document.getElementById('sortMenu').contains(e.target)) closeSortMenu();
 });
 
 loadManifest();
+updateQuickCmd();
 </script>
 </body>
 </html>

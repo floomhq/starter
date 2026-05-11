@@ -109,3 +109,19 @@ jobs:
             exit 1
           fi
           echo "OK: $COUNT skill files written"
+
+  deploy-site:
+    runs-on: ubuntu-latest
+    needs: [validate-manifest, validate-skill-jsons, cli-smoke]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Trigger Vercel deployment
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          set -eo pipefail
+          if [ -z "$VERCEL_DEPLOY_HOOK" ]; then
+            echo "::error::VERCEL_DEPLOY_HOOK secret is not configured"
+            exit 1
+          fi
+          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK"

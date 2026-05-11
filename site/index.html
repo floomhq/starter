@@ -116,11 +116,11 @@
 
       .wordmark {
         display: grid;
-        grid-template-columns: 24px auto;
+        grid-template-columns: 28px auto;
         grid-template-areas:
           "mark name"
-          ". meta";
-        column-gap: 8px;
+          "meta meta";
+        column-gap: 4px;
         row-gap: 2px;
         align-items: center;
         color: inherit;
@@ -130,8 +130,8 @@
       .wordmark::before {
         content: "";
         grid-area: mark;
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: 28px;
         background: var(--ink);
         -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
         mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
@@ -392,6 +392,40 @@
         align-items: flex-start;
         gap: 10px;
         padding-top: 8px;
+      }
+
+      .hero-action-row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .secondary-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 60px;
+        padding: 0 24px;
+        border: 2px solid var(--ink);
+        border-radius: 18px;
+        background: #fff;
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: background 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+      }
+
+      .secondary-cta:hover,
+      .secondary-cta:focus-visible {
+        background: var(--ink);
+        color: #fff;
+        box-shadow: 0 8px 22px rgba(5,5,5,0.18);
+        outline: none;
+        transform: translateY(-1px);
       }
 
       /* SkillsBench chart panel (Adam's hero visual) */
@@ -1498,10 +1532,13 @@
             One command installs 65 curated skills. Better coding, writing, research, and every task you throw at your agent.
           </p>
           <div class="actions">
-            <div class="install-cta-wrap">
-<button class="install-cta button" type="button" data-copy="npx @floomhq/starter install --global" aria-label="Copy and send to your agent: copies the install command to clipboard">
-                <span class="install-cta-label">Copy and send to your agent</span><span class="install-cta-icon-box"><svg class="install-cta-icon" width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="8" height="9" rx="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h7"/></svg></span>
-              </button>
+            <div class="hero-action-row">
+              <div class="install-cta-wrap">
+                <button class="install-cta button" type="button" data-copy="npx @floomhq/starter install --global" aria-label="Copy and send to your agent: copies the install command to clipboard">
+                  <span class="install-cta-label">Copy and send to your agent</span><span class="install-cta-icon-box"><svg class="install-cta-icon" width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="8" height="9" rx="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h7"/></svg></span>
+                </button>
+              </div>
+              <a class="secondary-cta" href="library.html">See all skills</a>
             </div>
             <p class="copy-help">Runs in your terminal. Works with Claude, Codex, Cursor, OpenCode, and more.</p>
             <p class="hero-trust">
