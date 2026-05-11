@@ -34,7 +34,7 @@
   --brand-kimi:     var(--ink);
 
   /* Lines */
-  --line:           2px solid var(--ink);
+  --line:           1px solid var(--ink);
   --line-light:     1px solid var(--muted-rule);
   --line-soft:      1px solid rgba(5, 5, 5, 0.12);
   --line-faint:     1px solid rgba(5, 5, 5, 0.06);
@@ -141,13 +141,17 @@ h1, h2, h3, p { margin: 0; }
 }
 
 .wordmark::before {
-  content: "";
+  content: "▰";
   grid-area: mark;
   width: 28px;
   height: 28px;
-  background: var(--ink);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
+  color: var(--ink);
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wordmark strong {

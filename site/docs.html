@@ -61,7 +61,7 @@
         --blue-pale: #eaf7ff;
         --link: #b8299a;
         --cloud-pink: #ff4fd8;
-        --line: 2px solid var(--ink);
+        --line: 1px solid var(--ink);
         --line-hair: 1px solid #e0dfdb;
         --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
@@ -106,7 +106,7 @@
       }
 
       .wordmark { display: grid; grid-template-columns: 28px auto; grid-template-areas: "mark name" "meta meta"; column-gap: 4px; row-gap: 2px; align-items: center; color: inherit; text-decoration: none; }
-.wordmark::before { content: ""; grid-area: mark; width: 28px; height: 28px; background: var(--ink); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat; }
+.wordmark::before { content: "▰"; grid-area: mark; width: 28px; height: 28px; color: var(--ink); font-size: 30px; font-weight: 900; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
       .wordmark strong { grid-area: name; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
       .wordmark span { grid-area: meta; color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
 
