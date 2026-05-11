@@ -14,7 +14,7 @@
     <meta property="og:title" content="Floom Starter Pack — 65 curated AI agent skills" />
     <meta property="og:description" content="One install. Auto-activates. +16.2pp pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
     <meta property="og:url" content="https://floom.dev/" />
-    <meta property="og:image" content="https://floom.dev/og-image-v3.png" />
+    <meta property="og:image" content="https://floom.dev/og-image-v4.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
@@ -23,7 +23,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Floom Starter Pack — 65 curated AI agent skills" />
     <meta name="twitter:description" content="One install. Auto-activates. +16.2pp pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
-    <meta name="twitter:image" content="https://floom.dev/og-image-v3.png" />
+    <meta name="twitter:image" content="https://floom.dev/og-image-v4.png" />
     <meta name="twitter:creator" content="@floomhq" />
     <meta name="twitter:site" content="@floomhq" />
 
@@ -1352,12 +1352,7 @@
       /* Install CTA + tooltip */
       .install-cta-wrap { position: relative; display: inline-block; }
 
-      @keyframes cta-glow-pulse {
-        0%, 100% { box-shadow: 0 0 14px rgba(255, 79, 216, 0.25); }
-        50%       { box-shadow: 0 0 30px rgba(255, 79, 216, 0.55), 0 0 54px rgba(255, 79, 216, 0.18); }
-      }
-
-.install-cta {
+      .install-cta {
         display: inline-flex;
         align-items: center;
         border: 2px solid transparent;
@@ -1372,13 +1367,11 @@
         transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         gap: 16px;
-        animation: cta-glow-pulse 2.6s ease-in-out infinite;
       }
 
       .install-cta:hover,
       .install-cta:focus-visible {
-        animation-play-state: paused;
-        box-shadow: 0 0 30px rgba(255, 79, 216, 0.55), 0 8px 22px rgba(5,5,5,0.2);
+        box-shadow: 0 8px 22px rgba(5,5,5,0.2);
         transform: translateY(-1px);
         outline: none;
       }
