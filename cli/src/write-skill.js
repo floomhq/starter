@@ -16,14 +16,59 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // SKILL.md file happens to exist on disk it will be used. Otherwise the loader
 // falls through to data/bundled-skills.json which is the canonical source.
 const BUNDLED_SKILLS_DIR = path.resolve(__dirname, "..", "..", "skills");
+const SAFE_SKILL_SLUG = /^[a-z0-9][a-z0-9-]{0,99}$/;
+
+export function assertSafeSkillSlug(slug) {
+  if (typeof slug !== "string" || !SAFE_SKILL_SLUG.test(slug)) {
+    throw new Error(`Unsafe skill slug: ${slug}`);
+  }
+}
+
+function safeJoinInside(root, ...parts) {
+  const dest = path.resolve(root, ...parts);
+  const base = path.resolve(root);
+  if (dest !== base && !dest.startsWith(base + path.sep)) {
+    throw new Error(`Refusing to write outside skill root: ${dest}`);
+  }
+  return dest;
+}
+
+export function prepareSafeWriteTarget(root, dest, label = "file") {
+  const basePath = path.resolve(root);
+  const destPath = path.resolve(dest);
+  if (destPath !== basePath && !destPath.startsWith(basePath + path.sep)) {
+    throw new Error(`Refusing to write outside ${label} root: ${destPath}`);
+  }
+
+  fs.mkdirSync(basePath, { recursive: true });
+  if (fs.lstatSync(basePath).isSymbolicLink()) {
+    throw new Error(`Refusing to write through symlinked ${label} root: ${basePath}`);
+  }
+
+  const dir = path.dirname(destPath);
+  fs.mkdirSync(dir, { recursive: true });
+  if (fs.lstatSync(dir).isSymbolicLink()) {
+    throw new Error(`Refusing to write through symlinked ${label} path: ${destPath}`);
+  }
+
+  const base = fs.realpathSync(basePath);
+  const realDir = fs.realpathSync(dir);
+  if (realDir !== base && !realDir.startsWith(base + path.sep)) {
+    throw new Error(`Refusing to write through symlinked ${label} path: ${destPath}`);
+  }
+  if (fs.existsSync(destPath) && fs.lstatSync(destPath).isSymbolicLink()) {
+    throw new Error(`Refusing to write through symlinked ${label} file: ${destPath}`);
+  }
+}
 
 /**
  * Load the SKILL.md content for a given slug.
  * Priority: bundled source tree > embedded data in this package.
  */
 export function loadSkillContent(slug) {
+  assertSafeSkillSlug(slug);
   // Try source tree first (packs repo development mode)
-  const sourceFile = path.join(BUNDLED_SKILLS_DIR, slug, "SKILL.md");
+  const sourceFile = safeJoinInside(BUNDLED_SKILLS_DIR, slug, "SKILL.md");
   if (fs.existsSync(sourceFile)) {
     return fs.readFileSync(sourceFile, "utf8");
   }
@@ -99,8 +144,10 @@ function hashContent(str) {
  *   - File present, diff hash  → keep user file, action: "kept", warn: true
  */
 export function writeSkill(agent, slug, content, force = false) {
+  assertSafeSkillSlug(slug);
   if (agent.id === "cursor") {
-    const dest = path.join(agent.skillsDir, `${slug}.mdc`);
+    const dest = safeJoinInside(agent.skillsDir, `${slug}.mdc`);
+    prepareSafeWriteTarget(agent.skillsDir, dest, "skill");
     if (fs.existsSync(dest) && !force) {
       const existing = fs.readFileSync(dest, "utf8");
       const incomingMdc = convertToCursorMdc(slug, content);
@@ -109,14 +156,14 @@ export function writeSkill(agent, slug, content, force = false) {
       }
       return { path: dest, action: "kept", warn: true };
     }
-    fs.mkdirSync(agent.skillsDir, { recursive: true });
     const mdcContent = convertToCursorMdc(slug, content);
     fs.writeFileSync(dest, mdcContent, "utf8");
     return { path: dest, action: "written" };
   }
 
   // All others: write <skillsDir>/<slug>/SKILL.md
-  const dest = path.join(agent.skillsDir, slug, "SKILL.md");
+  const dest = safeJoinInside(agent.skillsDir, slug, "SKILL.md");
+  prepareSafeWriteTarget(agent.skillsDir, dest, "skill");
   if (fs.existsSync(dest) && !force) {
     const existing = fs.readFileSync(dest, "utf8");
     if (hashContent(existing) === hashContent(content)) {
@@ -124,7 +171,6 @@ export function writeSkill(agent, slug, content, force = false) {
     }
     return { path: dest, action: "kept", warn: true };
   }
-  fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, content, "utf8");
   return { path: dest, action: "written" };
 }

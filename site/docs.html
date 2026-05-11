@@ -89,6 +89,11 @@
       main.docs-page { background: transparent; }
 
       .nav {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: rgba(250, 250, 247, 0.94);
+        backdrop-filter: blur(12px);
         display: flex;
         align-items: flex-start;
         flex-wrap: wrap;
@@ -150,11 +155,13 @@
         gap: 0 2.5rem;
         margin-top: 0;
         align-items: start;
+        min-width: 0;
       }
 
       main.docs-page .docs-nav-rail {
         position: relative;
         align-self: stretch;
+        min-width: 0;
       }
 
       main.docs-page .docs-sidebar {
@@ -172,6 +179,7 @@
         box-shadow: none;
         padding: 12px 20px 20px 0;
         margin: 0;
+        min-width: 0;
       }
 
       main.docs-page .docs-sidebar a {
@@ -214,6 +222,8 @@
         gap: 0;
         padding-bottom: 80px;
         display: grid;
+        min-width: 0;
+        max-width: 100%;
       }
 
       main.docs-page .doc-body h2 {
@@ -244,6 +254,8 @@
         margin: 0;
         border-bottom: var(--line-hair);
         scroll-margin-top: 1.25rem;
+        min-width: 0;
+        max-width: 100%;
       }
       main.docs-page .doc-section:last-child { border-bottom: none; }
 
@@ -482,6 +494,10 @@
         }
         main.docs-page .docs-nav-rail {
           order: -1;
+          position: static;
+          max-height: none;
+          overflow: visible;
+          width: 100%;
         }
         main.docs-page .docs-sidebar {
           position: static;
@@ -492,7 +508,20 @@
           border-bottom: var(--line-hair);
           padding: 0 0 16px 0;
           margin-bottom: 0;
+          width: 100%;
+          max-width: 100%;
         }
+        main.docs-page .docs-sidebar a,
+        .doc-toc .toc-heading,
+        .doc-toc .toc-sub,
+        main.docs-page .doc-body,
+        main.docs-page .doc-section {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+        }
+        main.docs-page .code-block,
+        main.docs-page .table-wrap { max-width: 100%; overflow-x: auto; }
         .page { padding: 30px 22px 52px; }
         .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; }
         .wordmark span { font-size: 9px; letter-spacing: 0.12em; }
@@ -633,12 +662,8 @@
                     <td>Activation rules. When to invoke each skill, using the AGENTS.md pattern Vercel found can reach a 100% invocation rate versus skills being skipped by default.</td>
                   </tr>
                   <tr>
-                    <td><code>.floom/skills.json</code></td>
-                    <td>Skill manifest. The full list of installed skills, their sources, install counts, and profile tags. Used by the <code>find-skills</code> meta-skill for discovery without loading every skill file into context.</td>
-                  </tr>
-                  <tr>
-                    <td><code>.floom/starter.lock</code></td>
-                    <td>Lock file. Pack version and install date. Used by <code>npx @floomhq/starter update</code> to pull only changed skills.</td>
+                    <td><code>.floom/manifest.json</code></td>
+                    <td>Local install manifest. Tracks installed skill slugs, pack version, install time, and target paths for <code>list</code>, <code>update</code>, and <code>remove</code>.</td>
                   </tr>
                 </tbody>
               </table>
@@ -647,7 +672,7 @@
               No executables. Nothing is added to your PATH, no daemons start, and no network connections stay open after install. The pack is static config and skill text.
             </p>
             <p class="doc-note">
-              Total size on disk: approximately 120 KB for the full 65-skill pack. Individual skill files average about 1.2 KB.
+              Verified full-pack size on disk: about 924 KB for one agent plus a 32 KB local manifest.
             </p>
           </article>
 
@@ -678,8 +703,8 @@
                   </tr>
                   <tr>
                     <td>Cursor</td>
-                    <td><code>.cursorrules</code> (project)</td>
-                    <td><code>.cursor/skills/</code></td>
+                    <td><code>.cursor/rules/floom-skills.mdc</code></td>
+                    <td><code>.cursor/rules/&lt;slug&gt;.mdc</code></td>
                   </tr>
                   <tr>
                     <td>OpenCode</td>
@@ -700,8 +725,7 @@
           <article id="updating" class="doc-section">
             <h2>Updating</h2>
             <p>
-              The skill manifest is updated daily as new skills are published to
-              <a href="https://skills.sh/" style="color: var(--blue)">skills.sh</a>. To pull the latest version:
+              The package updates only when you ask it to. To pull the latest manifest and skill content:
             </p>
             <div class="code-block">
               <header>
@@ -711,7 +735,7 @@
               <pre><code>npx @floomhq/starter update</code></pre>
             </div>
             <p>
-              This reads your existing <code>.floom/starter.lock</code>, fetches the latest manifest, and writes only files that changed. Existing activation rules in <code>AGENTS.md</code> or <code>CLAUDE.md</code> are preserved.
+              This reads your existing <code>.floom/manifest.json</code>, checks the latest manifest, and rewrites only skills whose upstream content is newer. Existing user-modified skill files are preserved unless you pass <code>--force</code>.
             </p>
             <div class="code-block">
               <header>
@@ -748,30 +772,30 @@
             <p>
               Deletes the <code>.floom/</code> directory and removes the Floom activation block from <code>AGENTS.md</code> / <code>CLAUDE.md</code>. Will not remove unrelated files.
             </p>
-            <p>Remove specific skills, an entire profile, or one agent only:</p>
+            <p>Remove specific skills, an entire profile, or one agent only with <code>remove</code>:</p>
             <div class="code-block">
               <header>
                 <span>Terminal</span>
-                <button type="button" class="copy-command" data-copy="npx @floomhq/starter uninstall --skills pr-review,brand-voice">Copy</button>
+                <button type="button" class="copy-command" data-copy="npx @floomhq/starter remove --skills find-skills,brainstorming">Copy</button>
               </header>
-              <pre><code>npx @floomhq/starter uninstall --skills pr-review,brand-voice</code></pre>
+              <pre><code>npx @floomhq/starter remove --skills find-skills,brainstorming</code></pre>
             </div>
             <div class="code-block">
               <header>
                 <span>Terminal</span>
-                <button type="button" class="copy-command" data-copy="npx @floomhq/starter uninstall --profiles dev">Copy</button>
+                <button type="button" class="copy-command" data-copy="npx @floomhq/starter remove --profiles dev">Copy</button>
               </header>
-              <pre><code>npx @floomhq/starter uninstall --profiles dev</code></pre>
+              <pre><code>npx @floomhq/starter remove --profiles dev</code></pre>
             </div>
             <div class="code-block">
               <header>
                 <span>Terminal</span>
-                <button type="button" class="copy-command" data-copy="npx @floomhq/starter uninstall --harness claude">Copy</button>
+                <button type="button" class="copy-command" data-copy="npx @floomhq/starter remove --all --harness claude">Copy</button>
               </header>
-              <pre><code>npx @floomhq/starter uninstall --harness claude</code></pre>
+              <pre><code>npx @floomhq/starter remove --all --harness claude</code></pre>
             </div>
             <p>
-              Use <code>--global</code> with any install/uninstall command to write/remove the pack at the user level (<code>~/.claude/</code>, <code>~/.codex/</code>) instead of the current project.
+              Use <code>--global</code> with any install, update, remove, or uninstall command to write/remove the pack at the user level (<code>~/.claude/</code>, <code>~/.codex/</code>) instead of the current project.
             </p>
           </article>
 
@@ -784,7 +808,7 @@
               <li>The installer downloads skill files from GitHub. After install, there are no ongoing network calls by default.</li>
               <li>Skill files are static text. They contain no code that executes automatically.</li>
               <li>
-                The find-skills meta-skill (Vercel Labs, part of the pack) may call <code>skills.sh</code> when your agent invokes it. That is on demand, not automatic.
+                The find-skills meta-skill searches the local Floom-installed manifest and skill files. It does not call external registries unless you explicitly ask the agent to broaden discovery.
               </li>
             </ul>
           </article>
@@ -858,7 +882,7 @@
               <li>If <code>--harness</code> is provided, use the requested agents.</li>
               <li>Otherwise, detect local agent config directories: <code>~/.claude</code>, <code>~/.codex</code> (or <code>CODEX_HOME</code>), <code>~/.cursor</code>, <code>~/.config/opencode</code>, <code>~/.kimi</code>.</li>
               <li>If any are found, install only to detected agents.</li>
-              <li>If none are found, ask for explicit <code>--harness</code>.</li>
+              <li>If none are found and the current directory looks like a project, install Claude Code by default after confirmation or with <code>--yes</code>.</li>
             </ol>
             <p>
               Use <code>--skills &lt;list&gt;</code> to install a specific subset, <code>--all</code> to install every skill in every profile, and <code>--global</code> to write to user-level paths (<code>~/.claude/</code> etc.) instead of the current project.
@@ -866,7 +890,7 @@
 
             <h3 id="files-written-arch">Files written</h3>
             <p>
-              Each target receives skill folders in its native root, a harness instruction file, and a shared local index at <code>~/.floom/packs/starter-index.json</code>.
+              Each target receives skill files in its native root, a harness instruction file, and the shared local install manifest at <code>.floom/manifest.json</code> or <code>~/.floom/manifest.json</code> when <code>--global</code> is used.
             </p>
             <div class="table-wrap" role="region" aria-label="Files written per agent">
               <table>
@@ -880,7 +904,7 @@
                 <tbody>
                   <tr><td>Claude Code</td><td><code>~/.claude/skills</code></td><td><code>~/.claude/CLAUDE.md</code></td></tr>
                   <tr><td>Codex CLI</td><td><code>~/.codex/skills</code></td><td><code>~/.codex/AGENTS.md</code></td></tr>
-                  <tr><td>Cursor</td><td><code>~/.cursor/skills-cursor</code></td><td><code>~/.cursor/rules/floom-packs.mdc</code></td></tr>
+                  <tr><td>Cursor</td><td><code>~/.cursor/rules/&lt;slug&gt;.mdc</code></td><td><code>~/.cursor/rules/floom-skills.mdc</code></td></tr>
                   <tr><td>OpenCode</td><td><code>~/.config/opencode/skills</code></td><td><code>~/.config/opencode/AGENTS.md</code></td></tr>
                   <tr><td>Kimi</td><td><code>~/.kimi/skills</code></td><td><code>~/.kimi/agents/floom-system.md</code></td></tr>
                 </tbody>
@@ -888,19 +912,19 @@
             </div>
 
             <h3 id="conflict-protection">Conflict protection</h3>
-            <p>Every installed skill gets a provenance file. Managed pack skills can be replaced by later installs; untracked user-created folders are protected by default.</p>
+            <p>Collision protection is content-based. If a target skill file already exists and differs from the bundled version, Floom keeps the user's file unless <code>--force</code> is passed.</p>
             <ol>
-              <li>Plan a skill write. If the destination does not exist, copy the skill folder.</li>
-              <li>If it does exist, check for a <code>.floom-pack.json</code> from <code>@floomhq/starter</code>.</li>
-              <li>If the provenance file exists, replace the managed copy.</li>
-              <li>If it does not, refuse to overwrite unless <code>--force</code> is passed.</li>
+              <li>Plan a skill write. If the destination does not exist, write the file.</li>
+              <li>If it exists and the content hash matches, skip it as already current.</li>
+              <li>If it exists and the content differs, keep the local file and print a warning.</li>
+              <li>If <code>--force</code> is passed, replace the target file explicitly.</li>
             </ol>
 
             <h3 id="skill-discovery">Skill discovery</h3>
             <p>
-              No MCP is required in V0. The discovery loop is local: injected instructions point the agent at the starter index and the <code>find-skills</code> meta-skill.
+              No MCP is required in V0. The discovery loop is local: injected instructions point the agent at the local activation list, <code>.floom/manifest.json</code>, and the <code>find-skills</code> meta-skill.
             </p>
-            <p>The agent reads the injected instructions, searches the local <code>starter-index.json</code> via <code>find-skills</code>, picks the matching SKILL.md files, and uses them for task execution.</p>
+            <p>The agent reads the injected instructions, uses those trigger descriptions and the <code>find-skills</code> meta-skill, then loads the matching local <code>SKILL.md</code> or Cursor <code>.mdc</code> file on demand.</p>
             <p class="doc-note">
               MCP can augment search for larger libraries later. It is not a launch dependency for Floom Packs V0.
             </p>
@@ -913,10 +937,10 @@
                   <tr><th scope="col">Entity</th><th scope="col">Fields</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>PackManifest</td><td>id, name, version, defaultProfiles, targets</td></tr>
+                  <tr><td>PackManifest</td><td>pack, version, updated, defaultProfiles, profiles, skills</td></tr>
                   <tr><td>Profile</td><td>id, name, description, skills[]</td></tr>
-                  <tr><td>Skill</td><td>slug, name, source, upstream</td></tr>
-                  <tr><td>Source</td><td>label, repo, commit, license, status</td></tr>
+                  <tr><td>Skill</td><td>slug, name, publisher, description, profiles, detail_url, license</td></tr>
+                  <tr><td>Detail</td><td>skill_md_content, source_repo, skill_md_url, files, fetched_at</td></tr>
                 </tbody>
               </table>
             </div>
@@ -927,7 +951,7 @@
               <li>Manifest references existing skill folders.</li>
               <li>Every bundled skill has frontmatter and description.</li>
               <li>Dry-run writes nothing.</li>
-              <li>Temp-root install writes skills, index, provenance, and instructions.</li>
+              <li>Temp-root install writes skills, manifest, and instructions.</li>
               <li>Target autodetection works.</li>
               <li>Missing detected targets produces a clear error.</li>
               <li><code>--harness claude,codex,cursor,opencode,kimi</code> writes all five launch targets.</li>
@@ -993,7 +1017,7 @@
                 <strong>Installer writes activation:</strong> each skill gets one or two trigger sentences, for example: when the user mentions test failures, invoke <code>systematic-debugging</code>.
               </li>
               <li>
-                <strong>Compact manifest:</strong> <code>.floom/skills.json</code> holds name, source, profile tags. Agents do not load every full skill file until invoked.
+                <strong>Compact manifest:</strong> <code>.floom/manifest.json</code> holds installed skill names, versions, and target paths. Agents do not load every full skill file until invoked.
               </li>
               <li>
                 <strong>find-skills (Vercel Labs):</strong> when no installed trigger matches, the agent can search without loading every skill into context.
@@ -1035,7 +1059,7 @@
               </li>
               <li><strong>Cross-agent format translation:</strong> same skill, native install paths for five agents.</li>
               <li><strong>License vetting:</strong> exclude API-key and ambiguous-license skills.</li>
-              <li><strong>Daily refresh</strong> and version tracking from upstream sources.</li>
+              <li><strong>Manual update</strong> and version tracking from upstream sources.</li>
               <li><strong>Curated portfolio:</strong> a small slice from a very large public index.</li>
             </ol>
             <p>

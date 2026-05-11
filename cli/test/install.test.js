@@ -12,6 +12,9 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { loadManifest } from "../src/fetch-manifest.js";
+import { upsertActivationBlock } from "../src/activation-companion.js";
+import { writeSkill } from "../src/write-skill.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CLI = path.join(__dirname, "..", "bin", "starter.js");
@@ -49,6 +52,30 @@ test("bundled-skills.json has content for all manifest skills", () => {
   for (const skill of manifest.skills) {
     assert.ok(skills[skill.slug], `Missing bundled content for skill: ${skill.slug}`);
     assert.match(skills[skill.slug], /^---\n/, `${skill.slug} SKILL.md missing YAML frontmatter`);
+  }
+});
+
+test("loadManifest refuses to downgrade below bundled fallback version", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({
+    ok: true,
+    async json() {
+      return {
+        pack: "floom-starter",
+        version: "0.1.0",
+        profiles: [],
+        skills: [],
+      };
+    },
+  });
+
+  try {
+    const { manifest, source } = await loadManifest();
+    assert.equal(source, "fallback");
+    assert.equal(manifest.version, "0.2.7");
+    assert.ok(manifest.skills.length >= 29);
+  } finally {
+    globalThis.fetch = originalFetch;
   }
 });
 
@@ -224,6 +251,183 @@ test("install preserves custom SKILL.md and warns on collision", () => {
 
   // Summary line mentions skipped (kept) count
   assert.match(output, /skipped \(your custom versions kept\)/);
+});
+
+test("installer rejects unsafe slugs before writing outside the skill root", () => {
+  const root = tmpRoot("unsafe-slug");
+  let threw = false;
+  let combined = "";
+  try {
+    run([
+      "install",
+      "--skills", "../escape",
+      "--harness", "claude",
+      "--root", root,
+    ]);
+  } catch (err) {
+    threw = true;
+    combined = String(err.stdout || "") + String(err.stderr || "");
+  }
+
+  assert.equal(threw, true, "Expected unsafe slug install to fail");
+  assert.match(combined, /Unknown skill slug|Unsafe skill slug/);
+  assert.equal(
+    fs.existsSync(path.join(root, "claude", "escape", "SKILL.md")),
+    false,
+    "Unsafe slug must not create files outside the skill root",
+  );
+});
+
+test("writeSkill refuses path traversal slugs from manifest data", () => {
+  const root = tmpRoot("write-skill-traversal");
+  const agent = {
+    id: "claude",
+    skillsDir: path.join(root, "claude", "skills"),
+  };
+
+  assert.throws(
+    () => writeSkill(agent, "../escape", "---\nname: escape\n---\n# Escape\n"),
+    /Unsafe skill slug/,
+  );
+  assert.equal(
+    fs.existsSync(path.join(root, "claude", "escape", "SKILL.md")),
+    false,
+    "Path traversal slug must not write outside skillsDir",
+  );
+});
+
+test("writeSkill refuses symlinked skill file targets", () => {
+  const root = tmpRoot("write-skill-symlink-file");
+  const skillsDir = path.join(root, "claude", "skills");
+  const skillDir = path.join(skillsDir, "safe-slug");
+  const outside = path.join(root, "outside.md");
+  fs.mkdirSync(skillDir, { recursive: true });
+  fs.writeFileSync(outside, "outside", "utf8");
+  fs.symlinkSync(outside, path.join(skillDir, "SKILL.md"));
+
+  assert.throws(
+    () => writeSkill(
+      { id: "claude", skillsDir },
+      "safe-slug",
+      "---\nname: safe-slug\n---\n# Safe\n",
+      true,
+    ),
+    /symlinked skill file/,
+  );
+  assert.equal(fs.readFileSync(outside, "utf8"), "outside");
+});
+
+test("writeSkill refuses symlinked skill directories", () => {
+  const root = tmpRoot("write-skill-symlink-dir");
+  const skillsDir = path.join(root, "claude", "skills");
+  const outsideDir = path.join(root, "outside-dir");
+  fs.mkdirSync(skillsDir, { recursive: true });
+  fs.mkdirSync(outsideDir, { recursive: true });
+  fs.symlinkSync(outsideDir, path.join(skillsDir, "safe-slug"));
+
+  assert.throws(
+    () => writeSkill(
+      { id: "claude", skillsDir },
+      "safe-slug",
+      "---\nname: safe-slug\n---\n# Safe\n",
+      true,
+    ),
+    /symlinked skill path/,
+  );
+  assert.equal(fs.existsSync(path.join(outsideDir, "SKILL.md")), false);
+});
+
+test("writeSkill refuses a symlinked skills root", () => {
+  const root = tmpRoot("write-skill-symlink-root");
+  const realSkillsRoot = path.join(root, "outside-skills");
+  const symlinkedSkillsRoot = path.join(root, "claude", "skills");
+  fs.mkdirSync(path.dirname(symlinkedSkillsRoot), { recursive: true });
+  fs.mkdirSync(realSkillsRoot, { recursive: true });
+  fs.symlinkSync(realSkillsRoot, symlinkedSkillsRoot);
+
+  assert.throws(
+    () => writeSkill(
+      { id: "claude", skillsDir: symlinkedSkillsRoot },
+      "safe-slug",
+      "---\nname: safe-slug\n---\n# Safe\n",
+      true,
+    ),
+    /symlinked skill root/,
+  );
+  assert.equal(fs.existsSync(path.join(realSkillsRoot, "safe-slug", "SKILL.md")), false);
+});
+
+test("activation block refuses symlinked activation files", () => {
+  const root = tmpRoot("activation-symlink-file");
+  const activationDir = path.join(root, "claude");
+  const activationFile = path.join(activationDir, "CLAUDE.md");
+  const outside = path.join(root, "outside.md");
+  fs.mkdirSync(activationDir, { recursive: true });
+  fs.writeFileSync(outside, "outside", "utf8");
+  fs.symlinkSync(outside, activationFile);
+
+  assert.throws(
+    () => upsertActivationBlock(activationFile, "<!-- FLOOM-START -->\nblocked\n<!-- FLOOM-END -->"),
+    /symlinked activation file/,
+  );
+  assert.equal(fs.readFileSync(outside, "utf8"), "outside");
+});
+
+test("install refuses symlinked local manifest targets without writing through them", () => {
+  const root = tmpRoot("manifest-symlink-file");
+  const floomDir = path.join(root, ".floom");
+  const outside = path.join(root, "outside-manifest.json");
+  fs.mkdirSync(floomDir, { recursive: true });
+  fs.writeFileSync(outside, "outside", "utf8");
+  fs.symlinkSync(outside, path.join(floomDir, "manifest.json"));
+
+  let threw = false;
+  let combined = "";
+  try {
+    run([
+      "install",
+      "--skills", "find-skills",
+      "--harness", "claude",
+      "--root", root,
+    ]);
+  } catch (err) {
+    threw = true;
+    combined = String(err.stdout || "") + String(err.stderr || "");
+  }
+
+  assert.equal(threw, true);
+  assert.match(combined, /symlinked manifest file/);
+  assert.equal(fs.readFileSync(outside, "utf8"), "outside");
+});
+
+test("install with only symlink failures exits non-zero without activation or manifest", () => {
+  const root = tmpRoot("install-symlink-fail");
+  const skillDir = path.join(root, "claude", "skills", "find-skills");
+  const outside = path.join(root, "outside.md");
+  fs.mkdirSync(skillDir, { recursive: true });
+  fs.writeFileSync(outside, "outside", "utf8");
+  fs.symlinkSync(outside, path.join(skillDir, "SKILL.md"));
+
+  let threw = false;
+  let combined = "";
+  try {
+    run([
+      "install",
+      "--skills", "find-skills",
+      "--harness", "claude",
+      "--root", root,
+      "--force",
+    ]);
+  } catch (err) {
+    threw = true;
+    combined = String(err.stdout || "") + String(err.stderr || "");
+  }
+
+  assert.equal(threw, true);
+  assert.match(combined, /Install FAILED/);
+  assert.equal(fs.readFileSync(outside, "utf8"), "outside");
+  assert.equal(fs.existsSync(path.join(root, "claude", "CLAUDE.md")), false);
+  assert.equal(fs.existsSync(path.join(root, ".floom", "manifest.json")), false);
 });
 
 test("re-running install with no changes is silent (idempotent)", () => {

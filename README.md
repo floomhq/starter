@@ -53,7 +53,7 @@ That installs the Core profile (9 hand-picked skills) into the AI agent you use.
 2. Auto-detect your AI agent (Claude Code, Codex, Cursor, Kimi, OpenCode).
 3. Skills install locally to your project (`.claude/skills/`, `.codex/skills/`, etc.).
 4. Activation rules are added to your agent's config so the right skill fires on the right task.
-5. Floom keeps it current with daily refreshes from the upstream skills.sh registry. Install counts updated, content kept fresh.
+5. You update manually with `npx @floomhq/starter update`. The package has no daemon, no cron, and no background network process.
 
 ## Why curated
 
@@ -93,7 +93,7 @@ floomhq/starter (this repo)
     └── @floomhq/starter (npm)  the CLI users install
 ```
 
-The CLI fetches the slim manifest at install time, then lazy-loads per-skill JSONs only for skills the user installs. Daily refresh cron preserves user-edited skills and updates upstream metadata.
+The CLI fetches the slim manifest at install time, then lazy-loads per-skill JSONs only for skills the user installs. `npx @floomhq/starter update` refreshes manually while preserving user-edited files by default.
 
 ## Privacy
 
@@ -107,8 +107,8 @@ Individual skills retain their own licenses. See [licenses/README.md](licenses/R
 
 ## Contributors
 
-- [Federico de Ponte](https://x.com/fede_vault), Founder, Floom
-- Adam Beaudoin, Founder, Floom
+- [Federico de Ponte](https://x.com/fede_vault)
+- Adam Beaudoin
 
 Pull requests welcome.
 

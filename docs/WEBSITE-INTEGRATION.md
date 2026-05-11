@@ -79,8 +79,8 @@ Use public metrics only:
 
 | Metric | Source |
 | --- | --- |
-| npm weekly downloads | `https://api.npmjs.org/downloads/point/last-week/@floomhq/starter` |
-| npm monthly downloads | `https://api.npmjs.org/downloads/point/last-month/@floomhq/starter` |
+| npm weekly downloads | npm downloads API for `@floomhq/starter`; display `New package` when the API returns 404 before enough download history exists |
+| npm monthly downloads | npm downloads API for `@floomhq/starter`; display `New package` when the API returns 404 before enough download history exists |
 | package version | npm registry metadata for `@floomhq/starter` |
 | GitHub stars | GitHub API for `floomhq/starter` |
 | bundled skills | `manifest.total_skills` |

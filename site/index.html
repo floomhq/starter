@@ -45,7 +45,7 @@
       "operatingSystem": "macOS, Linux, Windows",
       "description": "65 curated AI agent skills from skills.sh. One install. Works with Claude Code, Codex, Cursor, Kimi, OpenCode.",
       "url": "https://floom.dev/",
-      "softwareVersion": "0.2.4",
+      "softwareVersion": "0.2.7",
       "license": "https://opensource.org/licenses/MIT",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "author": [
@@ -1031,12 +1031,18 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
         gap: 28px;
         margin-top: 48px;
         border: var(--line);
         background: var(--ink);
         color: #ffffff;
         padding: 32px 34px;
+      }
+
+      .final-cta > div:first-child {
+        min-width: min(100%, 420px);
+        flex: 1 1 420px;
       }
 
       .final-cta strong {
@@ -1124,7 +1130,7 @@
       /* Testimonial cards (Adam tokens) */
       .testimonials-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 20px;
         margin-top: 28px;
       }
@@ -1201,14 +1207,6 @@
         color: var(--blue);
       }
 
-      .testimonial-role {
-        font-size: 11px;
-        font-weight: 700;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-      }
-
       @media (max-width: 980px) {
         .testimonials-grid { grid-template-columns: 1fr; }
       }
@@ -1260,7 +1258,7 @@
         top: calc(100% + 12px);
         left: 0;
         min-width: 360px;
-        max-width: 420px;
+        max-width: min(420px, calc(100vw - 40px));
         background: var(--paper);
         color: var(--ink);
         border: 2px solid var(--ink);
@@ -1344,6 +1342,26 @@
         box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
       }
       .install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+      .install-cta-wrap--final .install-cta-tooltip {
+        left: auto;
+        right: 0;
+      }
+      .install-cta-wrap--final .install-cta-tooltip::before {
+        left: auto;
+        right: 28px;
+      }
+      .final-cta .install-cta-label,
+      .final-cta .install-cta-icon {
+        display: inline-flex;
+        margin-top: 0;
+        color: var(--ink);
+        font-size: inherit;
+        font-weight: inherit;
+      }
+      .final-cta .install-cta-tooltip span {
+        display: block;
+        margin-top: 0;
+      }
 
       @media (max-width: 640px) {
         .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
@@ -1473,56 +1491,6 @@
         <strong>Codex <span class="mini-logo logo-codex" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd"><path clip-rule="evenodd" d="M8.086.457a6.105 6.105 0 0 1 3.046-.415c1.333.153 2.521.72 3.564 1.7a.117.117 0 0 0 .107.029c1.408-.346 2.762-.224 4.061.366l.063.03.154.076c1.357.703 2.33 1.77 2.918 3.198.278.679.418 1.388.421 2.126a5.655 5.655 0 0 1-.18 1.631.167.167 0 0 0 .04.155 5.982 5.982 0 0 1 1.578 2.891c.385 1.901-.01 3.615-1.183 5.14l-.182.22a6.063 6.063 0 0 1-2.934 1.851.162.162 0 0 0-.108.102c-.255.736-.511 1.364-.987 1.992-1.199 1.582-2.962 2.462-4.948 2.451-1.583-.008-2.986-.587-4.21-1.736a.145.145 0 0 0-.14-.032c-.518.167-1.04.191-1.604.185a5.924 5.924 0 0 1-2.595-.622 6.058 6.058 0 0 1-2.146-1.781c-.203-.269-.404-.522-.551-.821a7.74 7.74 0 0 1-.495-1.283 6.11 6.11 0 0 1-.017-3.064.166.166 0 0 0 .008-.074.115.115 0 0 0-.037-.064 5.958 5.958 0 0 1-1.38-2.202 5.196 5.196 0 0 1-.333-1.589 6.915 6.915 0 0 1 .188-2.132c.45-1.484 1.309-2.648 2.577-3.493.282-.188.55-.334.802-.438.286-.12.573-.22.861-.304a.129.129 0 0 0 .087-.087A6.016 6.016 0 0 1 5.635 2.31C6.315 1.464 7.132.846 8.086.457zm-.804 7.85a.848.848 0 0 0-1.473.842l1.694 2.965-1.688 2.848a.849.849 0 0 0 1.46.864l1.94-3.272a.849.849 0 0 0 .007-.854l-1.94-3.393zm5.446 6.24a.849.849 0 0 0 0 1.695h4.848a.849.849 0 0 0 0-1.696h-4.848z" /></svg></span></strong>
         <strong>Kimi <span class="mini-logo logo-kimi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.846 0a1.923 1.923 0 1 1 0 3.846H20.15a.226.226 0 0 1-.227-.226V1.923C19.923.861 20.784 0 21.846 0z" /><path d="m11.065 11.199 7.257-7.2c.137-.136.06-.41-.116-.41H14.3a.164.164 0 0 0-.117.051l-7.82 7.756c-.122.12-.302.013-.302-.179V3.82c0-.127-.083-.23-.185-.23H3.186c-.103 0-.186.103-.186.23v15.95c0 .128.083.23.186.23h2.69c.103 0 .186-.102.186-.23v-3.25c0-.069.025-.135.069-.178l2.424-2.406a.158.158 0 0 1 .205-.023l6.484 4.772a7.677 7.677 0 0 0 3.453 1.283c.108.012.2-.095.2-.23v-3.06c0-.117-.07-.212-.164-.227a5.028 5.028 0 0 1-2.027-.807l-5.613-4.064c-.117-.078-.132-.279-.028-.381z" /></svg></span></strong>
         <strong>+ more</strong>
-      </section>
-
-      <section class="social-proof" id="social-proof" aria-label="What early users say">
-        <div class="social-proof-header">
-          <h2>What early users say</h2>
-        </div>
-
-        <div class="testimonials-grid">
-          <article class="testimonial-card">
-            <p class="testimonial-quote">"I'd been collecting agent skills for months. Floom shipped the curation I would've made, and made me actually use them."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar">
-                <img src="assets/fede-profile.jpg" alt="Federico de Ponte" loading="lazy" />
-              </div>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">Federico de Ponte</span>
-                <span class="testimonial-handle">@fedeponte1</span>
-                <span class="testimonial-role">Founder, Floom</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="testimonial-card">
-            <p class="testimonial-quote">"The whole point of curation is you stop second-guessing every install. Floom does the choosing so I don't have to."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar">
-                <img src="assets/adam-profile.jpg" alt="Adam Beaudoin" loading="lazy" />
-              </div>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">Adam Beaudoin</span>
-                <span class="testimonial-handle">@adambeaudoin</span>
-                <span class="testimonial-role">Founder, Floom</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="testimonial-card">
-            <p class="testimonial-quote">"One paste in my terminal. The next prompt my agent already pulled from a skill I didn't know it had. That's the moment."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar">
-                <span class="testimonial-avatar-initials">[?]</span>
-              </div>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">[FRIEND_NAME_3]</span>
-                <span class="testimonial-handle">@[HANDLE_3]</span>
-                <span class="testimonial-role">[ROLE_OR_COMPANY_3]</span>
-              </div>
-            </div>
-          </article>
-        </div>
       </section>
 
       <section class="caption-strip" aria-label="Evidence for curated agent skills">
@@ -1678,7 +1646,7 @@
           </details>
           <details class="faq-item">
             <summary>Is it free? Is it open source?</summary>
-            <p>Yes. MIT license. The pack and all Floom-authored skills are open source. Individual skills retain their own licenses, see the README for the full table.</p>
+            <p>The installer and Floom Starter Pack repository are MIT licensed. Individual bundled skills retain their own licenses, see the README for the full table.</p>
           </details>
         </div>
       </section>

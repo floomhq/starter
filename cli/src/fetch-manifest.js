@@ -45,6 +45,17 @@ function loadFallback() {
   return JSON.parse(raw);
 }
 
+function compareVersions(a, b) {
+  const left = String(a || "0").split(".").map((part) => Number.parseInt(part, 10) || 0);
+  const right = String(b || "0").split(".").map((part) => Number.parseInt(part, 10) || 0);
+  const len = Math.max(left.length, right.length);
+  for (let i = 0; i < len; i++) {
+    const diff = (left[i] || 0) - (right[i] || 0);
+    if (diff !== 0) return diff;
+  }
+  return 0;
+}
+
 /**
  * Returns { manifest, source: "remote" | "fallback" }
  *
@@ -53,11 +64,12 @@ function loadFallback() {
  *   manifest.profiles[].skill_slugs: ordered list of slugs for the profile
  */
 export async function loadManifest() {
+  const fallback = loadFallback();
   const remote = await fetchJson(MANIFEST_URL);
-  if (remote) {
+  if (remote && compareVersions(remote.version, fallback.version) >= 0) {
     return { manifest: remote, source: "remote" };
   }
-  return { manifest: loadFallback(), source: "fallback" };
+  return { manifest: fallback, source: "fallback" };
 }
 
 /**
@@ -73,6 +85,6 @@ export async function loadManifest() {
  *   fetched_at: ISO timestamp of last enrichment
  */
 export async function fetchSkillDetail(slug) {
-  const url = `${MANIFEST_BASE_URL}skills/${slug}.json`;
+  const url = `${MANIFEST_BASE_URL}skills/${encodeURIComponent(slug)}.json`;
   return await fetchJson(url);
 }

@@ -21,7 +21,7 @@ to the vendored LICENSE file in this directory.
 | https://github.com/remotion-dev/skills | remotion-dev | 1 | (no LICENSE in repo) | [remotion-dev-skills.LICENSE.md](./remotion-dev-skills.LICENSE.md) |
 | https://github.com/supabase/agent-skills | supabase | 1 | MIT | [supabase-agent-skills.LICENSE.md](./supabase-agent-skills.LICENSE.md) |
 | https://github.com/wshobson/agents | wshobson | 1 | MIT | [wshobson-agents.LICENSE.md](./wshobson-agents.LICENSE.md) |
-| https://github.com/floomhq/floom | floomhq | 3 | MIT (Floom team) | [floomhq-floom.LICENSE.md](./floomhq-floom.LICENSE.md) |
+| https://github.com/floomhq/floom | floomhq | 3 | Proprietary (Floom team; rights granted for pack distribution) | [floomhq-floom.LICENSE.md](./floomhq-floom.LICENSE.md) |
 
 The Apache-2.0 license text for SkillsBench is also kept verbatim in
 `licenses/LICENSE.skillsbench` for backwards compatibility.

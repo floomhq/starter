@@ -2,7 +2,15 @@
 
 ## Unreleased
 
-- CLI source: `--version` now prints `0.2.5`, matching `cli/package.json`.
+- No unreleased changes.
+
+## v0.2.7 - 2026-05-11
+
+- CLI security: reject unsafe skill slugs before fetch/write and guard resolved write paths inside each agent skill root.
+- CLI activation: direct agents to use the installed skill list first and keep `find-skills` local-first.
+- Pack content: `find-skills` now searches only local Floom-installed skills unless the user explicitly asks for external discovery.
+- Site/docs: fixed stale manifest paths, uninstall examples, no-daemon update contract, license wording, sticky library/docs navigation, CTA layout, testimonial placeholders, and support email.
+- CLI source: `--version` now prints `0.2.7`, matching `cli/package.json`.
 - CLI docs/help: replaced stale example slugs with skills that exist in the locked 65-skill manifest.
 - Docs: updated stale `@floomhq/packs`, `floomhq/packs`, and `floom-packs` references to the current `@floomhq/starter` package and `floomhq/starter` repo.
 - Repo docs: added the missing per-source license table referenced by the README.

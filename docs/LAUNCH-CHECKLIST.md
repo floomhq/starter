@@ -15,7 +15,7 @@ This checklist tracks release readiness for `floomhq/starter` and
 ## Package
 
 - [x] npm package is `@floomhq/starter`.
-- [x] Current npm version is `0.2.5`.
+- [x] Current npm version is `0.2.7`.
 - [x] CLI binary is `starter` with `floom-starter` alias.
 - [x] Supported agents are Claude Code, Codex, Cursor, Kimi, and OpenCode.
 - [x] Project-local install is the default.
@@ -32,15 +32,9 @@ This checklist tracks release readiness for `floomhq/starter` and
 
 ## Verification
 
-- [ ] `npm view @floomhq/starter time --json` matches changelog dates.
-- [ ] `npx @floomhq/starter@latest --help` is clear.
-- [ ] `npx @floomhq/starter@latest --version` matches npm metadata.
-- [ ] CI passes `validate-manifest`.
-- [ ] CI passes `validate-skill-jsons`.
-- [ ] CI passes `cli-smoke`.
-
-## Known Release Note
-
-`@floomhq/starter@0.2.5` is published on npm, but the published CLI entry point
-prints `0.2.4` for `--version`. The local source has been corrected for the next
-publish.
+- [x] `npm view @floomhq/starter time --json` reports latest `0.2.7`.
+- [x] `npx @floomhq/starter@latest --help` is clear.
+- [x] `npx @floomhq/starter@latest --version` matches npm metadata.
+- [x] CI passes `validate-manifest`.
+- [x] CI passes `validate-skill-jsons`.
+- [x] CI passes `cli-smoke`.

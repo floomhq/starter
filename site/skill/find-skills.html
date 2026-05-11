@@ -7,12 +7,12 @@
 <meta content="#fafaf7" name="theme-color"/>
 <meta content="light" name="color-scheme"/>
 <title>find-skills: Floom Starter Pack skill</title>
-<meta content="Meta-skill that helps the agent discover other skills." name="description"/>
+<meta content="Meta-skill that helps the agent discover installed Floom Starter skills locally." name="description"/>
 <!-- Open Graph -->
 <meta content="Floom Starter Pack" property="og:site_name"/>
 <meta content="article" property="og:type"/>
 <meta content="find-skills: Floom Starter Pack skill" property="og:title"/>
-<meta content="Meta-skill that helps the agent discover other skills." property="og:description"/>
+<meta content="Meta-skill that helps the agent discover installed Floom Starter skills locally." property="og:description"/>
 <meta content="https://floom.dev/skill/find-skills" property="og:url"/>
 <meta content="https://floom.dev/og-image-v3.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
@@ -21,7 +21,7 @@
 <!-- Twitter -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="find-skills: Floom Starter Pack skill" name="twitter:title"/>
-<meta content="Meta-skill that helps the agent discover other skills." name="twitter:description"/>
+<meta content="Meta-skill that helps the agent discover installed Floom Starter skills locally." name="twitter:description"/>
 <meta content="https://floom.dev/og-image-v3.png" name="twitter:image"/>
 <meta content="@floomhq" name="twitter:creator"/>
 <meta content="@floomhq" name="twitter:site"/>
@@ -37,7 +37,7 @@
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
   "name": "find-skills",
-  "description": "Meta-skill that helps the agent discover other skills.",
+  "description": "Meta-skill that helps the agent discover installed Floom Starter skills locally.",
   "codeRepository": "https://github.com/vercel-labs/skills",
   "license": "MIT",
   "isPartOf": {
@@ -66,9 +66,9 @@ html { scrollbar-gutter: stable; overflow-y: scroll; }
 body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 
-.page { width: min(100%, 1100px); margin: 0 auto; padding: 44px 70px 72px; }
+.page { width: min(100%, 1440px); margin: 0 auto; padding: 44px 70px 72px; }
 
-.nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
+.nav { position: sticky; top: 0; z-index: 40; background: rgba(250,250,247,0.94); backdrop-filter: blur(12px); display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
 .nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
 .wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
 .wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
@@ -146,14 +146,14 @@ a { color: inherit; }
 @media (max-width: 860px) { .footer-cta { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 36px; } }
 
 .site-footer { border-top: 2px solid var(--ink); background: var(--paper); padding: 48px 70px 0; margin-top: 56px; }
-.site-footer-inner { width: min(100%, 1100px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+.site-footer-inner { width: min(100%, 1440px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
 .footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
 .footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
 .footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
 .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
 .footer-col a:hover { color: var(--blue); }
-.footer-bottom { width: min(100%, 1100px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
+.footer-bottom { width: min(100%, 1440px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
 .footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
 @media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
 @media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
@@ -525,7 +525,7 @@ a { color: inherit; }
 <a href="#source">Source</a>
 </nav><div class="skill-body"><header class="hero" id="overview">
 <h1>find-skills</h1>
-<p class="hero-desc">Meta-skill that helps the agent discover other skills.</p>
+<p class="hero-desc">Meta-skill that helps the agent discover installed Floom Starter skills locally.</p>
 <div class="hero-meta">
 <span class="badge">↓ 1.4M on skills.sh</span><span class="badge mute">vercel-labs</span><span class="badge mute">MIT</span>
 <span class="profile-tag">core</span>
@@ -548,11 +548,11 @@ a { color: inherit; }
 </div>
 </section><section class="section" id="fires-when">
 <div class="section-label">Fires when</div>
-<div class="fires-block">agent needs to find a skill matching a task description, on first session setup</div>
+<div class="fires-block">agent needs to find a skill matching a task description from the locally installed pack</div>
 </section><section class="section" id="files">
 <div class="section-label">Files</div>
 <p style="font-size:13px;color:var(--muted);margin-bottom:10px;max-width:720px">Click a file to expand. SKILL.md is the activation entrypoint; other files are helpers, references, and scripts the skill loads on demand.</p>
-<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="https://raw.githubusercontent.com/vercel-labs/skills/HEAD/skills/find-skills/SKILL.md" data-github="https://github.com/vercel-labs/skills/blob/HEAD/skills/find-skills/SKILL.md" data-size="5446" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">5,446 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div></div>
+<div class="file-accordion"><div class="file-accordion-row" id="file-skill-md" data-name="SKILL.md" data-url="../skill-files/find-skills/SKILL.md" data-github="https://github.com/floomhq/starter/blob/main/site/skill-files/find-skills/SKILL.md" data-size="2340" data-open="true" data-loaded="false"><button type="button" class="file-accordion-toggle" aria-expanded="true"><svg class="file-accordion-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 2 8 6 4 10"/></svg><span class="file-name">SKILL.md</span><span class="file-size">2,340 bytes</span><span class="file-type">main</span></button><div class="file-content" role="region"></div></div></div>
 </section><section class="section" id="source">
 <div class="section-label">Source</div>
 <div class="links-row">

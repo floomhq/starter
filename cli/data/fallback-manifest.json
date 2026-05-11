@@ -1,8 +1,8 @@
 {
   "pack": "floom-starter",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "updated": "2026-05-11",
-  "license": "MIT (pack); individual skills retain their own licenses \u2014 see README.md license table",
+  "license": "MIT (pack); individual skills retain their own licenses — see README.md license table",
   "profiles": [
     {
       "description": "Everyday agent hygiene: skill discovery, planning, quality gate, debugging, parallelism, context management.",
@@ -355,7 +355,7 @@
       "slug": "diagnose",
       "name": "diagnose",
       "publisher": "mattpocock",
-      "description": "Structured debugging workflow: symptom \u2192 hypothesis \u2192 root cause \u2192 fix.",
+      "description": "Structured debugging workflow: symptom → hypothesis → root cause → fix.",
       "install_count_skills_sh": 54125,
       "license": "MIT",
       "profiles": [
@@ -418,13 +418,14 @@
       "slug": "find-skills",
       "name": "find-skills",
       "publisher": "vercel-labs",
-      "description": "Meta-skill that helps the agent discover other skills.",
+      "description": "Meta-skill that helps the agent discover installed Floom Starter skills locally.",
       "install_count_skills_sh": 1435944,
       "license": "MIT",
       "profiles": [
         "core"
       ],
-      "detail_url": "skills/find-skills.json"
+      "detail_url": "skills/find-skills.json",
+      "fires_when": "agent needs to find a skill matching a task description from the locally installed pack"
     },
     {
       "slug": "finishing-a-development-branch",

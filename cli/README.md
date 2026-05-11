@@ -153,7 +153,7 @@ Lists every skill installed via Floom in the current scope, which profile it bel
 
 ## After install
 
-Ask your agent: *"find a skill for this task"*: the `find-skills` skill searches your installed skills.
+Ask your agent: *"find a skill for this task"*: the `find-skills` skill searches only the Floom-installed skills in this project or machine scope. It does not call external registries unless you explicitly ask for broader discovery.
 
 Or: *"write a plan for this work"*: the `workplan` skill guides the planning flow.
 

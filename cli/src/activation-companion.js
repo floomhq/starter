@@ -6,6 +6,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { prepareSafeWriteTarget } from "./write-skill.js";
+
 const BLOCK_START = "<!-- FLOOM-START -->";
 const BLOCK_END = "<!-- FLOOM-END -->";
 
@@ -35,7 +37,7 @@ export function buildActivationBlock(agent, skills) {
   }
 
   lines.push(``);
-  lines.push(`Use \`find-skills\` first when you're not sure which skill applies.`);
+  lines.push(`Use the installed skill list above first. If the match is unclear, use \`find-skills\` to inspect only local Floom-installed skills before reaching for general tools.`);
   lines.push(BLOCK_END);
   return lines.join("\n");
 }
@@ -45,7 +47,7 @@ export function buildActivationBlock(agent, skills) {
  * Idempotent: replaces an existing block if present.
  */
 export function upsertActivationBlock(filePath, block) {
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  prepareSafeWriteTarget(path.dirname(filePath), filePath, "activation");
 
   const existing = fs.existsSync(filePath) ? fs.readFileSync(filePath, "utf8") : "";
   const startIdx = existing.indexOf(BLOCK_START);
@@ -64,4 +66,24 @@ export function upsertActivationBlock(filePath, block) {
   }
 
   fs.writeFileSync(filePath, next, "utf8");
+}
+
+/**
+ * Remove the Floom block from an activation file without following symlinked
+ * parent directories or symlinked files.
+ */
+export function stripActivationBlock(filePath) {
+  if (!fs.existsSync(filePath)) return false;
+  prepareSafeWriteTarget(path.dirname(filePath), filePath, "activation");
+
+  const content = fs.readFileSync(filePath, "utf8");
+  const startIdx = content.indexOf(BLOCK_START);
+  const endIdx = content.indexOf(BLOCK_END);
+  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) return false;
+
+  const before = content.slice(0, startIdx).trimEnd();
+  const after = content.slice(endIdx + BLOCK_END.length).trimStart();
+  const next = [before, after].filter(Boolean).join("\n\n") + "\n";
+  fs.writeFileSync(filePath, next, "utf8");
+  return true;
 }

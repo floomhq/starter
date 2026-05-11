@@ -17,8 +17,12 @@ import path from "node:path";
 
 import { loadManifest, fetchSkillDetail } from "./fetch-manifest.js";
 import { resolveAgents, detectAgents, SUPPORTED_HARNESSES } from "./detect-agents.js";
-import { loadSkillContent, writeSkill } from "./write-skill.js";
-import { buildActivationBlock, upsertActivationBlock } from "./activation-companion.js";
+import { loadSkillContent, prepareSafeWriteTarget, writeSkill } from "./write-skill.js";
+import {
+  buildActivationBlock,
+  stripActivationBlock,
+  upsertActivationBlock,
+} from "./activation-companion.js";
 
 /**
  * Compute the path to the local install manifest tracker.
@@ -182,7 +186,7 @@ function buildLocalManifestPayload(agents, installedSkills, manifestVersion) {
  * Write the local manifest tracker to the resolved path.
  */
 function writeLocalManifest(manifestPath, agents, installedSkills, manifestVersion) {
-  fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+  prepareSafeWriteTarget(path.dirname(manifestPath), manifestPath, "manifest");
   const payload = buildLocalManifestPayload(agents, installedSkills, manifestVersion);
   fs.writeFileSync(manifestPath, JSON.stringify(payload, null, 2) + "\n", "utf8");
   return manifestPath;
@@ -225,7 +229,7 @@ export async function install(opts = {}) {
   // 1. Load manifest
   const { manifest, source } = await loadManifest();
   if (source === "fallback") {
-    log("  (using bundled manifest, floomhq/starter not reachable)");
+    log("  (using bundled manifest)");
   }
 
   // 2. Select skills
@@ -381,7 +385,8 @@ export async function install(opts = {}) {
   const written = allSkillResults.filter((s) => s.action === "written").length;
   const skipped = allSkillResults.filter((s) => s.action === "skipped").length;
   const kept = allSkillResults.filter((s) => s.action === "kept").length;
-  const errors = allSkillResults.filter((s) => s.action === "error").length;
+  const errorResults = allSkillResults.filter((s) => s.action === "error");
+  const errors = errorResults.length;
 
   const successfulActions = new Set(["written", "skipped", "kept"]);
   const successfulSlugs = new Set(
@@ -394,22 +399,26 @@ export async function install(opts = {}) {
 
   // 8. Write activation companion (from RESULTS).
   const activationFiles = [];
-  for (const agent of agents) {
-    const block = buildActivationBlock(agent, installedSkills);
-    upsertActivationBlock(agent.activationFile, block);
-    activationFiles.push(agent.activationFile);
+  if (installedSkills.length > 0) {
+    for (const agent of agents) {
+      const block = buildActivationBlock(agent, installedSkills);
+      upsertActivationBlock(agent.activationFile, block);
+      activationFiles.push(agent.activationFile);
+    }
   }
 
   // 9. Write local manifest tracker (from RESULTS).
   const manifestPath = manifestPathFor({ root: opts.root || null, globalScope, cwd });
-  writeLocalManifest(manifestPath, agents, installedSkills, manifest.version);
+  if (installedSkills.length > 0) {
+    writeLocalManifest(manifestPath, agents, installedSkills, manifest.version);
+  }
 
   // 10. Print summary with the explicit partial-failure message required
   // by the 0.2.4 hardening pass.
   log("");
   if (errors > 0 && installedSkills.length > 0) {
     log(`  Installed ${installedSkills.length} of ${skills.length} skills.`);
-    log(`  ${errors} skills failed to fetch SKILL.md content. They were skipped.`);
+    log(`  ${errors} skills failed to install. They were skipped.`);
     if (failedSlugs.length > 0) {
       const head = failedSlugs.slice(0, 3).join(", ");
       const tail = failedSlugs.length > 3 ? ` (and ${failedSlugs.length - 3} more)` : "";
@@ -417,9 +426,9 @@ export async function install(opts = {}) {
     }
     if (!opts.verbose) {
       log(`  Re-run with --verbose for the per-skill fetch errors.`);
-    } else if (fetchErrors.length > 0) {
-      log(`  Per-skill fetch errors:`);
-      for (const e of fetchErrors) {
+    } else if (errorResults.length > 0 || fetchErrors.length > 0) {
+      log(`  Per-skill errors:`);
+      for (const e of errorResults.length > 0 ? errorResults : fetchErrors) {
         log(`    ${e.slug}: ${e.error}`);
       }
     }
@@ -427,11 +436,13 @@ export async function install(opts = {}) {
     log(`  ${written} skills installed, ${kept} skipped (your custom versions kept)`);
     if (skipped > 0) log(`  ${skipped} already up to date (no changes)`);
   }
-  log(`  Activation rules written to:`);
-  for (const f of activationFiles) log(`    ${f}`);
-  log(`  Manifest: ${manifestPath}`);
-  log("");
-  log(`  Try: ask your agent "find a skill for this task", find-skills will fire.`);
+  if (activationFiles.length > 0) {
+    log(`  Activation rules written to:`);
+    for (const f of activationFiles) log(`    ${f}`);
+    log(`  Manifest: ${manifestPath}`);
+    log("");
+    log(`  Try: ask your agent "find a skill for this task", find-skills will fire.`);
+  }
 
   // 11. Decide exit signal. Per 0.2.4 spec:
   //   - any installs landed:        exit 0 (partial success is success)
@@ -440,7 +451,14 @@ export async function install(opts = {}) {
   if (failed) {
     log("");
     log(`  Install FAILED: 0 skills written across all agents (${errors} errors).`);
-    log(`  Likely cause: per-skill JSONs missing skill_md_content or network fetch blocked.`);
+    if (opts.verbose) {
+      log(`  Per-skill errors:`);
+      for (const e of errorResults) {
+        log(`    ${e.slug}: ${e.error}`);
+      }
+    } else {
+      log(`  No activation block or manifest was written. Re-run with --verbose for per-skill errors.`);
+    }
   }
 
   return {
@@ -609,28 +627,26 @@ export async function remove(opts = {}) {
       if (agent.id === "cursor") {
         const dest = path.join(agent.skillsDir, `${slug}.mdc`);
         if (fs.existsSync(dest)) {
-          if (!opts.dryRun) fs.rmSync(dest);
+          if (!opts.dryRun) {
+            prepareSafeWriteTarget(agent.skillsDir, dest, "skill");
+            fs.rmSync(dest);
+          }
           removed++;
         }
       } else {
         const dest = path.join(agent.skillsDir, slug);
         if (fs.existsSync(dest)) {
-          if (!opts.dryRun) fs.rmSync(dest, { recursive: true });
+          if (!opts.dryRun) {
+            prepareSafeWriteTarget(agent.skillsDir, path.join(dest, "SKILL.md"), "skill");
+            fs.rmSync(dest, { recursive: true });
+          }
           removed++;
         }
       }
     }
 
-    if (!opts.dryRun && fs.existsSync(agent.activationFile)) {
-      const content = fs.readFileSync(agent.activationFile, "utf8");
-      const startIdx = content.indexOf("<!-- FLOOM-START -->");
-      const endIdx = content.indexOf("<!-- FLOOM-END -->");
-      if (startIdx !== -1 && endIdx !== -1) {
-        const before = content.slice(0, startIdx).trimEnd();
-        const after = content.slice(endIdx + "<!-- FLOOM-END -->".length).trimStart();
-        const next = [before, after].filter(Boolean).join("\n\n") + "\n";
-        fs.writeFileSync(agent.activationFile, next, "utf8");
-      }
+    if (!opts.dryRun) {
+      stripActivationBlock(agent.activationFile);
     }
   }
 
@@ -638,6 +654,7 @@ export async function remove(opts = {}) {
   if (!opts.dryRun) {
     const manifestPath = manifestPathFor({ root: opts.root || null, globalScope, cwd });
     if (fs.existsSync(manifestPath)) {
+      prepareSafeWriteTarget(path.dirname(manifestPath), manifestPath, "manifest");
       fs.rmSync(manifestPath);
     }
   }

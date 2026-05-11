@@ -1,11 +1,11 @@
 {
   "name": "@floomhq/starter",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Install curated AI agent skills for Claude Code, Codex, Cursor, OpenCode, and Kimi: zero dependencies, one command.",
   "type": "module",
   "bin": {
-    "floom-starter": "./bin/starter.js",
-    "starter": "./bin/starter.js"
+    "floom-starter": "bin/starter.js",
+    "starter": "bin/starter.js"
   },
   "files": [
     "bin/",
@@ -34,7 +34,7 @@
   "homepage": "https://floom.dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/floomhq/starter.git",
+    "url": "git+https://github.com/floomhq/starter.git",
     "directory": "cli"
   }
 }
