@@ -6,13 +6,13 @@
     <meta name="theme-color" content="#fafaf7" />
     <meta name="color-scheme" content="light" />
     <title>Floom Starter Pack — 65 curated AI agent skills</title>
-    <meta name="description" content="One install. Auto-activates. +18.6% pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
+    <meta name="description" content="One install. Auto-activates. +16.2pp pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
 
     <!-- Open Graph -->
     <meta property="og:site_name" content="Floom Starter Pack" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Floom Starter Pack — 65 curated AI agent skills" />
-    <meta property="og:description" content="One install. Auto-activates. +18.6% pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
+    <meta property="og:description" content="One install. Auto-activates. +16.2pp pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
     <meta property="og:url" content="https://floom.dev/" />
     <meta property="og:image" content="https://floom.dev/og-image-v3.png" />
     <meta property="og:image:width" content="1200" />
@@ -22,7 +22,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Floom Starter Pack — 65 curated AI agent skills" />
-    <meta name="twitter:description" content="One install. Auto-activates. +18.6% pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
+    <meta name="twitter:description" content="One install. Auto-activates. +16.2pp pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
     <meta name="twitter:image" content="https://floom.dev/og-image-v3.png" />
     <meta name="twitter:creator" content="@floomhq" />
     <meta name="twitter:site" content="@floomhq" />
@@ -63,6 +63,7 @@
         --blue-soft: #bfe6ff;
         --blue-pale: #eaf7ff;
         --cloud-pink: #ff4fd8;
+        --link: #b8299a;
         --brand-claude: #d97757;
         --brand-codex: var(--blue);
         --brand-cursor: var(--ink);
@@ -150,7 +151,7 @@
       }
 
       .nav-links a { text-decoration: none; }
-      .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+      .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--link); }
 
       .nav-sign-in, .button, .button-secondary {
         display: inline-flex;
@@ -260,6 +261,15 @@
         font-weight: 700;
         letter-spacing: -0.035em;
         line-height: 1;
+      }
+
+      .h1-sub {
+        display: block;
+        font-size: 21px;
+        font-weight: 500;
+        letter-spacing: normal;
+        line-height: 31px;
+        margin-top: 4px;
       }
 
       .hero-agent-rotator {
@@ -534,7 +544,7 @@
         line-height: 1.45;
       }
 
-      .chart-note a { color: var(--blue); }
+      .chart-note a { color: var(--link); }
 
       /* Works with strip */
       .works-strip {
@@ -582,6 +592,7 @@
       .logo-claude { color: var(--brand-claude); }
       .logo-cursor { color: var(--brand-cursor); }
       .logo-kimi { color: var(--brand-kimi); }
+      .logo-opencode { color: var(--brand-opencode); }
 
       /* Social proof */
       .social-proof {
@@ -785,7 +796,98 @@
         font-weight: 900;
       }
 
-      .lift-source a { color: var(--blue); text-decoration: none; white-space: nowrap; }
+      .lift-source a { color: var(--link); text-decoration: none; white-space: nowrap; }
+
+      /* Compare infographic */
+      .cmp-wrap { width: min(100%, 440px); display: flex; flex-direction: column; gap: 32px; }
+      .cmp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+      .cmp-col { display: flex; flex-direction: column; align-items: center; }
+      .cmp-col-label {
+        font-family: var(--mono); font-size: 10px; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 0.1em;
+        color: rgba(5,5,5,0.38); margin-bottom: 10px;
+      }
+      .cmp-col--active .cmp-col-label { color: var(--ink); }
+      .cmp-box {
+        width: 100%; border: 1.5px solid rgba(5,5,5,0.18); border-radius: 0;
+        padding: 20px 14px; display: flex; flex-direction: column;
+        align-items: center; gap: 7px; background: rgba(255,255,255,0.5);
+      }
+      .cmp-box--active { border: 2px solid var(--ink); background: rgba(255,255,255,0.9); }
+      .cmp-agent-label { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--ink); }
+      .cmp-skill-badge {
+        font-family: var(--mono); font-size: 11px; font-weight: 700;
+        color: var(--cloud-pink);
+        background: rgba(255,79,216,0.07);
+        border: 1px solid rgba(255,79,216,0.28);
+        border-radius: 4px; padding: 2px 7px;
+      }
+      .cmp-arrow { font-size: 16px; color: rgba(5,5,5,0.25); margin: 10px 0 9px; line-height: 1; }
+      .cmp-col--active .cmp-arrow { color: rgba(5,5,5,0.6); }
+      .cmp-bar-wrap { width: 100%; display: flex; flex-direction: column; gap: 7px; }
+      .cmp-bar {
+        height: 8px; border-radius: 2px; position: relative;
+        background: repeating-linear-gradient(90deg,
+          rgba(5,5,5,0.08) 0px, rgba(5,5,5,0.08) 9px,
+          transparent 9px, transparent 12px);
+      }
+      .cmp-bar::before {
+        content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+        width: var(--fill); border-radius: 2px;
+        background: repeating-linear-gradient(90deg,
+          rgba(5,5,5,0.28) 0px, rgba(5,5,5,0.28) 9px,
+          transparent 9px, transparent 12px);
+      }
+      .cmp-bar--active::before {
+        background: repeating-linear-gradient(90deg,
+          var(--ink) 0px, var(--ink) 9px,
+          transparent 9px, transparent 12px);
+      }
+      .cmp-bar-label {
+        font-family: var(--mono); font-size: 10px; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.08em; color: rgba(5,5,5,0.38);
+      }
+      .cmp-bar-label--lift { color: var(--ink); font-weight: 900; }
+      .cmp-finding {
+        display: flex; flex-direction: column; gap: 5px;
+        padding-top: 22px; border-top: 1px solid rgba(5,5,5,0.1);
+      }
+      .cmp-finding-kicker {
+        font-family: var(--mono); font-size: 9px; font-weight: 900;
+        text-transform: uppercase; letter-spacing: 0.14em; color: rgba(5,5,5,0.38);
+      }
+      .cmp-finding-text {
+        font-size: 14px; font-weight: 650; color: var(--ink);
+        letter-spacing: -0.02em; line-height: 1.3;
+      }
+
+      /* Three-col infographic */
+      .tri-wrap { width: min(100%, 520px); display: flex; flex-direction: column; gap: 28px; }
+      .tri-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+      .tri-col { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+      .tri-outcome {
+        font-family: var(--mono); font-size: 11px; font-weight: 900;
+        text-transform: uppercase; letter-spacing: 0.06em;
+      }
+      .tri-col--good .tri-outcome { color: var(--blue); }
+      .tri-col--neutral .tri-outcome { color: rgba(5,5,5,0.35); }
+      .tri-col--bad .tri-outcome { color: rgba(180,0,0,0.65); }
+      .tri-box {
+        width: 100%; border: 1.5px solid rgba(5,5,5,0.14); border-radius: 0;
+        padding: 18px 10px; display: flex; flex-direction: column;
+        align-items: center; gap: 10px; background: rgba(255,255,255,0.4);
+      }
+      .tri-col--good .tri-box { border: 2px solid var(--ink); background: rgba(255,255,255,0.85); }
+      .tri-col--bad .tri-box { border: 1.5px solid rgba(180,0,0,0.18); background: rgba(255,242,242,0.4); }
+      .tri-type { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--ink); text-align: center; }
+      .tri-divider { width: 20px; height: 1px; background: rgba(5,5,5,0.12); }
+      .tri-result { font-family: var(--mono); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+      .tri-col--good .tri-result { color: rgba(5,5,5,0.55); }
+      .tri-col--neutral .tri-result { color: rgba(5,5,5,0.3); }
+      .tri-col--bad .tri-result { color: rgba(180,0,0,0.55); }
+      .tri-footer { display: flex; flex-direction: column; gap: 4px; padding-top: 20px; border-top: 1px solid rgba(5,5,5,0.1); }
+      .tri-footer-kicker { font-family: var(--mono); font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(5,5,5,0.35); }
+      .tri-footer-text { font-size: 13px; font-weight: 650; color: var(--ink); letter-spacing: -0.02em; }
 
       .pack-kicker { color: #006fbf; font-family: var(--mono); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
 
@@ -890,7 +992,7 @@
       }
 
       .source-card strong { font-size: 15px; font-weight: 950; }
-      .source-card a { color: var(--blue); font-family: var(--mono); font-size: 11px; font-weight: 900; text-decoration: none; white-space: nowrap; }
+      .source-card a { color: var(--link); font-family: var(--mono); font-size: 11px; font-weight: 900; text-decoration: none; white-space: nowrap; }
 
       /* Activation visual */
       .right-skill-visual { padding: clamp(22px, 4vw, 42px); }
@@ -968,7 +1070,7 @@
       }
 
       .activation-source strong { font-size: 15px; font-weight: 950; }
-      .activation-source a { color: var(--blue); font-family: var(--mono); font-size: 11px; font-weight: 900; text-decoration: none; white-space: nowrap; }
+      .activation-source a { color: var(--link); font-family: var(--mono); font-size: 11px; font-weight: 900; text-decoration: none; white-space: nowrap; }
 
       /* FAQ / proof */
       .proof {
@@ -1123,7 +1225,7 @@
       .footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
       .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
       .footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
-      .footer-col a:hover { color: var(--blue); }
+      .footer-col a:hover { color: var(--link); }
       .footer-bottom { width: min(100%, 1440px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
       .footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
       @media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
@@ -1246,14 +1348,6 @@
         transform: translateY(-1px);
         outline: none;
       }
-      .install-cta:hover .install-cta-icon-box,
-      .install-cta:focus-visible .install-cta-icon-box {
-        background: rgba(255,255,255,0.15);
-      }
-      .install-cta:hover .install-cta-icon,
-      .install-cta:focus-visible .install-cta-icon {
-        transform: translateY(2px);
-      }
       .install-cta-icon-box {
         display: flex;
         align-items: center;
@@ -1261,9 +1355,8 @@
         width: 38px;
         height: 38px;
         flex: 0 0 38px;
-        background: rgba(255,255,255,0.09);
+        background: rgba(255,255,255,0.15);
         border-radius: 9px;
-        transition: background 200ms ease;
       }
       .install-cta-icon {
         width: 18px;
@@ -1276,88 +1369,7 @@
       .install-cta.is-copied { box-shadow: 0 0 18px rgba(0, 148, 255, 0.35); }
       .install-cta.is-copied .install-cta-label::after { content: " \2713"; }
 
-      .install-cta-tooltip {
-        position: absolute;
-        top: calc(100% + 12px);
-        left: 0;
-        min-width: 360px;
-        max-width: min(420px, calc(100vw - 40px));
-        background: var(--paper);
-        color: var(--ink);
-        border: 2px solid var(--ink);
-        border-radius: 14px;
-        padding: 14px 16px;
-        font-family: var(--sans);
-        font-size: 13px;
-        font-weight: 500;
-        line-height: 1.45;
-        letter-spacing: normal;
-        text-transform: none;
-        text-align: left;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
-        transform: translateY(-4px);
-        z-index: 100;
-        box-shadow: 0 14px 30px rgba(5,5,5,0.18);
-      }
-
-      .install-cta:hover .install-cta-tooltip,
-      .install-cta:focus-visible .install-cta-tooltip,
-      .install-cta:focus-within .install-cta-tooltip {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
-      }
-
-      /* Connector arrow from button up to tooltip */
-      .install-cta-tooltip::before {
-        content: '';
-        position: absolute;
-        top: -8px;
-        left: 28px;
-        width: 14px;
-        height: 14px;
-        background: var(--paper);
-        border-left: 2px solid var(--ink);
-        border-top: 2px solid var(--ink);
-        transform: rotate(45deg);
-        border-radius: 2px;
-      }
-
-      /* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
-      @media (hover: none) {
-        .install-cta-tooltip { display: none; }
-      }
-
-      .tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
-
-      .tooltip-cmd {
-        display: block;
-        font-family: var(--mono);
-        font-size: 13px;
-        font-weight: 700;
-        background: var(--ink);
-        color: #ffffff;
-        padding: 8px 10px;
-        border-radius: 8px;
-        margin-bottom: 6px;
-        white-space: nowrap;
-        overflow-x: auto;
-      }
-
-      .tooltip-hint {
-        display: block;
-        color: var(--muted);
-        font-size: 11px;
-        font-family: var(--mono);
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-      }
-
-      /* Final-cta variant: invert tooltip surface for contrast on dark bg */
+      /* Final-cta variant */
       .install-cta--final { background: #ffffff; color: var(--ink); }
       .install-cta--final:hover,
       .install-cta--final:focus-visible {
@@ -1365,14 +1377,6 @@
         box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
       }
       .install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
-      .install-cta-wrap--final .install-cta-tooltip {
-        left: auto;
-        right: 0;
-      }
-      .install-cta-wrap--final .install-cta-tooltip::before {
-        left: auto;
-        right: 28px;
-      }
       .final-cta .install-cta-label,
       .final-cta .install-cta-icon {
         display: inline-flex;
@@ -1380,14 +1384,6 @@
         color: var(--ink);
         font-size: inherit;
         font-weight: inherit;
-      }
-      .final-cta .install-cta-tooltip span {
-        display: block;
-        margin-top: 0;
-      }
-
-      @media (max-width: 640px) {
-        .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
       }
     </style>
   </head>
@@ -1444,20 +1440,14 @@
                 </span>
               </span>
             </span>
-            with the right agent skills.
           </h1>
           <p class="lead">
-            One command installs 65 curated skills. Your agent gets smarter at code, writing, research, and every task you throw at it.
+            One command for your agent installs 65 curated skills. Improved performance for coding, writing, research, and every task you throw at it.
           </p>
           <div class="actions">
             <div class="install-cta-wrap">
 <button class="install-cta button" type="button" data-copy="npx @floomhq/starter install" aria-label="Copy and send to your agent: copies the install command to clipboard">
                 <span class="install-cta-label">Copy and send to your agent</span><span class="install-cta-icon-box"><svg class="install-cta-icon" width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="8" height="9" rx="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h7"/></svg></span>
-                <span class="install-cta-tooltip" role="tooltip">
-                  <span class="tooltip-line">Copies a command that installs 65 curated skills into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
-                  <code class="tooltip-cmd">npx @floomhq/starter install</code>
-                  <span class="tooltip-hint">Click to copy</span>
-                </span>
               </button>
             </div>
             <p class="copy-help">Runs in your terminal. Works with Claude, Codex, Cursor, and more.</p>
@@ -1523,122 +1513,115 @@
       <section class="caption-strip" aria-label="Evidence for curated agent skills">
         <article class="caption-card" id="lift">
           <div class="feature-visual lift-visual" aria-label="Average pass-rate lift from curated skills">
-            <div class="lift-panel">
-              <div class="lift-card">
-                <span class="pack-kicker">SkillsBench result · arxiv:2602.12670</span>
-                <div class="lift-stat">
-                  <strong>+18.6</strong>
-                  <span>pp</span>
+            <div class="cmp-wrap">
+              <div class="cmp-cols">
+                <div class="cmp-col">
+                  <div class="cmp-col-label">no skills</div>
+                  <div class="cmp-box">
+                    <span class="cmp-agent-label">Agent</span>
+                  </div>
+                  <div class="cmp-arrow">↓</div>
+                  <div class="cmp-bar-wrap">
+                    <div class="cmp-bar" style="--fill: 53%"></div>
+                    <span class="cmp-bar-label">baseline</span>
+                  </div>
                 </div>
-                <p>average pass-rate lift when agents use curated skills on SkillsBench.</p>
+                <div class="cmp-col cmp-col--active">
+                  <div class="cmp-col-label">curated skills</div>
+                  <div class="cmp-box cmp-box--active">
+                    <span class="cmp-agent-label">Agent</span>
+                    <span class="cmp-skill-badge">+ Skill</span>
+                  </div>
+                  <div class="cmp-arrow">↓</div>
+                  <div class="cmp-bar-wrap">
+                    <div class="cmp-bar cmp-bar--active" style="--fill: 80%"></div>
+                    <span class="cmp-bar-label cmp-bar-label--lift">+16.2pp lift</span>
+                  </div>
+                </div>
               </div>
-
-              <div class="lift-bar-card" aria-hidden="true">
-                <div class="lift-bar-row">
-                  <span>no skills</span>
-                  <div class="lift-track"><i style="--fill: 51%;"></i></div>
-                </div>
-                <div class="lift-bar-row">
-                  <span>curated skills</span>
-                  <div class="lift-track"><i style="--fill: 82%;"></i></div>
-                </div>
-              </div>
-
-              <div class="lift-source">
-                <span>Curated beats improvised.</span>
-                <a href="https://arxiv.org/abs/2602.12670" target="_blank" rel="noopener">Source ↗</a>
+              <div class="cmp-finding">
+                <span class="cmp-finding-kicker">SkillsBench finding</span>
+                <span class="cmp-finding-text">More skills ≠ better. Curation is the lift.</span>
               </div>
             </div>
           </div>
           <div class="feature-copy">
             <h3>Curated skills make agents better</h3>
-            <p>SkillsBench shows a consistent +18.6% average lift when agents use curated skills. Floom starts there: focused packs, clear procedures, and less noisy context.</p>
+            <p>SkillsBench shows a consistent +16.2pp average lift when agents use curated skills. Floom starts there: focused packs, clear procedures, and less noisy context.</p>
           </div>
         </article>
 
         <article class="caption-card" id="curation">
           <div class="feature-visual download-visual" aria-label="More skills equals worse agent: curation is the lift">
-            <div class="skillsbench-panel">
-              <div class="skillsbench-card">
-                <header>
-                  <div>
-                    <span class="pack-kicker">SkillsBench finding</span>
-                    <h2>More skills = worse agent. Curation is the lift.</h2>
+            <div class="tri-wrap">
+              <div class="tri-cols">
+                <div class="tri-col tri-col--bad">
+                  <span class="tri-outcome">negative</span>
+                  <div class="tri-box">
+                    <span class="tri-type">bulk install</span>
+                    <div class="tri-divider"></div>
+                    <span class="tri-result">drops ↓</span>
                   </div>
-                  <span class="evidence-pill">curation matters</span>
-                </header>
-
-                <div class="finding-list">
-                  <div class="finding-row is-good">
-                    <b>+18.6%</b>
-                    <div>
-                      <strong>Curated skills lift pass rates</strong>
-                      <span>focused procedural knowledge helps agents at inference time</span>
-                    </div>
+                </div>
+                <div class="tri-col tri-col--neutral">
+                  <span class="tri-outcome">0 lift</span>
+                  <div class="tri-box">
+                    <span class="tri-type">AI-written</span>
+                    <div class="tri-divider"></div>
+                    <span class="tri-result">flatline →</span>
                   </div>
-                  <div class="finding-row is-bad">
-                    <b>0</b>
-                    <div>
-                      <strong>Self-generated skills do not help on average</strong>
-                      <span>models cannot reliably author the knowledge they need</span>
-                    </div>
-                  </div>
-                  <div class="finding-row is-warning">
-                    <b>2-3</b>
-                    <div>
-                      <strong>Focused modules beat kitchen-sink installs</strong>
-                      <span>comprehensive documentation can hurt more than nothing</span>
-                    </div>
+                </div>
+                <div class="tri-col tri-col--good">
+                  <span class="tri-outcome">+16.2pp</span>
+                  <div class="tri-box">
+                    <span class="tri-type">curated</span>
+                    <div class="tri-divider"></div>
+                    <span class="tri-result">helps ↑</span>
                   </div>
                 </div>
               </div>
-              <div class="source-card">
-                <strong>Self-generated skills drop performance. Kitchen-sink installs hurt more than nothing.</strong>
-                <a href="https://arxiv.org/abs/2602.12670" target="_blank" rel="noopener">Source ↗</a>
+              <div class="tri-footer">
+                <span class="tri-footer-kicker">Floom's approach</span>
+                <span class="tri-footer-text">65 hand-picked skills from 91,000 on skills.sh</span>
               </div>
             </div>
           </div>
           <div class="feature-copy">
             <h3>The skills you choose matter</h3>
-            <p>Curated skills improve agents, but self-generated skills and kitchen-sink installs can drag them down. 65 skills, hand-picked from 91,000 on skills.sh.</p>
+            <p>Curated skills improve agents, but self-generated skills (−1.3pp on average) and bulk installs (−2.9pp) drag performance down. 65 skills, hand-picked from 91,000 on skills.sh.</p>
           </div>
         </article>
 
         <article class="caption-card">
           <div class="feature-visual right-skill-visual" aria-label="Skill activation rules performance">
-            <div class="activation-panel">
-              <div class="activation-card">
-                <header>
-                  <div>
-                    <span class="pack-kicker">Activation rules · Vercel eval</span>
-                    <h2>Vercel proved it: 53% → 79% → 100% with AGENTS.md</h2>
+            <div class="cmp-wrap">
+              <div class="cmp-cols">
+                <div class="cmp-col">
+                  <div class="cmp-col-label">not invoked</div>
+                  <div class="cmp-box">
+                    <span class="cmp-agent-label">skill exists</span>
                   </div>
-                  <span class="evidence-pill">100% activation</span>
-                </header>
-
-                <div class="activation-grid">
-                  <div class="activation-stat">
-                    <b>56%</b>
-                    <span>of evals skipped the installed skill by default</span>
-                  </div>
-                  <div class="activation-stat">
-                    <b>79%</b>
-                    <span>pass rate with explicit skill instructions</span>
-                  </div>
-                  <div class="activation-stat is-floom">
-                    <b>100%</b>
-                    <span>activation with Floom AGENTS.md rules in every pack</span>
+                  <div class="cmp-arrow">↓</div>
+                  <div class="cmp-bar-wrap">
+                    <div class="cmp-bar" style="--fill: 44%"></div>
+                    <span class="cmp-bar-label">skipped 56%</span>
                   </div>
                 </div>
-
-                <div class="activation-rule">
-                  <strong>Floom packages the instruction that tells your agent when to load the skill.</strong>
-                  <span>rules included</span>
+                <div class="cmp-col cmp-col--active">
+                  <div class="cmp-col-label">with AGENTS.md</div>
+                  <div class="cmp-box cmp-box--active">
+                    <span class="cmp-agent-label">skill invoked</span>
+                  </div>
+                  <div class="cmp-arrow">↓</div>
+                  <div class="cmp-bar-wrap">
+                    <div class="cmp-bar cmp-bar--active" style="--fill: 100%"></div>
+                    <span class="cmp-bar-label cmp-bar-label--lift">100% activation</span>
+                  </div>
                 </div>
               </div>
-              <div class="activation-source">
-                <strong>Vercel found agents skipped 56% of installed skills by default. AGENTS.md hit 100%.</strong>
-                <a href="https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals" target="_blank" rel="noopener">Source ↗</a>
+              <div class="cmp-finding">
+                <span class="cmp-finding-kicker">Vercel eval</span>
+                <span class="cmp-finding-text">Floom ships AGENTS.md with every skill.</span>
               </div>
             </div>
           </div>
@@ -1661,7 +1644,7 @@
           </details>
           <details class="faq-item">
             <summary>How do skills improve my agent?</summary>
-            <p>Skills give your agent focused procedures, examples, and checks for a task. In SkillsBench, curated skills added +18.6% on average. Self-generated and kitchen-sink installs hurt performance.</p>
+            <p>Skills give your agent focused procedures, examples, and checks for a task. In SkillsBench, curated skills added +16.2pp on average. Self-generated and bulk installs hurt performance.</p>
           </details>
           <details class="faq-item">
             <summary>Where do the 65 skills come from?</summary>
@@ -1686,11 +1669,6 @@
         <div class="install-cta-wrap install-cta-wrap--final">
           <button class="install-cta install-cta--final button" type="button" data-copy="npx @floomhq/starter install" aria-label="Add to your agent: copies the install command to clipboard">
             <svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
-            <span class="install-cta-tooltip" role="tooltip">
-              <span class="tooltip-line">Copies a command that installs 65 curated skills into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
-              <code class="tooltip-cmd">npx @floomhq/starter install</code>
-              <span class="tooltip-hint">Click to copy</span>
-            </span>
           </button>
         </div>
       </section>
