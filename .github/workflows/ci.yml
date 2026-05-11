@@ -95,10 +95,17 @@ jobs:
           ./node_modules/.bin/starter install --harness claude --profiles core --yes
           # CLI 0.2.3 writes globally to ~/.claude/skills. CLI 0.2.4+ adds project-local
           # default at ./.claude/skills. Accept either layout to keep CI green across the
-          # version transition.
-          COUNT=$(( $(find "$HOME/.claude/skills" -name SKILL.md 2>/dev/null | wc -l) + $(find ./.claude/skills -name SKILL.md 2>/dev/null | wc -l) ))
+          # version transition. Use || true so set -e does not fail when one path is absent.
+          GLOBAL_COUNT=$(find "$HOME/.claude/skills" -name SKILL.md 2>/dev/null | wc -l || true)
+          LOCAL_COUNT=$(find ./.claude/skills -name SKILL.md 2>/dev/null | wc -l || true)
+          COUNT=$((GLOBAL_COUNT + LOCAL_COUNT))
+          echo "Global SKILL.md count: $GLOBAL_COUNT"
+          echo "Local SKILL.md count: $LOCAL_COUNT"
+          echo "Total: $COUNT"
           if [ "$COUNT" -lt 5 ]; then
             echo "::error::Only $COUNT SKILL.md files written, expected at least 5"
+            ls -la "$HOME/.claude/" 2>/dev/null || echo "no global ~/.claude"
+            ls -la ./.claude/ 2>/dev/null || echo "no local ./.claude"
             exit 1
           fi
           echo "OK: $COUNT skill files written"
