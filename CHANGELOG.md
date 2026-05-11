@@ -2,9 +2,20 @@
 
 ## v0.2.4 - 2026-05-11
 
+### Repo
+
 - Repo flattened to single-pack layout (`manifest.json` + `skills/` at root, `cli/` subfolder).
 - CLI `MANIFEST_BASE_URL` updated to flat path.
 - Cron audit: 5 assertion tests added covering enrichment preservation, locked-65 enforcement, no auto-add, fetch failure resilience.
+- Legacy v0.1 `bin/floom-packs.mjs`, top-level `package.json`, and `ARCHITECTURE.md` removed.
+
+### CLI hardening
+
+- **Project-local install is now the default.** Skills land in `<cwd>/.claude/skills/`, `<cwd>/.codex/skills/`, etc. Pass `--global` to opt into the previous machine-wide behaviour (writes to `~/.claude/`, `~/.codex/`, etc.). The CLI prints which scope it is using on every install. If the current directory has no project markers (no `package.json`, `.git`, etc.), the CLI asks once before scaffolding (or auto-confirms with `--yes`).
+- **`uninstall` and `update` are first-class commands.** `uninstall` is an alias for `remove --all` in the current scope. `update` re-fetches the manifest and per-skill JSONs, re-installs only the skills whose remote version is newer, and never overwrites files you have customised.
+- **Gemini is explicitly rejected.** `--harness gemini` (or any unknown harness) prints a clear error and exits `1`.
+- **Better partial-failure errors.** When some skills fail to fetch, the summary now reads `Installed N of M skills. K skills failed to fetch SKILL.md content. They were skipped. Failed skills: a, b, c (and N more). Re-run with --verbose for the per-skill fetch errors.` Exit code is `0` on partial success and `1` only when zero skills install.
+- **`--version` / `-v` print just the version string** (e.g. `0.2.4`).
 
 ## v0.2.3 - 2026-05-11
 

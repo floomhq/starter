@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * @floomhq/starter — CLI entry point
+ * @floomhq/starter, CLI entry point
  *
  * Install curated AI agent skills for Claude Code, Codex, Cursor, OpenCode, and Kimi.
  *
@@ -10,13 +10,19 @@
  *   npx @floomhq/starter install --all
  *   npx @floomhq/starter init
  *   npx @floomhq/starter list
+ *   npx @floomhq/starter update
+ *   npx @floomhq/starter uninstall
  *   npx @floomhq/starter remove --all
+ *
+ * Scope flags:
+ *   (default)        install/uninstall in the current directory (./.claude/, ./.codex/, etc.)
+ *   --global         operate machine-wide (~/.claude/, ~/.codex/, etc.)
  */
 
-import { install, remove, list } from "../src/install.js";
+import { install, remove, uninstall, update, list } from "../src/install.js";
 import { runInit } from "../src/init-interactive.js";
 
-const PACKAGE_VERSION = "0.2.3";
+const PACKAGE_VERSION = "0.2.4";
 
 function usage() {
   return `
@@ -25,10 +31,16 @@ function usage() {
   Install curated AI skills for Claude Code, Codex, Cursor, OpenCode, and Kimi.
 
   Commands:
-    install        Install skills to detected agents
+    install        Install skills to detected agents (project-local by default)
     init           Interactive: pick your role, auto-install matching profiles
     list           Show installed skills
+    update         Re-fetch newer skills, preserve user-modified files
+    uninstall      Remove all installed skills (alias for \`remove --all\`)
     remove --all   Remove all installed skills
+
+  Scope flags:
+    (default)         project-local: writes to <cwd>/.claude/, etc.
+    --global          machine-wide: writes to ~/.claude/, etc.
 
   Install flags:
     --profiles <ids>    Comma-separated profile IDs (core, dev, writing, research,
@@ -39,6 +51,7 @@ function usage() {
                         (default: auto-detect installed agents)
     --force             Overwrite existing skills
     --dry-run           Print plan without installing
+    --verbose           Print per-skill fetch errors
     --yes               Skip interactive prompts (alias: --non-interactive)
     --non-interactive   Same as --yes
 
@@ -46,8 +59,11 @@ function usage() {
     npx @floomhq/starter install --profiles core,dev
     npx @floomhq/starter install --skills pr-review,task-brief --harness claude
     npx @floomhq/starter install --all
+    npx @floomhq/starter install --global --profiles core
     npx @floomhq/starter init
     npx @floomhq/starter list
+    npx @floomhq/starter update
+    npx @floomhq/starter uninstall
     npx @floomhq/starter remove --all
 `.trim();
 }
@@ -63,7 +79,15 @@ function parseArgs(argv) {
       throw new Error(`Unexpected argument: ${arg}`);
     }
     const key = arg.slice(2);
-    const boolFlags = ["all", "force", "dry-run", "yes", "non-interactive"];
+    const boolFlags = [
+      "all",
+      "force",
+      "dry-run",
+      "yes",
+      "non-interactive",
+      "global",
+      "verbose",
+    ];
     if (boolFlags.includes(key)) {
       // --non-interactive is an alias for --yes
       if (key === "non-interactive") {
@@ -98,6 +122,25 @@ function formatProfiles(str) {
   return splitList(str);
 }
 
+/**
+ * Build the shared opts shape that install/update/remove/uninstall expect.
+ */
+function commonOpts(flags) {
+  return {
+    profiles: formatProfiles(flags.profiles),
+    skills: splitList(flags.skills),
+    all: Boolean(flags.all),
+    harness: splitList(flags.harness),
+    root: flags.root || null,
+    force: Boolean(flags.force),
+    dryRun: Boolean(flags["dry-run"]),
+    yes: Boolean(flags.yes),
+    verbose: Boolean(flags.verbose),
+    globalScope: Boolean(flags.global),
+    log,
+  };
+}
+
 async function main() {
   const { command, flags } = parseArgs(process.argv);
 
@@ -113,18 +156,9 @@ async function main() {
 
   if (command === "install") {
     log("");
-    log("  Floom Starter — installing skills...");
+    log("  Floom Starter, installing skills...");
     log("");
-    const result = await install({
-      profiles: formatProfiles(flags.profiles),
-      skills: splitList(flags.skills),
-      all: Boolean(flags.all),
-      harness: splitList(flags.harness),
-      root: flags.root || null,
-      force: Boolean(flags.force),
-      dryRun: Boolean(flags["dry-run"]),
-      log,
-    });
+    const result = await install(commonOpts(flags));
     if (result && result.failed) {
       process.exit(1);
     }
@@ -136,6 +170,9 @@ async function main() {
       harness: splitList(flags.harness),
       root: flags.root || null,
       force: Boolean(flags.force),
+      yes: Boolean(flags.yes),
+      verbose: Boolean(flags.verbose),
+      globalScope: Boolean(flags.global),
       log,
     });
     return;
@@ -145,22 +182,40 @@ async function main() {
     log("");
     list({
       root: flags.root || null,
+      globalScope: Boolean(flags.global),
       log,
     });
     return;
   }
 
+  if (command === "update") {
+    log("");
+    const result = await update(commonOpts(flags));
+    if (result && result.failed) {
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (command === "uninstall") {
+    log("");
+    log("  Floom Starter, uninstalling skills...");
+    log("");
+    const result = await uninstall(commonOpts(flags));
+    if (result && result.failed) {
+      process.exit(1);
+    }
+    return;
+  }
+
   if (command === "remove") {
     log("");
-    log("  Floom Starter — removing skills...");
+    log("  Floom Starter, removing skills...");
     log("");
-    await remove({
-      all: Boolean(flags.all),
-      harness: splitList(flags.harness),
-      root: flags.root || null,
-      dryRun: Boolean(flags["dry-run"]),
-      log,
-    });
+    const result = await remove(commonOpts(flags));
+    if (result && result.failed) {
+      process.exit(1);
+    }
     return;
   }
 

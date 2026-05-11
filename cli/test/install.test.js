@@ -33,7 +33,7 @@ function tmpRoot(label) {
 
 test("bundled fallback manifest exists and has required fields", () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "fallback-manifest.json"), "utf8"));
-  assert.equal(manifest.id, "starter");
+  assert.equal(manifest.pack, "floom-starter");
   assert.ok(Array.isArray(manifest.profiles));
   assert.ok(manifest.profiles.length >= 11, `Expected >=11 profiles, got ${manifest.profiles.length}`);
   assert.ok(Array.isArray(manifest.skills));
@@ -260,4 +260,46 @@ test("remove --all removes skills and strips activation block", () => {
     const content = fs.readFileSync(path.join(root, "claude", "CLAUDE.md"), "utf8");
     assert.equal(content.includes("<!-- FLOOM-START -->"), false, "FLOOM block should be removed");
   }
+});
+
+// ─── 0.2.4 hardening: --version, gemini reject, uninstall alias ─────────────
+
+test("--version prints just the version number", () => {
+  const output = run(["--version"]).trim();
+  assert.match(output, /^\d+\.\d+\.\d+$/, `Expected semver, got: ${JSON.stringify(output)}`);
+});
+
+test("-v prints just the version number", () => {
+  const output = run(["-v"]).trim();
+  assert.match(output, /^\d+\.\d+\.\d+$/, `Expected semver, got: ${JSON.stringify(output)}`);
+});
+
+test("--harness gemini is explicitly rejected with exit 1", () => {
+  let threw = false;
+  let combined = "";
+  try {
+    run(["install", "--harness", "gemini", "--yes"]);
+  } catch (err) {
+    threw = true;
+    combined = String(err.stdout || "") + String(err.stderr || "");
+    assert.equal(err.status, 1, `Expected exit 1 on gemini reject, got ${err.status}`);
+  }
+  assert.ok(threw, "CLI should have exited non-zero for --harness gemini");
+  assert.match(combined, /Gemini is not currently supported/);
+  assert.match(combined, /Claude Code, Codex, Cursor, Kimi, OpenCode/);
+});
+
+test("uninstall is an alias for remove --all in the same scope", () => {
+  const root = tmpRoot("uninstall-alias");
+  run(["install", "--profiles", "core", "--harness", "claude", "--root", root]);
+  assert.ok(
+    fs.existsSync(path.join(root, "claude", "skills", "find-skills", "SKILL.md")),
+    "skill should exist after install",
+  );
+  run(["uninstall", "--harness", "claude", "--root", root, "--yes"]);
+  assert.equal(
+    fs.existsSync(path.join(root, "claude", "skills", "find-skills", "SKILL.md")),
+    false,
+    "uninstall should remove the skill",
+  );
 });
