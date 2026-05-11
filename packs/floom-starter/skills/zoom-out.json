@@ -7,10 +7,16 @@
   "install_count_skills_sh": 53778,
   "license": "MIT",
   "description": "Establishes broader context before deep-diving into a topic.",
-  "fires_when": "",
-  "skill_md_content": "",
-  "skill_md_url": "",
-  "skill_md_size_bytes": 0,
-  "files": [],
-  "fetched_at": ""
+  "fires_when": "\"give me context on X\", \"what's the bigger picture\"",
+  "skill_md_content": "---\nname: zoom-out\ndescription: Tell the agent to zoom out and give broader context or a higher-level perspective. Use when you're unfamiliar with a section of code or need to understand how it fits into the bigger picture.\ndisable-model-invocation: true\n---\n\nI don't know this area of code well. Go up a layer of abstraction. Give me a map of all the relevant modules and callers, using the project's domain glossary vocabulary.\n",
+  "skill_md_url": "https://raw.githubusercontent.com/mattpocock/skills/main/skills/engineering/zoom-out/SKILL.md",
+  "skill_md_size_bytes": 430,
+  "files": [
+    {
+      "name": "SKILL.md",
+      "size_bytes": 430,
+      "type": "main"
+    }
+  ],
+  "fetched_at": "2026-05-11T00:52:32.983849+00:00"
 }

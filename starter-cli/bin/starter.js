@@ -16,7 +16,7 @@
 import { install, remove, list } from "../src/install.js";
 import { runInit } from "../src/init-interactive.js";
 
-const PACKAGE_VERSION = "0.1.0";
+const PACKAGE_VERSION = "0.2.2";
 
 function usage() {
   return `
@@ -39,6 +39,8 @@ function usage() {
                         (default: auto-detect installed agents)
     --force             Overwrite existing skills
     --dry-run           Print plan without installing
+    --yes               Skip interactive prompts (alias: --non-interactive)
+    --non-interactive   Same as --yes
 
   Examples:
     npx @floomhq/starter install --profiles core,dev
@@ -61,9 +63,14 @@ function parseArgs(argv) {
       throw new Error(`Unexpected argument: ${arg}`);
     }
     const key = arg.slice(2);
-    const boolFlags = ["all", "force", "dry-run", "yes"];
+    const boolFlags = ["all", "force", "dry-run", "yes", "non-interactive"];
     if (boolFlags.includes(key)) {
-      flags[key] = true;
+      // --non-interactive is an alias for --yes
+      if (key === "non-interactive") {
+        flags["yes"] = true;
+      } else {
+        flags[key] = true;
+      }
       continue;
     }
     const value = rest[i + 1];
@@ -108,7 +115,7 @@ async function main() {
     log("");
     log("  Floom Starter — installing skills...");
     log("");
-    await install({
+    const result = await install({
       profiles: formatProfiles(flags.profiles),
       skills: splitList(flags.skills),
       all: Boolean(flags.all),
@@ -118,6 +125,9 @@ async function main() {
       dryRun: Boolean(flags["dry-run"]),
       log,
     });
+    if (result && result.failed) {
+      process.exit(1);
+    }
     return;
   }
 

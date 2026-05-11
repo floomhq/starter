@@ -207,27 +207,44 @@ export async function install(opts = {}) {
     results.push({ agent, skills: agentResults });
   }
 
-  // 6. Write activation companion
+  // 6. Compute results FIRST so we know which skills actually landed.
+  // Manifest + activation block must reflect RESULTS, not INTENT.
+  const allSkillResults = results.flatMap((r) => r.skills);
+  const written = allSkillResults.filter((s) => s.action === "written").length;
+  const skipped = allSkillResults.filter((s) => s.action === "skipped").length;
+  const kept = allSkillResults.filter((s) => s.action === "kept").length;
+  const errors = allSkillResults.filter((s) => s.action === "error").length;
+
+  // A skill is "successfully installed on at least one agent" if any of its
+  // per-agent results is written / skipped / kept (i.e. file exists on disk).
+  const successfulActions = new Set(["written", "skipped", "kept"]);
+  const successfulSlugs = new Set(
+    allSkillResults
+      .filter((r) => successfulActions.has(r.action))
+      .map((r) => r.slug)
+  );
+  const installedSkills = skills.filter((s) => successfulSlugs.has(s.slug));
+
+  // 7. Write activation companion (from RESULTS — only successful skills)
   const activationFiles = [];
   for (const agent of agents) {
-    const block = buildActivationBlock(agent, skills);
+    const block = buildActivationBlock(agent, installedSkills);
     upsertActivationBlock(agent.activationFile, block);
     activationFiles.push(agent.activationFile);
   }
 
-  // 7. Write local manifest
+  // 8. Write local manifest (from RESULTS — only successful skills)
   const manifestPath = opts.root
     ? path.join(opts.root, ".floom", "manifest.json")
     : MANIFEST_PATH;
 
-  // Override MANIFEST_PATH for test root
   if (opts.root) {
     fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
     const now = new Date().toISOString();
     const localManifest = {
       version: "1",
       updatedAt: now,
-      installed_skills: skills.map((skill) => ({
+      installed_skills: installedSkills.map((skill) => ({
         slug: skill.slug,
         name: skill.name,
         source: skill.source,
@@ -244,27 +261,39 @@ export async function install(opts = {}) {
     };
     fs.writeFileSync(manifestPath, JSON.stringify(localManifest, null, 2) + "\n", "utf8");
   } else {
-    writeLocalManifest(agents, skills, manifest);
+    writeLocalManifest(agents, installedSkills, manifest);
   }
 
-  // 8. Print summary
-  const allSkillResults = results.flatMap((r) => r.skills);
-  const written = allSkillResults.filter((s) => s.action === "written").length;
-  const skipped = allSkillResults.filter((s) => s.action === "skipped").length;
-  const kept = allSkillResults.filter((s) => s.action === "kept").length;
-  const errors = allSkillResults.filter((s) => s.action === "error").length;
-
+  // 9. Print summary
   log("");
   log(`  ${written} skills installed, ${kept} skipped (your custom versions kept)`);
   if (skipped > 0) log(`  ${skipped} already up to date (no changes)`);
-  if (errors > 0) log(`  Errors: ${errors}`);
+  if (errors > 0) {
+    log(`  ${errors} skills failed to install. First few errors:`);
+    const errored = allSkillResults.filter((s) => s.action === "error").slice(0, 5);
+    for (const e of errored) {
+      log(`    ${e.slug}: ${e.error || "unknown error"}`);
+    }
+  }
   log(`  Activation rules written to:`);
   for (const f of activationFiles) log(`    ${f}`);
   log(`  Manifest: ${manifestPath}`);
   log("");
   log(`  Try: ask your agent "review the changes in this branch" — pr-review will fire.`);
 
-  return { agents, skills, results, manifestPath, activationFiles };
+  // 10. Decide exit signal. If nothing landed, this is a hard failure.
+  // The CLI entry point checks the `failed` field and exits non-zero.
+  const failed = errors > 0 && installedSkills.length === 0;
+  if (failed) {
+    log("");
+    log(`  Install FAILED: 0 skills written across all agents (${errors} errors).`);
+    log(`  Likely cause: per-skill JSONs missing skill_md_content or network fetch blocked.`);
+  } else if (errors > 0) {
+    log("");
+    log(`  WARN: ${errors} skill(s) failed to install. ${installedSkills.length} succeeded.`);
+  }
+
+  return { agents, skills, installedSkills, results, manifestPath, activationFiles, failed, errors, written, kept, skipped };
 }
 
 /**

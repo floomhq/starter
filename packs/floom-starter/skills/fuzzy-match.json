@@ -3,14 +3,20 @@
   "name": "fuzzy-match",
   "publisher": "benchflow-ai",
   "source_repo": "https://github.com/benchflow-ai/skillsbench",
-  "skills_sh_url": "https://skills.sh/benchflow-ai/skillsbench/fuzzy-match",
+  "skills_sh_url": null,
   "install_count_skills_sh": null,
   "license": "Apache-2.0",
   "description": "Reconciles entity names across datasets using fuzzy string matching.",
-  "fires_when": "",
-  "skill_md_content": "",
-  "skill_md_url": "",
-  "skill_md_size_bytes": 0,
-  "files": [],
-  "fetched_at": ""
+  "fires_when": "\"match these lists\", \"find duplicates\", \"reconcile company names\"",
+  "skill_md_content": "---\nname: fuzzy-match\ndescription: A toolkit for fuzzy string matching and data reconciliation. Useful for matching entity names (companies, people) across different datasets where spelling variations, typos, or formatting differences exist.\nlicense: MIT\n---\n\n# Fuzzy Matching Guide\n\n## Overview\n\nThis skill provides methods to compare strings and find the best matches using Levenshtein distance and other similarity metrics. It is essential when joining datasets on string keys that are not identical.\n\n## Quick Start\n\n```python\nfrom difflib import SequenceMatcher\n\ndef similarity(a, b):\n    return SequenceMatcher(None, a, b).ratio()\n\nprint(similarity(\"Apple Inc.\", \"Apple Incorporated\"))\n# Output: 0.7...\n```\n\n## Python Libraries\n\n### difflib (Standard Library)\n\nThe `difflib` module provides classes and functions for comparing sequences.\n\n#### Basic Similarity\n\n```python\nfrom difflib import SequenceMatcher\n\ndef get_similarity(str1, str2):\n    \"\"\"Returns a ratio between 0 and 1.\"\"\"\n    return SequenceMatcher(None, str1, str2).ratio()\n\n# Example\ns1 = \"Acme Corp\"\ns2 = \"Acme Corporation\"\nprint(f\"Similarity: {get_similarity(s1, s2)}\")\n```\n\n#### Finding Best Match in a List\n\n```python\nfrom difflib import get_close_matches\n\nword = \"appel\"\npossibilities = [\"ape\", \"apple\", \"peach\", \"puppy\"]\nmatches = get_close_matches(word, possibilities, n=1, cutoff=0.6)\nprint(matches)\n# Output: ['apple']\n```\n\n### rapidfuzz (Recommended for Performance)\n\nIf `rapidfuzz` is available (pip install rapidfuzz), it is much faster and offers more metrics.\n\n```python\nfrom rapidfuzz import fuzz, process\n\n# Simple Ratio\nscore = fuzz.ratio(\"this is a test\", \"this is a test!\")\nprint(score)\n\n# Partial Ratio (good for substrings)\nscore = fuzz.partial_ratio(\"this is a test\", \"this is a test!\")\nprint(score)\n\n# Extraction\nchoices = [\"Atlanta Falcons\", \"New York Jets\", \"New York Giants\", \"Dallas Cowboys\"]\nbest_match = process.extractOne(\"new york jets\", choices)\nprint(best_match)\n# Output: ('New York Jets', 100.0, 1)\n```\n\n## Common Patterns\n\n### Normalization before Matching\n\nAlways normalize strings before comparing to improve accuracy.\n\n```python\nimport re\n\ndef normalize(text):\n    # Convert to lowercase\n    text = text.lower()\n    # Remove special characters\n    text = re.sub(r'[^\\w\\s]', '', text)\n    # Normalize whitespace\n    text = \" \".join(text.split())\n    # Common abbreviations\n    text = text.replace(\"limited\", \"ltd\").replace(\"corporation\", \"corp\")\n    return text\n\ns1 = \"Acme  Corporation, Inc.\"\ns2 = \"acme corp inc\"\nprint(normalize(s1) == normalize(s2))\n```\n\n### Entity Resolution\n\nWhen matching a list of dirty names to a clean database:\n\n```python\nclean_names = [\"Google LLC\", \"Microsoft Corp\", \"Apple Inc\"]\ndirty_names = [\"google\", \"Microsft\", \"Apple\"]\n\nresults = {}\nfor dirty in dirty_names:\n    # simple containment check first\n    match = None\n    for clean in clean_names:\n        if dirty.lower() in clean.lower():\n            match = clean\n            break\n\n    # fallback to fuzzy\n    if not match:\n        matches = get_close_matches(dirty, clean_names, n=1, cutoff=0.6)\n        if matches:\n            match = matches[0]\n\n    results[dirty] = match\n```\n",
+  "skill_md_url": "https://raw.githubusercontent.com/benchflow-ai/skillsbench/main/tasks/invoice-fraud-detection/environment/skills/fuzzy-match/SKILL.md",
+  "skill_md_size_bytes": 3173,
+  "files": [
+    {
+      "name": "SKILL.md",
+      "size_bytes": 3173,
+      "type": "main"
+    }
+  ],
+  "fetched_at": "2026-05-11T00:52:32.882433+00:00"
 }

@@ -2,15 +2,21 @@
   "slug": "workplan",
   "name": "workplan",
   "publisher": "floomhq",
-  "source_repo": "",
-  "skills_sh_url": "",
+  "source_repo": "https://github.com/floomhq/floom",
+  "skills_sh_url": null,
   "install_count_skills_sh": null,
-  "license": "Proprietary",
+  "license": "Proprietary (Floom team)",
   "description": "Context-compaction-safe external runbook; no skills.sh equivalent for this specific compaction-recovery pattern.",
-  "fires_when": "",
-  "skill_md_content": "",
-  "skill_md_url": "",
-  "skill_md_size_bytes": 0,
-  "files": [],
-  "fetched_at": ""
+  "fires_when": "\"create a runbook\", \"where was I\", any 2+ step task, session recovery after compaction",
+  "skill_md_content": "---\nname: workplan\ndescription: >\n  Create, update, or close work plans for multi-step tasks. Use when starting\n  refactors, bug lists, feature work, migrations, or any task with 2+ steps.\n  Also use after auto-compaction to re-orient. Triggers: \"workplan\", \"work plan\",\n  \"create a plan\", \"what's the plan\", \"where was I\", or when Claude detects\n  a multi-step task that needs tracking.\n---\n\n# Work Plan Skill\n\nWork plans are timestamped markdown files that survive auto-compaction. They are your external brain for multi-step work.\n\n## File Convention\n\n- **Location:** Project root, gitignored\n- **Name:** `WORKPLAN-YYYYMMDD-slug.md` (e.g., `WORKPLAN-20260228-auth-refactor.md`)\n- **One file per task/phase.** Do not reuse old workplans. Start fresh for each distinct effort.\n\n## Actions\n\n### Create (`/workplan` or `/workplan create`)\n\n1. **Read first.** Before writing the plan, read all relevant files, issues, context.\n2. **Ensure `.gitignore` includes `WORKPLAN-*.md`** (add if missing).\n3. **Pick a scope mode** before writing the plan:\n   - **EXPANSION**: \"What's the 10-star version?\" Dream big, push scope up.\n   - **HOLD**: \"Make this bulletproof.\" Scope is right, maximize rigor.\n   - **REDUCTION**: \"What's the minimum that ships value?\" Cut ruthlessly.\n\n   Defaults: greenfield feature = EXPANSION, bug fix / launch prep = HOLD, time-constrained = REDUCTION.\n\n4. **Create the file** with this template:\n\n```markdown\n# Work Plan: [Title]\n\nCreated: YYYY-MM-DD HH:MM\nLast updated: YYYY-MM-DD HH:MM\nStatus: IN PROGRESS\nMode: HOLD / EXPANSION / REDUCTION\n\n## Context\n\n[Why this work exists. The problem. Root cause. Key constraints. Links to issues/PRs.]\n\n## Roadmap\n\n- [ ] 1. Step description\n- [ ] 2. Step description\n- [ ] 3. Step description\n\n## Decisions\n\n[Log architectural or approach decisions with timestamps]\n- [HH:MM] Chose X over Y because Z\n\n## Discovered Issues\n\n[Things found along the way that were not in the original scope]\n- [HH:MM] Found ... while working on step 2\n\n## Verification Log\n\n[Each completed item gets a verification entry]\n- [HH:MM] Step 1: VERIFIED - ran `npm test`, all 42 tests pass\n- [HH:MM] Step 3: VERIFIED - manually tested login flow, works with OAuth and email\n```\n\n### Update (`/workplan update`)\n\n1. Read the active `WORKPLAN-*.md` file(s) in the project root.\n2. Update \"Last updated\" timestamp.\n3. Check off completed items with verification timestamps.\n4. Add any new discoveries or decisions.\n5. Report current status to Federico.\n\n### Close (`/workplan close`)\n\n1. Read the active workplan.\n2. Verify ALL items are checked off with verification timestamps.\n3. Run final verification (build, tests, manual checks).\n4. Change status to `DONE`.\n5. Add final summary:\n```markdown\n## Completed\n\nClosed: YYYY-MM-DD HH:MM\nAll N items implemented and verified. Build passes. Tests pass.\n```\n\n### Resume (after compaction)\n\nWhen context has been compacted or you're unsure where you left off:\n\n1. Find active workplans: look for `WORKPLAN-*.md` in project root.\n2. Read the workplan file.\n3. Identify the first unchecked item.\n4. Continue from there.\n\n## Rules\n\n1. **VERIFIED means tested.** Not \"I think it works.\" Run it, see it pass, then mark verified. Include what you ran and the result.\n2. **Update timestamps on every change.** Future-you (post-compaction) depends on this.\n3. **New discoveries go in immediately.** Do not keep them only in context.\n4. **Never delete the plan** until Federico confirms the work is done.\n5. **One concern per checklist item.** Break big steps into smaller verifiable pieces.\n6. **If a step fails verification,** log the failure, keep it unchecked, add what went wrong.\n",
+  "skill_md_url": "https://raw.githubusercontent.com/floomhq/floom/main/examples/workplan/SKILL.md",
+  "skill_md_size_bytes": 3660,
+  "files": [
+    {
+      "name": "SKILL.md",
+      "size_bytes": 3660,
+      "type": "main"
+    }
+  ],
+  "fetched_at": "2026-05-11T00:52:32.978167+00:00"
 }

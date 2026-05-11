@@ -7,10 +7,16 @@
   "install_count_skills_sh": 60336,
   "license": "MIT",
   "description": "Synthesizes strategy and discussions into structured PRD-style documents.",
-  "fires_when": "",
-  "skill_md_content": "",
-  "skill_md_url": "",
-  "skill_md_size_bytes": 0,
-  "files": [],
-  "fetched_at": ""
+  "fires_when": "\"turn this into a document\", \"roadmap from these signals\"",
+  "skill_md_content": "---\nname: to-prd\ndescription: Turn the current conversation context into a PRD and publish it to the project issue tracker. Use when user wants to create a PRD from the current context.\n---\n\nThis skill takes the current conversation context and codebase understanding and produces a PRD. Do NOT interview the user — just synthesize what you already know.\n\nThe issue tracker and triage label vocabulary should have been provided to you — run `/setup-matt-pocock-skills` if not.\n\n## Process\n\n1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the PRD, and respect any ADRs in the area you're touching.\n\n2. Sketch out the major modules you will need to build or modify to complete the implementation. Actively look for opportunities to extract deep modules that can be tested in isolation.\n\nA deep module (as opposed to a shallow module) is one which encapsulates a lot of functionality in a simple, testable interface which rarely changes.\n\nCheck with the user that these modules match their expectations. Check with the user which modules they want tests written for.\n\n3. Write the PRD using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.\n\n<prd-template>\n\n## Problem Statement\n\nThe problem that the user is facing, from the user's perspective.\n\n## Solution\n\nThe solution to the problem, from the user's perspective.\n\n## User Stories\n\nA LONG, numbered list of user stories. Each user story should be in the format of:\n\n1. As an <actor>, I want a <feature>, so that <benefit>\n\n<user-story-example>\n1. As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending\n</user-story-example>\n\nThis list of user stories should be extremely extensive and cover all aspects of the feature.\n\n## Implementation Decisions\n\nA list of implementation decisions that were made. This can include:\n\n- The modules that will be built/modified\n- The interfaces of those modules that will be modified\n- Technical clarifications from the developer\n- Architectural decisions\n- Schema changes\n- API contracts\n- Specific interactions\n\nDo NOT include specific file paths or code snippets. They may end up being outdated very quickly.\n\nException: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts — not a working demo, just the important bits.\n\n## Testing Decisions\n\nA list of testing decisions that were made. Include:\n\n- A description of what makes a good test (only test external behavior, not implementation details)\n- Which modules will be tested\n- Prior art for the tests (i.e. similar types of tests in the codebase)\n\n## Out of Scope\n\nA description of the things that are out of scope for this PRD.\n\n## Further Notes\n\nAny further notes about the feature.\n\n</prd-template>\n",
+  "skill_md_url": "https://raw.githubusercontent.com/mattpocock/skills/main/skills/engineering/to-prd/SKILL.md",
+  "skill_md_size_bytes": 3113,
+  "files": [
+    {
+      "name": "SKILL.md",
+      "size_bytes": 3113,
+      "type": "main"
+    }
+  ],
+  "fetched_at": "2026-05-11T00:52:32.958156+00:00"
 }
