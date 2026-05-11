@@ -1,0 +1,5 @@
+/index.html
+/pricing.html
+/blog.html
+/post1.html
+/contact.html

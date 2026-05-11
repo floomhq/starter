@@ -1,0 +1,27 @@
+{
+  "pack": "seo-audit-v0",
+  "run": "20260511T224300Z",
+  "baseline_avg_pass_rate": 0.0,
+  "with_skill_avg_pass_rate": 1.0,
+  "lift_pp": 100.0,
+  "tasks": [
+    {
+      "task_id": "seo.meta-canonical-robots-audit",
+      "baseline": 0.0,
+      "with_skill": 1.0,
+      "lift_pp": 100.0
+    },
+    {
+      "task_id": "seo.structured-data-validation",
+      "baseline": 0.0,
+      "with_skill": 1.0,
+      "lift_pp": 100.0
+    },
+    {
+      "task_id": "seo.internal-link-architecture",
+      "baseline": 0.0,
+      "with_skill": 1.0,
+      "lift_pp": 100.0
+    }
+  ]
+}

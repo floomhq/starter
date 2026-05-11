@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1.0",
+  "id": "seo-audit.technical-homepage-audit",
+  "skill": "seo-audit",
+  "task": "technical-homepage-audit",
+  "timeout_minutes": 2,
+  "conditions": ["baseline", "with_skill"],
+  "trials": 2,
+  "agent": "codex",
+  "model": "gpt-5.3-codex",
+  "expected_output": "output/result.json",
+  "verifier": "python3 verifier.py output/result.json",
+  "agent_command": {
+    "baseline": "echo '{\"status\": \"wrong\"}' > {output_path}",
+    "with_skill": "if [ -n \"${FLOOM_SKILL_PATH:-}\" ]; then echo '{\"status\": \"replace-this\"}' > {output_path}; else echo '{\"status\": \"wrong\"}' > {output_path}; fi"
+  }
+}

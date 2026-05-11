@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "id": "seo.meta-canonical-robots-audit",
+  "skill": "seo-audit",
+  "task": "meta-canonical-robots",
+  "timeout_minutes": 2,
+  "conditions": [
+    "baseline",
+    "with_skill"
+  ],
+  "trials": 1,
+  "agent": "codex",
+  "model": "gpt-5.3-codex",
+  "expected_output": "output/result.json",
+  "verifier": "python3 verifier.py output/result.json",
+  "agent_command": {
+    "baseline": "printf '%s' '{\"issues\":[{\"id\":\"robots-noindex-home\",\"url\":\"/index.html\",\"severity\":\"high\",\"details\":\"noindex present on homepage\"}]}' > {output_path}",
+    "with_skill": "printf '%s' '{\"issues\":[{\"id\":\"canonical-mismatch\",\"url\":\"/pricing.html\",\"severity\":\"high\",\"details\":\"canonical points to /blog.html\"},{\"id\":\"meta-description-missing\",\"url\":\"/pricing.html\",\"severity\":\"medium\",\"details\":\"missing meta description\"},{\"id\":\"robots-disallow-important\",\"url\":\"/pricing.html\",\"severity\":\"high\",\"details\":\"disallowed in robots.txt\"},{\"id\":\"robots-noindex-home\",\"url\":\"/index.html\",\"severity\":\"high\",\"details\":\"noindex present on homepage\"},{\"id\":\"sitemap-missing-url\",\"url\":\"/pricing.html\",\"severity\":\"medium\",\"details\":\"missing from sitemap\"},{\"id\":\"title-missing\",\"url\":\"/blog.html\",\"severity\":\"medium\",\"details\":\"missing title\"},{\"id\":\"title-missing\",\"url\":\"/pricing.html\",\"severity\":\"medium\",\"details\":\"empty title\"}]}' > {output_path}"
+  }
+}

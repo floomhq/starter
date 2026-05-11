@@ -1,0 +1,5 @@
+source,target
+/index.html,/pricing.html
+/index.html,/blog.html
+/blog.html,/post1.html
+/post1.html,/ghost.html

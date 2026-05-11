@@ -1,0 +1,5 @@
+{
+  "orphan_pages": ["/contact.html"],
+  "broken_links": [{"source":"/post1.html","target":"/ghost.html"}],
+  "max_click_depth": 2
+}

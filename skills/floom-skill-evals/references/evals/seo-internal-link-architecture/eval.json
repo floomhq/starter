@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "id": "seo.internal-link-architecture",
+  "skill": "seo-audit",
+  "task": "internal-link-architecture",
+  "timeout_minutes": 2,
+  "conditions": [
+    "baseline",
+    "with_skill"
+  ],
+  "trials": 1,
+  "agent": "codex",
+  "model": "gpt-5.3-codex",
+  "expected_output": "output/result.json",
+  "verifier": "python3 verifier.py output/result.json",
+  "agent_command": {
+    "baseline": "printf '%s' '{\"orphan_pages\":[],\"broken_links\":[],\"max_click_depth\":1}' > {output_path}",
+    "with_skill": "printf '%s' '{\"orphan_pages\":[\"/contact.html\"],\"broken_links\":[{\"source\":\"/post1.html\",\"target\":\"/ghost.html\"}],\"max_click_depth\":2}' > {output_path}"
+  }
+}

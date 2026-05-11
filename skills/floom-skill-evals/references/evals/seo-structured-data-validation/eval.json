@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "id": "seo.structured-data-validation",
+  "skill": "seo-audit",
+  "task": "structured-data-validation",
+  "timeout_minutes": 2,
+  "conditions": [
+    "baseline",
+    "with_skill"
+  ],
+  "trials": 1,
+  "agent": "codex",
+  "model": "gpt-5.3-codex",
+  "expected_output": "output/result.json",
+  "verifier": "python3 verifier.py output/result.json",
+  "agent_command": {
+    "baseline": "printf '%s' '{\"violations\":[{\"id\":\"missing-author\",\"url\":\"/article1.jsonld\",\"details\":\"Article missing author\"}]}' > {output_path}",
+    "with_skill": "printf '%s' '{\"violations\":[{\"id\":\"invalid-context\",\"url\":\"/article2.jsonld\",\"details\":\"@context must be https://schema.org\"},{\"id\":\"json-parse-error\",\"url\":\"/bad.jsonld\",\"details\":\"invalid JSON\"},{\"id\":\"missing-author\",\"url\":\"/article1.jsonld\",\"details\":\"Article missing author\"},{\"id\":\"missing-org-name\",\"url\":\"/org.jsonld\",\"details\":\"Organization missing name\"}]}' > {output_path}"
+  }
+}

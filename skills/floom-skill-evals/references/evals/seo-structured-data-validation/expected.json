@@ -1,0 +1,8 @@
+{
+  "violations": [
+    {"id":"invalid-context","url":"/article2.jsonld","details":"@context must be https://schema.org"},
+    {"id":"json-parse-error","url":"/bad.jsonld","details":"invalid JSON"},
+    {"id":"missing-author","url":"/article1.jsonld","details":"Article missing author"},
+    {"id":"missing-org-name","url":"/org.jsonld","details":"Organization missing name"}
+  ]
+}
