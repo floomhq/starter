@@ -1,6 +1,6 @@
 {
   "pack": "floom-starter",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "updated": "2026-05-11",
   "license": "MIT (pack); individual skills retain their own licenses — see README.md license table",
   "profiles": [
@@ -195,7 +195,8 @@
       "profiles": [
         "marketing"
       ],
-      "detail_url": "skills/ab-test-setup.json"
+      "detail_url": "skills/ab-test-setup.json",
+      "has_support_files": true
     },
     {
       "slug": "agent-browser",
@@ -219,7 +220,8 @@
       "profiles": [
         "marketing"
       ],
-      "detail_url": "skills/analytics-tracking.json"
+      "detail_url": "skills/analytics-tracking.json",
+      "has_support_files": true
     },
     {
       "slug": "audio-extractor",
@@ -231,7 +233,8 @@
       "profiles": [
         "video"
       ],
-      "detail_url": "skills/audio-extractor.json"
+      "detail_url": "skills/audio-extractor.json",
+      "has_support_files": true
     },
     {
       "slug": "audit",
@@ -243,7 +246,8 @@
       "profiles": [
         "design"
       ],
-      "detail_url": "skills/audit.json"
+      "detail_url": "skills/audit.json",
+      "has_support_files": true
     },
     {
       "slug": "brainstorming",
@@ -261,7 +265,8 @@
         "design",
         "video"
       ],
-      "detail_url": "skills/brainstorming.json"
+      "detail_url": "skills/brainstorming.json",
+      "has_support_files": true
     },
     {
       "slug": "brand-guidelines",
@@ -273,7 +278,8 @@
       "profiles": [
         "writing"
       ],
-      "detail_url": "skills/brand-guidelines.json"
+      "detail_url": "skills/brand-guidelines.json",
+      "has_support_files": true
     },
     {
       "slug": "churn-prevention",
@@ -285,7 +291,8 @@
       "profiles": [
         "sales"
       ],
-      "detail_url": "skills/churn-prevention.json"
+      "detail_url": "skills/churn-prevention.json",
+      "has_support_files": true
     },
     {
       "slug": "cold-email",
@@ -297,7 +304,8 @@
       "profiles": [
         "sales"
       ],
-      "detail_url": "skills/cold-email.json"
+      "detail_url": "skills/cold-email.json",
+      "has_support_files": true
     },
     {
       "slug": "content-strategy",
@@ -310,7 +318,8 @@
         "writing",
         "marketing"
       ],
-      "detail_url": "skills/content-strategy.json"
+      "detail_url": "skills/content-strategy.json",
+      "has_support_files": true
     },
     {
       "slug": "copy-editing",
@@ -322,7 +331,8 @@
       "profiles": [
         "writing"
       ],
-      "detail_url": "skills/copy-editing.json"
+      "detail_url": "skills/copy-editing.json",
+      "has_support_files": true
     },
     {
       "slug": "copywriting",
@@ -337,7 +347,8 @@
         "sales",
         "founder"
       ],
-      "detail_url": "skills/copywriting.json"
+      "detail_url": "skills/copywriting.json",
+      "has_support_files": true
     },
     {
       "slug": "critique",
@@ -349,7 +360,8 @@
       "profiles": [
         "design"
       ],
-      "detail_url": "skills/critique.json"
+      "detail_url": "skills/critique.json",
+      "has_support_files": true
     },
     {
       "slug": "diagnose",
@@ -362,7 +374,8 @@
         "dev",
         "ops"
       ],
-      "detail_url": "skills/diagnose.json"
+      "detail_url": "skills/diagnose.json",
+      "has_support_files": true
     },
     {
       "slug": "dispatching-parallel-agents",
@@ -449,7 +462,8 @@
       "profiles": [
         "design"
       ],
-      "detail_url": "skills/frontend-design.json"
+      "detail_url": "skills/frontend-design.json",
+      "has_support_files": true
     },
     {
       "slug": "fuzzy-match",
@@ -488,7 +502,8 @@
       "profiles": [
         "dev"
       ],
-      "detail_url": "skills/improve-codebase-architecture.json"
+      "detail_url": "skills/improve-codebase-architecture.json",
+      "has_support_files": true
     },
     {
       "slug": "internal-comms",
@@ -501,7 +516,8 @@
         "writing",
         "ops"
       ],
-      "detail_url": "skills/internal-comms.json"
+      "detail_url": "skills/internal-comms.json",
+      "has_support_files": true
     },
     {
       "slug": "just-scrape",
@@ -527,7 +543,8 @@
         "marketing",
         "founder"
       ],
-      "detail_url": "skills/launch-strategy.json"
+      "detail_url": "skills/launch-strategy.json",
+      "has_support_files": true
     },
     {
       "slug": "marketing-psychology",
@@ -539,7 +556,8 @@
       "profiles": [
         "marketing"
       ],
-      "detail_url": "skills/marketing-psychology.json"
+      "detail_url": "skills/marketing-psychology.json",
+      "has_support_files": true
     },
     {
       "slug": "memory-optimization",
@@ -551,7 +569,8 @@
       "profiles": [
         "data"
       ],
-      "detail_url": "skills/memory-optimization.json"
+      "detail_url": "skills/memory-optimization.json",
+      "has_support_files": true
     },
     {
       "slug": "next-best-practices",
@@ -563,7 +582,8 @@
       "profiles": [
         "dev"
       ],
-      "detail_url": "skills/next-best-practices.json"
+      "detail_url": "skills/next-best-practices.json",
+      "has_support_files": true
     },
     {
       "slug": "page-cro",
@@ -575,7 +595,8 @@
       "profiles": [
         "marketing"
       ],
-      "detail_url": "skills/page-cro.json"
+      "detail_url": "skills/page-cro.json",
+      "has_support_files": true
     },
     {
       "slug": "pdf",
@@ -590,7 +611,8 @@
         "founder",
         "data"
       ],
-      "detail_url": "skills/pdf.json"
+      "detail_url": "skills/pdf.json",
+      "has_support_files": true
     },
     {
       "slug": "playwright-best-practices",
@@ -602,7 +624,8 @@
       "profiles": [
         "dev"
       ],
-      "detail_url": "skills/playwright-best-practices.json"
+      "detail_url": "skills/playwright-best-practices.json",
+      "has_support_files": true
     },
     {
       "slug": "polish",
@@ -614,7 +637,8 @@
       "profiles": [
         "design"
       ],
-      "detail_url": "skills/polish.json"
+      "detail_url": "skills/polish.json",
+      "has_support_files": true
     },
     {
       "slug": "pricing-strategy",
@@ -626,7 +650,8 @@
       "profiles": [
         "founder"
       ],
-      "detail_url": "skills/pricing-strategy.json"
+      "detail_url": "skills/pricing-strategy.json",
+      "has_support_files": true
     },
     {
       "slug": "product-marketing-context",
@@ -638,7 +663,8 @@
       "profiles": [
         "founder"
       ],
-      "detail_url": "skills/product-marketing-context.json"
+      "detail_url": "skills/product-marketing-context.json",
+      "has_support_files": true
     },
     {
       "slug": "programmatic-seo",
@@ -650,7 +676,8 @@
       "profiles": [
         "marketing"
       ],
-      "detail_url": "skills/programmatic-seo.json"
+      "detail_url": "skills/programmatic-seo.json",
+      "has_support_files": true
     },
     {
       "slug": "python-parallelization",
@@ -662,7 +689,8 @@
       "profiles": [
         "data"
       ],
-      "detail_url": "skills/python-parallelization.json"
+      "detail_url": "skills/python-parallelization.json",
+      "has_support_files": true
     },
     {
       "slug": "remotion-best-practices",
@@ -674,7 +702,8 @@
       "profiles": [
         "video"
       ],
-      "detail_url": "skills/remotion-best-practices.json"
+      "detail_url": "skills/remotion-best-practices.json",
+      "has_support_files": true
     },
     {
       "slug": "requesting-code-review",
@@ -686,7 +715,8 @@
       "profiles": [
         "dev"
       ],
-      "detail_url": "skills/requesting-code-review.json"
+      "detail_url": "skills/requesting-code-review.json",
+      "has_support_files": true
     },
     {
       "slug": "revops",
@@ -698,7 +728,8 @@
       "profiles": [
         "sales"
       ],
-      "detail_url": "skills/revops.json"
+      "detail_url": "skills/revops.json",
+      "has_support_files": true
     },
     {
       "slug": "sales-enablement",
@@ -710,7 +741,8 @@
       "profiles": [
         "sales"
       ],
-      "detail_url": "skills/sales-enablement.json"
+      "detail_url": "skills/sales-enablement.json",
+      "has_support_files": true
     },
     {
       "slug": "schema-markup",
@@ -722,7 +754,8 @@
       "profiles": [
         "marketing"
       ],
-      "detail_url": "skills/schema-markup.json"
+      "detail_url": "skills/schema-markup.json",
+      "has_support_files": true
     },
     {
       "slug": "seo-audit",
@@ -735,7 +768,8 @@
         "marketing",
         "founder"
       ],
-      "detail_url": "skills/seo-audit.json"
+      "detail_url": "skills/seo-audit.json",
+      "has_support_files": true
     },
     {
       "slug": "skill-creator",
@@ -747,7 +781,8 @@
       "profiles": [
         "core"
       ],
-      "detail_url": "skills/skill-creator.json"
+      "detail_url": "skills/skill-creator.json",
+      "has_support_files": true
     },
     {
       "slug": "social-content",
@@ -759,7 +794,8 @@
       "profiles": [
         "marketing"
       ],
-      "detail_url": "skills/social-content.json"
+      "detail_url": "skills/social-content.json",
+      "has_support_files": true
     },
     {
       "slug": "supabase-postgres-best-practices",
@@ -771,7 +807,8 @@
       "profiles": [
         "dev"
       ],
-      "detail_url": "skills/supabase-postgres-best-practices.json"
+      "detail_url": "skills/supabase-postgres-best-practices.json",
+      "has_support_files": true
     },
     {
       "slug": "systematic-debugging",
@@ -783,7 +820,8 @@
       "profiles": [
         "core"
       ],
-      "detail_url": "skills/systematic-debugging.json"
+      "detail_url": "skills/systematic-debugging.json",
+      "has_support_files": true
     },
     {
       "slug": "tailwind-design-system",
@@ -795,7 +833,8 @@
       "profiles": [
         "design"
       ],
-      "detail_url": "skills/tailwind-design-system.json"
+      "detail_url": "skills/tailwind-design-system.json",
+      "has_support_files": true
     },
     {
       "slug": "tdd",
@@ -807,7 +846,8 @@
       "profiles": [
         "dev"
       ],
-      "detail_url": "skills/tdd.json"
+      "detail_url": "skills/tdd.json",
+      "has_support_files": true
     },
     {
       "slug": "testing-python",
@@ -855,7 +895,8 @@
       "profiles": [
         "ops"
       ],
-      "detail_url": "skills/triage.json"
+      "detail_url": "skills/triage.json",
+      "has_support_files": true
     },
     {
       "slug": "vercel-react-best-practices",
@@ -867,7 +908,8 @@
       "profiles": [
         "dev"
       ],
-      "detail_url": "skills/vercel-react-best-practices.json"
+      "detail_url": "skills/vercel-react-best-practices.json",
+      "has_support_files": true
     },
     {
       "slug": "verification-before-completion",
@@ -908,7 +950,8 @@
       "profiles": [
         "video"
       ],
-      "detail_url": "skills/video-processor.json"
+      "detail_url": "skills/video-processor.json",
+      "has_support_files": true
     },
     {
       "slug": "web-design-guidelines",
@@ -933,7 +976,8 @@
       "profiles": [
         "dev"
       ],
-      "detail_url": "skills/webapp-testing.json"
+      "detail_url": "skills/webapp-testing.json",
+      "has_support_files": true
     },
     {
       "slug": "wireframe-to-react",
@@ -974,7 +1018,8 @@
         "ops",
         "founder"
       ],
-      "detail_url": "skills/writing-plans.json"
+      "detail_url": "skills/writing-plans.json",
+      "has_support_files": true
     },
     {
       "slug": "xlsx",
@@ -988,7 +1033,8 @@
         "ops",
         "data"
       ],
-      "detail_url": "skills/xlsx.json"
+      "detail_url": "skills/xlsx.json",
+      "has_support_files": true
     },
     {
       "slug": "zoom-out",
@@ -1005,7 +1051,5 @@
     }
   ],
   "total_skills": 65,
-  "defaultProfiles": [
-    "core"
-  ]
+  "defaultSelection": "all"
 }

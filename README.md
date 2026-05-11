@@ -22,10 +22,10 @@ Works with Claude Code, Codex, Cursor, Kimi, OpenCode.
 ## Install
 
 ```bash
-npx @floomhq/starter install
+npx @floomhq/starter install --global
 ```
 
-That installs the Core profile (9 hand-picked skills) into the AI agent you use. Use `--all` for all 65 across 11 profiles, or `--profiles dev,writing` for specific ones. Auto-detects Claude Code, Codex, Cursor, Kimi, or OpenCode.
+That installs all 65 curated skills machine-wide into all eligible agents on your computer. Omit `--global` for a project-local install in the current repository, or pass `--profiles dev,writing` for a smaller subset. Auto-detects Claude Code, Codex, Cursor, Kimi, or OpenCode.
 
 ## What you get
 
@@ -51,15 +51,16 @@ That installs the Core profile (9 hand-picked skills) into the AI agent you use.
 
 1. One npm command runs the installer.
 2. Auto-detect your AI agent (Claude Code, Codex, Cursor, Kimi, OpenCode).
-3. Skills install locally to your project (`.claude/skills/`, `.codex/skills/`, etc.).
-4. Activation rules are added to your agent's config so the right skill fires on the right task.
-5. You update manually with `npx @floomhq/starter update`. The package has no daemon, no cron, and no background network process.
+3. Skills install locally to your machine (`~/.claude/skills/`, `~/.codex/skills/`, etc.) or to the current project when you omit `--global`.
+4. Folder-based skills also receive upstream support files when available, such as references and scripts.
+5. Activation rules are added to your agent's config so the right skill fires on the right task.
+6. You update manually with `npx @floomhq/starter update`. The package has no daemon, no cron, and no background network process.
 
 ## Why curated
 
-skills.sh has 91,000+ AI agent skills. Most agents drown in choice or pick wrong. We picked the 65 that move the needle, ranked by real install counts on skills.sh, organized into 11 profiles for clarity.
+skills.sh has 91,000+ AI agent skills. Most agents drown in choice or pick wrong. We picked 65 high-signal skills with real usage, clear licenses, broad applicability, and low setup friction. We filtered out narrow cloud-vendor skills, API-key-heavy skills, duplicate prompts, and personal dotfile snippets that do not belong in a general starter pack.
 
-**+18.6pp pass-rate lift** on real benchmarks vs. an unconfigured agent. **-2.9pp** for kitchen-sink (install everything) approach. Curation matters.
+**+16.2pp average pass-rate lift** on SkillsBench when agents use curated skills. **-2.9pp** for a kitchen-sink public-index install. Curation matters.
 
 ## Updating
 

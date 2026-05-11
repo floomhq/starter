@@ -57,6 +57,7 @@
         --blue: #0094ff;
         --blue-soft: #bfe6ff;
         --blue-pale: #eaf7ff;
+        --link: #b8299a;
         --cloud-pink: #ff4fd8;
         --line: 2px solid var(--ink);
         --line-hair: 1px solid #e0dfdb;
@@ -122,7 +123,7 @@
         text-transform: uppercase;
       }
       .nav-links a { text-decoration: none; }
-      .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+      .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--link); }
 
       /* === DOCS HERO (Adam pattern: tight, paper bg, hairline border-bottom) === */
       .docs-hero {
@@ -200,7 +201,7 @@
       main.docs-page .docs-sidebar a.is-active {
         background: transparent;
         border-left-color: var(--ink);
-        color: var(--blue);
+        color: var(--link);
         font-weight: 700;
       }
 
@@ -344,7 +345,7 @@
         background: #f0efeb;
         outline: none;
       }
-      main.docs-page .copy-command.is-copied { color: var(--blue); border-color: var(--blue-soft); }
+      main.docs-page .copy-command.is-copied { color: var(--link); border-color: var(--blue-soft); }
 
       /* Inline code: outline only */
       main.docs-page .doc-section code, main.docs-page .docs-hero code {
@@ -532,6 +533,32 @@
         .page { padding: 22px 16px 44px; }
         .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; }
         .wordmark span { font-size: 9px; letter-spacing: 0.12em; }
+        main.docs-page .docs-sidebar {
+          position: sticky;
+          top: 0;
+          z-index: 30;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin: 20px -16px 26px;
+          padding: 12px 16px;
+          background: rgba(250, 250, 247, 0.96);
+          border-top: var(--line-hair);
+          border-bottom: var(--line-hair);
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+        main.docs-page .docs-sidebar a {
+          width: auto;
+          min-width: max-content;
+          margin: 0;
+          padding: 7px 0;
+          border-left: 0;
+          font-size: 13px;
+        }
+        .doc-toc .toc-heading { min-width: max-content; margin: 0; color: var(--muted); }
+        .doc-toc .toc-sub { display: contents; padding-left: 0; }
+        .doc-toc .toc-sub a { font-size: 12px; }
       }
 
       /* SHARED FOOTER */
@@ -553,7 +580,7 @@
       .footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
       .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
       .footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
-      .footer-col a:hover { color: var(--blue); }
+      .footer-col a:hover { color: var(--link); }
       .footer-bottom { width: min(100%, 1440px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
       .footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
       @media (max-width: 860px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
@@ -632,16 +659,16 @@
               </header>
               <pre><code>Set up Floom Starter Pack: https://floom.dev/docs#quickstart</code></pre>
             </div>
-            <p>Or run the CLI locally:</p>
+            <p>Or run the CLI locally for all eligible agents on your machine:</p>
             <div class="code-block">
               <header>
                 <span>Terminal</span>
-                <button type="button" class="copy-command" data-copy="npx @floomhq/starter install">Copy</button>
+                <button type="button" class="copy-command" data-copy="npx @floomhq/starter install --global">Copy</button>
               </header>
-              <pre><code>npx @floomhq/starter install</code></pre>
+              <pre><code>npx @floomhq/starter install --global</code></pre>
             </div>
             <p>
-              The CLI detects which agent config paths exist on your machine and writes only to the appropriate locations.
+              The CLI detects which agent config paths exist on your machine and writes only to the appropriate locations. Folder-based skills also receive upstream support files when available. Omit <code>--global</code> when you want a project-local install in the current repository.
             </p>
           </article>
 
@@ -703,22 +730,25 @@
                   </tr>
                   <tr>
                     <td>Cursor</td>
-                    <td><code>.cursor/rules/floom-skills.mdc</code></td>
-                    <td><code>.cursor/rules/&lt;slug&gt;.mdc</code></td>
+                    <td><code>~/.cursor/rules/floom-skills.mdc</code></td>
+                    <td><code>~/.cursor/rules/&lt;slug&gt;.mdc</code></td>
                   </tr>
                   <tr>
                     <td>OpenCode</td>
-                    <td><code>AGENTS.md</code> (project)</td>
-                    <td><code>.opencode/skills/</code></td>
+                    <td><code>~/.config/opencode/AGENTS.md</code></td>
+                    <td><code>~/.config/opencode/skills/</code></td>
                   </tr>
                   <tr>
                     <td>Kimi</td>
-                    <td><code>AGENTS.md</code> (project)</td>
-                    <td><code>.kimi/skills/</code></td>
+                    <td><code>~/.kimi/agents/floom-system.md</code></td>
+                    <td><code>~/.kimi/skills/</code></td>
                   </tr>
                 </tbody>
               </table>
             </div>
+            <p>
+              Project-local installs use the same skill folders under the current repository. Codex is the exception for activation: it writes the Floom block into <code>./AGENTS.md</code>, because Codex does not load <code>./.codex/AGENTS.md</code>.
+            </p>
             <p><strong>Not included:</strong> Gemini CLI is not supported in this pack at this time.</p>
           </article>
 
@@ -765,9 +795,9 @@
             <div class="code-block">
               <header>
                 <span>Terminal</span>
-                <button type="button" class="copy-command" data-copy="npx @floomhq/starter uninstall --all">Copy</button>
+                <button type="button" class="copy-command" data-copy="npx @floomhq/starter uninstall --global">Copy</button>
               </header>
-              <pre><code>npx @floomhq/starter uninstall --all</code></pre>
+              <pre><code>npx @floomhq/starter uninstall --global</code></pre>
             </div>
             <p>
               Deletes the <code>.floom/</code> directory and removes the Floom activation block from <code>AGENTS.md</code> / <code>CLAUDE.md</code>. Will not remove unrelated files.
@@ -885,7 +915,7 @@
               <li>If none are found and the current directory looks like a project, install Claude Code by default after confirmation or with <code>--yes</code>.</li>
             </ol>
             <p>
-              Use <code>--skills &lt;list&gt;</code> to install a specific subset, <code>--all</code> to install every skill in every profile, and <code>--global</code> to write to user-level paths (<code>~/.claude/</code> etc.) instead of the current project.
+              By default, install writes all 65 curated skills. Use <code>--skills &lt;list&gt;</code> or <code>--profiles &lt;list&gt;</code> for a smaller subset. Use <code>--global</code> to write to user-level paths (<code>~/.claude/</code> etc.) instead of the current project.
             </p>
 
             <h3 id="files-written-arch">Files written</h3>
@@ -937,7 +967,7 @@
                   <tr><th scope="col">Entity</th><th scope="col">Fields</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>PackManifest</td><td>pack, version, updated, defaultProfiles, profiles, skills</td></tr>
+                  <tr><td>PackManifest</td><td>pack, version, updated, defaultSelection, profiles, skills</td></tr>
                   <tr><td>Profile</td><td>id, name, description, skills[]</td></tr>
                   <tr><td>Skill</td><td>slug, name, publisher, description, profiles, detail_url, license</td></tr>
                   <tr><td>Detail</td><td>skill_md_content, source_repo, skill_md_url, files, fetched_at</td></tr>
@@ -1035,7 +1065,7 @@
             </p>
             <div class="stat-triple" aria-label="SkillsBench reported deltas">
               <div class="stat-box">
-                <strong>+18.6%</strong>
+                <strong>+16.2%</strong>
                 <span>Lift with 2-3 curated skills per task.</span>
               </div>
               <div class="stat-box muted">

@@ -271,7 +271,7 @@
         <span class="label">~/my-project</span>
       </div>
       <div class="term" id="installOut">
-        <div class="line"><span class="prompt"><b>~/my-project</b> $&nbsp;</span><span class="cmd">npx @floomhq/starter install</span></div>
+        <div class="line"><span class="prompt"><b>~/my-project</b> $&nbsp;</span><span class="cmd">npx @floomhq/starter install --global</span></div>
       </div>
     </div>
 
@@ -291,7 +291,7 @@
   </div>
 
   <div class="subtitle" id="subtitle">
-    <b>+18.6% pass-rate lift</b> on real benchmarks <span class="src">SkillsBench, vs unconfigured agent</span>
+    <b>+16.2% pass-rate lift</b> on real benchmarks <span class="src">SkillsBench, vs unconfigured agent</span>
   </div>
 
 <script>
@@ -305,7 +305,7 @@
   // Scene 2: 3200..8800  install output streaming
   // Scene 3: 8800..13000 Claude Code chat + subtitle reveal
 
-  const COMMAND = 'npx @floomhq/starter install';
+  const COMMAND = 'npx @floomhq/starter install --global';
   // Per-character key timings in ms (cumulative chosen for natural rhythm)
   const KEY_DELAYS_MS = (() => {
     const base = 60;
@@ -390,11 +390,11 @@
   function renderScene2(t) {
     // t relative to SCENE2_START
     const lines = [];
-    lines.push(`<div class="line"><span class="prompt"><b>~/my-project</b> $&nbsp;</span><span class="cmd">npx @floomhq/starter install</span></div>`);
+    lines.push(`<div class="line"><span class="prompt"><b>~/my-project</b> $&nbsp;</span><span class="cmd">npx @floomhq/starter install --global</span></div>`);
     if (t >= S2.detect) lines.push(`<div class="line"><span class="out dim">Detecting agent...</span></div>`);
     if (t >= S2.detected) lines.push(`<div class="line"><span class="out"><span class="check">&check;</span> Claude Code detected at <span class="bold">.claude/</span></span></div>`);
     if (t >= S2.spacer) lines.push(`<div class="line"><span class="out">&nbsp;</span></div>`);
-    if (t >= S2.header) lines.push(`<div class="line"><span class="out blue bold">Floom Starter, installing Core profile...</span></div>`);
+    if (t >= S2.header) lines.push(`<div class="line"><span class="out blue bold">Floom Starter, installing curated starter pack...</span></div>`);
     for (let i = 0; i < SKILLS.length; i++) {
       const tShow = S2.skillsStart + i * S2.skillsStep;
       if (t >= tShow) {

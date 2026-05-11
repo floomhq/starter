@@ -20,7 +20,7 @@ Use this skill when the user:
 
 1. Read the Floom activation block in the current agent instruction file if present:
    - Claude Code: .claude/CLAUDE.md or ~/.claude/CLAUDE.md
-   - Codex: .codex/AGENTS.md or ~/.codex/AGENTS.md
+   - Codex: AGENTS.md or ~/.codex/AGENTS.md
    - Cursor: .cursor/rules/floom-skills.mdc or ~/.cursor/rules/floom-skills.mdc
    - OpenCode: .opencode/AGENTS.md or ~/.config/opencode/AGENTS.md
    - Kimi: .kimi/agents/floom-system.md or ~/.kimi/agents/floom-system.md
@@ -47,7 +47,7 @@ Then ask which one to use only if the choice changes the work materially. Otherw
 Say that no installed Floom Starter skill clearly matches. Offer to handle the task with general capabilities, or tell the user they can install more curated skills with:
 
 ```bash
-npx @floomhq/starter install --all
+npx @floomhq/starter install --global
 ```
 
 Do not install anything without the user's confirmation.

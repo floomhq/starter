@@ -51,7 +51,7 @@ const PER_HARNESS = {
     local: (cwd) => ({
       presencePath: path.join(cwd, ".codex"),
       skillsDir: path.join(cwd, ".codex", "skills"),
-      activationFile: path.join(cwd, ".codex", "AGENTS.md"),
+      activationFile: path.join(cwd, "AGENTS.md"),
     }),
   },
   cursor: {

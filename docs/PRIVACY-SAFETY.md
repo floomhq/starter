@@ -14,6 +14,10 @@ Project-local is the default scope. In a project directory, Floom Starter writes
 - activation instructions in the matching local agent file;
 - `./.floom/manifest.json` to track installed skills.
 
+Project-local Codex activation is written to `./AGENTS.md`, because Codex reads
+the repository instruction file from the project root. The skill files still
+live under `./.codex/skills/`.
+
 With `--global`, the same files are written under the user's home directory:
 
 | Agent | Skill directory | Activation file |

@@ -7,7 +7,7 @@
  * Usage:
  *   npx @floomhq/starter install --profiles core,dev
  *   npx @floomhq/starter install --skills find-skills,skill-creator
- *   npx @floomhq/starter install --all
+ *   npx @floomhq/starter install
  *   npx @floomhq/starter init
  *   npx @floomhq/starter list
  *   npx @floomhq/starter update
@@ -22,7 +22,7 @@
 import { install, remove, uninstall, update, list } from "../src/install.js";
 import { runInit } from "../src/init-interactive.js";
 
-const PACKAGE_VERSION = "0.2.7";
+const PACKAGE_VERSION = "0.2.8";
 
 function usage() {
   return `
@@ -31,7 +31,7 @@ function usage() {
   Install curated AI skills for Claude Code, Codex, Cursor, OpenCode, and Kimi.
 
   Commands:
-    install        Install skills to detected agents (project-local by default)
+    install        Install all 65 curated skills to detected agents
     init           Interactive: pick your role, auto-install matching profiles
     list           Show installed skills
     update         Re-fetch newer skills, preserve user-modified files
@@ -46,7 +46,7 @@ function usage() {
     --profiles <ids>    Comma-separated profile IDs (core, dev, writing, research,
                         marketing, sales, ops, founder, data, design, video)
     --skills <slugs>    Comma-separated skill slugs for direct selection
-    --all               Install all available skills
+    --all               Install all available skills (default)
     --harness <ids>     Comma-separated agent IDs: claude,codex,cursor,opencode,kimi
                         (default: auto-detect installed agents)
     --force             Overwrite existing skills
@@ -58,7 +58,7 @@ function usage() {
   Examples:
     npx @floomhq/starter install --profiles core,dev
     npx @floomhq/starter install --skills find-skills,skill-creator --harness claude
-    npx @floomhq/starter install --all
+    npx @floomhq/starter install
     npx @floomhq/starter install --global --profiles core
     npx @floomhq/starter init
     npx @floomhq/starter list
@@ -86,6 +86,8 @@ function parseArgs(argv) {
       "yes",
       "non-interactive",
       "global",
+      "help",
+      "h",
       "verbose",
     ];
     if (boolFlags.includes(key)) {
@@ -145,6 +147,11 @@ async function main() {
   const { command, flags } = parseArgs(process.argv);
 
   if (!command || command === "--help" || command === "-h") {
+    log(usage());
+    return;
+  }
+
+  if (flags.help || flags.h) {
     log(usage());
     return;
   }

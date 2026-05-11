@@ -12,19 +12,25 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { loadManifest } from "../src/fetch-manifest.js";
+import { fetchSupportFiles, loadManifest } from "../src/fetch-manifest.js";
 import { upsertActivationBlock } from "../src/activation-companion.js";
-import { writeSkill } from "../src/write-skill.js";
+import { writeSkill, writeSupportFiles } from "../src/write-skill.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CLI = path.join(__dirname, "..", "bin", "starter.js");
 const DATA_DIR = path.join(__dirname, "..", "data");
 
 function run(args, options = {}) {
+  const { env, ...rest } = options;
   return execFileSync(process.execPath, [CLI, ...args], {
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
-    ...options,
+    env: {
+      ...process.env,
+      FLOOM_STARTER_SKIP_SUPPORT: "1",
+      ...(env || {}),
+    },
+    ...rest,
   });
 }
 
@@ -72,7 +78,7 @@ test("loadManifest refuses to downgrade below bundled fallback version", async (
   try {
     const { manifest, source } = await loadManifest();
     assert.equal(source, "fallback");
-    assert.equal(manifest.version, "0.2.7");
+    assert.equal(manifest.version, "0.2.8");
     assert.ok(manifest.skills.length >= 29);
   } finally {
     globalThis.fetch = originalFetch;
@@ -87,6 +93,25 @@ test("--help prints usage", () => {
   assert.match(output, /install/);
   assert.match(output, /init/);
   assert.match(output, /list/);
+});
+
+test("install --help prints usage", () => {
+  const output = run(["install", "--help"]);
+  assert.match(output, /@floomhq\/starter/);
+  assert.match(output, /Install all 65 curated skills/);
+});
+
+test("default install writes all curated skills", () => {
+  const root = tmpRoot("install-default-all");
+  const output = run([
+    "install",
+    "--harness", "claude",
+    "--root", root,
+  ]);
+
+  assert.match(output, /65 skills installed into 1 agent/);
+  const skillDirs = fs.readdirSync(path.join(root, "claude", "skills"));
+  assert.equal(skillDirs.length, 65, `Expected 65 skill dirs, got ${skillDirs.length}`);
 });
 
 test("install --dry-run --profiles core writes nothing", () => {
@@ -161,7 +186,21 @@ test("install --profiles core,dev writes all profile skills", () => {
   );
 });
 
-test("install --all writes all skills (>=29)", () => {
+test("project-local codex activation writes root AGENTS.md", () => {
+  const cwd = tmpRoot("codex-project-local");
+  fs.mkdirSync(path.join(cwd, ".codex"), { recursive: true });
+  const output = run(["install", "--profiles", "core", "--harness", "codex", "--yes"], { cwd });
+
+  assert.match(output, /AGENTS\.md/);
+  assert.ok(fs.existsSync(path.join(cwd, "AGENTS.md")), "root AGENTS.md missing");
+  assert.equal(
+    fs.existsSync(path.join(cwd, ".codex", "AGENTS.md")),
+    false,
+    "Codex does not load .codex/AGENTS.md for project-local activation",
+  );
+});
+
+test("install --all writes all curated skills", () => {
   const root = tmpRoot("install-all");
   const output = run([
     "install",
@@ -173,7 +212,85 @@ test("install --all writes all skills (>=29)", () => {
   assert.match(output, /skills installed/);
 
   const skillDirs = fs.readdirSync(path.join(root, "claude", "skills"));
-  assert.ok(skillDirs.length >= 29, `Expected >=29 skill dirs, got ${skillDirs.length}`);
+  assert.equal(skillDirs.length, 65, `Expected 65 skill dirs, got ${skillDirs.length}`);
+});
+
+test("CLI install fetches support files on bundled manifest path", () => {
+  const root = tmpRoot("cli-support-files");
+  const output = run(
+    [
+      "install",
+      "--skills", "tdd",
+      "--harness", "claude",
+      "--root", root,
+      "--yes",
+    ],
+    { env: { FLOOM_STARTER_SKIP_SUPPORT: "0" } },
+  );
+
+  assert.match(output, /support files written/);
+  assert.ok(
+    fs.existsSync(path.join(root, "claude", "skills", "tdd", "tests.md")),
+    "tdd support file missing",
+  );
+});
+
+test("support files are fetched and written inside the skill folder", async () => {
+  const originalFetch = globalThis.fetch;
+  const textEncoder = new TextEncoder();
+  globalThis.fetch = async (url) => {
+    const value = String(url);
+    if (value.includes("/contents/skills/sample/references")) {
+      return {
+        ok: true,
+        async json() {
+          return [
+            {
+              type: "file",
+              path: "skills/sample/references/guide.md",
+              name: "guide.md",
+              size: 12,
+              download_url: "https://raw.githubusercontent.com/acme/pack/main/skills/sample/references/guide.md",
+            },
+          ];
+        },
+      };
+    }
+    if (value.endsWith("/references/guide.md")) {
+      return {
+        ok: true,
+        async arrayBuffer() {
+          return textEncoder.encode("# Guide\n").buffer;
+        },
+      };
+    }
+    return { ok: false };
+  };
+
+  try {
+    const supportFiles = await fetchSupportFiles({
+      skill_md_url: "https://raw.githubusercontent.com/acme/pack/main/skills/sample/SKILL.md",
+      files: [
+        { name: "SKILL.md", size_bytes: 100, type: "main" },
+        { name: "references", size_bytes: 0, type: "support" },
+        { name: "evals", size_bytes: 0, type: "support" },
+      ],
+    });
+    assert.equal(supportFiles.length, 1);
+    assert.equal(supportFiles[0].path, "references/guide.md");
+
+    const root = tmpRoot("support-files");
+    const agent = { id: "claude", skillsDir: path.join(root, "claude", "skills") };
+    writeSkill(agent, "sample", "---\nname: sample\n---\n# Sample\n", true);
+    const counts = writeSupportFiles(agent, "sample", supportFiles);
+    assert.equal(counts.written, 1);
+    assert.equal(
+      fs.readFileSync(path.join(root, "claude", "skills", "sample", "references", "guide.md"), "utf8"),
+      "# Guide\n",
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test("activation block is idempotent on repeated installs", () => {
@@ -464,6 +581,60 @@ test("remove --all removes skills and strips activation block", () => {
     const content = fs.readFileSync(path.join(root, "claude", "CLAUDE.md"), "utf8");
     assert.equal(content.includes("<!-- FLOOM-START -->"), false, "FLOOM block should be removed");
   }
+});
+
+test("remove --all removes Cursor activation file when Floom-only", () => {
+  const root = tmpRoot("remove-cursor");
+  run(["install", "--profiles", "core", "--harness", "cursor", "--root", root]);
+
+  const activationFile = path.join(root, "cursor", "floom-skills.mdc");
+  assert.ok(fs.existsSync(activationFile), "Cursor activation file should exist after install");
+
+  run(["remove", "--all", "--harness", "cursor", "--root", root]);
+
+  assert.equal(
+    fs.existsSync(path.join(root, "cursor", "skills", "find-skills.mdc")),
+    false,
+    "Cursor skill file should be removed",
+  );
+  assert.equal(
+    fs.existsSync(activationFile),
+    false,
+    "Floom-only Cursor activation file should be removed",
+  );
+});
+
+test("remove --skills keeps remaining manifest entries and activation block", () => {
+  const root = tmpRoot("remove-partial");
+  run(["install", "--profiles", "core", "--harness", "claude", "--root", root]);
+
+  run(["remove", "--skills", "find-skills", "--harness", "claude", "--root", root, "--yes"]);
+
+  assert.equal(
+    fs.existsSync(path.join(root, "claude", "skills", "find-skills", "SKILL.md")),
+    false,
+    "removed skill should be gone",
+  );
+  assert.ok(
+    fs.existsSync(path.join(root, "claude", "skills", "brainstorming", "SKILL.md")),
+    "remaining skill should stay installed",
+  );
+
+  const manifestPath = path.join(root, ".floom", "manifest.json");
+  assert.ok(fs.existsSync(manifestPath), "manifest should remain after partial remove");
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+  const slugs = manifest.installed_skills.map((skill) => skill.slug);
+  assert.equal(slugs.includes("find-skills"), false, "removed skill should leave manifest");
+  assert.equal(slugs.includes("brainstorming"), true, "remaining skill should stay in manifest");
+
+  const claudeMd = fs.readFileSync(path.join(root, "claude", "CLAUDE.md"), "utf8");
+  assert.match(claudeMd, /<!-- FLOOM-START -->/);
+  assert.doesNotMatch(claudeMd, /- \*\*find-skills\*\*/);
+  assert.match(claudeMd, /brainstorming/);
+
+  const listOutput = run(["list", "--root", root]);
+  assert.doesNotMatch(listOutput, /find-skills/);
+  assert.match(listOutput, /brainstorming/);
 });
 
 // ─── 0.2.4 hardening: --version, gemini reject, uninstall alias ─────────────

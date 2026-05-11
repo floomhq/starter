@@ -45,7 +45,7 @@
       "operatingSystem": "macOS, Linux, Windows",
       "description": "65 curated AI agent skills from skills.sh. One install. Works with Claude Code, Codex, Cursor, Kimi, OpenCode.",
       "url": "https://floom.dev/",
-      "softwareVersion": "0.2.7",
+      "softwareVersion": "0.2.8",
       "license": "https://opensource.org/licenses/MIT",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "author": [
@@ -79,11 +79,13 @@
       html {
         scrollbar-gutter: stable;
         overflow-y: scroll;
+        background: var(--paper);
       }
 
       body {
         margin: 0;
         min-height: 100vh;
+        overflow-x: hidden;
         background:
           radial-gradient(circle at 14% 12%, rgba(0, 148, 255, 0.14), transparent 28rem),
           radial-gradient(circle at 88% 2%, rgba(255, 79, 216, 0.12), transparent 24rem),
@@ -1446,7 +1448,7 @@
           </p>
           <div class="actions">
             <div class="install-cta-wrap">
-<button class="install-cta button" type="button" data-copy="npx @floomhq/starter install" aria-label="Copy and send to your agent: copies the install command to clipboard">
+<button class="install-cta button" type="button" data-copy="npx @floomhq/starter install --global" aria-label="Copy and send to your agent: copies the install command to clipboard">
                 <span class="install-cta-label">Copy and send to your agent</span><span class="install-cta-icon-box"><svg class="install-cta-icon" width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="8" height="9" rx="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h7"/></svg></span>
               </button>
             </div>
@@ -1588,7 +1590,7 @@
           </div>
           <div class="feature-copy">
             <h3>The skills you choose matter</h3>
-            <p>Curated skills improve agents, but self-generated skills (−1.3% on average) and bulk installs (−2.9%) drag performance down. 65 skills, hand-picked from 91,000 on skills.sh.</p>
+            <p>Curated skills improve agents, but self-generated skills (−1.3% on average) and kitchen-sink public-index installs (−2.9%) drag performance down. Floom keeps the useful slice: 65 skills, hand-picked from 91,000 on skills.sh.</p>
           </div>
         </article>
 
@@ -1647,7 +1649,7 @@
           </details>
           <details class="faq-item">
             <summary>Where do the 65 skills come from?</summary>
-            <p>We curated from skills.sh, the open-source leaderboard of 91,000 skills ranked by real install counts. Priority: skills.sh top-ranked, then SkillsBench validated, then a few Floom-authored only where no proven alternative exists.</p>
+            <p>We curated from skills.sh, SkillsBench, and open-source agent-skill repos. We prioritised high real-world usage, clear licenses, broad applicability, and low setup friction; we filtered out narrow Azure/cloud-vendor skills, API-key-heavy workflows, duplicates, personal dotfiles, and prompt snippets that do not belong in a general starter pack.</p>
           </details>
           <details class="faq-item">
             <summary>Does it work with my agent?</summary>
@@ -1666,7 +1668,7 @@
           <span>65 curated skills. One command. Works with any agent.</span>
         </div>
         <div class="install-cta-wrap install-cta-wrap--final">
-          <button class="install-cta install-cta--final button" type="button" data-copy="npx @floomhq/starter install" aria-label="Add to your agent: copies the install command to clipboard">
+          <button class="install-cta install-cta--final button" type="button" data-copy="npx @floomhq/starter install --global" aria-label="Add to your agent: copies the install command to clipboard">
             <svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
           </button>
         </div>

@@ -10,7 +10,7 @@ repo links, supported agents, and skill counts must match the files in this repo
 Default install command:
 
 ```bash
-npx @floomhq/starter install
+npx @floomhq/starter install --global
 ```
 
 Profile examples:
@@ -18,7 +18,7 @@ Profile examples:
 ```bash
 npx @floomhq/starter install --profiles core,dev,writing
 npx @floomhq/starter install --profiles founder,marketing,sales
-npx @floomhq/starter install --all
+npx @floomhq/starter install --global
 ```
 
 ## Manifest Data
@@ -34,7 +34,8 @@ Important fields:
 - `total_skills`: locked at 65;
 - `profiles`: 11 profile records with `skill_slugs`;
 - `skills`: slim skill index with names, descriptions, profile membership, and detail URLs;
-- `defaultProfiles`: currently `["core"]`.
+- `defaultSelection`: currently `"all"`.
+- per-skill detail JSON may include upstream `files`; the CLI fetches support files for folder-based skills when the install uses the remote manifest.
 
 ## Supported Agents
 
@@ -48,7 +49,7 @@ Show exactly five supported agents:
 
 ## Profile Selector Behavior
 
-Core is selected by default. Users can add any profile:
+All 65 curated skills are selected by default. Users can choose a smaller profile subset:
 
 - dev
 - writing
@@ -67,10 +68,10 @@ Command generation:
 npx @floomhq/starter install --profiles core,dev,writing
 ```
 
-If every profile is selected:
+If every profile is selected or no profile is selected:
 
 ```text
-npx @floomhq/starter install --all
+npx @floomhq/starter install --global
 ```
 
 ## Social Proof Metrics
@@ -115,7 +116,7 @@ Avoid:
 {
   "packageName": "@floomhq/starter",
   "repo": "floomhq/starter",
-  "installCommand": "npx @floomhq/starter install",
+  "installCommand": "npx @floomhq/starter install --global",
   "profiles": 11,
   "skills": 65,
   "targets": ["claude", "codex", "cursor", "kimi", "opencode"]

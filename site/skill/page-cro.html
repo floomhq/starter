@@ -56,6 +56,7 @@
   --blue: #0094ff;
   --blue-soft: #bfe6ff;
   --blue-pale: #eaf7ff;
+  --link: #b8299a;
   --line: 2px solid var(--ink);
   --line-light: 1px solid #e0dfdb;
   --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -75,7 +76,7 @@ a { color: inherit; }
 .wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
 .nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; max-width: 100%; }
 .nav-links a { color: inherit; text-decoration: none; }
-.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--link); }
 
 @media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
 @media (max-width: 980px) { .page { padding: 30px 22px 52px; } }
@@ -88,7 +89,7 @@ a { color: inherit; }
 .hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 14px; word-break: break-word; }
 .hero-desc { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 18px; }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
+.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--link); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
 .badge.mute { color: var(--muted); background: #fff; border-color: #ddd; }
 
 .section { margin-top: 40px; }
@@ -97,7 +98,7 @@ a { color: inherit; }
 .install-btn-wrap { position: relative; display: inline-block; }
 .install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
 .install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-.install-btn.copied { background: var(--blue); border-color: var(--blue); }
+.install-btn.copied { background: var(--blue); border-color: var(--link); }
 .install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
 .install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
@@ -115,7 +116,7 @@ a { color: inherit; }
 .file-row { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; padding: 8px 12px; background: #fff; border: 1px solid #e0dfdb; border-radius: 8px; }
 .file-name { flex: 1; color: var(--ink); word-break: break-all; }
 .file-size { color: var(--muted); flex-shrink: 0; }
-.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--link); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
 
 .md-block { font-size: 15px; line-height: 1.7; color: var(--ink); background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 22px 26px; max-width: 860px; }
 .md-block h2, .md-block h3, .md-block h4 { font-weight: 700; margin: 18px 0 8px; letter-spacing: -0.01em; }
@@ -128,15 +129,15 @@ a { color: inherit; }
 .md-block code { font-family: var(--mono); font-size: 13px; background: #f0efeb; padding: 1px 5px; border-radius: 3px; }
 .md-block pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 10px 0; }
 .md-block pre code { background: none; padding: 0; }
-.md-block a { color: var(--blue); }
+.md-block a { color: var(--link); }
 .md-block blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 14px; color: var(--muted); margin: 12px 0; }
 .md-block hr { border: none; border-top: 1px solid #e0dfdb; margin: 14px 0; }
 
 .links-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
-.link-btn { font-family: var(--mono); font-size: 12px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.link-btn { font-family: var(--mono); font-size: 12px; color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
 .link-btn:hover { color: var(--ink); }
 
-.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
+.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--link); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
 
 .footer-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; border: var(--line); border-radius: 28px; background: var(--blue); color: #ffffff; padding: 28px; }
 .footer-cta h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
@@ -152,7 +153,7 @@ a { color: inherit; }
 .footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
 .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
-.footer-col a:hover { color: var(--blue); }
+.footer-col a:hover { color: var(--link); }
 .footer-bottom { width: min(100%, 1440px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
 .footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
 @media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
@@ -431,7 +432,7 @@ a { color: inherit; }
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--link);
   background: var(--blue-pale);
   border-radius: 3px;
   padding: 2px 7px;
@@ -459,7 +460,7 @@ a { color: inherit; }
 .file-content--md code { font-family: var(--mono); font-size: 12px; background: #f0efeb; padding: 1px 4px; border-radius: 3px; border: none; }
 .file-content--md pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 8px 0; border: none; }
 .file-content--md pre code { background: none; padding: 0; }
-.file-content--md a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.file-content--md a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
 .file-content--md blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 12px; color: var(--muted); margin: 8px 0; }
 .file-content--md hr { border: none; border-top: 1px solid #e0dfdb; margin: 12px 0; }
 .file-content--code, .file-content--text {
@@ -488,7 +489,7 @@ a { color: inherit; }
   color: var(--muted);
   font-size: 13px;
 }
-.file-content--binary a { color: var(--blue); text-decoration: underline; }
+.file-content--binary a { color: var(--link); text-decoration: underline; }
 
 </style>
 </head>
@@ -535,17 +536,17 @@ a { color: inherit; }
 </header><section class="section" id="install">
 <div class="section-label">Install</div>
 <div class="install-cta-wrap">
-<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --skills page-cro" type="button">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --global --skills page-cro" type="button">
 <svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
 <span class="install-cta-tooltip" role="tooltip">
 <span class="tooltip-line">Copies a command that installs the <strong>page-cro</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
-<code class="tooltip-cmd">npx @floomhq/starter install --skills page-cro</code>
+<code class="tooltip-cmd">npx @floomhq/starter install --global --skills page-cro</code>
 <span class="tooltip-hint">Click to copy</span>
 </span>
 </button>
 </div>
 <div class="cmd-block">
-<div class="cmd-text" id="cmdText">npx @floomhq/starter install --skills page-cro</div>
+<div class="cmd-text" id="cmdText">npx @floomhq/starter install --global --skills page-cro</div>
 <button class="cmd-copy" id="cmdCopy" onclick="copyCmd()">Copy</button>
 </div>
 </section><section class="section" id="fires-when">
@@ -568,11 +569,11 @@ a { color: inherit; }
 <span>Installs <code style="background:rgba(255,255,255,0.12);padding:1px 6px;border-radius:4px;color:#fff;font-family:var(--mono);font-size:13px">page-cro</code> into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
 </div>
 <div class="install-cta-wrap install-cta-wrap--final">
-<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --skills page-cro" type="button">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --global --skills page-cro" type="button">
 <svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
 <span class="install-cta-tooltip" role="tooltip">
 <span class="tooltip-line">Copies a command that installs the <strong>page-cro</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
-<code class="tooltip-cmd">npx @floomhq/starter install --skills page-cro</code>
+<code class="tooltip-cmd">npx @floomhq/starter install --global --skills page-cro</code>
 <span class="tooltip-hint">Click to copy</span>
 </span>
 </button>

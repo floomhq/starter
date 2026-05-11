@@ -3,27 +3,28 @@
 Install curated AI agent skills for Claude Code, Codex, Cursor, OpenCode, and Kimi: zero dependencies, one command.
 
 ```bash
-npx @floomhq/starter install
+npx @floomhq/starter install --global
 ```
 
 ## What it does
 
 1. Detects your installed AI agents (Claude Code, Codex, Cursor, OpenCode, Kimi)
 2. Installs skill files to each agent's local skill directory
-3. Appends an activation companion block to your agent's instruction file (`CLAUDE.md`, `AGENTS.md`, etc.)
-4. Writes a local manifest to track what was installed
+3. Installs upstream support files for folder-based skills when available
+4. Appends an activation companion block to your agent's instruction file (`CLAUDE.md`, `AGENTS.md`, etc.)
+5. Writes a local manifest to track what was installed
 
 ## Install scope
 
-Starting with `0.2.4`, the default scope is **project-local**: skills are installed under the current directory (`./.claude/skills/`, `./.codex/skills/`, etc.). This keeps your machine clean and lets each project own its own skill set.
+Starting with `0.2.8`, the default selection is **all 65 curated skills**. The default scope is still **project-local**: skills are installed under the current directory (`./.claude/skills/`, `./.codex/skills/`, etc.). This keeps your machine clean and lets each project own its own skill set.
 
 To install machine-wide (the old behaviour), pass `--global`:
 
 ```bash
-# Project-local (default): writes to ./.claude/skills/, ./.codex/skills/, etc.
+# Project-local (default scope): writes all 65 to ./.claude/skills/, ./.codex/skills/, etc.
 npx @floomhq/starter install
 
-# Machine-wide: writes to ~/.claude/skills/, ~/.codex/skills/, etc.
+# Machine-wide: writes all 65 to ~/.claude/skills/, ~/.codex/skills/, etc.
 npx @floomhq/starter install --global
 ```
 
@@ -39,8 +40,8 @@ npx @floomhq/starter install --profiles core,dev,writing
 # Install specific skills
 npx @floomhq/starter install --skills find-skills,skill-creator
 
-# Install everything
-npx @floomhq/starter install --all
+# Install the full curated pack (default)
+npx @floomhq/starter install
 
 # Interactive setup (asks your role, picks profiles)
 npx @floomhq/starter init
@@ -96,7 +97,7 @@ Project-local (default):
 | Agent | Skill directory | Activation file |
 |-------|----------------|-----------------|
 | Claude Code | `./.claude/skills/<slug>/SKILL.md` | `./.claude/CLAUDE.md` |
-| Codex CLI | `./.codex/skills/<slug>/SKILL.md` | `./.codex/AGENTS.md` |
+| Codex CLI | `./.codex/skills/<slug>/SKILL.md` | `./AGENTS.md` |
 | Cursor | `./.cursor/rules/<slug>.mdc` | `./.cursor/rules/floom-skills.mdc` |
 | OpenCode | `./.opencode/skills/<slug>/SKILL.md` | `./.opencode/AGENTS.md` |
 | Kimi | `./.kimi/skills/<slug>/SKILL.md` | `./.kimi/agents/floom-system.md` |

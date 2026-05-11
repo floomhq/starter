@@ -4,6 +4,16 @@
 
 - No unreleased changes.
 
+## v0.2.8 - 2026-05-11
+
+- CLI: default install selection is now the full curated 65-skill pack. `--profiles` and `--skills` remain available for smaller installs.
+- CLI: `install --help` now prints command help instead of treating `--help` as a missing-value flag.
+- CLI: install summaries now report unique skills, target agents, and written files separately, avoiding the old 45/325 file-count confusion.
+- CLI: uninstall now removes a Floom-only Cursor activation file after stripping the activation block.
+- CLI: Codex project-local activation now writes `./AGENTS.md` because Codex does not load `./.codex/AGENTS.md`.
+- Site/docs: public CTAs use `npx @floomhq/starter install --global` so the one command reaches all eligible agents on the machine.
+- Docs and embedded manifests: updated from Core-default to all-skills-default behavior.
+
 ## v0.2.7 - 2026-05-11
 
 - CLI security: reject unsafe skill slugs before fetch/write and guard resolved write paths inside each agent skill root.

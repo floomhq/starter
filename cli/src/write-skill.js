@@ -33,6 +33,18 @@ function safeJoinInside(root, ...parts) {
   return dest;
 }
 
+function safeSupportRelPath(relPath) {
+  if (typeof relPath !== "string") {
+    throw new Error(`Unsafe support file path: ${relPath}`);
+  }
+  const normalized = relPath.replace(/\\/g, "/").replace(/^\/+/, "");
+  const parts = normalized.split("/").filter(Boolean);
+  if (parts.length === 0 || parts.some((part) => part === "." || part === "..")) {
+    throw new Error(`Unsafe support file path: ${relPath}`);
+  }
+  return parts.join(path.sep);
+}
+
 export function prepareSafeWriteTarget(root, dest, label = "file") {
   const basePath = path.resolve(root);
   const destPath = path.resolve(dest);
@@ -173,4 +185,42 @@ export function writeSkill(agent, slug, content, force = false) {
   }
   fs.writeFileSync(dest, content, "utf8");
   return { path: dest, action: "written" };
+}
+
+/**
+ * Write optional support files for folder-based skills.
+ *
+ * Cursor receives a single .mdc rule file, so support folders are skipped there.
+ * Claude, Codex, OpenCode, and Kimi get <skillsDir>/<slug>/<support-path>.
+ */
+export function writeSupportFiles(agent, slug, files = [], force = false) {
+  assertSafeSkillSlug(slug);
+  if (agent.id === "cursor" || files.length === 0) {
+    return { written: 0, skipped: 0, kept: 0 };
+  }
+
+  const skillRoot = safeJoinInside(agent.skillsDir, slug);
+  const counts = { written: 0, skipped: 0, kept: 0 };
+
+  for (const file of files) {
+    const relPath = safeSupportRelPath(file.path);
+    const dest = safeJoinInside(skillRoot, relPath);
+    prepareSafeWriteTarget(skillRoot, dest, "skill support");
+    const incoming = Buffer.isBuffer(file.bytes) ? file.bytes : Buffer.from(file.bytes || "", "utf8");
+
+    if (fs.existsSync(dest) && !force) {
+      const existing = fs.readFileSync(dest);
+      if (hashContent(existing) === hashContent(incoming)) {
+        counts.skipped += 1;
+      } else {
+        counts.kept += 1;
+      }
+      continue;
+    }
+
+    fs.writeFileSync(dest, incoming);
+    counts.written += 1;
+  }
+
+  return counts;
 }
