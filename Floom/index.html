@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Floom - Skills Pack Concept</title>
+    <title>Fold prototype · Floom</title>
     <style>
       :root {
         --paper: #fafaf7;
@@ -2142,28 +2142,50 @@
         box-shadow: none;
       }
 
-      .evidence-ribbon {
-        padding: 32px 0 20px;
-        border-bottom: 1px solid rgba(5, 5, 5, 0.1);
+      .caption-strip .lift-visual {
+        min-height: auto;
+        padding: 20px 22px;
+        background: #e8e8e3;
       }
 
-      .evidence-ribbon__label {
+      .caption-strip .lift-visual-asset {
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .caption-strip .lift-figure {
+        margin: 0;
+        width: 100%;
+        max-width: 560px;
+        align-self: center;
+      }
+
+      .caption-strip .lift-figure img {
         display: block;
-        margin-bottom: 8px;
+        width: 100%;
+        height: auto;
+        border: 1px solid rgba(5, 5, 5, 0.12);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .caption-strip .lift-source-link {
+        align-self: flex-start;
+        font-family: var(--mono);
         font-size: 11px;
         font-weight: 900;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: #006fbf;
+        color: var(--blue);
+        text-decoration: none;
       }
 
-      .evidence-ribbon__title {
-        margin: 0;
-        max-width: 48ch;
-        font-size: clamp(18px, 2vw, 21px);
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        line-height: 1.45;
+      .caption-strip .lift-source-link:hover {
+        text-decoration: underline;
+      }
+
+      article#lift .feature-visual.lift-visual-asset {
+        min-height: unset;
       }
 
       .caption-strip .caption-card {
@@ -2687,14 +2709,14 @@
   <body>
     <main class="page">
       <nav class="nav" aria-label="Main navigation">
-        <a class="wordmark" href="Floom%20v0%20landing.html">
+        <a class="wordmark" href="home.html">
           <strong>Floom</strong>
           <span>Open source · MIT</span>
         </a>
         <div class="nav-right">
           <div class="nav-links">
-            <a href="Floom%20v0%20landing.html" aria-current="page">Home</a>
-            <a href="skill.html">Skills</a>
+            <a href="home.html">Home</a>
+            <a href="skills.html">Skills</a>
             <a href="docs.html">Docs</a>
             <a href="about.html">About</a>
           </div>
@@ -2902,44 +2924,27 @@
         </ul>
       </section>
 
-      <section class="caption-strip" aria-label="Evidence for curated agent skills">
-        <header class="evidence-ribbon">
-          <span class="evidence-ribbon__label">Evidence</span>
-          <h2 class="evidence-ribbon__title">Curated context, explicit activation, portable packs.</h2>
-        </header>
-
+      <section class="caption-strip" aria-label="Skills and evidence">
         <article class="caption-card" id="lift">
-          <div class="feature-visual lift-visual" aria-label="Average pass-rate lift from curated skills">
-            <div class="lift-panel">
-              <div class="lift-card">
-                <span class="pack-kicker">SkillsBench result</span>
-                <div class="lift-stat">
-                  <strong>+16.2</strong>
-                  <span>pp</span>
-                </div>
-                <p>average pass-rate lift when agents use curated skills on SkillsBench.</p>
-              </div>
-
-              <div class="lift-bar-card" aria-hidden="true">
-                <div class="lift-bar-row">
-                  <span>no skills</span>
-                  <div class="lift-track"><i style="--fill: 58%;"></i></div>
-                </div>
-                <div class="lift-bar-row">
-                  <span>curated skills</span>
-                  <div class="lift-track"><i style="--fill: 86%;"></i></div>
-                </div>
-              </div>
-
-              <div class="lift-source">
-                <span>Curated beats improvised.</span>
-                <a href="https://arxiv.org/abs/2602.12670">Source ↗</a>
-              </div>
-            </div>
+          <div class="feature-visual lift-visual lift-visual-asset">
+            <figure class="lift-figure">
+              <img
+                src="assets/curated-skills-infographic.png"
+                width="1024"
+                height="696"
+                decoding="async"
+                loading="lazy"
+                alt="Sunny outdoor terrace with café tables full of people, framed by trees and blue sky beneath a geometric overhang."
+              />
+            </figure>
+            <a class="lift-source-link" href="https://arxiv.org/abs/2602.12670">SkillsBench paper ↗</a>
           </div>
           <div class="feature-copy">
             <h3>Curated skills make agents better</h3>
-            <p>SkillsBench shows a meaningful average lift when agents use curated skills. Floom starts there: focused packs, clear procedures, and less noisy context.</p>
+            <p>
+              SkillsBench shows a measurable pass-rate lift when agents use curated skills. Floom starts there—with focused packs, clear procedures,
+              and less noisy context—for the workflows you decide to tackle.
+            </p>
           </div>
         </article>
 

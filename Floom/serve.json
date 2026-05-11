@@ -1,7 +1,11 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/skill/", "destination": "/skill.html" },
-    { "source": "/skill", "destination": "/skill.html" }
+    { "source": "/skill/", "destination": "/skills.html" },
+    { "source": "/skill", "destination": "/skills.html" },
+    { "source": "/skills/", "destination": "/skills.html" },
+    { "source": "/skills", "destination": "/skills.html" },
+    { "source": "/home/", "destination": "/home.html" },
+    { "source": "/home", "destination": "/home.html" }
   ]
 }

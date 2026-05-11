@@ -1,0 +1,1122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Skills · Floom</title>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #050505;
+  --muted: #333333;
+  --dim: #999;
+  --blue: #0094ff;
+  --blue-soft: #bfe6ff;
+  --blue-pale: #eaf7ff;
+  --line: 2px solid var(--ink);
+  --line-light: 1px solid #e0dfdb;
+  --sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --mono:
+    "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas,
+    monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  height: 100vh;
+}
+
+
+/* ── NAV ── */
+.page {
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  padding: 44px 70px 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.nav {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+  border-bottom: var(--line);
+  padding-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 30px;
+  min-width: 0;
+  flex-shrink: 1;
+}
+.wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
+.wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+.wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 34px;
+  row-gap: 10px;
+  line-height: 1;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  max-width: 100%;
+}
+.nav-links a { color: inherit; text-decoration: none; }
+.nav-links a:hover,
+.nav-links a[aria-current="page"] { color: var(--blue); }
+
+@media (max-width: 980px) {
+  .page {
+    padding: 30px 22px 0;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 20px 16px 0;
+  }
+
+  .nav-links {
+    row-gap: 10px;
+    column-gap: 14px;
+  }
+}
+
+/* ── TWO-PANEL ── */
+.panels {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── LEFT PANEL ── */
+.panel-left {
+  border-right: var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panel-left-header {
+  padding: 28px 20px 20px;
+  border-bottom: var(--line-light);
+  flex-shrink: 0;
+}
+.panel-left-header h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.panel-left-header .meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--dim);
+}
+
+.cat-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+  border-left: 3px solid transparent;
+}
+.cat-item:hover { background: #f0efeb; }
+.cat-item.is-active {
+  background: #fff;
+  border-left-color: var(--ink);
+}
+.cat-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cat-item-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--dim);
+}
+
+.panel-left-footer {
+  padding: 16px 20px;
+  border-top: var(--line-light);
+  flex-shrink: 0;
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.download-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* ── RIGHT PANEL ── */
+.panel-right {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-bottom: var(--line-light);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 7px 12px;
+  width: 200px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.search-input:focus { border-color: var(--blue); }
+.search-input::placeholder { color: var(--dim); }
+
+.sort-select {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 7px 28px 7px 10px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.view-toggle {
+  display: inline-flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-left: auto;
+}
+.view-tab {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  transition: background 0.13s, color 0.13s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.view-tab.active { background: var(--ink); color: #fff; }
+.view-tab:hover:not(.active) { background: #f0efeb; color: var(--ink); }
+
+.select-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.13s, border-color 0.13s, color 0.13s;
+}
+.select-btn:hover { border-color: var(--ink); color: var(--ink); }
+.select-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* Results count */
+.results-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 32px;
+  border-bottom: var(--line-light);
+  flex-shrink: 0;
+}
+.results-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+}
+.results-count strong { color: var(--ink); }
+
+/* Select status */
+.select-status {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 32px;
+  background: var(--blue-pale);
+  border-bottom: 1px solid var(--blue-soft);
+  flex-shrink: 0;
+}
+.select-status.visible { display: flex; }
+.select-status-text {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--blue);
+  flex: 1;
+}
+.select-status-text strong { font-weight: 700; }
+.cancel-select-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cancel-select-btn:hover { color: var(--ink); }
+.generate-cmd-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ink);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.13s;
+}
+.generate-cmd-btn:hover { background: #333; }
+
+/* ── SKILL CONTENT ── */
+.skill-scroll {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Grid view */
+.grid-view {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 20px 32px;
+}
+
+.skill-card {
+  background: #fff;
+  border: 1px solid #e0dfdb;
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  position: relative;
+}
+.skill-card:hover {
+  border-color: var(--ink);
+  box-shadow: 0 4px 16px -4px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+.skill-card.selected {
+  border-color: var(--blue);
+  background: var(--blue-pale);
+  box-shadow: 0 0 0 1.5px var(--blue) inset;
+}
+
+.card-checkbox {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+}
+.select-mode .card-checkbox { display: flex; }
+.skill-card.selected .card-checkbox { border-color: var(--blue); background: var(--blue); }
+.card-check-icon {
+  display: none;
+  width: 8px;
+  height: 5px;
+  border-left: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg);
+  margin-top: -1px;
+}
+.skill-card.selected .card-check-icon { display: block; }
+
+.card-name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 5px;
+  padding-right: 20px;
+}
+.card-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-bottom: 10px;
+  min-height: 32px;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.card-publisher {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--dim);
+}
+.profile-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+.card-install {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border: 0.5px solid var(--blue-soft);
+  border-radius: 4px;
+  padding: 2px 7px;
+  margin-left: auto;
+}
+
+/* List view */
+.list-view {
+  display: none;
+  flex-direction: column;
+  padding: 0 32px;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: var(--line-light);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.skill-row:hover { background: rgba(255,255,255,0.5); margin: 0 -8px; padding: 12px 8px; border-radius: 6px; }
+.skill-row.selected { background: var(--blue-pale); margin: 0 -4px; padding: 12px 4px; border-radius: 6px; }
+
+.row-checkbox-wrap { flex-shrink: 0; display: flex; align-items: center; }
+.row-checkbox {
+  width: 16px; height: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.skill-row.selected .row-checkbox { border-color: var(--blue); background: var(--blue); }
+.row-check-icon {
+  display: none;
+  width: 8px; height: 5px;
+  border-left: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg);
+  margin-top: -1px;
+}
+.skill-row.selected .row-check-icon { display: block; }
+:not(.select-mode) .row-checkbox-wrap { visibility: hidden; width: 0; overflow: hidden; }
+.select-mode .row-checkbox-wrap { visibility: visible; width: auto; }
+
+.row-main { flex: 1; min-width: 0; }
+.row-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 2px; }
+.row-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.row-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; align-items: center; }
+.row-publisher { font-family: var(--mono); font-size: 10px; color: var(--dim); }
+
+.row-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.install-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border: 0.5px solid var(--blue-soft);
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+/* Show more */
+.show-more-wrap { padding: 20px 32px 32px; text-align: center; }
+.show-more-btn {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: border-color 0.13s;
+}
+.show-more-btn:hover { border-color: var(--ink); }
+
+/* ── SIDEBAR DRAWER ── */
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(5,5,5,0.18);
+  z-index: 200;
+  backdrop-filter: blur(2px);
+}
+.sidebar-overlay.visible { display: block; }
+
+.sidebar-drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 440px;
+  max-width: 100vw;
+  background: var(--paper);
+  border-left: var(--line);
+  z-index: 201;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(.25,.8,.25,1);
+  box-shadow: -12px 0 40px -8px rgba(0,0,0,0.1);
+}
+.sidebar-drawer.visible { transform: translateX(0); }
+
+.sidebar-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 28px 28px 0;
+  gap: 16px;
+}
+.sidebar-skill-name {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  flex: 1;
+}
+.sidebar-close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--dim);
+  transition: background 0.13s, color 0.13s;
+}
+.sidebar-close:hover { background: #eee; color: var(--ink); }
+
+.sidebar-body { padding: 20px 28px 40px; }
+.sidebar-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+.sidebar-section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 8px;
+  margin-top: 24px;
+}
+.sidebar-divider { height: 1px; background: #e0dfdb; margin: 24px 0; }
+
+.sidebar-cmd-wrap {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.sidebar-cmd {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 10px 14px;
+  word-break: break-all;
+  line-height: 1.55;
+}
+.sidebar-copy {
+  flex-shrink: 0;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: background 0.15s;
+  display: flex; align-items: center; gap: 5px;
+}
+.sidebar-copy:hover { background: #333; }
+.sidebar-copy.copied { background: var(--blue); }
+
+.sidebar-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.sidebar-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border: 0.5px solid var(--blue-soft);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+.sidebar-badge.mute { color: var(--dim); background: #fff; border-color: #ddd; }
+
+.sidebar-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+.sidebar-source-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 12px;
+}
+.sidebar-source-link:hover { color: var(--ink); }
+
+.sidebar-related { margin-top: 20px; }
+.sidebar-related-list { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+.sidebar-related-item {
+  font-size: 13px;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  padding: 3px 0;
+}
+.sidebar-related-item:hover { color: var(--ink); }
+
+/* ── CMD BAR (fixed bottom, select mode) ── */
+.cmd-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--paper);
+  border-top: var(--line);
+  box-shadow: 0 -8px 32px -8px rgba(0,0,0,0.06);
+  padding: 10px 32px 14px;
+  flex-direction: column;
+  gap: 6px;
+}
+.cmd-bar.visible { display: flex; }
+.cmd-bar-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cmd-bar-row {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cmd-bar-text {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  padding: 10px 14px;
+  word-break: break-all;
+}
+.cmd-bar-copy {
+  flex-shrink: 0;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: background 0.15s;
+  display: flex; align-items: center; gap: 6px;
+}
+.cmd-bar-copy:hover { background: #333; }
+.cmd-bar-copy.copied { background: var(--blue); }
+
+/* Empty */
+.empty-state { text-align: center; padding: 48px 0; font-size: 14px; color: var(--dim); }
+</style>
+</head>
+<body>
+<main class="page">
+  <nav class="nav">
+    <a class="wordmark" href="home.html">
+      <strong>Floom</strong>
+      <span>Open source · MIT</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="skills.html" aria-current="page">Skills</a>
+        <a href="docs.html">Docs</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="panels">
+    <!-- LEFT: Categories -->
+    <div class="panel-left">
+      <div class="panel-left-header">
+        <h1>Skills</h1>
+        <span class="meta" id="totalMeta">63 skills · 11 categories</span>
+      </div>
+      <div class="cat-list" id="catList"></div>
+      <div class="panel-left-footer">
+        <a class="download-btn" href="#">Download all ↓</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Skills -->
+    <div class="panel-right">
+      <div class="toolbar">
+        <input class="search-input" id="searchInput" type="search" placeholder="Search skills..." oninput="applyFilters()"/>
+        <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+          <option value="installs">Most installed</option>
+          <option value="alpha">A–Z</option>
+        </select>
+        <div class="view-toggle">
+          <button class="view-tab active" id="tabGrid" onclick="setView('grid')">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="0" y="0" width="5" height="5" rx="1" fill="currentColor"/><rect x="7" y="0" width="5" height="5" rx="1" fill="currentColor"/><rect x="0" y="7" width="5" height="5" rx="1" fill="currentColor"/><rect x="7" y="7" width="5" height="5" rx="1" fill="currentColor"/></svg>
+            Grid
+          </button>
+          <button class="view-tab" id="tabList" onclick="setView('list')">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="0" y="1" width="12" height="2" rx="1" fill="currentColor"/><rect x="0" y="5" width="12" height="2" rx="1" fill="currentColor"/><rect x="0" y="9" width="12" height="2" rx="1" fill="currentColor"/></svg>
+            List
+          </button>
+        </div>
+        <button class="select-btn" id="selectBtn" onclick="toggleSelectMode()">Select</button>
+      </div>
+
+      <div class="select-status" id="selectStatus">
+        <span class="select-status-text"><strong id="selectCount">0</strong> selected</span>
+        <button class="cancel-select-btn" onclick="cancelSelectMode()">Cancel</button>
+        <button class="generate-cmd-btn" id="genCmdBtn" onclick="showGeneratedCmd()">Generate command →</button>
+      </div>
+
+      <div class="results-bar">
+        <span class="results-count"><strong id="visibleCount">0</strong> skills</span>
+      </div>
+
+      <div class="skill-scroll">
+        <div class="grid-view" id="gridView"></div>
+        <div class="list-view" id="listView"></div>
+        <div id="emptyState"></div>
+        <div class="show-more-wrap" id="showMoreWrap" style="display:none">
+          <button class="show-more-btn" id="showMoreBtn" onclick="showMore()">Show 25 more →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR DRAWER -->
+<div class="sidebar-drawer" id="sidebarDrawer">
+  <div class="sidebar-header">
+    <div class="sidebar-skill-name" id="sidebarName">—</div>
+    <button class="sidebar-close" onclick="closeSidebar()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="3" x2="13" y2="13"/><line x1="13" y1="3" x2="3" y2="13"/></svg>
+    </button>
+  </div>
+  <div class="sidebar-body">
+    <p class="sidebar-desc" id="sidebarDesc"></p>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section-label">Install</div>
+    <div class="sidebar-cmd-wrap">
+      <div class="sidebar-cmd" id="sidebarCmd"></div>
+      <button class="sidebar-copy" id="sidebarCopyBtn" onclick="copySidebarCmd()">Copy</button>
+    </div>
+    <a class="sidebar-source-link" id="sidebarSourceLink" href="#" target="_blank" rel="noopener">View on GitHub ↗</a>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section-label">Details</div>
+    <div class="sidebar-meta-row" id="sidebarMeta"></div>
+    <div class="sidebar-tags" id="sidebarTags"></div>
+    <div class="sidebar-related" id="sidebarRelated"></div>
+  </div>
+</div>
+
+<!-- CMD BAR -->
+<div class="cmd-bar" id="cmdBar">
+  <div class="cmd-bar-label" id="cmdBarLabel">Install command</div>
+  <div class="cmd-bar-row">
+    <div class="cmd-bar-text" id="cmdBarText"></div>
+    <button class="cmd-bar-copy" id="cmdBarCopy" onclick="copyCmd()">Copy</button>
+  </div>
+</div>
+
+<script>
+const SKILLS=[
+{name:"find-skills",publisher:"vercel-labs/skills",installs:1400000,license:"MIT",desc:"Discovers and installs new skills. Every agent needs this first.",profiles:["core"],repoUrl:"https://github.com/vercel-labs/skills"},
+{name:"skill-creator",publisher:"anthropics/skills",installs:195500,license:"Apache 2.0",desc:"Creates new skills from workflows. Keeps agents self-improving.",profiles:["core"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"brainstorming",publisher:"obra/superpowers",installs:147400,license:"MIT",desc:"Clarifies any vague brief before acting. Prevents wasted work.",profiles:["core","research","marketing","sales","design","video","founder"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"grill-me",publisher:"mattpocock/skills",installs:108900,license:"MIT",desc:"Exhaustive questioning to finalize plans. Eliminates half-baked briefs.",profiles:["core","founder"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"using-superpowers",publisher:"obra/superpowers",installs:89100,license:"MIT",desc:"Meta-skill for using the superpowers suite effectively.",profiles:["core"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"systematic-debugging",publisher:"obra/superpowers",installs:88500,license:"MIT",desc:"Structured debug before proposing fixes.",profiles:["core"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"writing-plans",publisher:"obra/superpowers",installs:87800,license:"MIT",desc:"Structured planning from specs before touching code.",profiles:["core","writing","research","ops","founder"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"executing-plans",publisher:"obra/superpowers",installs:71300,license:"MIT",desc:"Structured plan execution with checkpoints.",profiles:["core"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"verification-before-completion",publisher:"obra/superpowers",installs:63400,license:"MIT",desc:"Forces evidence before success claims. Blocks 'should work now' completions.",profiles:["core","writing","sales","ops","design","video"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"write-a-skill",publisher:"mattpocock/skills",installs:56400,license:"MIT",desc:"Create a skills.sh-compatible skill from any workflow.",profiles:["core"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"workplan",publisher:"Floom",installs:0,license:"Proprietary",desc:"Context-compaction-safe external brain for complex tasks.",profiles:["core","ops"],repoUrl:"https://floom.dev"},
+{name:"frontend-design",publisher:"anthropics/skills",installs:390700,license:"Apache 2.0",desc:"Anthropic's own frontend design guidance. #2 on skills.sh.",profiles:["design"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"vercel-react-best-practices",publisher:"vercel-labs/agent-skills",installs:386000,license:"MIT",desc:"40+ React/Next.js rules by Vercel. The most proven React skill.",profiles:["dev"],repoUrl:"https://github.com/vercel-labs/agent-skills"},
+{name:"web-design-guidelines",publisher:"vercel-labs/agent-skills",installs:308300,license:"MIT",desc:"100+ UI/UX rules by Vercel. #4 on skills.sh.",profiles:["dev","design"],repoUrl:"https://github.com/vercel-labs/agent-skills"},
+{name:"agent-browser",publisher:"vercel-labs/agent-browser",installs:256100,license:"MIT",desc:"Browser automation for research tasks. #9 on skills.sh.",profiles:["research"],repoUrl:"https://github.com/vercel-labs/agent-browser"},
+{name:"supabase-postgres-best-practices",publisher:"supabase/agent-skills",installs:154800,license:"Apache 2.0",desc:"Database optimization, query patterns, RLS from Supabase.",profiles:["dev"],repoUrl:"https://github.com/supabase/agent-skills"},
+{name:"github-actions-docs",publisher:"xixu-me/skills",installs:122400,license:"MIT",desc:"GitHub Actions documentation and workflow patterns.",profiles:["dev"],repoUrl:"https://github.com/xixu-me/skills"},
+{name:"next-best-practices",publisher:"vercel-labs/next-skills",installs:82500,license:"MIT",desc:"Next.js-specific patterns: routing, data fetching, middleware.",profiles:["dev"],repoUrl:"https://github.com/vercel-labs/next-skills"},
+{name:"improve-codebase-architecture",publisher:"mattpocock/skills",installs:77700,license:"MIT",desc:"Identifies architectural improvements for large codebases.",profiles:["dev"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"requesting-code-review",publisher:"obra/superpowers",installs:77000,license:"MIT",desc:"Dispatches a fresh reviewer subagent with precise context.",profiles:["dev"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"tdd",publisher:"mattpocock/skills",installs:76900,license:"MIT",desc:"Red-green-refactor loop for new functionality.",profiles:["dev"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"test-driven-development",publisher:"obra/superpowers",installs:76700,license:"MIT",desc:"Full TDD workflow from the superpowers collection.",profiles:["dev"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"browser-use",publisher:"browser-use/browser-use",installs:73700,license:"MIT",desc:"Browser automation and web interaction for agents.",profiles:["research","dev"],repoUrl:"https://github.com/browser-use/browser-use"},
+{name:"subagent-driven-development",publisher:"obra/superpowers",installs:65400,license:"MIT",desc:"Decompose tasks for subagent delegation.",profiles:["dev"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"webapp-testing",publisher:"anthropics/skills",installs:64800,license:"Apache 2.0",desc:"End-to-end browser testing framework.",profiles:["dev"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"supabase",publisher:"supabase/agent-skills",installs:60200,license:"Apache 2.0",desc:"Official Supabase skill: auth, storage, realtime, edge functions.",profiles:["dev"],repoUrl:"https://github.com/supabase/agent-skills"},
+{name:"receiving-code-review",publisher:"obra/superpowers",installs:61000,license:"MIT",desc:"How to receive, process, and act on code review feedback.",profiles:["dev"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"grill-with-docs",publisher:"mattpocock/skills",installs:59200,license:"MIT",desc:"Exhaustive questioning grounded in your project docs.",profiles:["dev"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"dispatching-parallel-agents",publisher:"obra/superpowers",installs:59100,license:"MIT",desc:"Parallel agent coordination for complex tasks.",profiles:["dev","ops"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"using-git-worktrees",publisher:"obra/superpowers",installs:59000,license:"MIT",desc:"Git worktree patterns for parallel feature branches.",profiles:["dev"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"finishing-a-development-branch",publisher:"obra/superpowers",installs:56900,license:"MIT",desc:"Structured branch completion. Prevents half-done states.",profiles:["dev"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"diagnose",publisher:"mattpocock/skills",installs:54000,license:"MIT",desc:"Structured debugging: symptom to root cause.",profiles:["dev","ops"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"mcp-builder",publisher:"anthropics/skills",installs:50800,license:"Apache 2.0",desc:"Build MCP servers and tool integrations.",profiles:["dev"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"deploy-to-vercel",publisher:"vercel-labs/agent-skills",installs:47000,license:"MIT",desc:"Deploy and configure Vercel projects from your agent.",profiles:["dev"],repoUrl:"https://github.com/vercel-labs/agent-skills"},
+{name:"sentry-cli",publisher:"sentry/dev",installs:40100,license:"MIT",desc:"Sentry error tracking CLI integration.",profiles:["dev"],repoUrl:"https://github.com/getsentry/sentry"},
+{name:"typescript-advanced-types",publisher:"wshobson/agents",installs:39800,license:"MIT",desc:"Advanced TypeScript type patterns: generics, conditional, utility.",profiles:["dev"],repoUrl:"https://github.com/wshobson/agents"},
+{name:"playwright-best-practices",publisher:"currents-dev",installs:37100,license:"MIT",desc:"Official Playwright testing patterns for E2E work.",profiles:["dev"],repoUrl:"https://github.com/currents-dev/playwright-best-practices-skill"},
+{name:"copywriting",publisher:"coreyhaines31/marketingskills",installs:92900,license:"MIT",desc:"Professional copywriting frameworks. Most proven writing skill.",profiles:["writing","marketing","sales","founder"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"content-strategy",publisher:"coreyhaines31/marketingskills",installs:63300,license:"MIT",desc:"Content planning, audience mapping, distribution strategy.",profiles:["writing","marketing"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"writing-skills",publisher:"obra/superpowers",installs:60900,license:"MIT",desc:"Structured approach to any writing task.",profiles:["writing"],repoUrl:"https://github.com/obra/superpowers"},
+{name:"copy-editing",publisher:"coreyhaines31/marketingskills",installs:55900,license:"MIT",desc:"Systematic editing: clarity, tone, structure, brevity.",profiles:["writing"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"doc-coauthoring",publisher:"anthropics/skills",installs:38900,license:"Apache 2.0",desc:"Collaborative document authoring: outlines, drafts, review cycles.",profiles:["writing"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"brand-guidelines",publisher:"anthropics/skills",installs:37500,license:"Apache 2.0",desc:"Brand voice, tone, and style guidelines.",profiles:["writing"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"internal-comms",publisher:"anthropics/skills",installs:32900,license:"Apache 2.0",desc:"Internal communication templates: status updates, memos.",profiles:["writing","ops"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"docx",publisher:"benchflow-ai/skillsbench",installs:0,license:"Apache 2.0",desc:"Word document manipulation: placeholders, headers, tables.",profiles:["writing","data"],repoUrl:"https://github.com/benchflow-ai/skillsbench"},
+{name:"pdf",publisher:"anthropics/skills",installs:99000,license:"Source-available",desc:"Extract text and tables from PDFs.",profiles:["research","ops","founder","data"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"xlsx",publisher:"anthropics/skills",installs:73300,license:"Source-available",desc:"Create and analyze spreadsheets from research data.",profiles:["research","ops","data"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"just-scrape",publisher:"scrapegraphai/just-scrape",installs:62500,license:"MIT",desc:"Zero-config web scraping, no API key required.",profiles:["research","data"],repoUrl:"https://github.com/scrapegraphai/just-scrape"},
+{name:"firecrawl",publisher:"firecrawl/cli",installs:51200,license:"Firecrawl ToS",desc:"Advanced web scraping and crawling.",profiles:["research"],repoUrl:"https://github.com/mendableai/firecrawl"},
+{name:"zoom-out",publisher:"mattpocock/skills",installs:53600,license:"MIT",desc:"Broader context before deep-diving. Landscape first.",profiles:["research","data"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"fuzzy-match",publisher:"benchflow-ai/skillsbench",installs:0,license:"Apache 2.0",desc:"Reconcile entity names across datasets. Dedupe and match.",profiles:["research","sales","data"],repoUrl:"https://github.com/benchflow-ai/skillsbench"},
+{name:"seo-audit",publisher:"coreyhaines31/marketingskills",installs:103300,license:"MIT",desc:"Full SEO audit: technical, on-page, schema.",profiles:["marketing","founder"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"marketing-psychology",publisher:"coreyhaines31/marketingskills",installs:68000,license:"MIT",desc:"Behavioral science applied to copy and design.",profiles:["marketing"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"social-content",publisher:"coreyhaines31/marketingskills",installs:64300,license:"MIT",desc:"Social media content creation across platforms.",profiles:["marketing"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"marketing-ideas",publisher:"coreyhaines31/marketingskills",installs:59500,license:"MIT",desc:"Generate and evaluate marketing campaign ideas.",profiles:["marketing"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"launch-strategy",publisher:"coreyhaines31/marketingskills",installs:53600,license:"MIT",desc:"GTM planning, launch sequencing, channel strategy.",profiles:["marketing","founder"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"cold-email",publisher:"coreyhaines31/marketingskills",installs:44100,license:"MIT",desc:"Structured cold email sequences with personalization.",profiles:["sales"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"churn-prevention",publisher:"coreyhaines31/marketingskills",installs:42000,license:"MIT",desc:"Retention tactics, churn analysis, win-back strategies.",profiles:["sales"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"sales-enablement",publisher:"coreyhaines31/marketingskills",installs:40900,license:"MIT",desc:"Sales collateral, battlecards, objection handling.",profiles:["sales"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"revops",publisher:"coreyhaines31/marketingskills",installs:39600,license:"MIT",desc:"Revenue ops: pipeline management, reporting, CRM cleanup.",profiles:["sales"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"to-issues",publisher:"mattpocock/skills",installs:57300,license:"MIT",desc:"Convert processes into tracked tasks and issues.",profiles:["ops"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"triage",publisher:"mattpocock/skills",installs:46900,license:"MIT",desc:"State machine-based issue classification.",profiles:["ops"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"pptx",publisher:"anthropics/skills",installs:95500,license:"Source-available",desc:"Generate and manipulate PowerPoint presentations.",profiles:["founder"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"to-prd",publisher:"mattpocock/skills",installs:60200,license:"MIT",desc:"Synthesize strategy into structured PRD documents.",profiles:["founder"],repoUrl:"https://github.com/mattpocock/skills"},
+{name:"pricing-strategy",publisher:"coreyhaines31/marketingskills",installs:58800,license:"MIT",desc:"Pricing model design, positioning, packaging.",profiles:["founder"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"product-marketing-context",publisher:"coreyhaines31/marketingskills",installs:58800,license:"MIT",desc:"Product in market context: messaging, positioning, ICP.",profiles:["founder"],repoUrl:"https://github.com/coreyhaines31/marketingskills"},
+{name:"python-parallelization",publisher:"benchflow-ai/skillsbench",installs:0,license:"Apache 2.0",desc:"CPU-bound to multiprocessing, I/O-bound to asyncio.",profiles:["data"],repoUrl:"https://github.com/benchflow-ai/skillsbench"},
+{name:"memory-optimization",publisher:"benchflow-ai/skillsbench",installs:0,license:"Apache 2.0",desc:"Reduce memory footprint, fix leaks, efficient structures.",profiles:["data"],repoUrl:"https://github.com/benchflow-ai/skillsbench"},
+{name:"testing-python",publisher:"benchflow-ai/skillsbench",installs:0,license:"Apache 2.0",desc:"pytest for data pipelines: fixtures, parametrize, mocking.",profiles:["data"],repoUrl:"https://github.com/benchflow-ai/skillsbench"},
+{name:"polish",publisher:"pbakaus/impeccable",installs:85500,license:"Apache 2.0",desc:"Design polish pass applying impeccable principles.",profiles:["design"],repoUrl:"https://github.com/pbakaus/impeccable"},
+{name:"critique",publisher:"pbakaus/impeccable",installs:83000,license:"Apache 2.0",desc:"Structured design critique with actionable feedback.",profiles:["design"],repoUrl:"https://github.com/pbakaus/impeccable"},
+{name:"audit",publisher:"pbakaus/impeccable",installs:82200,license:"Apache 2.0",desc:"Comprehensive UI audit: typography, color, spacing, motion.",profiles:["design"],repoUrl:"https://github.com/pbakaus/impeccable"},
+{name:"bolder",publisher:"pbakaus/impeccable",installs:80300,license:"Apache 2.0",desc:"Make design decisions bolder and more opinionated.",profiles:["design"],repoUrl:"https://github.com/pbakaus/impeccable"},
+{name:"typeset",publisher:"pbakaus/impeccable",installs:64900,license:"Apache 2.0",desc:"Typography system: scale, rhythm, hierarchy.",profiles:["design"],repoUrl:"https://github.com/pbakaus/impeccable"},
+{name:"canvas-design",publisher:"anthropics/skills",installs:51000,license:"Apache 2.0",desc:"Design system for canvas-based UI components.",profiles:["design"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"tailwind-design-system",publisher:"wshobson/agents",installs:40400,license:"MIT",desc:"Tailwind CSS design system: tokens, components, consistency.",profiles:["design"],repoUrl:"https://github.com/wshobson/agents"},
+{name:"theme-factory",publisher:"anthropics/skills",installs:38700,license:"Apache 2.0",desc:"Generate design tokens and theme configurations.",profiles:["design"],repoUrl:"https://github.com/anthropics/skills"},
+{name:"remotion-best-practices",publisher:"remotion-dev/skills",installs:299500,license:"MIT",desc:"Official Remotion skill for programmatic video. #6 on skills.sh.",profiles:["video"],repoUrl:"https://github.com/remotion-dev/skills"},
+{name:"video-edit",publisher:"agentspace-so",installs:43400,license:"TBD",desc:"Video editing workflows and output generation.",profiles:["video"],repoUrl:"https://github.com/agentspace-so/runcomfy-agent-skills"},
+{name:"audio-extractor",publisher:"benchflow-ai/skillsbench",installs:0,license:"Apache 2.0",desc:"Extract audio from video to WAV for analysis.",profiles:["video"],repoUrl:"https://github.com/benchflow-ai/skillsbench"},
+{name:"video-processor",publisher:"benchflow-ai/skillsbench",installs:0,license:"Apache 2.0",desc:"Remove segments via ffmpeg. Batch segment removal.",profiles:["video"],repoUrl:"https://github.com/benchflow-ai/skillsbench"},
+];
+
+const seen=new Set();
+const ALL_SKILLS=SKILLS.filter(s=>{if(seen.has(s.name))return false;seen.add(s.name);return true;});
+const PROFILES=["all","core","dev","writing","research","marketing","sales","ops","founder","data","design","video"];
+const PROFILE_LABELS={all:"All",core:"Core",dev:"Dev",writing:"Writing",research:"Research",marketing:"Marketing",sales:"Sales",ops:"Ops",founder:"Founder",data:"Data",design:"Design",video:"Video"};
+
+let activeProfile='all', searchQuery='', sortOrder='installs', currentView='grid';
+let selectMode=false, selectedSkills=new Set(), visibleCount=25;
+
+function fmtInstalls(n){if(!n)return null;if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return Math.round(n/100)/10+'K';return String(n);}
+
+function buildCatList(){
+  const el=document.getElementById('catList');
+  el.innerHTML=PROFILES.map(p=>{
+    const count=p==='all'?ALL_SKILLS.length:ALL_SKILLS.filter(s=>s.profiles.includes(p)).length;
+    return `<div class="cat-item${p===activeProfile?' is-active':''}" data-profile="${p}" onclick="selectProfile('${p}')">
+      <span class="cat-item-name">${PROFILE_LABELS[p]}</span>
+      <span class="cat-item-count">${count}</span>
+    </div>`;
+  }).join('');
+}
+
+function selectProfile(p){
+  activeProfile=p;
+  visibleCount=25;
+  buildCatList();
+  render();
+}
+
+function filterAndSort(){
+  let f=ALL_SKILLS.filter(s=>{
+    const pm=activeProfile==='all'||s.profiles.includes(activeProfile);
+    const q=searchQuery.toLowerCase();
+    const sm=!q||s.name.toLowerCase().includes(q)||s.desc.toLowerCase().includes(q)||s.publisher.toLowerCase().includes(q)||s.profiles.some(p=>p.includes(q));
+    return pm&&sm;
+  });
+  if(sortOrder==='installs')f.sort((a,b)=>b.installs-a.installs);
+  else f.sort((a,b)=>a.name.localeCompare(b.name));
+  return f;
+}
+
+function handleSkillClick(name){selectMode?toggleSelect(name):openSidebar(name);}
+
+function toggleSelectMode(){
+  selectMode=!selectMode;
+  document.getElementById('selectBtn').classList.toggle('active',selectMode);
+  document.getElementById('selectStatus').classList.toggle('visible',selectMode);
+  if(!selectMode){selectedSkills.clear();document.getElementById('cmdBar').classList.remove('visible');}
+  document.body.classList.toggle('select-mode',selectMode);
+  updateSelectUI();render();
+}
+function cancelSelectMode(){
+  selectMode=false;selectedSkills.clear();
+  document.getElementById('selectBtn').classList.remove('active');
+  document.getElementById('selectStatus').classList.remove('visible');
+  document.getElementById('cmdBar').classList.remove('visible');
+  document.body.classList.remove('select-mode');
+  render();
+}
+function toggleSelect(name){
+  if(selectedSkills.has(name))selectedSkills.delete(name);else selectedSkills.add(name);
+  updateSelectUI();
+  document.querySelectorAll(`[data-name="${name}"]`).forEach(el=>el.classList.toggle('selected',selectedSkills.has(name)));
+  updateCmdBar();
+}
+function updateSelectUI(){
+  document.getElementById('selectCount').textContent=selectedSkills.size;
+}
+function updateCmdBar(){
+  if(!selectedSkills.size){document.getElementById('cmdBar').classList.remove('visible');return;}
+  const cmd='npx @floomhq/starter install --skills '+Array.from(selectedSkills).join(',');
+  document.getElementById('cmdBarText').textContent=cmd;
+  document.getElementById('cmdBar').classList.add('visible');
+  document.getElementById('cmdBarLabel').textContent=selectedSkills.size+' skill'+(selectedSkills.size===1?'':'s')+' selected — install command:';
+}
+function showGeneratedCmd(){updateCmdBar();}
+function copyCmd(){
+  const t=document.getElementById('cmdBarText').textContent;
+  const b=document.getElementById('cmdBarCopy');
+  navigator.clipboard.writeText(t).then(()=>{b.classList.add('copied');b.textContent='Copied!';setTimeout(()=>{b.classList.remove('copied');b.textContent='Copy';},2000);});
+}
+
+function openSidebar(name){
+  const s=ALL_SKILLS.find(x=>x.name===name);if(!s)return;
+  document.getElementById('sidebarName').textContent=s.name;
+  document.getElementById('sidebarDesc').textContent=s.desc;
+  document.getElementById('sidebarCmd').textContent='npx @floomhq/starter install --skills '+s.name;
+  const link=document.getElementById('sidebarSourceLink');
+  link.href=s.repoUrl;
+  link.textContent=s.repoUrl.includes('github.com')?'View on GitHub ↗':'View source ↗';
+  const badges=[];
+  const fmt=fmtInstalls(s.installs);
+  if(fmt)badges.push('<span class="sidebar-badge">↓ '+fmt+'</span>');
+  badges.push('<span class="sidebar-badge mute">'+s.license+'</span>');
+  document.getElementById('sidebarMeta').innerHTML=badges.join('');
+  document.getElementById('sidebarTags').innerHTML=s.profiles.map(p=>'<span class="profile-tag">'+p+'</span>').join('');
+  const related=ALL_SKILLS.filter(x=>x.name!==s.name&&x.profiles.some(p=>s.profiles.includes(p))).sort((a,b)=>b.installs-a.installs).slice(0,5);
+  const relEl=document.getElementById('sidebarRelated');
+  relEl.innerHTML=related.length?'<div class="sidebar-section-label">Related</div><div class="sidebar-related-list">'+related.map(r=>`<div class="sidebar-related-item" onclick="openSidebar('${r.name}')">${r.name}</div>`).join('')+'</div>':'';
+  document.getElementById('sidebarOverlay').classList.add('visible');
+  document.getElementById('sidebarDrawer').classList.add('visible');
+}
+function closeSidebar(){
+  document.getElementById('sidebarOverlay').classList.remove('visible');
+  document.getElementById('sidebarDrawer').classList.remove('visible');
+}
+function copySidebarCmd(){
+  const t=document.getElementById('sidebarCmd').textContent;
+  const b=document.getElementById('sidebarCopyBtn');
+  navigator.clipboard.writeText(t).then(()=>{b.classList.add('copied');b.textContent='Copied!';setTimeout(()=>{b.classList.remove('copied');b.textContent='Copy';},2000);});
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSidebar();});
+
+function renderGridCard(s){
+  const sel=selectedSkills.has(s.name);
+  const fmt=fmtInstalls(s.installs);
+  const tags=s.profiles.map(p=>'<span class="profile-tag">'+p+'</span>').join('');
+  return `<div class="skill-card${sel?' selected':''}" data-name="${s.name}" onclick="handleSkillClick('${s.name}')">
+    <div class="card-checkbox"><div class="card-check-icon"></div></div>
+    <div class="card-name">${s.name}</div>
+    <div class="card-desc">${s.desc}</div>
+    <div class="card-footer"><span class="card-publisher">${s.publisher}</span>${tags}${fmt?'<span class="card-install">↓ '+fmt+'</span>':''}</div>
+  </div>`;
+}
+function renderListRow(s){
+  const sel=selectedSkills.has(s.name);
+  const fmt=fmtInstalls(s.installs);
+  const tags=s.profiles.map(p=>'<span class="profile-tag">'+p+'</span>').join('');
+  return `<div class="skill-row${sel?' selected':''}" data-name="${s.name}" onclick="handleSkillClick('${s.name}')">
+    <div class="row-checkbox-wrap"><div class="row-checkbox"><div class="row-check-icon"></div></div></div>
+    <div class="row-main"><div class="row-name">${s.name}</div><div class="row-desc">${s.desc}</div><div class="row-meta"><span class="row-publisher">${s.publisher}</span>${tags}</div></div>
+    <div class="row-right">${fmt?'<div class="install-badge">↓ '+fmt+'</div>':''}</div>
+  </div>`;
+}
+
+function render(){
+  const filtered=filterAndSort();
+  const slice=filtered.slice(0,visibleCount);
+  document.getElementById('gridView').innerHTML=slice.map(renderGridCard).join('');
+  document.getElementById('listView').innerHTML=slice.map(renderListRow).join('');
+  document.getElementById('visibleCount').textContent=filtered.length;
+  const smw=document.getElementById('showMoreWrap');
+  if(filtered.length>visibleCount){
+    smw.style.display='block';
+    document.getElementById('showMoreBtn').textContent='Show '+Math.min(25,filtered.length-visibleCount)+' more →';
+  }else smw.style.display='none';
+  document.getElementById('emptyState').innerHTML=filtered.length?'':'<div class="empty-state">No skills match your filters.</div>';
+}
+
+function setView(v){
+  currentView=v;
+  document.getElementById('gridView').style.display=v==='grid'?'grid':'none';
+  document.getElementById('listView').style.display=v==='list'?'flex':'none';
+  document.getElementById('tabGrid').classList.toggle('active',v==='grid');
+  document.getElementById('tabList').classList.toggle('active',v==='list');
+}
+function applyFilters(){
+  searchQuery=document.getElementById('searchInput').value;
+  sortOrder=document.getElementById('sortSelect').value;
+  visibleCount=25;render();
+}
+function showMore(){visibleCount+=25;render();}
+
+buildCatList();setView('grid');render();
+document.getElementById('totalMeta').textContent=ALL_SKILLS.length+' skills · '+PROFILES.filter(p=>p!=='all').length+' categories';
+</script>
+</body>
+</html>

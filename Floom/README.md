@@ -41,10 +41,13 @@ startup/poll sync, local conflict protection, and public/starter-library search.
 
 This folder contains standalone HTML/CSS pages for a Floom web concept:
 
-- `floom-concept-07.html` - main landing/product concept page. Large standalone
-  page with most styling inline.
-- `library.html` - skills library/dashboard surface.
-- `skill.html` - individual shared skill page.
+- `home.html` — main marketing landing (**Home** in the shared nav).
+- `skills.html` — skills pack browser (**Skills** in nav).
+- `docs.html` — documentation (**Docs** in nav).
+- `about.html` — about (**About** in nav).
+- `library.html` — library / dashboard surface (prototype; not part of the four primary nav destinations).
+- `index.html` — alternate “fold-style” prototype; **Home** in nav points to **`home.html`** so URLs stay canonical.
+- `floom-concept-07.html` — older standalone concept (different IA than Home / Skills / Docs / About).
 - `docs.html` - documentation-style page for skills, MCP, sync, CLI, and agents.
 - `settings.html` - account, MCP, library, and connected-agent settings surface.
 - `signin.html` - sign-in/onboarding page.
@@ -66,17 +69,20 @@ python3 -m http.server 8000 --bind 127.0.0.1
 Then open:
 
 ```text
-http://127.0.0.1:8000/floom-concept-07.html
+http://127.0.0.1:8000/home.html
 ```
 
 Other useful routes:
 
 ```text
-http://127.0.0.1:8000/library.html
-http://127.0.0.1:8000/skill.html
+http://127.0.0.1:8000/skills.html
 http://127.0.0.1:8000/docs.html
+http://127.0.0.1:8000/about.html
+http://127.0.0.1:8000/index.html
+http://127.0.0.1:8000/library.html
 http://127.0.0.1:8000/settings.html
 http://127.0.0.1:8000/signin.html
+http://127.0.0.1:8000/floom-concept-07.html
 ```
 
 `package.json` currently only declares `vercel` as a dependency and does not
@@ -89,14 +95,29 @@ The current concept uses a bold editorial/SaaS visual language: crisp black
 rules, bright Floom blue, paper-like backgrounds, heavy uppercase utility text,
 terminal command pills, and dense product panels.
 
-When editing, keep the shared nav links consistent across the HTML pages:
+When editing, keep these primary nav targets identical anywhere the four-route header appears (**Home**, **Skills**, **Docs**, **About**):
 
-- Library -> `library.html`
-- Skills -> `skill.html`
-- Agents -> `settings.html#agents`
+- Home -> `home.html`
+- Skills -> `skills.html`
 - Docs -> `docs.html`
-- Install -> `settings.html#mcp`
-- Sign in -> `signin.html`
+- About -> `about.html`
+
+Concept-only pages (`floom-concept-07.html`) use different labels; legacy bookmark files redirect as follows:
+
+- `/skill.html` redirects to **`skills.html`**.
+- `Floom v0 landing.html` redirects to **`home.html`**.
+
+Older concept page (`floom-concept-07.html`) keeps a different IA:
+
+- Library → `library.html`
+- Skills → `skills.html`
+- Agents → `settings.html#agents`
+- Docs → `docs.html`
+- Install → `settings.html#mcp`
+
+Shared chrome pages:
+
+- Sign in → `signin.html`
 
 The secondary pages share `floom-pages.css`. The main concept page has extensive
 inline CSS, so changes to shared styling may need to be mirrored manually there.

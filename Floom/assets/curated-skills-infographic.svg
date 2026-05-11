@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" fill="none" role="img" aria-labelledby="ttl desc">
+  <title id="ttl">Curated skills improve agents on SkillsBench</title>
+  <desc id="desc">
+    Diagram showing flow from focused skill pack through clear procedures to your agent and the tasks you choose,
+    plus a plus sixteen point two percentage point average pass-rate lift for curated skills versus no skills on SkillsBench.
+  </desc>
+
+  <rect width="640" height="420" fill="#fdfdf9" />
+  <rect x="1" y="1" width="638" height="418" stroke="#050505" stroke-width="2" />
+
+  <text x="32" y="44" fill="#050505" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="800" letter-spacing="0.14em">
+    SKILLSBENCH RESULT
+  </text>
+  <text x="32" y="78" fill="#050505" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="22" font-weight="700" letter-spacing="-0.03em">
+    Curated skills make agents better
+  </text>
+  <text x="32" y="106" fill="#333" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="13" font-weight="500">
+    Floom packs ù clearer procedures ù less noisy context ù stronger outcomes on the work you explore.
+  </text>
+
+  <!-- Flow row -->
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" font-weight="800" letter-spacing="0.08em" fill="#050505">
+    <rect x="28" y="132" width="124" height="52" fill="#fff" stroke="#050505" stroke-width="1.5" />
+    <text x="90" y="164" text-anchor="middle">FOCUSED PACK</text>
+
+    <path d="M158 158h18" stroke="#050505" stroke-width="1.5" />
+    <path d="M176 158l6-4v8l-6-4z" fill="#050505" />
+
+    <rect x="190" y="132" width="124" height="52" fill="#fff" stroke="#050505" stroke-width="1.5" />
+    <text x="252" y="164" text-anchor="middle">PROCEDURES</text>
+
+    <path d="M320 158h18" stroke="#050505" stroke-width="1.5" />
+    <path d="M338 158l6-4v8l-6-4z" fill="#050505" />
+
+    <rect x="352" y="132" width="124" height="52" fill="#eaf7ff" stroke="#050505" stroke-width="1.5" />
+    <text x="414" y="164" text-anchor="middle">YOUR AGENT</text>
+
+    <path d="M482 158h18" stroke="#050505" stroke-width="1.5" />
+    <path d="M500 158l6-4v8l-6-4z" fill="#050505" />
+
+    <rect x="514" y="132" width="98" height="52" fill="#fff" stroke="#050505" stroke-width="1.5" />
+    <text x="563" y="164" text-anchor="middle">TASKS</text>
+  </g>
+
+  <!-- Stat -->
+  <text x="32" y="232" fill="#0094ff" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="56" font-weight="800" letter-spacing="-0.06em">
+    +16.2
+  </text>
+  <text x="168" y="232" fill="#666" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="14" font-weight="800">
+    pp
+  </text>
+  <text x="32" y="262" fill="#222" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="14" font-weight="600">
+    Average pass-rate lift with curated skills vs. without (SkillsBench).
+  </text>
+
+  <!-- Bars -->
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" font-weight="800" fill="#050505">
+    <text x="32" y="302">no skills</text>
+    <rect x="120" y="288" width="480" height="18" rx="9" fill="rgba(5,5,5,0.08)" stroke="rgba(5,5,5,0.15)" />
+    <rect x="120" y="288" width="278" height="18" rx="9" fill="rgba(5,5,5,0.28)" />
+
+    <text x="32" y="338">curated skills</text>
+    <rect x="120" y="324" width="480" height="18" rx="9" fill="rgba(5,5,5,0.08)" stroke="rgba(5,5,5,0.15)" />
+    <rect x="120" y="324" width="412" height="18" rx="9" fill="#0094ff" />
+  </g>
+
+  <text x="32" y="392" fill="#050505" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" font-weight="800" letter-spacing="0.04em">
+    CURATED BEATS IMPROVISED  SKILLSBENCH
+  </text>
+  <text x="32" y="408" fill="#0094ff" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" font-weight="800">
+    arxiv.org/abs/2602.12670
+  </text>
+</svg>

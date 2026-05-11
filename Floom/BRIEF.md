@@ -10,11 +10,12 @@ Floom is a skills marketplace for AI agents. It lets users find, install, and ma
 
 ```
 Floom/
-├── Floom v0 landing.html   # Main landing page
-├── about.html              # About route (hero image only; no founder copy on page)
-├── skill.html              # Skills browser
-├── docs.html               # Documentation
-├── library.html            # User library
+├── home.html               # Home (main landing)
+├── index.html             # Alternate fold-layout prototype (Home links to home.html)
+├── skills.html             # Skills browser
+├── docs.html               # Docs
+├── about.html              # About (hero-only stub)
+├── library.html            # Library / dashboard prototype (not primary nav)
 ├── settings.html           # Settings
 ├── signin.html             # Sign in
 ├── floom-pages.css         # Shared design system CSS
@@ -56,14 +57,14 @@ All pages use `floom-pages.css` as the base. Key tokens:
 **Nav pattern (every page):**
 ```html
 <nav class="nav">
-  <a class="wordmark" href="Floom v0 landing.html">
+  <a class="wordmark" href="home.html">
     <strong>Floom</strong>
     <span>Open source · MIT</span>
   </a>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="Floom v0 landing.html">Home</a>
-      <a href="skill.html">Skills</a>
+      <a href="home.html">Home</a>
+      <a href="skills.html">Skills</a>
       <a href="docs.html">Docs</a>
       <a href="about.html" aria-current="page">About</a>
     </div>
@@ -91,7 +92,7 @@ Nav label **About**. Page shows the Golden Gate Bridge hero image (`assets/about
 
 ---
 
-## Landing Page (`Floom v0 landing.html`)
+## Landing Page (`home.html`)
 
 Single self-contained file (~3,100 lines, inline CSS + JS). Sections in order:
 
