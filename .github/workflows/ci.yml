@@ -93,7 +93,10 @@ jobs:
           npm init -y > /dev/null
           npm install "$ABS_TGZ" --no-audit --no-fund
           ./node_modules/.bin/starter install --harness claude --profiles core --yes
-          COUNT=$(find .claude/skills -name SKILL.md 2>/dev/null | wc -l)
+          # CLI 0.2.3 writes globally to ~/.claude/skills. CLI 0.2.4+ adds project-local
+          # default at ./.claude/skills. Accept either layout to keep CI green across the
+          # version transition.
+          COUNT=$(( $(find "$HOME/.claude/skills" -name SKILL.md 2>/dev/null | wc -l) + $(find ./.claude/skills -name SKILL.md 2>/dev/null | wc -l) ))
           if [ "$COUNT" -lt 5 ]; then
             echo "::error::Only $COUNT SKILL.md files written, expected at least 5"
             exit 1
