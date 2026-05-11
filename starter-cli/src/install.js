@@ -196,6 +196,9 @@ export async function install(opts = {}) {
       }
       try {
         const result = writeSkill(agent, skill.slug, content, opts.force || false);
+        if (result.warn) {
+          log(`  ⚠ Kept your custom version of ${skill.slug} at ${result.path}. To overwrite, delete that file first.`);
+        }
         agentResults.push({ slug: skill.slug, ...result });
       } catch (err) {
         agentResults.push({ slug: skill.slug, action: "error", error: err.message });
@@ -245,13 +248,15 @@ export async function install(opts = {}) {
   }
 
   // 8. Print summary
-  const written = results.flatMap((r) => r.skills).filter((s) => s.action === "written").length;
-  const skipped = results.flatMap((r) => r.skills).filter((s) => s.action === "skipped").length;
-  const errors = results.flatMap((r) => r.skills).filter((s) => s.action === "error").length;
+  const allSkillResults = results.flatMap((r) => r.skills);
+  const written = allSkillResults.filter((s) => s.action === "written").length;
+  const skipped = allSkillResults.filter((s) => s.action === "skipped").length;
+  const kept = allSkillResults.filter((s) => s.action === "kept").length;
+  const errors = allSkillResults.filter((s) => s.action === "error").length;
 
   log("");
-  log(`  Installed ${skills.length} skills for ${agents.map((a) => a.label).join(", ")}`);
-  if (skipped > 0) log(`  Skipped ${skipped} (already installed — use --force to overwrite)`);
+  log(`  ${written} skills installed, ${kept} skipped (your custom versions kept)`);
+  if (skipped > 0) log(`  ${skipped} already up to date (no changes)`);
   if (errors > 0) log(`  Errors: ${errors}`);
   log(`  Activation rules written to:`);
   for (const f of activationFiles) log(`    ${f}`);
