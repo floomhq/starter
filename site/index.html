@@ -1238,7 +1238,8 @@
         .works-strip { align-items: flex-start; justify-content: flex-start; gap: 18px; margin-bottom: 32px; padding: 24px; }
         .proof { display: block; }
         .proof-intro { position: static; margin-bottom: 28px; }
-        .final-cta { flex-direction: column; }
+        .final-cta { flex-direction: column; align-items: center; text-align: center; justify-content: center; gap: 22px; padding: 42px 34px; }
+        .final-cta > div:first-child { flex: none; min-width: 0; }
         .activation-grid { grid-template-columns: 1fr; }
       }
 
@@ -1486,7 +1487,7 @@
             </span>
           </h1>
           <p class="lead">
-            One command for your agent installs 65 curated skills. Improved performance for coding, writing, research, and every task you throw at it.
+            One command installs 65 curated skills. Better coding, writing, research, and every task you throw at your agent.
           </p>
           <div class="actions">
             <div class="install-cta-wrap">
@@ -1595,7 +1596,7 @@
           </div>
           <div class="feature-copy">
             <h3>Curated skills make agents better</h3>
-            <p>SkillsBench shows a consistent +16.2% average lift when agents use curated skills. Floom starts there: focused packs, clear procedures, and less noisy context.</p>
+            <p>SkillsBench shows a consistent +16.2% average lift with curated skills. Floom offers curated skills, clear activations and less noise.</p>
           </div>
         </article>
 
@@ -1674,7 +1675,7 @@
             </div>
           </div>
           <div class="feature-copy">
-            <h3>Make agents use the skill</h3>
+            <h3>Make agents use the skills</h3>
             <p>Skills create a performance gap when agents don't activate them. Floom ships activation rules with every skill so the right guidance is present when the task starts.</p>
           </div>
         </article>
@@ -1695,7 +1696,7 @@
           </details>
           <details class="faq-item">
             <summary>Where do the 65 skills come from?</summary>
-            <p>We curated from skills.sh, SkillsBench, and open-source agent-skill repos. We prioritised high real-world usage, clear licenses, broad applicability, and low setup friction; we filtered out narrow Azure/cloud-vendor skills, API-key-heavy workflows, duplicates, personal dotfiles, and prompt snippets that do not belong in a general starter pack.</p>
+            <p>We selected from skills.sh, SkillsBench, and open-source agent-skill repos. Each skill had to show real-world usage, a clear license, and broad applicability. We filtered out vendor-specific, API-key-heavy, and duplicate skills.</p>
           </details>
           <details class="faq-item">
             <summary>Does it work with my agent?</summary>
@@ -1715,7 +1716,7 @@
       <section class="final-cta">
         <div>
           <strong>Upgrade your agent with curated skills</strong>
-          <span>65 curated skills. One command. Works with any agent.</span>
+          <span>65 skills. One command. Works with any agent.</span>
         </div>
         <div class="install-cta-wrap install-cta-wrap--final">
           <button class="install-cta install-cta--final button" type="button" data-copy="npx @floomhq/starter install --global" aria-label="Add to your agent: copies the install command to clipboard">
