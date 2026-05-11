@@ -106,9 +106,10 @@
         padding-bottom: 18px;
       }
 
-      .wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
-      .wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
-      .wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+      .wordmark { display: grid; grid-template-columns: 24px auto; grid-template-areas: "mark name" "mark meta"; column-gap: 8px; row-gap: 2px; align-items: center; color: inherit; text-decoration: none; }
+.wordmark::before { content: ""; grid-area: mark; width: 24px; height: 24px; background: var(--ink); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat; }
+      .wordmark strong { grid-area: name; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+      .wordmark span { grid-area: meta; color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
 
       .nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
       .nav-links {

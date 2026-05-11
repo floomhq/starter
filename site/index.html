@@ -115,14 +115,30 @@
       }
 
       .wordmark {
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
+        display: grid;
+        grid-template-columns: 24px auto;
+        grid-template-areas:
+          "mark name"
+          "mark meta";
+        column-gap: 8px;
+        row-gap: 2px;
+        align-items: center;
         color: inherit;
         text-decoration: none;
       }
 
+      .wordmark::before {
+        content: "";
+        grid-area: mark;
+        width: 24px;
+        height: 24px;
+        background: var(--ink);
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30%2022h20l22%2022a3%203%200%200%201%200%204L50%2070H30a6%206%200%200%201-6-6V28a6%206%200%200%201%206-6z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
+      }
+
       .wordmark strong {
+        grid-area: name;
         font-size: 28px;
         font-weight: 900;
         letter-spacing: -0.06em;
@@ -140,7 +156,7 @@
         text-transform: uppercase;
       }
 
-      .wordmark span { color: #4b4b4b; font-size: 10px; }
+      .wordmark span { grid-area: meta; color: #4b4b4b; font-size: 10px; }
 
       .nav-right, .nav-links { display: flex; align-items: center; }
 
@@ -1480,7 +1496,7 @@
             </div>
             <p class="copy-help">Runs in your terminal. Works with Claude, Codex, Cursor, and more.</p>
             <p class="hero-trust">
-              <span><strong id="npmDownloadCount">469</strong>&nbsp;npm downloads last week</span>
+              <span><strong id="npmDownloadCount">469</strong>&nbsp;npm downloads this week</span>
               <span>Open source MIT</span>
             </p>
           </div>
