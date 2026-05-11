@@ -86,7 +86,7 @@ test("install --profiles core writes skills, activation block, and manifest", ()
     "--root", root,
   ]);
 
-  assert.match(output, /Installed/);
+  assert.match(output, /skills installed/);
 
   // Core profile skills: local-find-skills, task-brief, project-onboarding
   const claudeSkills = path.join(root, "claude", "skills");
@@ -117,7 +117,7 @@ test("install --profiles core,dev writes all profile skills", () => {
     "--root", root,
   ]);
 
-  assert.match(output, /Installed/);
+  assert.match(output, /skills installed/);
 
   // Dev profile skills should be present
   assert.ok(
@@ -143,7 +143,7 @@ test("install --all writes all 29 skills", () => {
     "--root", root,
   ]);
 
-  assert.match(output, /Installed 29 skills/);
+  assert.match(output, /29 skills installed/);
 
   const skillDirs = fs.readdirSync(path.join(root, "claude", "skills"));
   assert.equal(skillDirs.length, 29, `Expected 29 skill dirs, got ${skillDirs.length}`);
@@ -189,6 +189,53 @@ test("list shows installed skills", () => {
   const output = run(["list", "--root", root]);
   assert.match(output, /local-find-skills/);
   assert.match(output, /task-brief/);
+});
+
+test("install preserves custom SKILL.md and warns on collision", () => {
+  const root = tmpRoot("collision");
+
+  // Pre-create a custom SKILL.md for pr-review
+  const skillDir = path.join(root, "claude", "skills", "pr-review");
+  fs.mkdirSync(skillDir, { recursive: true });
+  const customContent = "# My custom pr-review skill\nDo not overwrite me.\n";
+  fs.writeFileSync(path.join(skillDir, "SKILL.md"), customContent, "utf8");
+
+  const output = run([
+    "install",
+    "--profiles", "core,dev",
+    "--harness", "claude",
+    "--root", root,
+  ]);
+
+  // Warning must appear
+  assert.match(output, /Kept your custom version of pr-review/);
+  assert.match(output, /delete that file first/);
+
+  // Custom file must be preserved
+  const kept = fs.readFileSync(path.join(skillDir, "SKILL.md"), "utf8");
+  assert.equal(kept, customContent, "Custom SKILL.md was overwritten — it must be preserved");
+
+  // Other skills from core must still be installed
+  assert.ok(
+    fs.existsSync(path.join(root, "claude", "skills", "local-find-skills", "SKILL.md")),
+    "local-find-skills should still be installed"
+  );
+
+  // Summary line mentions kept count
+  assert.match(output, /skipped \(your custom versions kept\)/);
+});
+
+test("re-running install with no changes is silent (idempotent)", () => {
+  const root = tmpRoot("idempotent-silent");
+
+  // First install
+  run(["install", "--profiles", "core", "--harness", "claude", "--root", root]);
+
+  // Second install — no changes, must produce no ⚠ warnings
+  const output = run(["install", "--profiles", "core", "--harness", "claude", "--root", root]);
+
+  assert.equal(output.includes("⚠"), false, "No warnings expected on idempotent re-run");
+  assert.equal(output.includes("Kept your custom version"), false, "No 'kept' message on identical re-run");
 });
 
 test("remove --all removes skills and strips activation block", () => {

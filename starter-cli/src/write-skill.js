@@ -3,6 +3,7 @@
  * Write a skill to an agent's skill directory.
  */
 
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -78,17 +79,33 @@ export function convertToCursorMdc(slug, content) {
 }
 
 /**
+ * Compute a short SHA-256 hash of a string for content comparison.
+ */
+function hashContent(str) {
+  return crypto.createHash("sha256").update(str, "utf8").digest("hex");
+}
+
+/**
  * Write a skill to the target agent's skill directory.
  *
  * For Claude/Codex/OpenCode/Kimi: writes <skillsDir>/<slug>/SKILL.md
  * For Cursor: writes <skillsDir>/<slug>.mdc (converted format)
+ *
+ * Collision behaviour (when !force):
+ *   - File absent              → write normally, action: "written"
+ *   - File present, same hash  → silent skip (idempotent), action: "skipped"
+ *   - File present, diff hash  → keep user file, action: "kept", warn: true
  */
 export function writeSkill(agent, slug, content, force = false) {
   if (agent.id === "cursor") {
-    // Cursor uses .mdc files in the rules dir
     const dest = path.join(agent.skillsDir, `${slug}.mdc`);
     if (fs.existsSync(dest) && !force) {
-      return { path: dest, action: "skipped" };
+      const existing = fs.readFileSync(dest, "utf8");
+      const incomingMdc = convertToCursorMdc(slug, content);
+      if (hashContent(existing) === hashContent(incomingMdc)) {
+        return { path: dest, action: "skipped" };
+      }
+      return { path: dest, action: "kept", warn: true };
     }
     fs.mkdirSync(agent.skillsDir, { recursive: true });
     const mdcContent = convertToCursorMdc(slug, content);
@@ -99,7 +116,11 @@ export function writeSkill(agent, slug, content, force = false) {
   // All others: write <skillsDir>/<slug>/SKILL.md
   const dest = path.join(agent.skillsDir, slug, "SKILL.md");
   if (fs.existsSync(dest) && !force) {
-    return { path: dest, action: "skipped" };
+    const existing = fs.readFileSync(dest, "utf8");
+    if (hashContent(existing) === hashContent(content)) {
+      return { path: dest, action: "skipped" };
+    }
+    return { path: dest, action: "kept", warn: true };
   }
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, content, "utf8");

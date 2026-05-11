@@ -203,3 +203,30 @@ Current verified backend:
 
 See [docs/LAUNCH-CHECKLIST.md](./docs/LAUNCH-CHECKLIST.md).
 
+## Using the Starter Pack
+
+The `@floomhq/starter` npm package is the user-facing CLI built on top of this repo's skill packs.
+
+```bash
+npx @floomhq/starter install --profiles core,dev
+```
+
+See the [@floomhq/starter package on npm](https://www.npmjs.com/package/@floomhq/starter) for full install, update, remove, and list documentation.
+
+**Updating:** re-run install with `@latest` to pull the newest manifest:
+```bash
+npx @floomhq/starter@latest install --profiles core,dev
+```
+
+**Uninstalling:** removes skill files, activation blocks, and `~/.floom/manifest.json`:
+```bash
+npx @floomhq/starter remove --all
+npx @floomhq/starter remove --skills pr-review,brand-voice
+npx @floomhq/starter remove --profiles dev
+```
+
+**Listing:** shows every installed skill, its profile, and which agent paths it was written to:
+```bash
+npx @floomhq/starter@latest list
+```
+

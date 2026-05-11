@@ -73,6 +73,39 @@ npx @floomhq/starter remove --all
 | OpenCode | `~/.config/opencode/skills/<slug>/SKILL.md` | `~/.config/opencode/AGENTS.md` |
 | Kimi | `~/.kimi/skills/<slug>/SKILL.md` | `~/.kimi/agents/floom-system.md` |
 
+## Updating
+
+There is no auto-update. To pull the latest manifest and skills, re-run the install command with the `@latest` tag:
+
+```bash
+npx @floomhq/starter@latest install --profiles core,dev
+```
+
+`@latest` fetches the newest package version from npm. Re-running install refetches the public manifest. The operation is idempotent: skills you have already customised are skipped (the collision check in CLI 0.2.1 preserves your versions).
+
+## Uninstalling
+
+```bash
+# Remove everything
+npx @floomhq/starter remove --all
+
+# Remove specific skills
+npx @floomhq/starter remove --skills pr-review,brand-voice
+
+# Remove an entire profile
+npx @floomhq/starter remove --profiles dev
+```
+
+`remove` deletes the SKILL.md files the installer wrote, clears the Floom activation block from CLAUDE.md / AGENTS.md, and deletes `~/.floom/manifest.json`. Files the collision check skipped (your custom versions) are not touched.
+
+## Listing what's installed
+
+```bash
+npx @floomhq/starter@latest list
+```
+
+Lists every skill installed via Floom, which profile it belongs to, and which agent paths it was written to.
+
 ## After install
 
 Ask your agent: *"review the changes in this branch"* — the `pr-review` skill fires automatically.
