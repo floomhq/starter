@@ -4,19 +4,13 @@
   "publisher": "vercel-labs",
   "source_repo": "https://github.com/vercel-labs/agent-skills",
   "skills_sh_url": "https://skills.sh/vercel-labs/agent-skills/web-design-guidelines",
-  "install_count_skills_sh": 308300,
+  "install_count_skills_sh": 308453,
   "license": "MIT",
   "description": "Comprehensive frontend and UI design guidelines from Vercel.",
-  "fires_when": "any frontend/UI work",
-  "skill_md_content": "---\nname: web-design-guidelines\ndescription: Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\".\nmetadata:\n  author: vercel\n  version: \"1.0.0\"\n  argument-hint: <file-or-pattern>\n---\n\n# Web Interface Guidelines\n\nReview files for compliance with Web Interface Guidelines.\n\n## How It Works\n\n1. Fetch the latest guidelines from the source URL below\n2. Read the specified files (or prompt user for files/pattern)\n3. Check against all rules in the fetched guidelines\n4. Output findings in the terse `file:line` format\n\n## Guidelines Source\n\nFetch fresh guidelines before each review:\n\n```\nhttps://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md\n```\n\nUse WebFetch to retrieve the latest rules. The fetched content contains all the rules and output format instructions.\n\n## Usage\n\nWhen a user provides a file or pattern argument:\n1. Fetch guidelines from the source URL above\n2. Read the specified files\n3. Apply all rules from the fetched guidelines\n4. Output findings using the format specified in the guidelines\n\nIf no files specified, ask the user which files to review.\n",
-  "skill_md_url": "https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/web-design-guidelines/SKILL.md",
-  "skill_md_size_bytes": 1231,
-  "files": [
-    {
-      "name": "SKILL.md",
-      "size_bytes": 1231,
-      "type": "main"
-    }
-  ],
-  "fetched_at": "2026-05-10T23:25:48.226363+00:00"
+  "fires_when": "",
+  "skill_md_content": "",
+  "skill_md_url": "",
+  "skill_md_size_bytes": 0,
+  "files": [],
+  "fetched_at": ""
 }

@@ -1,0 +1,16 @@
+{
+  "slug": "theme-factory",
+  "name": "theme-factory",
+  "publisher": "anthropics",
+  "source_repo": "https://github.com/anthropics/skills",
+  "skills_sh_url": "https://skills.sh/anthropics/skills/theme-factory",
+  "install_count_skills_sh": 38674,
+  "license": "Apache-2.0",
+  "description": "",
+  "fires_when": "",
+  "skill_md_content": "",
+  "skill_md_url": "",
+  "skill_md_size_bytes": 0,
+  "files": [],
+  "fetched_at": "2026-05-11T00:00:00+00:00"
+}
