@@ -53,6 +53,8 @@
   --muted: #333333;
   --dim: #6b6b6b;
   --blue: #0094ff;
+  --success: #167a4a;
+  --success-soft: #e8f6ee;
   --blue-soft: #bfe6ff;
   --blue-pale: #eaf7ff;
   --link: #b8299a;
@@ -91,8 +93,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 80;
-  background: rgba(250,250,247,0.94);
-  backdrop-filter: blur(12px);
+  background: var(--paper);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -153,13 +154,14 @@ body {
   flex: 1;
   min-height: calc(100vh + 900px);
   align-items: start;
+  --library-sticky-top: 59px;
 }
 
 /* ── LEFT PANEL ── */
 .panel-left {
   position: sticky;
-  top: 78px;
-  height: calc(100vh - 78px);
+  top: var(--library-sticky-top);
+  height: calc(100vh - var(--library-sticky-top));
   border-right: var(--line);
   display: flex;
   flex-direction: column;
@@ -250,7 +252,12 @@ body {
 }
 .install-btn:hover,
 .install-btn:focus-visible { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10); outline: none; }
-.install-btn.copied { background: var(--blue); border-color: var(--link); }
+.install-btn.copied {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(22,122,74,0.14), 0 12px 28px rgba(22,122,74,0.18);
+}
 .install-btn svg { width: 16px; height: 16px; flex: 0 0 16px; transition: transform 0.18s ease; }
 .install-btn:hover svg,
 .install-btn:focus-visible svg { transform: translateY(2px); }
@@ -308,10 +315,9 @@ body {
 /* Toolbar */
 .toolbar {
   position: sticky;
-  top: 78px;
+  top: var(--library-sticky-top);
   z-index: 70;
-  background: rgba(250,250,247,0.96);
-  backdrop-filter: blur(12px);
+  background: var(--paper);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -321,6 +327,14 @@ body {
   flex-wrap: wrap;
 }
 
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 220px;
+  flex: 0 0 260px;
+}
+
 .search-input {
   font-family: var(--sans);
   font-size: 13px;
@@ -328,8 +342,8 @@ body {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 7px 12px;
-  width: 220px;
+  padding: 7px 44px 7px 12px;
+  width: 100%;
   outline: none;
   transition: border-color 0.15s;
 }
@@ -344,12 +358,20 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 2px 5px;
-  margin-left: -34px;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   pointer-events: none;
   background: #fff;
 }
 
-.sort-select {
+.sort-menu {
+  position: relative;
+  z-index: 90;
+}
+
+.sort-button {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
@@ -360,12 +382,61 @@ body {
   padding: 7px 28px 7px 10px;
   outline: none;
   cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
+  min-width: 136px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
+.sort-button:hover,
+.sort-button:focus-visible { border-color: var(--ink); outline: none; }
+.sort-chevron {
+  width: 10px;
+  height: 6px;
+  flex: 0 0 10px;
+  transition: transform 140ms ease;
+}
+.sort-menu.is-open .sort-chevron { transform: rotate(180deg); }
+.sort-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 160px;
+  background: #fff;
+  border: 1px solid #d7d5cf;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 16px 34px rgba(5,5,5,0.16);
+  display: none;
+}
+.sort-menu.is-open .sort-options { display: grid; }
+.sort-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.sort-option:hover,
+.sort-option.is-active {
+  background: var(--paper);
+  color: var(--ink);
+}
+.sort-option-check {
+  width: 12px;
+  color: var(--link);
+  opacity: 0;
+}
+.sort-option.is-active .sort-option-check { opacity: 1; }
 
 .view-toggle {
   display: inline-flex;
@@ -373,6 +444,7 @@ body {
   border-radius: 8px;
   overflow: hidden;
   margin-left: auto;
+  flex: 0 0 auto;
 }
 .view-tab {
   font-family: var(--mono);
@@ -388,6 +460,7 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
+  white-space: nowrap;
 }
 .view-tab.active { background: var(--ink); color: #fff; }
 .view-tab:hover:not(.active) { background: #f0efeb; color: var(--ink); }
@@ -412,10 +485,9 @@ body {
 /* Results count */
 .results-bar {
   position: sticky;
-  top: 136px;
+  top: calc(var(--library-sticky-top) + 80px);
   z-index: 60;
-  background: rgba(250,250,247,0.94);
-  backdrop-filter: blur(12px);
+  background: var(--paper);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -777,7 +849,7 @@ body {
   display: flex; align-items: center; gap: 5px;
 }
 .sidebar-copy:hover { background: #333; }
-.sidebar-copy.copied { background: var(--blue); }
+.sidebar-copy.copied { background: var(--success); }
 
 .sidebar-meta-row {
   display: flex;
@@ -915,7 +987,9 @@ body {
   font-size: 12px;
   color: var(--ink);
   padding: 10px 14px;
-  word-break: break-all;
+  white-space: nowrap;
+  overflow-x: auto;
+  line-height: 1.4;
 }
 .cmd-bar-copy {
   flex-shrink: 0;
@@ -932,7 +1006,7 @@ body {
   display: flex; align-items: center; gap: 6px;
 }
 .cmd-bar-copy:hover { background: #333; }
-.cmd-bar-copy.copied { background: var(--blue); }
+.cmd-bar-copy.copied { background: var(--success); }
 
 /* Empty */
 .empty-state { text-align: center; padding: 48px 0; font-size: 14px; color: var(--dim); }
@@ -972,7 +1046,7 @@ body {
   .results-bar { padding: 10px 16px; }
   .grid-view { grid-template-columns: 1fr; padding: 16px; }
   .list-view { padding: 0 16px; }
-  .search-input { width: min(100%, 260px); }
+  .search-wrap { width: min(100%, 260px); }
   .view-toggle { margin-left: 0; }
   .sidebar-drawer { width: 100vw; border-left: none; }
   .sidebar-body { padding: 18px 18px 34px; }
@@ -1024,13 +1098,21 @@ body {
     <!-- RIGHT: Skills -->
     <div class="panel-right">
       <div class="toolbar">
-        <input class="search-input" id="searchInput" type="search" placeholder="Search skills…" oninput="applyFilters()" aria-label="Search skills" aria-keyshortcuts="Meta+K Control+K /"/>
-        <span class="search-shortcut" aria-hidden="true">⌘K</span>
-        <select class="sort-select" id="sortSelect" aria-label="Sort skills by" onchange="applyFilters()">
-          <option value="installs">Most installed</option>
-          <option value="alpha">A to Z</option>
-          <option value="recent">Recently added</option>
-        </select>
+        <div class="search-wrap">
+          <input class="search-input" id="searchInput" type="search" placeholder="Search skills…" oninput="applyFilters()" aria-label="Search skills" aria-keyshortcuts="Meta+K Control+K /"/>
+          <span class="search-shortcut" aria-hidden="true">⌘K</span>
+        </div>
+        <div class="sort-menu" id="sortMenu">
+          <button class="sort-button" id="sortButton" type="button" aria-haspopup="listbox" aria-expanded="false" onclick="toggleSortMenu(event)">
+            <span id="sortLabel">Most installed</span>
+            <svg class="sort-chevron" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="sort-options" id="sortOptions" role="listbox" aria-label="Sort skills by">
+            <button class="sort-option is-active" type="button" role="option" aria-selected="true" data-sort="installs" onclick="setSort('installs')"><span class="sort-option-check">✓</span>Most installed</button>
+            <button class="sort-option" type="button" role="option" aria-selected="false" data-sort="alpha" onclick="setSort('alpha')"><span class="sort-option-check">✓</span>A to Z</button>
+            <button class="sort-option" type="button" role="option" aria-selected="false" data-sort="recent" onclick="setSort('recent')"><span class="sort-option-check">✓</span>Recently added</button>
+          </div>
+        </div>
         <div class="view-toggle">
           <button class="view-tab active" id="tabGrid" onclick="setView('grid')">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="0" y="0" width="5" height="5" rx="1" fill="currentColor"/><rect x="7" y="0" width="5" height="5" rx="1" fill="currentColor"/><rect x="0" y="7" width="5" height="5" rx="1" fill="currentColor"/><rect x="7" y="7" width="5" height="5" rx="1" fill="currentColor"/></svg>
@@ -2422,8 +2504,7 @@ function toggleSelect(slug) {
   updateCmdBar();
 }
 function selectAllVisible() {
-  const visible = filterAndSort().slice(0, visibleCount);
-  visible.forEach(s => selectedSkills.add(s.slug));
+  filterAndSort().forEach(s => selectedSkills.add(s.slug));
   updateSelectUI();
   render();
   updateCmdBar();
@@ -2433,32 +2514,55 @@ function updateSelectUI() {
 }
 function updateCmdBar() {
   if (!selectedSkills.size) { document.getElementById('cmdBar').classList.remove('visible'); return; }
-  const cmd = 'npx ' + STARTER_VERSION + ' install --global --skills ' + Array.from(selectedSkills).join(',');
+  const selected = Array.from(selectedSkills);
+  const allSelected = selected.length === ALL_SKILLS.length && ALL_SKILLS.every(s => selectedSkills.has(s.slug));
+  const cmd = allSelected
+    ? 'npx ' + STARTER_VERSION + ' install --global'
+    : 'npx ' + STARTER_VERSION + ' install --global --skills ' + selected.join(',');
   document.getElementById('cmdBarText').textContent = cmd;
   document.getElementById('cmdBar').classList.add('visible');
-  document.getElementById('cmdBarLabel').textContent = selectedSkills.size + ' skill' + (selectedSkills.size === 1 ? '' : 's') + ' selected — install command:';
+  document.getElementById('cmdBarLabel').textContent = allSelected
+    ? 'All 65 skills selected - global install command:'
+    : selectedSkills.size + ' skill' + (selectedSkills.size === 1 ? '' : 's') + ' selected - install command:';
 }
 function showGeneratedCmd() { updateCmdBar(); }
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+    return;
+  }
+  fallbackCopy(text);
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  ta.remove();
+}
+
 function copyCmd() {
   const t = document.getElementById('cmdBarText').textContent;
   const b = document.getElementById('cmdBarCopy');
-  navigator.clipboard.writeText(t).then(() => {
-    b.classList.add('copied'); b.textContent = 'Copied!';
-    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
-  });
+  copyText(t);
+  b.classList.add('copied'); b.textContent = 'Copied!';
+  setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
 }
 
 function copyInstall(btn, cmd) {
-  navigator.clipboard.writeText(cmd).then(() => {
-    const original = btn.dataset.originalHtml || btn.innerHTML;
-    btn.dataset.originalHtml = original;
-    btn.classList.add('copied');
-    btn.textContent = 'Copied';
-    setTimeout(() => {
-      btn.classList.remove('copied');
-      btn.innerHTML = btn.dataset.originalHtml;
-    }, 2000);
-  });
+  copyText(cmd);
+  const original = btn.dataset.originalHtml || btn.innerHTML;
+  btn.dataset.originalHtml = original;
+  btn.classList.add('copied');
+  btn.textContent = 'Paste to your agent ✓';
+  setTimeout(() => {
+    btn.classList.remove('copied');
+    btn.innerHTML = btn.dataset.originalHtml;
+  }, 2000);
 }
 
 async function fetchDetail(slug) {
@@ -2557,14 +2661,13 @@ function closeSidebar() {
 function copySidebarCmd() {
   const t = document.getElementById('sidebarCmd').textContent;
   const b = document.getElementById('sidebarCopyBtn');
-  navigator.clipboard.writeText(t).then(() => {
-    b.classList.add('copied'); b.textContent = 'Copied!';
-    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
-  });
+  copyText(t);
+  b.classList.add('copied'); b.textContent = 'Copied!';
+  setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
 }
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeSidebar();
+  if (e.key === 'Escape') { closeSidebar(); closeSortMenu(); }
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
     e.preventDefault();
     document.getElementById('searchInput').focus();
@@ -2619,13 +2722,40 @@ function setView(v) {
   document.getElementById('tabGrid').classList.toggle('active', v === 'grid');
   document.getElementById('tabList').classList.toggle('active', v === 'list');
 }
+function toggleSortMenu(event) {
+  if (event) event.stopPropagation();
+  const menu = document.getElementById('sortMenu');
+  const open = !menu.classList.contains('is-open');
+  menu.classList.toggle('is-open', open);
+  document.getElementById('sortButton').setAttribute('aria-expanded', String(open));
+}
+function closeSortMenu() {
+  document.getElementById('sortMenu').classList.remove('is-open');
+  document.getElementById('sortButton').setAttribute('aria-expanded', 'false');
+}
+function setSort(order) {
+  sortOrder = order;
+  const labels = { installs: 'Most installed', alpha: 'A to Z', recent: 'Recently added' };
+  document.getElementById('sortLabel').textContent = labels[order] || labels.installs;
+  document.querySelectorAll('.sort-option').forEach(btn => {
+    const active = btn.dataset.sort === order;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-selected', String(active));
+  });
+  closeSortMenu();
+  visibleCount = 25;
+  render();
+}
 function applyFilters() {
   searchQuery = document.getElementById('searchInput').value;
-  sortOrder = document.getElementById('sortSelect').value;
   visibleCount = 25;
   render();
 }
 function showMore() { visibleCount += 25; render(); }
+
+document.addEventListener('click', e => {
+  if (!document.getElementById('sortMenu').contains(e.target)) closeSortMenu();
+});
 
 loadManifest();
 </script>

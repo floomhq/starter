@@ -266,7 +266,7 @@ h1, h2, h3, p { margin: 0; }
 .install-cta:hover .install-cta-icon,
 .install-cta:focus-visible .install-cta-icon { transform: translateY(2px); }
 
-.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied { background: var(--success); border-color: var(--success); color: #ffffff; box-shadow: 0 0 0 4px rgba(22,122,74,0.14), 0 12px 28px rgba(22,122,74,0.18); }
 .install-cta.is-copied .install-cta-label::after { content: " \2713"; }
 
 .install-cta-tooltip {

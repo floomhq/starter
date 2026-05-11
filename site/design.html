@@ -39,7 +39,8 @@
       .activation-box { border: 1px solid rgba(5,5,5,.2); border-radius: 12px; padding: 16px; text-align: center; font-weight: 850; }
       .activation .arrow { font-size: 34px; font-weight: 900; color: var(--link); }
       .logo-demo { display: flex; align-items: center; gap: 18px; }
-      .logo-mark { width: 58px; height: 58px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; }
+      .logo-mark { width: 58px; height: 58px; border-radius: 14px; background: var(--ink); display: grid; place-items: center; transition: background 140ms ease; }
+      .logo-mark:hover { background: var(--link); }
       .logo-mark svg { width: 40px; height: 40px; }
       @media (max-width: 980px) { .token-grid, .component-grid, .proof-grid { grid-template-columns: 1fr; } }
       @media (max-width: 640px) { .design-hero { padding-top: 34px; } .activation { grid-template-columns: 1fr; } .activation .arrow { transform: rotate(90deg); justify-self: center; } }
@@ -97,10 +98,10 @@
           </article>
           <article class="component">
             <strong>Logo</strong>
-            <p>Round icon, black field, wedge-cut F. No square favicon background.</p>
+            <p>Legacy play-button mark, black field, paper glyph. Hover can use the link pink accent.</p>
             <div class="logo-demo">
               <span class="logo-mark" aria-hidden="true">
-                <svg viewBox="0 0 64 64"><path fill="#fafaf7" d="M21 16h26l-7 8H30v8h14v8H30v13h-9V16z"/><path fill="#0094ff" d="M40 16h7l-7 8v-8z"/></svg>
+                <svg viewBox="0 0 100 100"><path d="M30 22h20l22 22a3 3 0 0 1 0 4L50 70H30a6 6 0 0 1-6-6V28a6 6 0 0 1 6-6z" fill="#fafaf7"/></svg>
               </span>
               <strong>Floom</strong>
             </div>

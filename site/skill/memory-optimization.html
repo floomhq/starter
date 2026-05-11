@@ -54,6 +54,8 @@
   --muted: #333333;
   --dim: #6b6b6b;
   --blue: #0094ff;
+  --success: #167a4a;
+  --success-soft: #e8f6ee;
   --blue-soft: #bfe6ff;
   --blue-pale: #eaf7ff;
   --link: #b8299a;
@@ -98,7 +100,7 @@ a { color: inherit; }
 .install-btn-wrap { position: relative; display: inline-block; }
 .install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
 .install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-.install-btn.copied { background: var(--blue); border-color: var(--link); }
+.install-btn.copied { background: var(--success); border-color: var(--success); color: #ffffff; box-shadow: 0 0 0 4px rgba(22,122,74,0.14), 0 12px 28px rgba(22,122,74,0.18); }
 .install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
 .install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
@@ -108,7 +110,7 @@ a { color: inherit; }
 .cmd-text { flex: 1; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); padding: 12px 14px; word-break: break-all; line-height: 1.55; }
 .cmd-copy { flex-shrink: 0; background: var(--ink); color: #fff; border: none; cursor: pointer; padding: 12px 18px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; transition: background 0.15s; text-transform: uppercase; }
 .cmd-copy:hover { background: #333; }
-.cmd-copy.copied { background: var(--blue); }
+.cmd-copy.copied { background: var(--success); }
 
 .fires-block { font-size: 16px; color: var(--ink); line-height: 1.6; background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 16px 18px; max-width: 720px; }
 
@@ -262,7 +264,7 @@ a { color: inherit; }
   color: currentColor;
   transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied { background: var(--success); border-color: var(--success); color: #ffffff; box-shadow: 0 0 0 4px rgba(22,122,74,0.14), 0 12px 28px rgba(22,122,74,0.18); }
 .install-cta.is-copied .install-cta-label::after { content: " \2713"; }
 .install-cta-tooltip {
   position: absolute;
@@ -346,7 +348,7 @@ a { color: inherit; }
   border-color: #ffffff;
   box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
 }
-.install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+.install-cta--final.is-copied { background: var(--success); border-color: var(--success); color: #ffffff; }
 .install-cta-wrap--final .install-cta-tooltip { left: auto; right: 0; }
 
 @media (max-width: 640px) {
@@ -611,22 +613,37 @@ a { color: inherit; }
 </div>
 </footer>
 <script>
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+    return;
+  }
+  fallbackCopy(text);
+}
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  ta.remove();
+}
 function copyInstall(btn, cmd) {
-  navigator.clipboard.writeText(cmd).then(() => {
-    const original = btn.dataset.original || btn.textContent;
-    btn.dataset.original = original;
-    btn.classList.add('copied');
-    btn.textContent = 'Copied! Paste in terminal';
-    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
-  });
+  copyText(cmd);
+  const original = btn.dataset.original || btn.textContent;
+  btn.dataset.original = original;
+  btn.classList.add('copied');
+  btn.textContent = 'Copied! Paste in terminal';
+  setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
 }
 function copyCmd() {
   const t = document.getElementById('cmdText').textContent;
   const b = document.getElementById('cmdCopy');
-  navigator.clipboard.writeText(t).then(() => {
-    b.classList.add('copied'); b.textContent = 'Copied!';
-    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
-  });
+  copyText(t);
+  b.classList.add('copied'); b.textContent = 'Copied!';
+  setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
 }
 </script>
 <script>

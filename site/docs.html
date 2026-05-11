@@ -55,6 +55,8 @@
         --ink: #050505;
         --muted: #333333;
         --blue: #0094ff;
+        --success: #167a4a;
+        --success-soft: #e8f6ee;
         --blue-soft: #bfe6ff;
         --blue-pale: #eaf7ff;
         --link: #b8299a;
@@ -538,25 +540,26 @@
           top: 0;
           z-index: 30;
           display: flex;
-          align-items: center;
-          gap: 16px;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          gap: 8px 14px;
           margin: 20px -16px 26px;
           padding: 12px 16px;
           background: rgba(250, 250, 247, 0.96);
           border-top: var(--line-hair);
           border-bottom: var(--line-hair);
-          overflow-x: auto;
-          white-space: nowrap;
+          overflow: visible;
+          white-space: normal;
         }
         main.docs-page .docs-sidebar a {
           width: auto;
-          min-width: max-content;
+          min-width: 0;
           margin: 0;
-          padding: 7px 0;
+          padding: 6px 0;
           border-left: 0;
           font-size: 13px;
         }
-        .doc-toc .toc-heading { min-width: max-content; margin: 0; color: var(--muted); }
+        .doc-toc .toc-heading { width: 100%; margin: 0; color: var(--muted); }
         .doc-toc .toc-sub { display: contents; padding-left: 0; }
         .doc-toc .toc-sub a { font-size: 12px; }
       }
@@ -1061,7 +1064,7 @@
             </p>
             <div class="stat-triple" aria-label="SkillsBench reported deltas">
               <div class="stat-box">
-                <strong>+16.2%</strong>
+                <strong>+16.2pp</strong>
                 <span>Lift with 2-3 curated skills per task.</span>
               </div>
               <div class="stat-box muted">

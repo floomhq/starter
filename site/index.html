@@ -6,13 +6,13 @@
     <meta name="theme-color" content="#fafaf7" />
     <meta name="color-scheme" content="light" />
     <title>Floom Starter Pack — 65 curated AI agent skills</title>
-    <meta name="description" content="One install. Auto-activates. +16.2% pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
+    <meta name="description" content="One install. Auto-activates. +16.2pp pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
 
     <!-- Open Graph -->
     <meta property="og:site_name" content="Floom Starter Pack" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Floom Starter Pack — 65 curated AI agent skills" />
-    <meta property="og:description" content="One install. Auto-activates. +16.2% pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
+    <meta property="og:description" content="One install. Auto-activates. +16.2pp pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
     <meta property="og:url" content="https://floom.dev/" />
     <meta property="og:image" content="https://floom.dev/og-image-v3.png" />
     <meta property="og:image:width" content="1200" />
@@ -22,7 +22,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Floom Starter Pack — 65 curated AI agent skills" />
-    <meta name="twitter:description" content="One install. Auto-activates. +16.2% pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
+    <meta name="twitter:description" content="One install. Auto-activates. +16.2pp pass-rate lift on real benchmarks. Works with Claude Code, Codex, Cursor, Kimi, OpenCode." />
     <meta name="twitter:image" content="https://floom.dev/og-image-v3.png" />
     <meta name="twitter:creator" content="@floomhq" />
     <meta name="twitter:site" content="@floomhq" />
@@ -60,6 +60,8 @@
         --ink: #050505;
         --muted: #333333;
         --blue: #0094ff;
+        --success: #167a4a;
+        --success-soft: #e8f6ee;
         --blue-soft: #bfe6ff;
         --blue-pale: #eaf7ff;
         --cloud-pink: #ff4fd8;
@@ -227,7 +229,7 @@
         transform: translateY(-2px);
       }
 
-      button.terminal.is-copied::after { content: "✓"; background: var(--blue); color: #ffffff; }
+      button.terminal.is-copied::after { content: "✓"; background: var(--success); color: #ffffff; }
 
       .copy-help {
         margin: 0;
@@ -1368,7 +1370,7 @@
         transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .install-cta.is-copied { box-shadow: 0 0 18px rgba(0, 148, 255, 0.35); }
+      .install-cta.is-copied { background: var(--success); border-color: var(--success); color: #ffffff; box-shadow: 0 0 0 4px rgba(22,122,74,0.14), 0 12px 28px rgba(22,122,74,0.18); }
       .install-cta.is-copied .install-cta-label::after { content: " \2713"; }
 
       /* Final-cta variant */
@@ -1379,7 +1381,7 @@
         border-color: #ffffff;
         box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
       }
-      .install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+      .install-cta--final.is-copied { background: var(--success); border-color: var(--success); color: #ffffff; }
       .final-cta .install-cta-label,
       .final-cta .install-cta-icon {
         display: inline-flex;
@@ -1538,7 +1540,7 @@
                   <div class="cmp-arrow">↓</div>
                   <div class="cmp-bar-wrap">
                     <div class="cmp-bar cmp-bar--active" style="--fill: 80%"></div>
-                    <span class="cmp-bar-label cmp-bar-label--lift">+16.2% lift</span>
+                    <span class="cmp-bar-label cmp-bar-label--lift">+16.2pp lift</span>
                   </div>
                 </div>
               </div>
@@ -1550,7 +1552,7 @@
           </div>
           <div class="feature-copy">
             <h3>Curated skills make agents better</h3>
-            <p>SkillsBench shows a consistent +16.2% average lift when agents use curated skills. Floom starts there: focused packs, clear procedures, and less noisy context.</p>
+            <p>SkillsBench shows a consistent +16.2pp average lift when agents use curated skills. Floom starts there: focused packs, clear procedures, and less noisy context.</p>
           </div>
         </article>
 
@@ -1575,7 +1577,7 @@
                   </div>
                 </div>
                 <div class="tri-col tri-col--good">
-                  <span class="tri-outcome">+16.2%</span>
+                  <span class="tri-outcome">+16.2pp</span>
                   <div class="tri-box">
                     <span class="tri-type">curated</span>
                     <div class="tri-divider"></div>
@@ -1624,7 +1626,7 @@
               </div>
               <div class="cmp-finding">
                 <span class="cmp-finding-kicker">Vercel eval</span>
-                <span class="cmp-finding-text">Floom ships AGENTS.md with every skill.</span>
+                <span class="cmp-finding-text">Floom writes activation rules for every installed skill.</span>
               </div>
             </div>
           </div>
@@ -1646,7 +1648,7 @@
           </details>
           <details class="faq-item">
             <summary>How do skills improve my agent?</summary>
-            <p>Skills give your agent focused procedures, examples, and checks for a task. In SkillsBench, curated skills added +16.2% on average. Self-generated skills add no benefit; bulk installs hurt performance.</p>
+            <p>Skills give your agent focused procedures, examples, and checks for a task. In SkillsBench, curated skills added +16.2pp on average. Self-generated skills add no benefit; bulk installs hurt performance.</p>
           </details>
           <details class="faq-item">
             <summary>Where do the 65 skills come from?</summary>
