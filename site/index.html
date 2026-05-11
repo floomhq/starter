@@ -67,6 +67,7 @@
         --brand-codex: var(--blue);
         --brand-cursor: var(--ink);
         --brand-kimi: var(--ink);
+        --brand-opencode: var(--ink);
         --line: 2px solid var(--ink);
         --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
@@ -423,7 +424,7 @@
       .chart-legend span { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
       .chart-legend i { display: inline-block; width: 22px; height: 12px; border-radius: 1px; }
       .legend-without { background: #cfcfcf; }
-      .legend-with { background: linear-gradient(90deg, var(--blue) 0 50%, #d97757 50% 100%); }
+      .legend-with { background: linear-gradient(90deg, var(--blue) 0 33.3%, #d97757 33.3% 66.6%, #7c6af7 66.6% 100%); }
 
       .skills-chart {
         display: grid;
@@ -448,7 +449,7 @@
       .chart-plot {
         position: relative;
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         align-items: end;
         gap: 26px;
         border-left: 1px solid rgba(5,5,5,0.24);
@@ -501,6 +502,7 @@
       .bar-with { --bar-fill: var(--bar-color); }
       .bar-codex { --bar-color: var(--blue); }
       .bar-claude { --bar-color: #d97757; }
+      .bar-gemini { --bar-color: #7c6af7; }
 
       .chart-label {
         position: absolute;
@@ -1097,7 +1099,7 @@
         .hero-agent-rotator .mini-logo { width: 0.34em; height: 0.34em; }
         .hero-copy { padding-top: 10px; }
         .lead { font-size: 18px; line-height: 26px; }
-        .chart-plot { grid-template-columns: repeat(2, 1fr); }
+        .chart-plot { grid-template-columns: repeat(3, 1fr); }
         .works-strip strong { font-size: 20px; }
         .final-cta strong { font-size: 28px; }
       }
@@ -1214,43 +1216,64 @@
       /* Install CTA + tooltip */
       .install-cta-wrap { position: relative; display: inline-block; }
 
-      .install-cta {
+      @keyframes cta-glow-pulse {
+        0%, 100% { box-shadow: 0 0 14px rgba(255, 79, 216, 0.25); }
+        50%       { box-shadow: 0 0 30px rgba(255, 79, 216, 0.55), 0 0 54px rgba(255, 79, 216, 0.18); }
+      }
+
+.install-cta {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        border: 2px solid var(--ink);
+        border: 2px solid transparent;
         border-radius: 14px;
-        background: var(--ink);
+        background: #18181a;
         color: #ffffff;
-        padding: 14px 22px;
-        font: 900 13px/1 var(--sans);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+        padding: 8px 8px 8px 22px;
+        font: 700 17px/1 var(--sans);
+        letter-spacing: normal;
+        text-transform: none;
         cursor: pointer;
-        transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+        transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
-        gap: 8px;
+        gap: 16px;
+        animation: cta-glow-pulse 2.6s ease-in-out infinite;
       }
 
       .install-cta:hover,
       .install-cta:focus-visible {
-        box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+        animation-play-state: paused;
+        box-shadow: 0 0 30px rgba(255, 79, 216, 0.55), 0 8px 22px rgba(5,5,5,0.2);
         transform: translateY(-1px);
         outline: none;
+      }
+      .install-cta:hover .install-cta-icon-box,
+      .install-cta:focus-visible .install-cta-icon-box {
+        background: rgba(255,255,255,0.15);
       }
       .install-cta:hover .install-cta-icon,
       .install-cta:focus-visible .install-cta-icon {
         transform: translateY(2px);
       }
+      .install-cta-icon-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        background: rgba(255,255,255,0.09);
+        border-radius: 9px;
+        transition: background 200ms ease;
+      }
       .install-cta-icon {
-        width: 16px;
-        height: 16px;
-        flex: 0 0 16px;
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
         color: currentColor;
         transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .install-cta.is-copied { background: var(--blue); }
+      .install-cta.is-copied { box-shadow: 0 0 18px rgba(0, 148, 255, 0.35); }
       .install-cta.is-copied .install-cta-label::after { content: " \2713"; }
 
       .install-cta-tooltip {
@@ -1421,15 +1444,15 @@
                 </span>
               </span>
             </span>
-            with the right skills.
+            with the right agent skills.
           </h1>
           <p class="lead">
             One command installs 65 curated skills. Your agent gets smarter at code, writing, research, and every task you throw at it.
           </p>
           <div class="actions">
             <div class="install-cta-wrap">
-              <button class="install-cta button" type="button" data-copy="npx @floomhq/starter install" aria-label="Add to your agent: copies the install command to clipboard">
-                <svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<button class="install-cta button" type="button" data-copy="npx @floomhq/starter install" aria-label="Copy and send to your agent: copies the install command to clipboard">
+                <span class="install-cta-label">Copy and send to your agent</span><span class="install-cta-icon-box"><svg class="install-cta-icon" width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="8" height="9" rx="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h7"/></svg></span>
                 <span class="install-cta-tooltip" role="tooltip">
                   <span class="tooltip-line">Copies a command that installs 65 curated skills into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
                   <code class="tooltip-cmd">npx @floomhq/starter install</code>
@@ -1446,7 +1469,7 @@
             <header class="chart-header">
               <div>
                 <span class="chart-kicker">SkillsBench · arxiv:2602.12670</span>
-                <h2>Curated skills lift task success by 18.6%</h2>
+                <h2>Skills raise agent task success.</h2>
               </div>
               <div class="chart-legend" aria-label="Chart legend">
                 <span><i class="legend-without"></i>without skills</span>
@@ -1454,7 +1477,7 @@
               </div>
             </header>
 
-            <div class="skills-chart" role="img" aria-label="Task success comparison: Codex improves from 30.6% to 49.2%, Claude improves from 30.6% to 44.5% with curated skills. Average +18.6%.">
+            <div class="skills-chart" role="img" aria-label="Task success comparison: GPT-5.2 on Codex improves from 30.6% to 44.7% (+14.1pp), Opus 4.6 on Claude Code improves from 30.6% to 44.5% (+13.9pp), Gemini 3 Flash on Gemini CLI improves from 31.3% to 48.7% (+17.4pp) with curated skills.">
               <div class="chart-axis" aria-hidden="true">
                 <span>60%</span>
                 <span>45%</span>
@@ -1465,20 +1488,24 @@
               <div class="chart-plot">
                 <div class="chart-group">
                   <div class="chart-bar bar-without" style="--height: 51%;"></div>
-                  <div class="chart-bar bar-with bar-codex" style="--height: 82%;" data-lift="+18.6% avg"></div>
-                  <div class="chart-label">Codex<span>OpenAI</span></div>
+                  <div class="chart-bar bar-with bar-codex" style="--height: 74.5%;" data-lift="+14.1%"></div>
+                  <div class="chart-label">Codex<span>GPT-5.2</span></div>
                 </div>
                 <div class="chart-group">
                   <div class="chart-bar bar-without" style="--height: 51%;"></div>
                   <div class="chart-bar bar-with bar-claude" style="--height: 74.2%;" data-lift="+13.9%"></div>
-                  <div class="chart-label">Claude<span>Anthropic</span></div>
+                  <div class="chart-label">Claude Code<span>Opus 4.6</span></div>
+                </div>
+                <div class="chart-group">
+                  <div class="chart-bar bar-without" style="--height: 52%;"></div>
+                  <div class="chart-bar bar-with bar-gemini" style="--height: 81%;" data-lift="+17.4%"></div>
+                  <div class="chart-label">Gemini CLI<span>Gemini 3 Flash</span></div>
                 </div>
               </div>
             </div>
 
             <p class="chart-note">
-              Average +18.6% pass-rate lift with curated skills across all agents on SkillsBench.
-              <a href="https://arxiv.org/abs/2602.12670" target="_blank" rel="noopener">Read the paper.</a>
+              Improvement in pass rate with curated skills. SkillsBench (<a href="https://arxiv.org/abs/2602.12670" target="_blank" rel="noopener">arxiv:2602.12670</a>).
             </p>
           </div>
         </div>
@@ -1723,7 +1750,7 @@
           const labelEl = button.querySelector(".install-cta-label");
           if (labelEl) {
             const originalLabel = labelEl.textContent;
-            labelEl.textContent = "Copied! Paste in terminal";
+            labelEl.textContent = "Paste to your agent";
             button.classList.add("is-copied");
             setTimeout(() => {
               labelEl.textContent = originalLabel;
