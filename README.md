@@ -1,232 +1,119 @@
-# Floom Packs
+<div align="center">
 
-Local-first curated skill packs for agent users.
+# Floom Starter Pack
 
-Floom Packs installs useful agent skills into the tools people already use:
-Claude Code, Codex CLI, Cursor, OpenCode, and Kimi.
+**65 hand-picked AI agent skills. One install. Auto-activates.**
 
-No Floom account, cloud sync, daemon, or MCP setup is required.
+Works with Claude Code, Codex, Cursor, Kimi, OpenCode.
 
-```bash
-npx @floomhq/packs install
-```
+[![npm version](https://img.shields.io/npm/v/@floomhq/starter?color=0094ff&style=flat-square)](https://www.npmjs.com/package/@floomhq/starter)
+[![npm downloads](https://img.shields.io/npm/dm/@floomhq/starter?color=0094ff&style=flat-square)](https://www.npmjs.com/package/@floomhq/starter)
+[![License: MIT](https://img.shields.io/badge/License-MIT-0094ff.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/floomhq/starter?color=0094ff&style=flat-square)](https://github.com/floomhq/starter)
 
-## What This Is
+[Install](#install) · [What you get](#what-you-get) · [How it works](#how-it-works) · [Docs](https://starter.floom.dev/docs) · [Browse skills](https://starter.floom.dev/library)
 
-Floom Packs is a standalone npm package and CLI:
+</div>
 
-- npm package: `@floomhq/packs`
-- CLI binary: `floom-packs`
-- default pack: `starter`
+---
 
-It installs:
-
-- local skill folders;
-- a local skill index at `~/.floom/packs/starter-index.json`;
-- a `local-find-skills` discovery skill;
-- short instruction snippets that teach agents how to find and use installed
-  skills.
-
-## Quickstart
-
-Preview the install plan:
+## Install
 
 ```bash
-npx @floomhq/packs install --dry-run
+npx @floomhq/starter install
 ```
 
-Install into detected local agents:
+Installs 65 curated skills into the AI agent you use. Auto-detects Claude Code, Codex, Cursor, Kimi, or OpenCode.
+
+## What you get
+
+65 skills across 11 profiles:
+
+| Profile | Skills | Examples |
+|---------|--------|----------|
+| Core | 9 | find-skills, skill-creator, brainstorming, grill-me, systematic-debugging, writing-plans |
+| Dev | 12 | next-best-practices, supabase-postgres-best-practices, tdd, webapp-testing, frontend-design |
+| Writing | 9 | copywriting, copy-editing, content-strategy, brand-guidelines, doc-coauthoring |
+| Research | 8 | just-scrape, agent-browser, pdf, xlsx, zoom-out |
+| Marketing | 12 | seo-audit, marketing-psychology, social-content, programmatic-seo, page-cro, analytics-tracking |
+| Sales | 8 | cold-email, sales-enablement, revops, churn-prevention, pricing-strategy |
+| Ops | 10 | workplan, to-issues, to-prd, triage, internal-comms |
+| Founder | 10 | pricing-strategy, product-marketing-context, launch-strategy, brand-guidelines |
+| Data | 9 | xlsx, pdf, just-scrape, fuzzy-match, python-parallelization, testing-python |
+| Design | 9 | frontend-design, web-design-guidelines, audit, polish, critique, tailwind-design-system |
+| Video | 6 | video-polish, remotion-best-practices, audio-extractor, video-processor |
+
+[Browse the full library](https://starter.floom.dev/library)
+
+## How it works
+
+1. One npm command runs the installer.
+2. Auto-detect your AI agent (Claude Code, Codex, Cursor, Kimi, OpenCode).
+3. Skills install locally to your project (`.claude/skills/`, `.codex/skills/`, etc.).
+4. Activation rules are added to your agent's config so the right skill fires on the right task.
+5. Floom keeps it current with daily refreshes from the upstream skills.sh registry. Install counts updated, content kept fresh.
+
+## Why curated
+
+skills.sh has 91,000+ AI agent skills. Most agents drown in choice or pick wrong. We picked the 65 that move the needle, ranked by real install counts on skills.sh, organized into 11 profiles for clarity.
+
+**+18.6pp pass-rate lift** on real benchmarks vs. an unconfigured agent. **-2.9pp** for kitchen-sink (install everything) approach. Curation matters.
+
+## Updating
 
 ```bash
-npx @floomhq/packs install --yes
+npx @floomhq/starter update
 ```
 
-Install selected profiles:
+Pulls the latest install counts and any updated SKILL.md content. Skills you customized are preserved.
+
+## Listing what is installed
 
 ```bash
-npx @floomhq/packs install --profiles core,dev,writing --yes
+npx @floomhq/starter list
 ```
 
-Install selected profiles into explicit agents:
+## Uninstalling
 
 ```bash
-npx @floomhq/packs install --profiles founder,marketing,sales --targets claude,codex --yes
+npx @floomhq/starter uninstall
 ```
 
-Install everything into every supported agent:
-
-```bash
-npx @floomhq/packs install --all --targets all --yes
-```
-
-## Commands
-
-```bash
-floom-packs list
-floom-packs manifest --json
-floom-packs install --dry-run
-floom-packs install --profiles core,dev --yes
-```
-
-`list` prints profile summaries.
-
-`manifest --json` prints the full machine-readable pack manifest for UI and docs
-integration.
-
-`install` copies selected skills and writes local discovery instructions.
-
-## Profiles
-
-Current V0 profiles:
-
-| Profile | Purpose |
-| --- | --- |
-| `core` | Skill discovery, task framing, and project onboarding. |
-| `dev` | Code review, tests, security, browser checks, and repo analysis. |
-| `writing` | Brand voice, concise drafts, documents, and presentations. |
-| `research` | Source-aware briefs, citations, enterprise search, and PDF extraction. |
-| `marketing` | Landing pages, positioning, customer synthesis, and brand voice. |
-| `sales` | Outbound, customer context, and sales data analysis. |
-| `ops` | Meetings, SOPs, onboarding, and file organization. |
-| `founder` | Strategy briefs, customer learning, landing pages, and decisions. |
-| `data` | Spreadsheets, PDFs, financial QA, and table extraction. |
-| `design` | Visual QA and browser-based implementation checks. |
-| `video` | Transcript, silence, and filler-word workflows. |
-
-`core` is included automatically unless `--all` is used.
-
-## Target Detection
-
-When `--targets` is omitted, Floom Packs detects installed local agents:
-
-| Target | Detection path | Skill root |
-| --- | --- | --- |
-| `claude` | `~/.claude` | `~/.claude/skills` |
-| `codex` | `~/.codex` or `CODEX_HOME` | `~/.codex/skills` |
-| `cursor` | `~/.cursor` | `~/.cursor/skills-cursor` |
-| `opencode` | `~/.config/opencode` | `~/.config/opencode/skills` |
-| `kimi` | `~/.kimi` | `~/.kimi/skills` |
-
-If no supported agent is detected, pass targets explicitly:
-
-```bash
-npx @floomhq/packs install --targets claude,codex --yes
-```
-
-## Existing Local Skills
-
-Floom Packs adds skills beside existing local skills. It does not delete or
-scan unrelated local skills.
-
-Each installed skill folder receives a provenance file:
-
-```text
-.floom-pack.json
-```
-
-If a destination folder already exists and does not have Floom Packs provenance,
-the installer reports a conflict and refuses to overwrite it.
-
-Use `--force` only when replacing an existing local folder is intentional.
-
-## Safety And Privacy
-
-Default safety behavior:
-
-- `install` is a dry-run unless `--yes` is provided.
-- untracked existing skill folders are not overwritten.
-- Floom Packs writes only local files.
-- no cloud account is required.
-- no install telemetry is sent.
-- no MCP server or background daemon is started.
-
-See [docs/PRIVACY-SAFETY.md](./docs/PRIVACY-SAFETY.md) for the full safety
-model.
-
-## Source Boundaries
-
-Bundled now:
-
-- curated seed skills maintained in this repo;
-- selected Apache-2.0 SkillsBench-derived skills.
-
-Planned but not bundled yet:
-
-- skills.sh ecosystem skills;
-- native Claude skills and examples;
-- standalone-safe gstack skills;
-- superpowers skills;
-- other clear-license open skill sources.
-
-Third-party content is only bundled after license and provenance review.
-
-See [docs/CURATION-BRIEF.md](./docs/CURATION-BRIEF.md) for the curation task.
-
-## Website And UI Integration
-
-The website can use:
-
-```bash
-floom-packs manifest --json
-```
-
-for profiles, skill counts, source labels, and supported targets.
-
-See [docs/WEBSITE-INTEGRATION.md](./docs/WEBSITE-INTEGRATION.md) for the UI data
-contract, social proof metrics, and copy rules.
+Removes the skill directories and the activation block from your agent's config. Your other skills are not touched.
 
 ## Architecture
 
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for the local install model, target
-detection, conflict handling, discovery flow, and Mermaid diagrams.
-
-Visual explainer:
-
-https://floom-packs-architecture-2026-05-10.surge.sh/
-
-## Launch Status
-
-This repo is launch-ready as the package backend after the outsourced curation
-and UI passes land.
-
-Current verified backend:
-
-- install planner;
-- local target detection;
-- profile selection;
-- local skill copy;
-- local index generation;
-- instruction injection;
-- provenance tracking;
-- overwrite protection;
-- package tarball execution on a clean VPS.
-
-See [docs/LAUNCH-CHECKLIST.md](./docs/LAUNCH-CHECKLIST.md).
-
-## Using the Starter Pack
-
-The `@floomhq/starter` npm package is the user-facing CLI built on top of this repo's skill packs.
-
-```bash
-npx @floomhq/starter install --profiles core,dev
+```
+floomhq/starter (this repo)
+├── packs/floom-starter/
+│   ├── manifest.json           slim index (65 skills + 11 profiles)
+│   └── skills/<slug>.json      full per-skill data (SKILL.md content, files, source)
+└── starter-cli/
+    └── @floomhq/starter (npm)  the CLI users install
 ```
 
-See the [@floomhq/starter package on npm](https://www.npmjs.com/package/@floomhq/starter) for full install, update, remove, and list documentation.
+The CLI fetches the slim manifest at install time, then lazy-loads per-skill JSONs only for skills the user installs. Daily refresh cron preserves user-edited skills and updates upstream metadata.
 
-**Updating:** re-run install with `@latest` to pull the newest manifest:
-```bash
-npx @floomhq/starter@latest install --profiles core,dev
-```
+## Privacy
 
-**Uninstalling:** removes skill files, activation blocks, and `~/.floom/manifest.json`:
-```bash
-npx @floomhq/starter remove --all
-npx @floomhq/starter remove --skills pr-review,brand-voice
-npx @floomhq/starter remove --profiles dev
-```
+No telemetry. No account required. No daemon running. The CLI runs once, writes files locally, exits. Source code is open and auditable.
 
-**Listing:** shows every installed skill, its profile, and which agent paths it was written to:
-```bash
-npx @floomhq/starter@latest list
-```
+## License
 
+MIT, copyright Floom contributors.
+
+Individual skills retain their own licenses. See [licenses/README.md](licenses/README.md) for the per-source license table.
+
+## Contributors
+
+- [Federico de Ponte](https://x.com/fede_vault)
+- Adam Beaudoin
+
+Pull requests welcome.
+
+## Links
+
+- Site: [starter.floom.dev](https://starter.floom.dev)
+- npm: [@floomhq/starter](https://www.npmjs.com/package/@floomhq/starter)
+- Library: [Browse all 65 skills](https://starter.floom.dev/library)
+- Docs: [starter.floom.dev/docs](https://starter.floom.dev/docs)

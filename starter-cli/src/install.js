@@ -78,7 +78,7 @@ function writeLocalManifest(agents, skills, existingManifest) {
     source: skill.source,
     sourceUrl: skill.upstream
       ? `https://github.com/benchflow-ai/skillsbench/tree/411dc68/${skill.upstream}`
-      : "https://github.com/floomhq/packs/tree/main/packs/starter/skills/" + skill.slug,
+      : "https://github.com/floomhq/starter/tree/main/packs/floom-starter/skills/" + skill.slug,
     version: existingManifest.version,
     installedAt: now,
     installedPaths: agents.map((agent) => ({

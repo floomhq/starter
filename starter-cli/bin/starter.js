@@ -16,7 +16,7 @@
 import { install, remove, list } from "../src/install.js";
 import { runInit } from "../src/init-interactive.js";
 
-const PACKAGE_VERSION = "0.2.2";
+const PACKAGE_VERSION = "0.2.3";
 
 function usage() {
   return `

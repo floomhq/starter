@@ -13,7 +13,7 @@ import path from "node:path";
 import fs from "node:fs";
 
 const MANIFEST_BASE_URL =
-  "https://raw.githubusercontent.com/floomhq/packs/main/packs/floom-starter/";
+  "https://raw.githubusercontent.com/floomhq/starter/main/packs/floom-starter/";
 
 const MANIFEST_URL = MANIFEST_BASE_URL + "manifest.json";
 
