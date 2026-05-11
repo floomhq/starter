@@ -92,8 +92,7 @@
       main.docs-page { background: transparent; }
 
       .nav {
-        position: sticky;
-        top: 0;
+        position: relative;
         z-index: 40;
         background: rgba(250, 250, 247, 0.94);
         backdrop-filter: blur(12px);
@@ -170,8 +169,8 @@
 
       main.docs-page .docs-sidebar {
         position: sticky;
-        top: 80px;
-        max-height: calc(100vh - 96px);
+        top: 24px;
+        max-height: calc(100vh - 48px);
         overflow-y: auto;
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
@@ -184,6 +183,17 @@
         padding: 12px 20px 20px 0;
         margin: 0;
         min-width: 0;
+      }
+
+      .doc-toc .toc-heading {
+        margin: 0 0 10px;
+        padding: 4px 8px 6px 10px;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
       }
 
       main.docs-page .docs-sidebar a {
@@ -537,30 +547,40 @@
         .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; }
         .wordmark span { font-size: 9px; letter-spacing: 0.12em; }
         main.docs-page .docs-sidebar {
-          position: sticky;
-          top: 0;
+          position: static;
           z-index: 30;
           display: flex;
           align-items: flex-start;
-          flex-wrap: wrap;
-          gap: 8px 14px;
+          flex-wrap: nowrap;
+          gap: 8px;
           margin: 20px -16px 26px;
-          padding: 12px 16px;
+          padding: 10px 16px;
           background: rgba(250, 250, 247, 0.96);
           border-top: var(--line-hair);
           border-bottom: var(--line-hair);
-          overflow: visible;
-          white-space: normal;
+          overflow-x: auto;
+          overflow-y: hidden;
+          white-space: nowrap;
+          scrollbar-width: none;
         }
+        main.docs-page .docs-sidebar::-webkit-scrollbar { display: none; }
         main.docs-page .docs-sidebar a {
           width: auto;
+          flex: 0 0 auto;
           min-width: 0;
           margin: 0;
-          padding: 6px 0;
-          border-left: 0;
-          font-size: 13px;
+          padding: 7px 10px;
+          border: 1px solid rgba(5,5,5,0.12);
+          border-radius: 999px;
+          background: #fff;
+          font-size: 12px;
+          line-height: 1;
         }
-        .doc-toc .toc-heading { width: 100%; margin: 0; color: var(--muted); }
+        main.docs-page .docs-sidebar a.is-active {
+          border-color: var(--ink);
+          color: var(--link);
+        }
+        .doc-toc .toc-heading { flex: 0 0 auto; width: auto; margin: 0; padding: 7px 4px 7px 0; color: var(--muted); line-height: 1; }
         .doc-toc .toc-sub { display: contents; padding-left: 0; }
         .doc-toc .toc-sub a { font-size: 12px; }
       }

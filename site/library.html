@@ -90,8 +90,7 @@ body {
 }
 
 .nav {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 80;
   background: var(--paper);
   display: flex;
@@ -155,7 +154,8 @@ body {
   flex: 1;
   min-height: calc(100vh + 900px);
   align-items: start;
-  --library-sticky-top: 59px;
+  --library-sticky-top: 0px;
+  --library-chrome-height: 102px;
 }
 
 /* ── LEFT PANEL ── */
@@ -170,7 +170,11 @@ body {
 }
 
 .panel-left-header {
-  padding: 28px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: var(--library-chrome-height);
+  padding: 20px;
   border-bottom: var(--line-light);
   flex-shrink: 0;
 }
@@ -323,9 +327,9 @@ body {
   align-items: center;
   gap: 10px;
   padding: 14px 32px;
-  border-bottom: var(--line-light);
   flex-shrink: 0;
   flex-wrap: wrap;
+  min-height: 66px;
 }
 
 .search-wrap {
@@ -486,13 +490,14 @@ body {
 /* Results count */
 .results-bar {
   position: sticky;
-  top: calc(var(--library-sticky-top) + 67px);
+  top: calc(var(--library-sticky-top) + 66px);
   z-index: 60;
   background: var(--paper);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 32px;
+  min-height: 36px;
   border-bottom: var(--line-light);
   flex-shrink: 0;
 }
