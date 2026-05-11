@@ -3,8 +3,8 @@
  * Fetches the starter pack manifest from GitHub, with fallback to the bundled copy.
  *
  * Schema v0.2.0:
- *   manifest.json  — slim index (~29KB): slug/name/publisher/description/profiles[]/detail_url per skill
- *   skills/<slug>.json — full data per skill: skill_md_content, fires_when, files, source_repo, etc.
+ *   manifest.json: slim index (~29KB): slug/name/publisher/description/profiles[]/detail_url per skill
+ *   skills/<slug>.json: full data per skill: skill_md_content, fires_when, files, source_repo, etc.
  */
 
 import { createRequire } from "node:module";
@@ -49,8 +49,8 @@ function loadFallback() {
  * Returns { manifest, source: "remote" | "fallback" }
  *
  * The returned manifest conforms to the v0.2.0 slim index schema:
- *   manifest.skills[].detail_url  — relative path to per-skill JSON
- *   manifest.profiles[].skill_slugs — ordered list of slugs for the profile
+ *   manifest.skills[].detail_url: relative path to per-skill JSON
+ *   manifest.profiles[].skill_slugs: ordered list of slugs for the profile
  */
 export async function loadManifest() {
   const remote = await fetchJson(MANIFEST_URL);
@@ -65,12 +65,12 @@ export async function loadManifest() {
  * Returns the parsed object, or null if the fetch fails.
  *
  * The detail JSON contains:
- *   skill_md_content   — full SKILL.md text
- *   skill_md_url       — upstream raw URL
- *   fires_when         — activation trigger description
- *   files              — file tree
- *   source_repo        — GitHub repo URL
- *   fetched_at         — ISO timestamp of last enrichment
+ *   skill_md_content: full SKILL.md text
+ *   skill_md_url: upstream raw URL
+ *   fires_when: activation trigger description
+ *   files: file tree
+ *   source_repo: GitHub repo URL
+ *   fetched_at: ISO timestamp of last enrichment
  */
 export async function fetchSkillDetail(slug) {
   const url = `${MANIFEST_BASE_URL}skills/${slug}.json`;

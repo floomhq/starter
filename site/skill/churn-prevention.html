@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#fafaf7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<title>churn-prevention: Floom Starter Pack skill</title>
+<meta content="Retention tactics, churn analysis, and win-back strategies." name="description"/>
+<!-- Open Graph -->
+<meta content="Floom Starter Pack" property="og:site_name"/>
+<meta content="article" property="og:type"/>
+<meta content="churn-prevention: Floom Starter Pack skill" property="og:title"/>
+<meta content="Retention tactics, churn analysis, and win-back strategies." property="og:description"/>
+<meta content="https://starter.floom.dev/skill/churn-prevention" property="og:url"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="churn-prevention: Floom Starter Pack skill" name="twitter:title"/>
+<meta content="Retention tactics, churn analysis, and win-back strategies." name="twitter:description"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="@floomhq" name="twitter:creator"/>
+<meta content="@floomhq" name="twitter:site"/>
+<!-- Favicon -->
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Canonical -->
+<link href="https://starter.floom.dev/skill/churn-prevention" rel="canonical"/>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "churn-prevention",
+  "description": "Retention tactics, churn analysis, and win-back strategies.",
+  "codeRepository": "https://github.com/coreyhaines31/marketingskills",
+  "license": "MIT",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "Floom Starter Pack",
+    "url": "https://starter.floom.dev/"
+  }
+}
+</script>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #050505;
+  --muted: #333333;
+  --dim: #6b6b6b;
+  --blue: #0094ff;
+  --blue-soft: #bfe6ff;
+  --blue-pale: #eaf7ff;
+  --line: 2px solid var(--ink);
+  --line-light: 1px solid #e0dfdb;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scrollbar-gutter: stable; overflow-y: scroll; }
+body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+.page { width: min(100%, 1100px); margin: 0 auto; padding: 44px 70px 72px; }
+
+.nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
+.nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
+.wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
+.wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+.wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; max-width: 100%; }
+.nav-links a { color: inherit; text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+
+@media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
+@media (max-width: 980px) { .page { padding: 30px 22px 52px; } }
+@media (max-width: 640px) { .page { padding: 22px 16px 44px; } .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--dim); text-decoration: none; margin-top: 24px; margin-bottom: 8px; }
+.back-link:hover { color: var(--ink); }
+
+.hero { margin-top: 8px; padding: 28px 0 32px; border-bottom: var(--line-light); }
+.hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 14px; word-break: break-word; }
+.hero-desc { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 18px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
+.badge.mute { color: var(--muted); background: #fff; border-color: #ddd; }
+
+.section { margin-top: 40px; }
+.section-label { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+.install-btn-wrap { position: relative; display: inline-block; }
+.install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.install-btn.copied { background: var(--blue); border-color: var(--blue); }
+.install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
+.install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.install-tooltip-cmd { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; word-break: break-all; }
+
+.cmd-block { display: flex; align-items: stretch; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; max-width: 720px; margin-top: 8px; }
+.cmd-text { flex: 1; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); padding: 12px 14px; word-break: break-all; line-height: 1.55; }
+.cmd-copy { flex-shrink: 0; background: var(--ink); color: #fff; border: none; cursor: pointer; padding: 12px 18px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; transition: background 0.15s; text-transform: uppercase; }
+.cmd-copy:hover { background: #333; }
+.cmd-copy.copied { background: var(--blue); }
+
+.fires-block { font-size: 16px; color: var(--ink); line-height: 1.6; background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 16px 18px; max-width: 720px; }
+
+.files-list { display: flex; flex-direction: column; gap: 6px; max-width: 720px; }
+.file-row { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; padding: 8px 12px; background: #fff; border: 1px solid #e0dfdb; border-radius: 8px; }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; }
+.file-size { color: var(--muted); flex-shrink: 0; }
+.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+
+.md-block { font-size: 15px; line-height: 1.7; color: var(--ink); background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 22px 26px; max-width: 860px; }
+.md-block h2, .md-block h3, .md-block h4 { font-weight: 700; margin: 18px 0 8px; letter-spacing: -0.01em; }
+.md-block h2 { font-size: 22px; }
+.md-block h3 { font-size: 18px; }
+.md-block h4 { font-size: 16px; }
+.md-block p { margin: 8px 0; }
+.md-block ul, .md-block ol { margin: 8px 0 8px 22px; }
+.md-block li { margin: 3px 0; }
+.md-block code { font-family: var(--mono); font-size: 13px; background: #f0efeb; padding: 1px 5px; border-radius: 3px; }
+.md-block pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 10px 0; }
+.md-block pre code { background: none; padding: 0; }
+.md-block a { color: var(--blue); }
+.md-block blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 14px; color: var(--muted); margin: 12px 0; }
+.md-block hr { border: none; border-top: 1px solid #e0dfdb; margin: 14px 0; }
+
+.links-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+.link-btn { font-family: var(--mono); font-size: 12px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.link-btn:hover { color: var(--ink); }
+
+.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
+
+.footer-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; border: var(--line); border-radius: 28px; background: var(--blue); color: #ffffff; padding: 28px; }
+.footer-cta h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.footer-cta p { color: rgba(255,255,255,0.92); margin-top: 8px; font-size: 15px; font-weight: 500; }
+.footer-cta .button { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #ffffff; border-radius: 14px; background: #ffffff; color: var(--ink); padding: 14px 20px; font: 900 13px/1 var(--sans); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: box-shadow 150ms ease, transform 150ms ease; }
+.footer-cta .button:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.22); transform: translateY(-2px); }
+@media (max-width: 860px) { .footer-cta { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 36px; } }
+
+.site-footer { border-top: 2px solid var(--ink); background: var(--paper); padding: 48px 70px 0; margin-top: 56px; }
+.site-footer-inner { width: min(100%, 1100px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+.footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
+.footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
+.footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom { width: min(100%, 1100px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
+.footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
+@media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
+@media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
+
+
+/* === Skill page TOC layout (mirrors docs.html .doc-layout) === */
+.skill-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 24px;
+  align-items: flex-start;
+}
+.skill-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-self: start;
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+.skill-nav-label {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+}
+.skill-nav a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 14px;
+  background: transparent;
+  color: #4b4b4b;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: background 120ms ease, color 120ms ease;
+}
+.skill-nav a.is-sub { padding-left: 20px; font-weight: 600; color: #5b5b5b; font-size: 12.5px; }
+.skill-nav a.is-sub-2 { padding-left: 32px; font-weight: 500; color: #6b6b6b; font-size: 12px; }
+.skill-nav a:hover, .skill-nav a.active {
+  background: var(--blue-pale);
+  color: var(--ink);
+}
+.skill-body { display: block; min-width: 0; }
+.skill-body .section { scroll-margin-top: 36px; }
+
+@media (max-width: 980px) {
+  .skill-layout { grid-template-columns: 1fr; gap: 28px; }
+  .skill-nav {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid rgba(5,5,5,0.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+  }
+  .skill-nav-label { width: 100%; padding-left: 4px; }
+  .skill-nav a { padding: 6px 10px; font-size: 12px; }
+  .skill-nav a.is-sub, .skill-nav a.is-sub-2 { padding-left: 10px; }
+}
+
+/* === Install CTA + tooltip (from index.html) === */
+.install-cta-wrap { position: relative; display: inline-block; }
+.install-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 14px 22px;
+  font: 900 13px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  gap: 8px;
+}
+.install-cta:hover, .install-cta:focus-visible {
+  box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+  transform: translateY(-1px);
+  outline: none;
+}
+.install-cta:hover .install-cta-icon,
+.install-cta:focus-visible .install-cta-icon {
+  transform: translateY(2px);
+}
+.install-cta-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied .install-cta-label::after { content: " \2713"; }
+.install-cta-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 360px;
+  max-width: 420px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
+  transform: translateY(-4px);
+  z-index: 100;
+  box-shadow: 0 14px 30px rgba(5,5,5,0.18);
+}
+.install-cta:hover .install-cta-tooltip,
+.install-cta:focus-visible .install-cta-tooltip,
+.install-cta:focus-within .install-cta-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
+}
+
+/* Connector arrow from button up to tooltip */
+.install-cta-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  border-top: 2px solid var(--ink);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+/* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
+@media (hover: none) {
+  .install-cta-tooltip { display: none; }
+}
+.tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
+.tooltip-cmd {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.tooltip-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.install-cta--final { background: #ffffff; color: var(--ink); }
+.install-cta--final:hover, .install-cta--final:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
+}
+.install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+.install-cta-wrap--final .install-cta-tooltip { left: auto; right: 0; }
+
+@media (max-width: 640px) {
+  .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
+}
+
+/* === Final CTA (mirrors index.html .final-cta dark surface) === */
+.final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 56px;
+  border: var(--line);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 32px 34px;
+}
+.final-cta strong {
+  display: block;
+  max-width: 620px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.final-cta span { display: block; margin-top: 12px; color: #d6d6d6; font-size: 15px; font-weight: 550; }
+@media (max-width: 860px) {
+  .final-cta { flex-direction: column; align-items: flex-start; }
+  .final-cta strong { font-size: 24px; }
+}
+
+/* skill-cta-label-fix */
+.final-cta .install-cta--final .install-cta-label { color: var(--ink); }
+.final-cta .install-cta--final .install-cta-icon { color: var(--ink); }
+.final-cta .install-cta--final.is-copied .install-cta-label,
+.final-cta .install-cta--final.is-copied .install-cta-icon { color: #ffffff; }
+.final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+</style>
+</head>
+<body>
+<main class="page">
+<nav aria-label="Main navigation" class="nav">
+<a class="wordmark" href="../index.html">
+<strong>Floom</strong>
+<span>Open source · MIT</span>
+</a>
+<div class="nav-right">
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a aria-current="page" href="../library.html">Skills</a>
+<a href="../docs.html">Docs</a>
+<a href="../about.html">About</a>
+</div>
+</div>
+</nav>
+<a class="back-link" href="../library.html">← Back to Skills</a>
+
+
+
+
+
+
+<div class="skill-layout"><nav aria-label="On this page" class="skill-nav">
+<span class="skill-nav-label">On this page</span>
+<a href="#overview">Overview</a>
+<a href="#install">Install</a>
+<a href="#fires-when">Fires when</a>
+<a href="#files">Files</a>
+<a href="#skill-md">SKILL.md</a>
+<a class="is-sub" href="#skillmd-churn-prevention">Churn Prevention</a>
+<a class="is-sub-2" href="#skillmd-before-starting">Before Starting</a>
+<a class="is-sub-2" href="#skillmd-how-this-skill-works">How This Skill Works</a>
+<a class="is-sub-2" href="#skillmd-cancel-flow-design">Cancel Flow Design</a>
+<a class="is-sub-2" href="#skillmd-churn-prediction-proactive-retention">Churn Prediction &amp; Proactive Retention</a>
+<a class="is-sub-2" href="#skillmd-involuntary-churn-payment-recovery">Involuntary Churn: Payment Recovery</a>
+<a class="is-sub-2" href="#skillmd-metrics-measurement">Metrics &amp; Measurement</a>
+<a class="is-sub-2" href="#skillmd-common-mistakes">Common Mistakes</a>
+<a class="is-sub-2" href="#skillmd-tool-integrations">Tool Integrations</a>
+<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
+<a href="#source">Source</a>
+</nav><div class="skill-body"><header class="hero" id="overview">
+<h1>churn-prevention</h1>
+<p class="hero-desc">Retention tactics, churn analysis, and win-back strategies.</p>
+<div class="hero-meta">
+<span class="badge">↓ 42.0K on skills.sh</span><span class="badge mute">coreyhaines31</span><span class="badge mute">MIT</span>
+<span class="profile-tag">sales</span>
+</div>
+</header><section class="section" id="install">
+<div class="section-label">Install</div>
+<div class="install-cta-wrap">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --skills churn-prevention" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>churn-prevention</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills churn-prevention</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+<div class="cmd-block">
+<div class="cmd-text" id="cmdText">npx @floomhq/starter install --skills churn-prevention</div>
+<button class="cmd-copy" id="cmdCopy" onclick="copyCmd()">Copy</button>
+</div>
+</section><section class="section" id="fires-when">
+<div class="section-label">Fires when</div>
+<div class="fires-block">"reduce churn", "win back users", "retention campaign"</div>
+</section><section class="section" id="files">
+<div class="section-label">Files</div>
+<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">18,457 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
+</section><section class="section" id="skill-md">
+<div class="section-label">SKILL.md</div>
+<div class="md-block"><h2 id="skillmd-churn-prevention">Churn Prevention</h2>
+<p>You are an expert in SaaS retention and churn prevention. Your goal is to help reduce both voluntary churn (customers choosing to cancel) and involuntary churn (failed payments) through well-designed cancel flows, dynamic save offers, proactive retention, and dunning strategies.</p>
+<h3 id="skillmd-before-starting">Before Starting</h3>
+<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.</p>
+<p>Gather this context (ask if not provided):</p>
+<h4>1. Current Churn Situation</h4>
+<ul><li>What's your monthly churn rate? (Voluntary vs. involuntary if known)</li><li>How many active subscribers?</li><li>What's the average MRR per customer?</li><li>Do you have a cancel flow today, or does cancel happen instantly?</li></ul>
+<h4>2. Billing &amp; Platform</h4>
+<ul><li>What billing provider? (Stripe, Chargebee, Paddle, Recurly, Braintree)</li><li>Monthly, annual, or both billing intervals?</li><li>Do you support plan pausing or downgrades?</li><li>Any existing retention tooling? (Churnkey, ProsperStack, Raaft)</li></ul>
+<h4>3. Product &amp; Usage Data</h4>
+<ul><li>Do you track feature usage per user?</li><li>Can you identify engagement drop-offs?</li><li>Do you have cancellation reason data from past churns?</li><li>What's your activation metric? (What do retained users do that churned users don't?)</li></ul>
+<h4>4. Constraints</h4>
+<ul><li>B2B or B2C? (Affects flow design)</li><li>Self-serve cancellation required? (Some regulations mandate easy cancel)</li><li>Brand tone for offboarding? (Empathetic, direct, playful)</li></ul>
+<hr/>
+<h3 id="skillmd-how-this-skill-works">How This Skill Works</h3>
+<p>Churn has two types requiring different strategies:</p>
+<p>| Type | Cause | Solution | |------|-------|----------| | <strong>Voluntary</strong> | Customer chooses to cancel | Cancel flows, save offers, exit surveys | | <strong>Involuntary</strong> | Payment fails | Dunning emails, smart retries, card updaters |</p>
+<p>Voluntary churn is typically 50-70% of total churn. Involuntary churn is 30-50% but is often easier to fix.</p>
+<p>This skill supports three modes:</p>
+<ol><li><strong>Build a cancel flow</strong> — Design from scratch with survey, save offers, and confirmation</li><li><strong>Optimize an existing flow</strong> — Analyze cancel data and improve save rates</li><li><strong>Set up dunning</strong> — Failed payment recovery with retries and email sequences</li></ol>
+<hr/>
+<h3 id="skillmd-cancel-flow-design">Cancel Flow Design</h3>
+<h4>The Cancel Flow Structure</h4>
+<p>Every cancel flow follows this sequence:</p>
+<pre><code class="lang-">Trigger → Survey → Dynamic Offer → Confirmation → Post-Cancel</code></pre>
+<p><strong>Step 1: Trigger</strong> Customer clicks "Cancel subscription" in account settings.</p>
+<p><strong>Step 2: Exit Survey</strong> Ask why they're cancelling. This determines which save offer to show.</p>
+<p><strong>Step 3: Dynamic Save Offer</strong> Present a targeted offer based on their reason (discount, pause, downgrade, etc.)</p>
+<p><strong>Step 4: Confirmation</strong> If they still want to cancel, confirm clearly with end-of-billing-period messaging.</p>
+<p><strong>Step 5: Post-Cancel</strong> Set expectations, offer easy reactivation path, trigger win-back sequence.</p>
+<h4>Exit Survey Design</h4>
+<p>The exit survey is the foundation. Good reason categories:</p>
+<p>| Reason | What It Tells You | |--------|-------------------| | Too expensive | Price sensitivity, may respond to discount or downgrade | | Not using it enough | Low engagement, may respond to pause or onboarding help | | Missing a feature | Product gap, show roadmap or workaround | | Switching to competitor | Competitive pressure, understand what they offer | | Technical issues / bugs | Product quality, escalate to support | | Temporary / seasonal need | Usage pattern, offer pause | | Business closed / changed | Unavoidable, learn and let go gracefully | | Other | Catch-all, include free text field |</p>
+<p><strong>Survey best practices:</strong></p>
+<ul><li>1 question, single-select with optional free text</li><li>5-8 reason options max (avoid decision fatigue)</li><li>Put most common reasons first (review data quarterly)</li><li>Don't make it feel like a guilt trip</li><li>"Help us improve" framing works better than "Why are you leaving?"</li></ul>
+<h4>Dynamic Save Offers</h4>
+<p>The key insight: <strong>match the offer to the reason.</strong> A discount won't save someone who isn't using the product. A feature roadmap won't save someone who can't afford it.</p>
+<p><strong>Offer-to-reason mapping:</strong></p>
+<p>| Cancel Reason | Primary Offer | Fallback Offer | |---------------|---------------|----------------| | Too expensive | Discount (20-30% for 2-3 months) | Downgrade to lower plan | | Not using it enough | Pause (1-3 months) | Free onboarding session | | Missing feature | Roadmap preview + timeline | Workaround guide | | Switching to competitor | Competitive comparison + discount | Feedback session | | Technical issues | Escalate to support immediately | Credit + priority fix | | Temporary / seasonal | Pause subscription | Downgrade temporarily | | Business closed | Skip offer (respect the situation) | — |</p>
+<h4>Save Offer Types</h4>
+<p><strong>Discount</strong></p>
+<ul><li>20-30% off for 2-3 months is the sweet spot</li><li>Avoid 50%+ discounts (trains customers to cancel for deals)</li><li>Time-limit the offer ("This offer expires when you leave this page")</li><li>Show the dollar amount saved, not just the percentage</li></ul>
+<p><strong>Pause subscription</strong></p>
+<ul><li>1-3 month pause maximum (longer pauses rarely reactivate)</li><li>60-80% of pausers eventually return to active</li><li>Auto-reactivation with advance notice email</li><li>Keep their data and settings intact</li></ul>
+<p><strong>Plan downgrade</strong></p>
+<ul><li>Offer a lower tier instead of full cancellation</li><li>Show what they keep vs. what they lose</li><li>Position as "right-size your plan" not "downgrade"</li><li>Easy path back up when ready</li></ul>
+<p><strong>Feature unlock / extension</strong></p>
+<ul><li>Unlock a premium feature they haven't tried</li><li>Extend trial of a higher tier</li><li>Works best for "not getting enough value" reasons</li></ul>
+<p><strong>Personal outreach</strong></p>
+<ul><li>For high-value accounts (top 10-20% by MRR)</li><li>Route to customer success for a call</li><li>Personal email from founder for smaller companies</li></ul>
+<h4>Cancel Flow UI Patterns</h4>
+<pre><code class="lang-">┌─────────────────────────────────────┐
+│  We're sorry to see you go          │
+│                                     │
+│  What's the main reason you're      │
+│  cancelling?                        │
+│                                     │
+│  ○ Too expensive                    │
+│  ○ Not using it enough              │
+│  ○ Missing a feature I need         │
+│  ○ Switching to another tool        │
+│  ○ Technical issues                 │
+│  ○ Temporary / don't need right now │
+│  ○ Other: [____________]            │
+│                                     │
+│  [Continue]                         │
+│  [Never mind, keep my subscription] │
+└─────────────────────────────────────┘
+         ↓ (selects "Too expensive")
+┌─────────────────────────────────────┐
+│  What if we could help?             │
+│                                     │
+│  We'd love to keep you. Here's a    │
+│  special offer:                     │
+│                                     │
+│  ┌───────────────────────────────┐  │
+│  │  25% off for the next 3 months│  │
+│  │  Save $XX/month               │  │
+│  │                               │  │
+│  │  [Accept Offer]               │  │
+│  └───────────────────────────────┘  │
+│                                     │
+│  Or switch to [Basic Plan] at       │
+│  $X/month →                         │
+│                                     │
+│  [No thanks, continue cancelling]   │
+└─────────────────────────────────────┘</code></pre>
+<p><strong>UI principles:</strong></p>
+<ul><li>Keep the "continue cancelling" option visible (no dark patterns)</li><li>One primary offer + one fallback, not a wall of options</li><li>Show specific dollar savings, not abstract percentages</li><li>Use the customer's name and account data when possible</li><li>Mobile-friendly (many cancellations happen on mobile)</li></ul>
+<p>For detailed cancel flow patterns by industry and billing provider, see <a href="references/cancel-flow-patterns.md" rel="noopener" target="_blank">references/cancel-flow-patterns.md</a>.</p>
+<hr/>
+<h3 id="skillmd-churn-prediction-proactive-retention">Churn Prediction &amp; Proactive Retention</h3>
+<p>The best save happens before the customer ever clicks "Cancel."</p>
+<h4>Risk Signals</h4>
+<p>Track these leading indicators of churn:</p>
+<p>| Signal | Risk Level | Timeframe | |--------|-----------|-----------| | Login frequency drops 50%+ | High | 2-4 weeks before cancel | | Key feature usage stops | High | 1-3 weeks before cancel | | Support tickets spike then stop | High | 1-2 weeks before cancel | | Email open rates decline | Medium | 2-6 weeks before cancel | | Billing page visits increase | High | Days before cancel | | Team seats removed | High | 1-2 weeks before cancel | | Data export initiated | Critical | Days before cancel | | NPS score drops below 6 | Medium | 1-3 months before cancel |</p>
+<h4>Health Score Model</h4>
+<p>Build a simple health score (0-100) from weighted signals:</p>
+<pre><code class="lang-">Health Score = (
+  Login frequency score × 0.30 +
+  Feature usage score   × 0.25 +
+  Support sentiment     × 0.15 +
+  Billing health        × 0.15 +
+  Engagement score      × 0.15
+)</code></pre>
+<p>| Score | Status | Action | |-------|--------|--------| | 80-100 | Healthy | Upsell opportunities | | 60-79 | Needs attention | Proactive check-in | | 40-59 | At risk | Intervention campaign | | 0-39 | Critical | Personal outreach |</p>
+<h4>Proactive Interventions</h4>
+<p><strong>Before they think about cancelling:</strong></p>
+<p>| Trigger | Intervention | |---------|-------------| | Usage drop &gt;50% for 2 weeks | "We noticed you haven't used [feature]. Need help?" email | | Approaching plan limit | Upgrade nudge (not a wall — paywall-upgrade-cro handles this) | | No login for 14 days | Re-engagement email with recent product updates | | NPS detractor (0-6) | Personal follow-up within 24 hours | | Support ticket unresolved &gt;48h | Escalation + proactive status update | | Annual renewal in 30 days | Value recap email + renewal confirmation |</p>
+<hr/>
+<h3 id="skillmd-involuntary-churn-payment-recovery">Involuntary Churn: Payment Recovery</h3>
+<p>Failed payments cause 30-50% of all churn but are the most recoverable.</p>
+<h4>The Dunning Stack</h4>
+<pre><code class="lang-">Pre-dunning → Smart retry → Dunning emails → Grace period → Hard cancel</code></pre>
+<h4>Pre-Dunning (Prevent Failures)</h4>
+<ul><li><strong>Card expiry alerts</strong>: Email 30, 15, and 7 days before card expires</li><li><strong>Backup payment method</strong>: Prompt for a second payment method at signup</li><li><strong>Card updater services</strong>: Visa/Mastercard auto-update programs (reduces hard declines 30-50%)</li><li><strong>Pre-billing notification</strong>: Email 3-5 days before charge for annual plans</li></ul>
+<h4>Smart Retry Logic</h4>
+<p>Not all failures are the same. Retry strategy by decline type:</p>
+<p>| Decline Type | Examples | Retry Strategy | |-------------|----------|----------------| | Soft decline (temporary) | Insufficient funds, processor timeout | Retry 3-5 times over 7-10 days | | Hard decline (permanent) | Card stolen, account closed | Don't retry — ask for new card | | Authentication required | 3D Secure, SCA | Send customer to update payment |</p>
+<p><strong>Retry timing best practices:</strong></p>
+<ul><li>Retry 1: 24 hours after failure</li><li>Retry 2: 3 days after failure</li><li>Retry 3: 5 days after failure</li><li>Retry 4: 7 days after failure (with dunning email escalation)</li><li>After 4 retries: Hard cancel with reactivation path</li></ul>
+<p><strong>Smart retry tip:</strong> Retry on the day of the month the payment originally succeeded (if Day 1 worked before, retry on Day 1). Stripe Smart Retries handles this automatically.</p>
+<h4>Dunning Email Sequence</h4>
+<p>| Email | Timing | Tone | Content | |-------|--------|------|---------| | 1 | Day 0 (failure) | Friendly alert | "Your payment didn't go through. Update your card." | | 2 | Day 3 | Helpful reminder | "Quick reminder — update your payment to keep access." | | 3 | Day 7 | Urgency | "Your account will be paused in 3 days. Update now." | | 4 | Day 10 | Final warning | "Last chance to keep your account active." |</p>
+<p><strong>Dunning email best practices:</strong></p>
+<ul><li>Direct link to payment update page (no login required if possible)</li><li>Show what they'll lose (their data, their team's access)</li><li>Don't blame ("your payment failed" not "you failed to pay")</li><li>Include support contact for help</li><li>Plain text performs better than designed emails for dunning</li></ul>
+<h4>Recovery Benchmarks</h4>
+<p>| Metric | Poor | Average | Good | |--------|------|---------|------| | Soft decline recovery | &lt;40% | 50-60% | 70%+ | | Hard decline recovery | &lt;10% | 20-30% | 40%+ | | Overall payment recovery | &lt;30% | 40-50% | 60%+ | | Pre-dunning prevention | None | 10-15% | 20-30% |</p>
+<p>For the complete dunning playbook with provider-specific setup, see <a href="references/dunning-playbook.md" rel="noopener" target="_blank">references/dunning-playbook.md</a>.</p>
+<hr/>
+<h3 id="skillmd-metrics-measurement">Metrics &amp; Measurement</h3>
+<h4>Key Churn Metrics</h4>
+<p>| Metric | Formula | Target | |--------|---------|--------| | Monthly churn rate | Churned customers / Start-of-month customers | &lt;5% B2C, &lt;2% B2B | | Revenue churn (net) | (Lost MRR - Expansion MRR) / Start MRR | Negative (net expansion) | | Cancel flow save rate | Saved / Total cancel sessions | 25-35% | | Offer acceptance rate | Accepted offers / Shown offers | 15-25% | | Pause reactivation rate | Reactivated / Total paused | 60-80% | | Dunning recovery rate | Recovered / Total failed payments | 50-60% | | Time to cancel | Days from first churn signal to cancel | Track trend |</p>
+<h4>Cohort Analysis</h4>
+<p>Segment churn by:</p>
+<ul><li><strong>Acquisition channel</strong> — Which channels bring stickier customers?</li><li><strong>Plan type</strong> — Which plans churn most?</li><li><strong>Tenure</strong> — When do most cancellations happen? (30, 60, 90 days?)</li><li><strong>Cancel reason</strong> — Which reasons are growing?</li><li><strong>Save offer type</strong> — Which offers work best for which segments?</li></ul>
+<h4>Cancel Flow A/B Tests</h4>
+<p>Test one variable at a time:</p>
+<p>| Test | Hypothesis | Metric | |------|-----------|--------| | Discount % (20% vs 30%) | Higher discount saves more | Save rate, LTV impact | | Pause duration (1 vs 3 months) | Longer pause increases return rate | Reactivation rate | | Survey placement (before vs after offer) | Survey-first personalizes offers | Save rate | | Offer presentation (modal vs full page) | Full page gets more attention | Save rate | | Copy tone (empathetic vs direct) | Empathetic reduces friction | Save rate |</p>
+<p><strong>How to run cancel flow experiments:</strong> Use the <strong>ab-test-setup</strong> skill to design statistically rigorous tests. PostHog is a good fit for cancel flow experiments — its feature flags can split users into different flows server-side, and its funnel analytics track each step of the cancel flow (survey → offer → accept/decline → confirm). See the <a href="../../tools/integrations/posthog.md" rel="noopener" target="_blank">PostHog integration guide</a> for setup.</p>
+<hr/>
+<h3 id="skillmd-common-mistakes">Common Mistakes</h3>
+<ul><li><strong>No cancel flow at all</strong> — Instant cancel leaves money on the table. Even a simple survey + one offer saves 10-15%</li><li><strong>Making cancellation hard to find</strong> — Hidden cancel buttons breed resentment and bad reviews. Many jurisdictions require easy cancellation (FTC Click-to-Cancel rule)</li><li><strong>Same offer for every reason</strong> — A blanket discount doesn't address "missing feature" or "not using it"</li><li><strong>Discounts too deep</strong> — 50%+ discounts train customers to cancel-and-return for deals</li><li><strong>Ignoring involuntary churn</strong> — Often 30-50% of total churn and the easiest to fix</li><li><strong>No dunning emails</strong> — Letting payment failures silently cancel accounts</li><li><strong>Guilt-trip copy</strong> — "Are you sure you want to abandon us?" damages brand trust</li><li><strong>Not tracking save offer LTV</strong> — A "saved" customer who churns 30 days later wasn't really saved</li><li><strong>Pausing too long</strong> — Pauses beyond 3 months rarely reactivate. Set limits.</li><li><strong>No post-cancel path</strong> — Make reactivation easy and trigger win-back emails, because some churned users will want to come back</li></ul>
+<hr/>
+<h3 id="skillmd-tool-integrations">Tool Integrations</h3>
+<p>For implementation, see the <a href="../../tools/REGISTRY.md" rel="noopener" target="_blank">tools registry</a>.</p>
+<h4>Retention Platforms</h4>
+<p>| Tool | Best For | Key Feature | |------|----------|-------------| | <strong>Churnkey</strong> | Full cancel flow + dunning | AI-powered adaptive offers, 34% avg save rate | | <strong>ProsperStack</strong> | Cancel flows with analytics | Advanced rules engine, Stripe/Chargebee integration | | <strong>Raaft</strong> | Simple cancel flow builder | Easy setup, good for early-stage | | <strong>Chargebee Retention</strong> | Chargebee customers | Native integration, was Brightback |</p>
+<h4>Billing Providers (Dunning)</h4>
+<p>| Provider | Smart Retries | Dunning Emails | Card Updater | |----------|:------------:|:--------------:|:------------:| | <strong>Stripe</strong> | Built-in (Smart Retries) | Built-in | Automatic | | <strong>Chargebee</strong> | Built-in | Built-in | Via gateway | | <strong>Paddle</strong> | Built-in | Built-in | Managed | | <strong>Recurly</strong> | Built-in | Built-in | Built-in | | <strong>Braintree</strong> | Manual config | Manual | Via gateway |</p>
+<h4>Related CLI Tools</h4>
+<p>| Tool | Use For | |------|---------| | <code>stripe</code> | Subscription management, dunning config, payment retries | | <code>customer-io</code> | Dunning email sequences, retention campaigns | | <code>posthog</code> | Cancel flow A/B tests via feature flags, funnel analytics | | <code>mixpanel</code> / <code>ga4</code> | Usage tracking, churn signal analysis | | <code>segment</code> | Event routing for health scoring |</p>
+<hr/>
+<h3 id="skillmd-related-skills">Related Skills</h3>
+<ul><li><strong>email-sequence</strong>: For win-back email sequences after cancellation</li><li><strong>paywall-upgrade-cro</strong>: For in-app upgrade moments and trial expiration</li><li><strong>pricing-strategy</strong>: For plan structure and annual discount strategy</li><li><strong>onboarding-cro</strong>: For activation to prevent early churn</li><li><strong>analytics-tracking</strong>: For setting up churn signal events</li><li><strong>ab-test-setup</strong>: For testing cancel flow variations with statistical rigor</li></ul></div>
+</section><section class="section" id="source">
+<div class="section-label">Source</div>
+<div class="links-row">
+<a class="link-btn" href="https://github.com/coreyhaines31/marketingskills" rel="noopener" target="_blank">View upstream on GitHub ↑</a>
+<a class="link-btn" href="https://github.com/floomhq/starter/blob/main/skills/churn-prevention.json" rel="noopener" target="_blank">View on Floom GitHub ↑</a>
+<a class="link-btn" href="https://skills.sh/coreyhaines31/marketingskills/churn-prevention" rel="noopener" target="_blank">View on skills.sh ↑</a>
+</div>
+</section></div></div><section class="final-cta">
+<div>
+<strong>Add this skill to your agent.</strong>
+<span>Installs <code style="background:rgba(255,255,255,0.12);padding:1px 6px;border-radius:4px;color:#fff;font-family:var(--mono);font-size:13px">churn-prevention</code> into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+</div>
+<div class="install-cta-wrap install-cta-wrap--final">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --skills churn-prevention" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>churn-prevention</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills churn-prevention</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+</section>
+</main>
+<footer aria-label="Site footer" class="site-footer">
+<div class="site-footer-inner">
+<div class="footer-brand">
+<a class="footer-wordmark" href="../index.html">Floom</a>
+<small>Open source · MIT</small>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Sitemap</div>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../library.html">Skills</a></li>
+<li><a href="../docs.html">Docs</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Resources</div>
+<ul>
+<li><a href="https://github.com/floomhq/starter" rel="noopener" target="_blank">GitHub</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+<li><a href="../terms.html">Terms</a></li>
+<li><a href="https://github.com/floomhq/starter/releases" rel="noopener" target="_blank">Changelog</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Floom · Built with care in Berlin and San Francisco</span>
+<span class="footer-mit">MIT License</span>
+</div>
+</footer>
+<script>
+function copyInstall(btn, cmd) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    const original = btn.dataset.original || btn.textContent;
+    btn.dataset.original = original;
+    btn.classList.add('copied');
+    btn.textContent = 'Copied! Paste in terminal';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
+  });
+}
+function copyCmd() {
+  const t = document.getElementById('cmdText').textContent;
+  const b = document.getElementById('cmdCopy');
+  navigator.clipboard.writeText(t).then(() => {
+    b.classList.add('copied'); b.textContent = 'Copied!';
+    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+<script>
+
+// === Install CTA (Add to your agent button) - copy on click ===
+document.querySelectorAll(".install-cta").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const command = button.dataset.copy;
+    if (!command) return;
+    try {
+      await navigator.clipboard.writeText(command);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = command;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const labelEl = button.querySelector(".install-cta-label");
+    if (labelEl) {
+      const original = labelEl.textContent;
+      labelEl.textContent = "Copied! Paste in terminal";
+      button.classList.add("is-copied");
+      setTimeout(() => {
+        labelEl.textContent = original;
+        button.classList.remove("is-copied");
+      }, 2000);
+    }
+  });
+});
+
+// === TOC active-section highlighting (scroll spy) ===
+(function () {
+  const sections = document.querySelectorAll(".skill-body .section[id], .skill-body .section [id]");
+  const navLinks = document.querySelectorAll(".skill-nav a");
+  if (!sections.length || !navLinks.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector('.skill-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add("active");
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
+  sections.forEach((s) => observer.observe(s));
+})();
+</script></body>
+</html>

@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#fafaf7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<title>tailwind-design-system: Floom Starter Pack skill</title>
+<meta content="Tailwind CSS design system patterns: tokens, components, and consistency." name="description"/>
+<!-- Open Graph -->
+<meta content="Floom Starter Pack" property="og:site_name"/>
+<meta content="article" property="og:type"/>
+<meta content="tailwind-design-system: Floom Starter Pack skill" property="og:title"/>
+<meta content="Tailwind CSS design system patterns: tokens, components, and consistency." property="og:description"/>
+<meta content="https://starter.floom.dev/skill/tailwind-design-system" property="og:url"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="tailwind-design-system: Floom Starter Pack skill" name="twitter:title"/>
+<meta content="Tailwind CSS design system patterns: tokens, components, and consistency." name="twitter:description"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="@floomhq" name="twitter:creator"/>
+<meta content="@floomhq" name="twitter:site"/>
+<!-- Favicon -->
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Canonical -->
+<link href="https://starter.floom.dev/skill/tailwind-design-system" rel="canonical"/>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "tailwind-design-system",
+  "description": "Tailwind CSS design system patterns: tokens, components, and consistency.",
+  "codeRepository": "https://github.com/wshobson/agents",
+  "license": "MIT",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "Floom Starter Pack",
+    "url": "https://starter.floom.dev/"
+  }
+}
+</script>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #050505;
+  --muted: #333333;
+  --dim: #6b6b6b;
+  --blue: #0094ff;
+  --blue-soft: #bfe6ff;
+  --blue-pale: #eaf7ff;
+  --line: 2px solid var(--ink);
+  --line-light: 1px solid #e0dfdb;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scrollbar-gutter: stable; overflow-y: scroll; }
+body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+.page { width: min(100%, 1100px); margin: 0 auto; padding: 44px 70px 72px; }
+
+.nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
+.nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
+.wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
+.wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+.wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; max-width: 100%; }
+.nav-links a { color: inherit; text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+
+@media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
+@media (max-width: 980px) { .page { padding: 30px 22px 52px; } }
+@media (max-width: 640px) { .page { padding: 22px 16px 44px; } .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--dim); text-decoration: none; margin-top: 24px; margin-bottom: 8px; }
+.back-link:hover { color: var(--ink); }
+
+.hero { margin-top: 8px; padding: 28px 0 32px; border-bottom: var(--line-light); }
+.hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 14px; word-break: break-word; }
+.hero-desc { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 18px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
+.badge.mute { color: var(--muted); background: #fff; border-color: #ddd; }
+
+.section { margin-top: 40px; }
+.section-label { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+.install-btn-wrap { position: relative; display: inline-block; }
+.install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.install-btn.copied { background: var(--blue); border-color: var(--blue); }
+.install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
+.install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.install-tooltip-cmd { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; word-break: break-all; }
+
+.cmd-block { display: flex; align-items: stretch; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; max-width: 720px; margin-top: 8px; }
+.cmd-text { flex: 1; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); padding: 12px 14px; word-break: break-all; line-height: 1.55; }
+.cmd-copy { flex-shrink: 0; background: var(--ink); color: #fff; border: none; cursor: pointer; padding: 12px 18px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; transition: background 0.15s; text-transform: uppercase; }
+.cmd-copy:hover { background: #333; }
+.cmd-copy.copied { background: var(--blue); }
+
+.fires-block { font-size: 16px; color: var(--ink); line-height: 1.6; background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 16px 18px; max-width: 720px; }
+
+.files-list { display: flex; flex-direction: column; gap: 6px; max-width: 720px; }
+.file-row { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; padding: 8px 12px; background: #fff; border: 1px solid #e0dfdb; border-radius: 8px; }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; }
+.file-size { color: var(--muted); flex-shrink: 0; }
+.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+
+.md-block { font-size: 15px; line-height: 1.7; color: var(--ink); background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 22px 26px; max-width: 860px; }
+.md-block h2, .md-block h3, .md-block h4 { font-weight: 700; margin: 18px 0 8px; letter-spacing: -0.01em; }
+.md-block h2 { font-size: 22px; }
+.md-block h3 { font-size: 18px; }
+.md-block h4 { font-size: 16px; }
+.md-block p { margin: 8px 0; }
+.md-block ul, .md-block ol { margin: 8px 0 8px 22px; }
+.md-block li { margin: 3px 0; }
+.md-block code { font-family: var(--mono); font-size: 13px; background: #f0efeb; padding: 1px 5px; border-radius: 3px; }
+.md-block pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 10px 0; }
+.md-block pre code { background: none; padding: 0; }
+.md-block a { color: var(--blue); }
+.md-block blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 14px; color: var(--muted); margin: 12px 0; }
+.md-block hr { border: none; border-top: 1px solid #e0dfdb; margin: 14px 0; }
+
+.links-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+.link-btn { font-family: var(--mono); font-size: 12px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.link-btn:hover { color: var(--ink); }
+
+.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
+
+.footer-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; border: var(--line); border-radius: 28px; background: var(--blue); color: #ffffff; padding: 28px; }
+.footer-cta h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.footer-cta p { color: rgba(255,255,255,0.92); margin-top: 8px; font-size: 15px; font-weight: 500; }
+.footer-cta .button { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #ffffff; border-radius: 14px; background: #ffffff; color: var(--ink); padding: 14px 20px; font: 900 13px/1 var(--sans); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: box-shadow 150ms ease, transform 150ms ease; }
+.footer-cta .button:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.22); transform: translateY(-2px); }
+@media (max-width: 860px) { .footer-cta { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 36px; } }
+
+.site-footer { border-top: 2px solid var(--ink); background: var(--paper); padding: 48px 70px 0; margin-top: 56px; }
+.site-footer-inner { width: min(100%, 1100px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+.footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
+.footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
+.footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom { width: min(100%, 1100px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
+.footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
+@media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
+@media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
+
+
+/* === Skill page TOC layout (mirrors docs.html .doc-layout) === */
+.skill-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 24px;
+  align-items: flex-start;
+}
+.skill-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-self: start;
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+.skill-nav-label {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+}
+.skill-nav a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 14px;
+  background: transparent;
+  color: #4b4b4b;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: background 120ms ease, color 120ms ease;
+}
+.skill-nav a.is-sub { padding-left: 20px; font-weight: 600; color: #5b5b5b; font-size: 12.5px; }
+.skill-nav a.is-sub-2 { padding-left: 32px; font-weight: 500; color: #6b6b6b; font-size: 12px; }
+.skill-nav a:hover, .skill-nav a.active {
+  background: var(--blue-pale);
+  color: var(--ink);
+}
+.skill-body { display: block; min-width: 0; }
+.skill-body .section { scroll-margin-top: 36px; }
+
+@media (max-width: 980px) {
+  .skill-layout { grid-template-columns: 1fr; gap: 28px; }
+  .skill-nav {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid rgba(5,5,5,0.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+  }
+  .skill-nav-label { width: 100%; padding-left: 4px; }
+  .skill-nav a { padding: 6px 10px; font-size: 12px; }
+  .skill-nav a.is-sub, .skill-nav a.is-sub-2 { padding-left: 10px; }
+}
+
+/* === Install CTA + tooltip (from index.html) === */
+.install-cta-wrap { position: relative; display: inline-block; }
+.install-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 14px 22px;
+  font: 900 13px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  gap: 8px;
+}
+.install-cta:hover, .install-cta:focus-visible {
+  box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+  transform: translateY(-1px);
+  outline: none;
+}
+.install-cta:hover .install-cta-icon,
+.install-cta:focus-visible .install-cta-icon {
+  transform: translateY(2px);
+}
+.install-cta-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied .install-cta-label::after { content: " \2713"; }
+.install-cta-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 360px;
+  max-width: 420px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
+  transform: translateY(-4px);
+  z-index: 100;
+  box-shadow: 0 14px 30px rgba(5,5,5,0.18);
+}
+.install-cta:hover .install-cta-tooltip,
+.install-cta:focus-visible .install-cta-tooltip,
+.install-cta:focus-within .install-cta-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
+}
+
+/* Connector arrow from button up to tooltip */
+.install-cta-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  border-top: 2px solid var(--ink);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+/* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
+@media (hover: none) {
+  .install-cta-tooltip { display: none; }
+}
+.tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
+.tooltip-cmd {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.tooltip-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.install-cta--final { background: #ffffff; color: var(--ink); }
+.install-cta--final:hover, .install-cta--final:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
+}
+.install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+.install-cta-wrap--final .install-cta-tooltip { left: auto; right: 0; }
+
+@media (max-width: 640px) {
+  .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
+}
+
+/* === Final CTA (mirrors index.html .final-cta dark surface) === */
+.final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 56px;
+  border: var(--line);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 32px 34px;
+}
+.final-cta strong {
+  display: block;
+  max-width: 620px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.final-cta span { display: block; margin-top: 12px; color: #d6d6d6; font-size: 15px; font-weight: 550; }
+@media (max-width: 860px) {
+  .final-cta { flex-direction: column; align-items: flex-start; }
+  .final-cta strong { font-size: 24px; }
+}
+
+/* skill-cta-label-fix */
+.final-cta .install-cta--final .install-cta-label { color: var(--ink); }
+.final-cta .install-cta--final .install-cta-icon { color: var(--ink); }
+.final-cta .install-cta--final.is-copied .install-cta-label,
+.final-cta .install-cta--final.is-copied .install-cta-icon { color: #ffffff; }
+.final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+</style>
+</head>
+<body>
+<main class="page">
+<nav aria-label="Main navigation" class="nav">
+<a class="wordmark" href="../index.html">
+<strong>Floom</strong>
+<span>Open source · MIT</span>
+</a>
+<div class="nav-right">
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a aria-current="page" href="../library.html">Skills</a>
+<a href="../docs.html">Docs</a>
+<a href="../about.html">About</a>
+</div>
+</div>
+</nav>
+<a class="back-link" href="../library.html">← Back to Skills</a>
+
+
+
+
+
+
+<div class="skill-layout"><nav aria-label="On this page" class="skill-nav">
+<span class="skill-nav-label">On this page</span>
+<a href="#overview">Overview</a>
+<a href="#install">Install</a>
+<a href="#fires-when">Fires when</a>
+<a href="#files">Files</a>
+<a href="#skill-md">SKILL.md</a>
+<a class="is-sub" href="#skillmd-tailwind-design-system-v4">Tailwind Design System (v4)</a>
+<a class="is-sub-2" href="#skillmd-when-to-use-this-skill">When to Use This Skill</a>
+<a class="is-sub-2" href="#skillmd-key-v4-changes">Key v4 Changes</a>
+<a class="is-sub-2" href="#skillmd-quick-start">Quick Start</a>
+<a class="is-sub-2" href="#skillmd-core-concepts">Core Concepts</a>
+<a class="is-sub-2" href="#skillmd-patterns">Patterns</a>
+<a class="is-sub-2" href="#skillmd-utility-functions">Utility Functions</a>
+<a href="#source">Source</a>
+</nav><div class="skill-body"><header class="hero" id="overview">
+<h1>tailwind-design-system</h1>
+<p class="hero-desc">Tailwind CSS design system patterns: tokens, components, and consistency.</p>
+<div class="hero-meta">
+<span class="badge">↓ 40.4K on skills.sh</span><span class="badge mute">wshobson</span><span class="badge mute">MIT</span>
+<span class="profile-tag">design</span>
+</div>
+</header><section class="section" id="install">
+<div class="section-label">Install</div>
+<div class="install-cta-wrap">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --skills tailwind-design-system" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>tailwind-design-system</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills tailwind-design-system</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+<div class="cmd-block">
+<div class="cmd-text" id="cmdText">npx @floomhq/starter install --skills tailwind-design-system</div>
+<button class="cmd-copy" id="cmdCopy" onclick="copyCmd()">Copy</button>
+</div>
+</section><section class="section" id="fires-when">
+<div class="section-label">Fires when</div>
+<div class="fires-block">any Tailwind project, design system work, "improve the design system"</div>
+</section><section class="section" id="files">
+<div class="section-label">Files</div>
+<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">15,730 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
+</section><section class="section" id="skill-md">
+<div class="section-label">SKILL.md</div>
+<div class="md-block"><h2 id="skillmd-tailwind-design-system-v4">Tailwind Design System (v4)</h2>
+<p>Build production-ready design systems with Tailwind CSS v4, including CSS-first configuration, design tokens, component variants, responsive patterns, and accessibility.</p>
+<blockquote><strong>Note</strong>: This skill targets Tailwind CSS v4 (2024+). For v3 projects, refer to the <a href="https://tailwindcss.com/docs/upgrade-guide" rel="noopener" target="_blank">upgrade guide</a>.</blockquote>
+<h3 id="skillmd-when-to-use-this-skill">When to Use This Skill</h3>
+<ul><li>Creating a component library with Tailwind v4</li><li>Implementing design tokens and theming with CSS-first configuration</li><li>Building responsive and accessible components</li><li>Standardizing UI patterns across a codebase</li><li>Migrating from Tailwind v3 to v4</li><li>Setting up dark mode with native CSS features</li></ul>
+<h3 id="skillmd-key-v4-changes">Key v4 Changes</h3>
+<p>| v3 Pattern                            | v4 Pattern                                                            | | ------------------------------------- | --------------------------------------------------------------------- | | <code>tailwind.config.ts</code>                  | <code>@theme</code> in CSS                                                       | | <code>@tailwind base/components/utilities</code> | <code>@import "tailwindcss"</code>                                               | | <code>darkMode: "class"</code>                   | <code>@custom-variant dark (&amp;:where(.dark, .dark <em>))</em></code>                      | | <code>theme.extend.colors</code>                 | <code>@theme { --color-: value }</code>                                         | | <code>require("tailwindcss-animate")</code>      | CSS <code>@keyframes</code> in <code>@theme</code> + <code>@starting-style</code> for entry animations |</p>
+<h3 id="skillmd-quick-start">Quick Start</h3>
+<pre><code class="lang-css">/* app.css - Tailwind v4 CSS-first configuration */
+@import "tailwindcss";
+
+/* Define your theme with @theme */
+@theme {
+  /* Semantic color tokens using OKLCH for better color perception */
+  --color-background: oklch(100% 0 0);
+  --color-foreground: oklch(14.5% 0.025 264);
+
+  --color-primary: oklch(14.5% 0.025 264);
+  --color-primary-foreground: oklch(98% 0.01 264);
+
+  --color-secondary: oklch(96% 0.01 264);
+  --color-secondary-foreground: oklch(14.5% 0.025 264);
+
+  --color-muted: oklch(96% 0.01 264);
+  --color-muted-foreground: oklch(46% 0.02 264);
+
+  --color-accent: oklch(96% 0.01 264);
+  --color-accent-foreground: oklch(14.5% 0.025 264);
+
+  --color-destructive: oklch(53% 0.22 27);
+  --color-destructive-foreground: oklch(98% 0.01 264);
+
+  --color-border: oklch(91% 0.01 264);
+  --color-ring: oklch(14.5% 0.025 264);
+
+  --color-card: oklch(100% 0 0);
+  --color-card-foreground: oklch(14.5% 0.025 264);
+
+  /* Ring offset for focus states */
+  --color-ring-offset: oklch(100% 0 0);
+
+  /* Radius tokens */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  /* Animation tokens - keyframes inside @theme are output when referenced by --animate-* variables */
+  --animate-fade-in: fade-in 0.2s ease-out;
+  --animate-fade-out: fade-out 0.2s ease-in;
+  --animate-slide-in: slide-in 0.3s ease-out;
+  --animate-slide-out: slide-out 0.3s ease-in;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(-0.5rem);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-0.5rem);
+      opacity: 0;
+    }
+  }
+}
+
+/* Dark mode variant - use @custom-variant for class-based dark mode */
+@custom-variant dark (&amp;:where(.dark, .dark *));
+
+/* Dark mode theme overrides */
+.dark {
+  --color-background: oklch(14.5% 0.025 264);
+  --color-foreground: oklch(98% 0.01 264);
+
+  --color-primary: oklch(98% 0.01 264);
+  --color-primary-foreground: oklch(14.5% 0.025 264);
+
+  --color-secondary: oklch(22% 0.02 264);
+  --color-secondary-foreground: oklch(98% 0.01 264);
+
+  --color-muted: oklch(22% 0.02 264);
+  --color-muted-foreground: oklch(65% 0.02 264);
+
+  --color-accent: oklch(22% 0.02 264);
+  --color-accent-foreground: oklch(98% 0.01 264);
+
+  --color-destructive: oklch(42% 0.15 27);
+  --color-destructive-foreground: oklch(98% 0.01 264);
+
+  --color-border: oklch(22% 0.02 264);
+  --color-ring: oklch(83% 0.02 264);
+
+  --color-card: oklch(14.5% 0.025 264);
+  --color-card-foreground: oklch(98% 0.01 264);
+
+  --color-ring-offset: oklch(14.5% 0.025 264);
+}
+
+/* Base styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}</code></pre>
+<h3 id="skillmd-core-concepts">Core Concepts</h3>
+<h4>1. Design Token Hierarchy</h4>
+<pre><code class="lang-">Brand Tokens (abstract)
+    └── Semantic Tokens (purpose)
+        └── Component Tokens (specific)
+
+Example:
+    oklch(45% 0.2 260) → --color-primary → bg-primary</code></pre>
+<h4>2. Component Architecture</h4>
+<pre><code class="lang-">Base styles → Variants → Sizes → States → Overrides</code></pre>
+<h3 id="skillmd-patterns">Patterns</h3>
+<h4>Pattern 1: CVA (Class Variance Authority) Components</h4>
+<pre><code class="lang-typescript">// components/ui/button.tsx
+import { Slot } from '@radix-ui/react-slot'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '@/lib/utils'
+
+const buttonVariants = cva(
+  // Base styles - v4 uses native CSS variables
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        outline: 'border border-border bg-background hover:bg-accent hover:text-accent-foreground',
+        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'text-primary underline-offset-4 hover:underline',
+      },
+      size: {
+        default: 'h-10 px-4 py-2',
+        sm: 'h-9 rounded-md px-3',
+        lg: 'h-11 rounded-md px-8',
+        icon: 'size-10',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  }
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;,
+    VariantProps&lt;typeof buttonVariants&gt; {
+  asChild?: boolean
+}
+
+// React 19: No forwardRef needed
+export function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  ref,
+  ...props
+}: ButtonProps &amp; { ref?: React.Ref&lt;HTMLButtonElement&gt; }) {
+  const Comp = asChild ? Slot : 'button'
+  return (
+    &lt;Comp
+      className={cn(buttonVariants({ variant, size, className }))}
+      ref={ref}
+      {...props}
+    /&gt;
+  )
+}
+
+// Usage
+&lt;Button variant="destructive" size="lg"&gt;Delete&lt;/Button&gt;
+&lt;Button variant="outline"&gt;Cancel&lt;/Button&gt;
+&lt;Button asChild&gt;&lt;Link href="/home"&gt;Home&lt;/Link&gt;&lt;/Button&gt;</code></pre>
+<h4>Pattern 2: Compound Components (React 19)</h4>
+<pre><code class="lang-typescript">// components/ui/card.tsx
+import { cn } from '@/lib/utils'
+
+// React 19: ref is a regular prop, no forwardRef
+export function Card({
+  className,
+  ref,
+  ...props
+}: React.HTMLAttributes&lt;HTMLDivElement&gt; &amp; { ref?: React.Ref&lt;HTMLDivElement&gt; }) {
+  return (
+    &lt;div
+      ref={ref}
+      className={cn(
+        'rounded-lg border border-border bg-card text-card-foreground shadow-sm',
+        className
+      )}
+      {...props}
+    /&gt;
+  )
+}
+
+export function CardHeader({
+  className,
+  ref,
+  ...props
+}: React.HTMLAttributes&lt;HTMLDivElement&gt; &amp; { ref?: React.Ref&lt;HTMLDivElement&gt; }) {
+  return (
+    &lt;div
+      ref={ref}
+      className={cn('flex flex-col space-y-1.5 p-6', className)}
+      {...props}
+    /&gt;
+  )
+}
+
+export function CardTitle({
+  className,
+  ref,
+  ...props
+}: React.HTMLAttributes&lt;HTMLHeadingElement&gt; &amp; { ref?: React.Ref&lt;HTMLHeadingElement&gt; }) {
+  return (
+    &lt;h3
+      ref={ref}
+      className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
+      {...props}
+    /&gt;
+  )
+}
+
+export function CardDescription({
+  className,
+  ref,
+  ...props
+}: React.HTMLAttributes&lt;HTMLParagraphElement&gt; &amp; { ref?: React.Ref&lt;HTMLParagraphElement&gt; }) {
+  return (
+    &lt;p
+      ref={ref}
+      className={cn('text-sm text-muted-foreground', className)}
+      {...props}
+    /&gt;
+  )
+}
+
+export function CardContent({
+  className,
+  ref,
+  ...props
+}: React.HTMLAttributes&lt;HTMLDivElement&gt; &amp; { ref?: React.Ref&lt;HTMLDivElement&gt; }) {
+  return (
+    &lt;div ref={ref} className={cn('p-6 pt-0', className)} {...props} /&gt;
+  )
+}
+
+export function CardFooter({
+  className,
+  ref,
+  ...props
+}: React.HTMLAttributes&lt;HTMLDivElement&gt; &amp; { ref?: React.Ref&lt;HTMLDivElement&gt; }) {
+  return (
+    &lt;div
+      ref={ref}
+      className={cn('flex items-center p-6 pt-0', className)}
+      {...props}
+    /&gt;
+  )
+}
+
+// Usage
+&lt;Card&gt;
+  &lt;CardHeader&gt;
+    &lt;CardTitle&gt;Account&lt;/CardTitle&gt;
+    &lt;CardDescription&gt;Manage your account settings&lt;/CardDescription&gt;
+  &lt;/CardHeader&gt;
+  &lt;CardContent&gt;
+    &lt;form&gt;...&lt;/form&gt;
+  &lt;/CardContent&gt;
+  &lt;CardFooter&gt;
+    &lt;Button&gt;Save&lt;/Button&gt;
+  &lt;/CardFooter&gt;
+&lt;/Card&gt;</code></pre>
+<h4>Pattern 3: Form Components</h4>
+<pre><code class="lang-typescript">// components/ui/input.tsx
+import { cn } from '@/lib/utils'
+
+export interface InputProps extends React.InputHTMLAttributes&lt;HTMLInputElement&gt; {
+  error?: string
+  ref?: React.Ref&lt;HTMLInputElement&gt;
+}
+
+export function Input({ className, type, error, ref, ...props }: InputProps) {
+  return (
+    &lt;div className="relative"&gt;
+      &lt;input
+        type={type}
+        className={cn(
+          'flex h-10 w-full rounded-md border border-border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+          error &amp;&amp; 'border-destructive focus-visible:ring-destructive',
+          className
+        )}
+        ref={ref}
+        aria-invalid={!!error}
+        aria-describedby={error ? `${props.id}-error` : undefined}
+        {...props}
+      /&gt;
+      {error &amp;&amp; (
+        &lt;p
+          id={`${props.id}-error`}
+          className="mt-1 text-sm text-destructive"
+          role="alert"
+        &gt;
+          {error}
+        &lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  )
+}
+
+// components/ui/label.tsx
+import { cva, type VariantProps } from 'class-variance-authority'
+
+const labelVariants = cva(
+  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+)
+
+export function Label({
+  className,
+  ref,
+  ...props
+}: React.LabelHTMLAttributes&lt;HTMLLabelElement&gt; &amp; { ref?: React.Ref&lt;HTMLLabelElement&gt; }) {
+  return (
+    &lt;label ref={ref} className={cn(labelVariants(), className)} {...props} /&gt;
+  )
+}
+
+// Usage with React Hook Form + Zod
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+const schema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+})
+
+function LoginForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(schema),
+  })
+
+  return (
+    &lt;form onSubmit={handleSubmit(onSubmit)} className="space-y-4"&gt;
+      &lt;div className="space-y-2"&gt;
+        &lt;Label htmlFor="email"&gt;Email&lt;/Label&gt;
+        &lt;Input
+          id="email"
+          type="email"
+          {...register('email')}
+          error={errors.email?.message}
+        /&gt;
+      &lt;/div&gt;
+      &lt;div className="space-y-2"&gt;
+        &lt;Label htmlFor="password"&gt;Password&lt;/Label&gt;
+        &lt;Input
+          id="password"
+          type="password"
+          {...register('password')}
+          error={errors.password?.message}
+        /&gt;
+      &lt;/div&gt;
+      &lt;Button type="submit" className="w-full"&gt;Sign In&lt;/Button&gt;
+    &lt;/form&gt;
+  )
+}</code></pre>
+<h4>Pattern 4: Responsive Grid System</h4>
+<pre><code class="lang-typescript">// components/ui/grid.tsx
+import { cn } from '@/lib/utils'
+import { cva, type VariantProps } from 'class-variance-authority'
+
+const gridVariants = cva('grid', {
+  variants: {
+    cols: {
+      1: 'grid-cols-1',
+      2: 'grid-cols-1 sm:grid-cols-2',
+      3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+      4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+      5: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5',
+      6: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6',
+    },
+    gap: {
+      none: 'gap-0',
+      sm: 'gap-2',
+      md: 'gap-4',
+      lg: 'gap-6',
+      xl: 'gap-8',
+    },
+  },
+  defaultVariants: {
+    cols: 3,
+    gap: 'md',
+  },
+})
+
+interface GridProps
+  extends React.HTMLAttributes&lt;HTMLDivElement&gt;,
+    VariantProps&lt;typeof gridVariants&gt; {}
+
+export function Grid({ className, cols, gap, ...props }: GridProps) {
+  return (
+    &lt;div className={cn(gridVariants({ cols, gap, className }))} {...props} /&gt;
+  )
+}
+
+// Container component
+const containerVariants = cva('mx-auto w-full px-4 sm:px-6 lg:px-8', {
+  variants: {
+    size: {
+      sm: 'max-w-screen-sm',
+      md: 'max-w-screen-md',
+      lg: 'max-w-screen-lg',
+      xl: 'max-w-screen-xl',
+      '2xl': 'max-w-screen-2xl',
+      full: 'max-w-full',
+    },
+  },
+  defaultVariants: {
+    size: 'xl',
+  },
+})
+
+interface ContainerProps
+  extends React.HTMLAttributes&lt;HTMLDivElement&gt;,
+    VariantProps&lt;typeof containerVariants&gt; {}
+
+export function Container({ className, size, ...props }: ContainerProps) {
+  return (
+    &lt;div className={cn(containerVariants({ size, className }))} {...props} /&gt;
+  )
+}
+
+// Usage
+&lt;Container&gt;
+  &lt;Grid cols={4} gap="lg"&gt;
+    {products.map((product) =&gt; (
+      &lt;ProductCard key={product.id} product={product} /&gt;
+    ))}
+  &lt;/Grid&gt;
+&lt;/Container&gt;</code></pre>
+<p>For advanced animation and dark mode patterns, see <a href="references/advanced-patterns.md" rel="noopener" target="_blank">references/advanced-patterns.md</a>:</p>
+<ul><li><strong>Pattern 5: Native CSS Animations</strong> — dialog <code>@keyframes</code>, native popover API with <code>@starting-style</code>, <code>allow-discrete</code> transitions, and a full <code>DialogContent</code>/<code>DialogOverlay</code> implementation using Radix UI</li><li><strong>Pattern 6: Dark Mode</strong> — <code>ThemeProvider</code> context with <code>localStorage</code> persistence, <code>prefers-color-scheme</code> detection, meta <code>theme-color</code> update, and a <code>ThemeToggle</code> button component</li></ul>
+<h3 id="skillmd-utility-functions">Utility Functions</h3>
+<pre><code class="lang-typescript">// lib/utils.ts
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+// Focus ring utility
+export const focusRing = cn(
+  "focus-visible:outline-none focus-visible:ring-2",
+  "focus-visible:ring-ring focus-visible:ring-offset-2",
+);
+
+// Disabled utility
+export const disabled = "disabled:pointer-events-none disabled:opacity-50";</code></pre>
+<p>For advanced v4 CSS patterns, the full v3-to-v4 migration checklist, and complete best practices, see <a href="references/advanced-patterns.md" rel="noopener" target="_blank">references/advanced-patterns.md</a>:</p>
+<ul><li><strong>Custom <code>@utility</code></strong> — reusable CSS utilities for decorative lines and text gradients</li><li><strong>Theme modifiers</strong> — <code>@theme inline</code> (reference other CSS vars), <code>@theme static</code> (always output), <code>@import "tailwindcss" theme(static)</code></li><li><strong>Namespace overrides</strong> — clearing default Tailwind color scales with <code>--color-*: initial</code></li><li><strong>Semi-transparent variants</strong> — <code>color-mix()</code> for alpha scale generation</li><li><strong>Container queries</strong> — <code>--container-*</code> token definitions</li><li><strong>v3→v4 migration checklist</strong> — 10-item checklist covering config, directives, colors, dark mode, animations, React 19 ref changes</li><li><strong>Best practices</strong> — full Do's and Don'ts list</li></ul></div>
+</section><section class="section" id="source">
+<div class="section-label">Source</div>
+<div class="links-row">
+<a class="link-btn" href="https://github.com/wshobson/agents" rel="noopener" target="_blank">View upstream on GitHub ↑</a>
+<a class="link-btn" href="https://github.com/floomhq/starter/blob/main/skills/tailwind-design-system.json" rel="noopener" target="_blank">View on Floom GitHub ↑</a>
+<a class="link-btn" href="https://skills.sh/wshobson/agents/tailwind-design-system" rel="noopener" target="_blank">View on skills.sh ↑</a>
+</div>
+</section></div></div><section class="final-cta">
+<div>
+<strong>Add this skill to your agent.</strong>
+<span>Installs <code style="background:rgba(255,255,255,0.12);padding:1px 6px;border-radius:4px;color:#fff;font-family:var(--mono);font-size:13px">tailwind-design-system</code> into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+</div>
+<div class="install-cta-wrap install-cta-wrap--final">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --skills tailwind-design-system" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>tailwind-design-system</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills tailwind-design-system</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+</section>
+</main>
+<footer aria-label="Site footer" class="site-footer">
+<div class="site-footer-inner">
+<div class="footer-brand">
+<a class="footer-wordmark" href="../index.html">Floom</a>
+<small>Open source · MIT</small>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Sitemap</div>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../library.html">Skills</a></li>
+<li><a href="../docs.html">Docs</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Resources</div>
+<ul>
+<li><a href="https://github.com/floomhq/starter" rel="noopener" target="_blank">GitHub</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+<li><a href="../terms.html">Terms</a></li>
+<li><a href="https://github.com/floomhq/starter/releases" rel="noopener" target="_blank">Changelog</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Floom · Built with care in Berlin and San Francisco</span>
+<span class="footer-mit">MIT License</span>
+</div>
+</footer>
+<script>
+function copyInstall(btn, cmd) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    const original = btn.dataset.original || btn.textContent;
+    btn.dataset.original = original;
+    btn.classList.add('copied');
+    btn.textContent = 'Copied! Paste in terminal';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
+  });
+}
+function copyCmd() {
+  const t = document.getElementById('cmdText').textContent;
+  const b = document.getElementById('cmdCopy');
+  navigator.clipboard.writeText(t).then(() => {
+    b.classList.add('copied'); b.textContent = 'Copied!';
+    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+<script>
+
+// === Install CTA (Add to your agent button) - copy on click ===
+document.querySelectorAll(".install-cta").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const command = button.dataset.copy;
+    if (!command) return;
+    try {
+      await navigator.clipboard.writeText(command);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = command;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const labelEl = button.querySelector(".install-cta-label");
+    if (labelEl) {
+      const original = labelEl.textContent;
+      labelEl.textContent = "Copied! Paste in terminal";
+      button.classList.add("is-copied");
+      setTimeout(() => {
+        labelEl.textContent = original;
+        button.classList.remove("is-copied");
+      }, 2000);
+    }
+  });
+});
+
+// === TOC active-section highlighting (scroll spy) ===
+(function () {
+  const sections = document.querySelectorAll(".skill-body .section[id], .skill-body .section [id]");
+  const navLinks = document.querySelectorAll(".skill-nav a");
+  if (!sections.length || !navLinks.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector('.skill-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add("active");
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
+  sections.forEach((s) => observer.observe(s));
+})();
+</script></body>
+</html>

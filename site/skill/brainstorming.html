@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#fafaf7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<title>brainstorming: Floom Starter Pack skill</title>
+<meta content="Structured ideation and clarification before starting open-ended work." name="description"/>
+<!-- Open Graph -->
+<meta content="Floom Starter Pack" property="og:site_name"/>
+<meta content="article" property="og:type"/>
+<meta content="brainstorming: Floom Starter Pack skill" property="og:title"/>
+<meta content="Structured ideation and clarification before starting open-ended work." property="og:description"/>
+<meta content="https://starter.floom.dev/skill/brainstorming" property="og:url"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="brainstorming: Floom Starter Pack skill" name="twitter:title"/>
+<meta content="Structured ideation and clarification before starting open-ended work." name="twitter:description"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="@floomhq" name="twitter:creator"/>
+<meta content="@floomhq" name="twitter:site"/>
+<!-- Favicon -->
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Canonical -->
+<link href="https://starter.floom.dev/skill/brainstorming" rel="canonical"/>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "brainstorming",
+  "description": "Structured ideation and clarification before starting open-ended work.",
+  "codeRepository": "https://github.com/obra/superpowers",
+  "license": "MIT",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "Floom Starter Pack",
+    "url": "https://starter.floom.dev/"
+  }
+}
+</script>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #050505;
+  --muted: #333333;
+  --dim: #6b6b6b;
+  --blue: #0094ff;
+  --blue-soft: #bfe6ff;
+  --blue-pale: #eaf7ff;
+  --line: 2px solid var(--ink);
+  --line-light: 1px solid #e0dfdb;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scrollbar-gutter: stable; overflow-y: scroll; }
+body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+.page { width: min(100%, 1100px); margin: 0 auto; padding: 44px 70px 72px; }
+
+.nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
+.nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
+.wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
+.wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+.wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; max-width: 100%; }
+.nav-links a { color: inherit; text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+
+@media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
+@media (max-width: 980px) { .page { padding: 30px 22px 52px; } }
+@media (max-width: 640px) { .page { padding: 22px 16px 44px; } .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--dim); text-decoration: none; margin-top: 24px; margin-bottom: 8px; }
+.back-link:hover { color: var(--ink); }
+
+.hero { margin-top: 8px; padding: 28px 0 32px; border-bottom: var(--line-light); }
+.hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 14px; word-break: break-word; }
+.hero-desc { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 18px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
+.badge.mute { color: var(--muted); background: #fff; border-color: #ddd; }
+
+.section { margin-top: 40px; }
+.section-label { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+.install-btn-wrap { position: relative; display: inline-block; }
+.install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.install-btn.copied { background: var(--blue); border-color: var(--blue); }
+.install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
+.install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.install-tooltip-cmd { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; word-break: break-all; }
+
+.cmd-block { display: flex; align-items: stretch; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; max-width: 720px; margin-top: 8px; }
+.cmd-text { flex: 1; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); padding: 12px 14px; word-break: break-all; line-height: 1.55; }
+.cmd-copy { flex-shrink: 0; background: var(--ink); color: #fff; border: none; cursor: pointer; padding: 12px 18px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; transition: background 0.15s; text-transform: uppercase; }
+.cmd-copy:hover { background: #333; }
+.cmd-copy.copied { background: var(--blue); }
+
+.fires-block { font-size: 16px; color: var(--ink); line-height: 1.6; background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 16px 18px; max-width: 720px; }
+
+.files-list { display: flex; flex-direction: column; gap: 6px; max-width: 720px; }
+.file-row { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; padding: 8px 12px; background: #fff; border: 1px solid #e0dfdb; border-radius: 8px; }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; }
+.file-size { color: var(--muted); flex-shrink: 0; }
+.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+
+.md-block { font-size: 15px; line-height: 1.7; color: var(--ink); background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 22px 26px; max-width: 860px; }
+.md-block h2, .md-block h3, .md-block h4 { font-weight: 700; margin: 18px 0 8px; letter-spacing: -0.01em; }
+.md-block h2 { font-size: 22px; }
+.md-block h3 { font-size: 18px; }
+.md-block h4 { font-size: 16px; }
+.md-block p { margin: 8px 0; }
+.md-block ul, .md-block ol { margin: 8px 0 8px 22px; }
+.md-block li { margin: 3px 0; }
+.md-block code { font-family: var(--mono); font-size: 13px; background: #f0efeb; padding: 1px 5px; border-radius: 3px; }
+.md-block pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 10px 0; }
+.md-block pre code { background: none; padding: 0; }
+.md-block a { color: var(--blue); }
+.md-block blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 14px; color: var(--muted); margin: 12px 0; }
+.md-block hr { border: none; border-top: 1px solid #e0dfdb; margin: 14px 0; }
+
+.links-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+.link-btn { font-family: var(--mono); font-size: 12px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.link-btn:hover { color: var(--ink); }
+
+.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
+
+.footer-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; border: var(--line); border-radius: 28px; background: var(--blue); color: #ffffff; padding: 28px; }
+.footer-cta h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.footer-cta p { color: rgba(255,255,255,0.92); margin-top: 8px; font-size: 15px; font-weight: 500; }
+.footer-cta .button { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #ffffff; border-radius: 14px; background: #ffffff; color: var(--ink); padding: 14px 20px; font: 900 13px/1 var(--sans); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: box-shadow 150ms ease, transform 150ms ease; }
+.footer-cta .button:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.22); transform: translateY(-2px); }
+@media (max-width: 860px) { .footer-cta { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 36px; } }
+
+.site-footer { border-top: 2px solid var(--ink); background: var(--paper); padding: 48px 70px 0; margin-top: 56px; }
+.site-footer-inner { width: min(100%, 1100px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+.footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
+.footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
+.footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom { width: min(100%, 1100px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
+.footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
+@media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
+@media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
+
+
+/* === Skill page TOC layout (mirrors docs.html .doc-layout) === */
+.skill-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 24px;
+  align-items: flex-start;
+}
+.skill-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-self: start;
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+.skill-nav-label {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+}
+.skill-nav a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 14px;
+  background: transparent;
+  color: #4b4b4b;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: background 120ms ease, color 120ms ease;
+}
+.skill-nav a.is-sub { padding-left: 20px; font-weight: 600; color: #5b5b5b; font-size: 12.5px; }
+.skill-nav a.is-sub-2 { padding-left: 32px; font-weight: 500; color: #6b6b6b; font-size: 12px; }
+.skill-nav a:hover, .skill-nav a.active {
+  background: var(--blue-pale);
+  color: var(--ink);
+}
+.skill-body { display: block; min-width: 0; }
+.skill-body .section { scroll-margin-top: 36px; }
+
+@media (max-width: 980px) {
+  .skill-layout { grid-template-columns: 1fr; gap: 28px; }
+  .skill-nav {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid rgba(5,5,5,0.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+  }
+  .skill-nav-label { width: 100%; padding-left: 4px; }
+  .skill-nav a { padding: 6px 10px; font-size: 12px; }
+  .skill-nav a.is-sub, .skill-nav a.is-sub-2 { padding-left: 10px; }
+}
+
+/* === Install CTA + tooltip (from index.html) === */
+.install-cta-wrap { position: relative; display: inline-block; }
+.install-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 14px 22px;
+  font: 900 13px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  gap: 8px;
+}
+.install-cta:hover, .install-cta:focus-visible {
+  box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+  transform: translateY(-1px);
+  outline: none;
+}
+.install-cta:hover .install-cta-icon,
+.install-cta:focus-visible .install-cta-icon {
+  transform: translateY(2px);
+}
+.install-cta-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied .install-cta-label::after { content: " \2713"; }
+.install-cta-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 360px;
+  max-width: 420px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
+  transform: translateY(-4px);
+  z-index: 100;
+  box-shadow: 0 14px 30px rgba(5,5,5,0.18);
+}
+.install-cta:hover .install-cta-tooltip,
+.install-cta:focus-visible .install-cta-tooltip,
+.install-cta:focus-within .install-cta-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
+}
+
+/* Connector arrow from button up to tooltip */
+.install-cta-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  border-top: 2px solid var(--ink);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+/* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
+@media (hover: none) {
+  .install-cta-tooltip { display: none; }
+}
+.tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
+.tooltip-cmd {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.tooltip-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.install-cta--final { background: #ffffff; color: var(--ink); }
+.install-cta--final:hover, .install-cta--final:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
+}
+.install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+.install-cta-wrap--final .install-cta-tooltip { left: auto; right: 0; }
+
+@media (max-width: 640px) {
+  .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
+}
+
+/* === Final CTA (mirrors index.html .final-cta dark surface) === */
+.final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 56px;
+  border: var(--line);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 32px 34px;
+}
+.final-cta strong {
+  display: block;
+  max-width: 620px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.final-cta span { display: block; margin-top: 12px; color: #d6d6d6; font-size: 15px; font-weight: 550; }
+@media (max-width: 860px) {
+  .final-cta { flex-direction: column; align-items: flex-start; }
+  .final-cta strong { font-size: 24px; }
+}
+
+/* skill-cta-label-fix */
+.final-cta .install-cta--final .install-cta-label { color: var(--ink); }
+.final-cta .install-cta--final .install-cta-icon { color: var(--ink); }
+.final-cta .install-cta--final.is-copied .install-cta-label,
+.final-cta .install-cta--final.is-copied .install-cta-icon { color: #ffffff; }
+.final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+</style>
+</head>
+<body>
+<main class="page">
+<nav aria-label="Main navigation" class="nav">
+<a class="wordmark" href="../index.html">
+<strong>Floom</strong>
+<span>Open source · MIT</span>
+</a>
+<div class="nav-right">
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a aria-current="page" href="../library.html">Skills</a>
+<a href="../docs.html">Docs</a>
+<a href="../about.html">About</a>
+</div>
+</div>
+</nav>
+<a class="back-link" href="../library.html">← Back to Skills</a>
+
+
+
+
+
+
+<div class="skill-layout"><nav aria-label="On this page" class="skill-nav">
+<span class="skill-nav-label">On this page</span>
+<a href="#overview">Overview</a>
+<a href="#install">Install</a>
+<a href="#fires-when">Fires when</a>
+<a href="#files">Files</a>
+<a href="#skill-md">SKILL.md</a>
+<a class="is-sub" href="#skillmd-brainstorming-ideas-into-designs">Brainstorming Ideas Into Designs</a>
+<a class="is-sub-2" href="#skillmd-anti-pattern-this-is-too-simple-to-need-a-design">Anti-Pattern: "This Is Too Simple To Need A De…</a>
+<a class="is-sub-2" href="#skillmd-checklist">Checklist</a>
+<a class="is-sub-2" href="#skillmd-process-flow">Process Flow</a>
+<a class="is-sub-2" href="#skillmd-the-process">The Process</a>
+<a class="is-sub-2" href="#skillmd-after-the-design">After the Design</a>
+<a class="is-sub-2" href="#skillmd-key-principles">Key Principles</a>
+<a class="is-sub-2" href="#skillmd-visual-companion">Visual Companion</a>
+<a href="#source">Source</a>
+</nav><div class="skill-body"><header class="hero" id="overview">
+<h1>brainstorming</h1>
+<p class="hero-desc">Structured ideation and clarification before starting open-ended work.</p>
+<div class="hero-meta">
+<span class="badge">↓ 147.4K on skills.sh</span><span class="badge mute">obra</span><span class="badge mute">MIT</span>
+<span class="profile-tag">core</span><span class="profile-tag">research</span><span class="profile-tag">marketing</span><span class="profile-tag">sales</span><span class="profile-tag">founder</span><span class="profile-tag">design</span><span class="profile-tag">video</span>
+</div>
+</header><section class="section" id="install">
+<div class="section-label">Install</div>
+<div class="install-cta-wrap">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --skills brainstorming" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>brainstorming</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills brainstorming</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+<div class="cmd-block">
+<div class="cmd-text" id="cmdText">npx @floomhq/starter install --skills brainstorming</div>
+<button class="cmd-copy" id="cmdCopy" onclick="copyCmd()">Copy</button>
+</div>
+</section><section class="section" id="fires-when">
+<div class="section-label">Fires when</div>
+<div class="fires-block">any vague request, "help me think through X", before starting anything open-ended</div>
+</section><section class="section" id="files">
+<div class="section-label">Files</div>
+<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">10,634 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">scripts</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">spec-document-reviewer-prompt.md</span><span class="file-size">1,748 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">visual-companion.md</span><span class="file-size">12,047 bytes</span><span class="file-type">support</span></div></div>
+</section><section class="section" id="skill-md">
+<div class="section-label">SKILL.md</div>
+<div class="md-block"><h2 id="skillmd-brainstorming-ideas-into-designs">Brainstorming Ideas Into Designs</h2>
+<p>Help turn ideas into fully formed designs and specs through natural collaborative dialogue.</p>
+<p>Start by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design and get user approval.</p>
+<p>&lt;HARD-GATE&gt; Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity. &lt;/HARD-GATE&gt;</p>
+<h3 id="skillmd-anti-pattern-this-is-too-simple-to-need-a-design">Anti-Pattern: "This Is Too Simple To Need A Design"</h3>
+<p>Every project goes through this process. A todo list, a single-function utility, a config change — all of them. "Simple" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and get approval.</p>
+<h3 id="skillmd-checklist">Checklist</h3>
+<p>You MUST create a task for each of these items and complete them in order:</p>
+<ol><li><strong>Explore project context</strong> — check files, docs, recent commits</li><li><strong>Offer visual companion</strong> (if topic will involve visual questions) — this is its own message, not combined with a clarifying question. See the Visual Companion section below.</li><li><strong>Ask clarifying questions</strong> — one at a time, understand purpose/constraints/success criteria</li><li><strong>Propose 2-3 approaches</strong> — with trade-offs and your recommendation</li><li><strong>Present design</strong> — in sections scaled to their complexity, get user approval after each section</li><li><strong>Write design doc</strong> — save to <code>docs/superpowers/specs/YYYY-MM-DD-&lt;topic&gt;-design.md</code> and commit</li><li><strong>Spec self-review</strong> — quick inline check for placeholders, contradictions, ambiguity, scope (see below)</li><li><strong>User reviews written spec</strong> — ask user to review the spec file before proceeding</li><li><strong>Transition to implementation</strong> — invoke writing-plans skill to create implementation plan</li></ol>
+<h3 id="skillmd-process-flow">Process Flow</h3>
+<pre><code class="lang-dot">digraph brainstorming {
+    "Explore project context" [shape=box];
+    "Visual questions ahead?" [shape=diamond];
+    "Offer Visual Companion\n(own message, no other content)" [shape=box];
+    "Ask clarifying questions" [shape=box];
+    "Propose 2-3 approaches" [shape=box];
+    "Present design sections" [shape=box];
+    "User approves design?" [shape=diamond];
+    "Write design doc" [shape=box];
+    "Spec self-review\n(fix inline)" [shape=box];
+    "User reviews spec?" [shape=diamond];
+    "Invoke writing-plans skill" [shape=doublecircle];
+
+    "Explore project context" -&gt; "Visual questions ahead?";
+    "Visual questions ahead?" -&gt; "Offer Visual Companion\n(own message, no other content)" [label="yes"];
+    "Visual questions ahead?" -&gt; "Ask clarifying questions" [label="no"];
+    "Offer Visual Companion\n(own message, no other content)" -&gt; "Ask clarifying questions";
+    "Ask clarifying questions" -&gt; "Propose 2-3 approaches";
+    "Propose 2-3 approaches" -&gt; "Present design sections";
+    "Present design sections" -&gt; "User approves design?";
+    "User approves design?" -&gt; "Present design sections" [label="no, revise"];
+    "User approves design?" -&gt; "Write design doc" [label="yes"];
+    "Write design doc" -&gt; "Spec self-review\n(fix inline)";
+    "Spec self-review\n(fix inline)" -&gt; "User reviews spec?";
+    "User reviews spec?" -&gt; "Write design doc" [label="changes requested"];
+    "User reviews spec?" -&gt; "Invoke writing-plans skill" [label="approved"];
+}</code></pre>
+<p><strong>The terminal state is invoking writing-plans.</strong> Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.</p>
+<h3 id="skillmd-the-process">The Process</h3>
+<p><strong>Understanding the idea:</strong></p>
+<ul><li>Check out the current project state first (files, docs, recent commits)</li><li>Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.</li><li>If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.</li><li>For appropriately-scoped projects, ask questions one at a time to refine the idea</li><li>Prefer multiple choice questions when possible, but open-ended is fine too</li><li>Only one question per message - if a topic needs more exploration, break it into multiple questions</li><li>Focus on understanding: purpose, constraints, success criteria</li></ul>
+<p><strong>Exploring approaches:</strong></p>
+<ul><li>Propose 2-3 different approaches with trade-offs</li><li>Present options conversationally with your recommendation and reasoning</li><li>Lead with your recommended option and explain why</li></ul>
+<p><strong>Presenting the design:</strong></p>
+<ul><li>Once you believe you understand what you're building, present the design</li><li>Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced</li><li>Ask after each section whether it looks right so far</li><li>Cover: architecture, components, data flow, error handling, testing</li><li>Be ready to go back and clarify if something doesn't make sense</li></ul>
+<p><strong>Design for isolation and clarity:</strong></p>
+<ul><li>Break the system into smaller units that each have one clear purpose, communicate through well-defined interfaces, and can be understood and tested independently</li><li>For each unit, you should be able to answer: what does it do, how do you use it, and what does it depend on?</li><li>Can someone understand what a unit does without reading its internals? Can you change the internals without breaking consumers? If not, the boundaries need work.</li><li>Smaller, well-bounded units are also easier for you to work with - you reason better about code you can hold in context at once, and your edits are more reliable when files are focused. When a file grows large, that's often a signal that it's doing too much.</li></ul>
+<p><strong>Working in existing codebases:</strong></p>
+<ul><li>Explore the current structure before proposing changes. Follow existing patterns.</li><li>Where existing code has problems that affect the work (e.g., a file that's grown too large, unclear boundaries, tangled responsibilities), include targeted improvements as part of the design - the way a good developer improves code they're working in.</li><li>Don't propose unrelated refactoring. Stay focused on what serves the current goal.</li></ul>
+<h3 id="skillmd-after-the-design">After the Design</h3>
+<p><strong>Documentation:</strong></p>
+<p>- (User preferences for spec location override this default)</p>
+<ul><li>Write the validated design (spec) to <code>docs/superpowers/specs/YYYY-MM-DD-&lt;topic&gt;-design.md</code></li><li>Use elements-of-style:writing-clearly-and-concisely skill if available</li><li>Commit the design document to git</li></ul>
+<p><strong>Spec Self-Review:</strong> After writing the spec document, look at it with fresh eyes:</p>
+<ol><li><strong>Placeholder scan:</strong> Any "TBD", "TODO", incomplete sections, or vague requirements? Fix them.</li><li><strong>Internal consistency:</strong> Do any sections contradict each other? Does the architecture match the feature descriptions?</li><li><strong>Scope check:</strong> Is this focused enough for a single implementation plan, or does it need decomposition?</li><li><strong>Ambiguity check:</strong> Could any requirement be interpreted two different ways? If so, pick one and make it explicit.</li></ol>
+<p>Fix any issues inline. No need to re-review — just fix and move on.</p>
+<p><strong>User Review Gate:</strong> After the spec review loop passes, ask the user to review the written spec before proceeding:</p>
+<blockquote>"Spec written and committed to <code>&lt;path&gt;</code>. Please review it and let me know if you want to make any changes before we start writing out the implementation plan."</blockquote>
+<p>Wait for the user's response. If they request changes, make them and re-run the spec review loop. Only proceed once the user approves.</p>
+<p><strong>Implementation:</strong></p>
+<ul><li>Invoke the writing-plans skill to create a detailed implementation plan</li><li>Do NOT invoke any other skill. writing-plans is the next step.</li></ul>
+<h3 id="skillmd-key-principles">Key Principles</h3>
+<ul><li><strong>One question at a time</strong> - Don't overwhelm with multiple questions</li><li><strong>Multiple choice preferred</strong> - Easier to answer than open-ended when possible</li><li><strong>YAGNI ruthlessly</strong> - Remove unnecessary features from all designs</li><li><strong>Explore alternatives</strong> - Always propose 2-3 approaches before settling</li><li><strong>Incremental validation</strong> - Present design, get approval before moving on</li><li><strong>Be flexible</strong> - Go back and clarify when something doesn't make sense</li></ul>
+<h3 id="skillmd-visual-companion">Visual Companion</h3>
+<p>A browser-based companion for showing mockups, diagrams, and visual options during brainstorming. Available as a tool — not a mode. Accepting the companion means it's available for questions that benefit from visual treatment; it does NOT mean every question goes through the browser.</p>
+<p><strong>Offering the companion:</strong> When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), offer it once for consent:</p>
+<blockquote>"Some of what we're working on might be easier to explain if I can show it to you in a web browser. I can put together mockups, diagrams, comparisons, and other visuals as we go. This feature is still new and can be token-intensive. Want to try it? (Requires opening a local URL)"</blockquote>
+<p><strong>This offer MUST be its own message.</strong> Do not combine it with clarifying questions, context summaries, or any other content. The message should contain ONLY the offer above and nothing else. Wait for the user's response before continuing. If they decline, proceed with text-only brainstorming.</p>
+<p><strong>Per-question decision:</strong> Even after the user accepts, decide FOR EACH QUESTION whether to use the browser or the terminal. The test: <strong>would the user understand this better by seeing it than reading it?</strong></p>
+<ul><li><strong>Use the browser</strong> for content that IS visual — mockups, wireframes, layout comparisons, architecture diagrams, side-by-side visual designs</li><li><strong>Use the terminal</strong> for content that is text — requirements questions, conceptual choices, tradeoff lists, A/B/C/D text options, scope decisions</li></ul>
+<p>A question about a UI topic is not automatically a visual question. "What does personality mean in this context?" is a conceptual question — use the terminal. "Which wizard layout works better?" is a visual question — use the browser.</p>
+<p>If they agree to the companion, read the detailed guide before proceeding: <code>skills/brainstorming/visual-companion.md</code></p></div>
+</section><section class="section" id="source">
+<div class="section-label">Source</div>
+<div class="links-row">
+<a class="link-btn" href="https://github.com/obra/superpowers" rel="noopener" target="_blank">View upstream on GitHub ↑</a>
+<a class="link-btn" href="https://github.com/floomhq/starter/blob/main/skills/brainstorming.json" rel="noopener" target="_blank">View on Floom GitHub ↑</a>
+<a class="link-btn" href="https://skills.sh/obra/superpowers/brainstorming" rel="noopener" target="_blank">View on skills.sh ↑</a>
+</div>
+</section></div></div><section class="final-cta">
+<div>
+<strong>Add this skill to your agent.</strong>
+<span>Installs <code style="background:rgba(255,255,255,0.12);padding:1px 6px;border-radius:4px;color:#fff;font-family:var(--mono);font-size:13px">brainstorming</code> into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+</div>
+<div class="install-cta-wrap install-cta-wrap--final">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --skills brainstorming" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>brainstorming</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills brainstorming</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+</section>
+</main>
+<footer aria-label="Site footer" class="site-footer">
+<div class="site-footer-inner">
+<div class="footer-brand">
+<a class="footer-wordmark" href="../index.html">Floom</a>
+<small>Open source · MIT</small>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Sitemap</div>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../library.html">Skills</a></li>
+<li><a href="../docs.html">Docs</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Resources</div>
+<ul>
+<li><a href="https://github.com/floomhq/starter" rel="noopener" target="_blank">GitHub</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+<li><a href="../terms.html">Terms</a></li>
+<li><a href="https://github.com/floomhq/starter/releases" rel="noopener" target="_blank">Changelog</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Floom · Built with care in Berlin and San Francisco</span>
+<span class="footer-mit">MIT License</span>
+</div>
+</footer>
+<script>
+function copyInstall(btn, cmd) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    const original = btn.dataset.original || btn.textContent;
+    btn.dataset.original = original;
+    btn.classList.add('copied');
+    btn.textContent = 'Copied! Paste in terminal';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
+  });
+}
+function copyCmd() {
+  const t = document.getElementById('cmdText').textContent;
+  const b = document.getElementById('cmdCopy');
+  navigator.clipboard.writeText(t).then(() => {
+    b.classList.add('copied'); b.textContent = 'Copied!';
+    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+<script>
+
+// === Install CTA (Add to your agent button) - copy on click ===
+document.querySelectorAll(".install-cta").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const command = button.dataset.copy;
+    if (!command) return;
+    try {
+      await navigator.clipboard.writeText(command);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = command;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const labelEl = button.querySelector(".install-cta-label");
+    if (labelEl) {
+      const original = labelEl.textContent;
+      labelEl.textContent = "Copied! Paste in terminal";
+      button.classList.add("is-copied");
+      setTimeout(() => {
+        labelEl.textContent = original;
+        button.classList.remove("is-copied");
+      }, 2000);
+    }
+  });
+});
+
+// === TOC active-section highlighting (scroll spy) ===
+(function () {
+  const sections = document.querySelectorAll(".skill-body .section[id], .skill-body .section [id]");
+  const navLinks = document.querySelectorAll(".skill-nav a");
+  if (!sections.length || !navLinks.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector('.skill-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add("active");
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
+  sections.forEach((s) => observer.observe(s));
+})();
+</script></body>
+</html>

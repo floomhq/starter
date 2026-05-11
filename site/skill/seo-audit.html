@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#fafaf7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<title>seo-audit: Floom Starter Pack skill</title>
+<meta content="Full SEO audit: on-page, schema, sitemap, indexability, keyword analysis." name="description"/>
+<!-- Open Graph -->
+<meta content="Floom Starter Pack" property="og:site_name"/>
+<meta content="article" property="og:type"/>
+<meta content="seo-audit: Floom Starter Pack skill" property="og:title"/>
+<meta content="Full SEO audit: on-page, schema, sitemap, indexability, keyword analysis." property="og:description"/>
+<meta content="https://starter.floom.dev/skill/seo-audit" property="og:url"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="seo-audit: Floom Starter Pack skill" name="twitter:title"/>
+<meta content="Full SEO audit: on-page, schema, sitemap, indexability, keyword analysis." name="twitter:description"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="@floomhq" name="twitter:creator"/>
+<meta content="@floomhq" name="twitter:site"/>
+<!-- Favicon -->
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Canonical -->
+<link href="https://starter.floom.dev/skill/seo-audit" rel="canonical"/>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "seo-audit",
+  "description": "Full SEO audit: on-page, schema, sitemap, indexability, keyword analysis.",
+  "codeRepository": "https://github.com/coreyhaines31/marketingskills",
+  "license": "MIT",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "Floom Starter Pack",
+    "url": "https://starter.floom.dev/"
+  }
+}
+</script>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #050505;
+  --muted: #333333;
+  --dim: #6b6b6b;
+  --blue: #0094ff;
+  --blue-soft: #bfe6ff;
+  --blue-pale: #eaf7ff;
+  --line: 2px solid var(--ink);
+  --line-light: 1px solid #e0dfdb;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scrollbar-gutter: stable; overflow-y: scroll; }
+body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+.page { width: min(100%, 1100px); margin: 0 auto; padding: 44px 70px 72px; }
+
+.nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
+.nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
+.wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
+.wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+.wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; max-width: 100%; }
+.nav-links a { color: inherit; text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+
+@media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
+@media (max-width: 980px) { .page { padding: 30px 22px 52px; } }
+@media (max-width: 640px) { .page { padding: 22px 16px 44px; } .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--dim); text-decoration: none; margin-top: 24px; margin-bottom: 8px; }
+.back-link:hover { color: var(--ink); }
+
+.hero { margin-top: 8px; padding: 28px 0 32px; border-bottom: var(--line-light); }
+.hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 14px; word-break: break-word; }
+.hero-desc { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 18px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
+.badge.mute { color: var(--muted); background: #fff; border-color: #ddd; }
+
+.section { margin-top: 40px; }
+.section-label { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+.install-btn-wrap { position: relative; display: inline-block; }
+.install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.install-btn.copied { background: var(--blue); border-color: var(--blue); }
+.install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
+.install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.install-tooltip-cmd { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; word-break: break-all; }
+
+.cmd-block { display: flex; align-items: stretch; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; max-width: 720px; margin-top: 8px; }
+.cmd-text { flex: 1; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); padding: 12px 14px; word-break: break-all; line-height: 1.55; }
+.cmd-copy { flex-shrink: 0; background: var(--ink); color: #fff; border: none; cursor: pointer; padding: 12px 18px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; transition: background 0.15s; text-transform: uppercase; }
+.cmd-copy:hover { background: #333; }
+.cmd-copy.copied { background: var(--blue); }
+
+.fires-block { font-size: 16px; color: var(--ink); line-height: 1.6; background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 16px 18px; max-width: 720px; }
+
+.files-list { display: flex; flex-direction: column; gap: 6px; max-width: 720px; }
+.file-row { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; padding: 8px 12px; background: #fff; border: 1px solid #e0dfdb; border-radius: 8px; }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; }
+.file-size { color: var(--muted); flex-shrink: 0; }
+.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+
+.md-block { font-size: 15px; line-height: 1.7; color: var(--ink); background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 22px 26px; max-width: 860px; }
+.md-block h2, .md-block h3, .md-block h4 { font-weight: 700; margin: 18px 0 8px; letter-spacing: -0.01em; }
+.md-block h2 { font-size: 22px; }
+.md-block h3 { font-size: 18px; }
+.md-block h4 { font-size: 16px; }
+.md-block p { margin: 8px 0; }
+.md-block ul, .md-block ol { margin: 8px 0 8px 22px; }
+.md-block li { margin: 3px 0; }
+.md-block code { font-family: var(--mono); font-size: 13px; background: #f0efeb; padding: 1px 5px; border-radius: 3px; }
+.md-block pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 10px 0; }
+.md-block pre code { background: none; padding: 0; }
+.md-block a { color: var(--blue); }
+.md-block blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 14px; color: var(--muted); margin: 12px 0; }
+.md-block hr { border: none; border-top: 1px solid #e0dfdb; margin: 14px 0; }
+
+.links-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+.link-btn { font-family: var(--mono); font-size: 12px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.link-btn:hover { color: var(--ink); }
+
+.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
+
+.footer-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; border: var(--line); border-radius: 28px; background: var(--blue); color: #ffffff; padding: 28px; }
+.footer-cta h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.footer-cta p { color: rgba(255,255,255,0.92); margin-top: 8px; font-size: 15px; font-weight: 500; }
+.footer-cta .button { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #ffffff; border-radius: 14px; background: #ffffff; color: var(--ink); padding: 14px 20px; font: 900 13px/1 var(--sans); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: box-shadow 150ms ease, transform 150ms ease; }
+.footer-cta .button:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.22); transform: translateY(-2px); }
+@media (max-width: 860px) { .footer-cta { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 36px; } }
+
+.site-footer { border-top: 2px solid var(--ink); background: var(--paper); padding: 48px 70px 0; margin-top: 56px; }
+.site-footer-inner { width: min(100%, 1100px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+.footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
+.footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
+.footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom { width: min(100%, 1100px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
+.footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
+@media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
+@media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
+
+
+/* === Skill page TOC layout (mirrors docs.html .doc-layout) === */
+.skill-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 24px;
+  align-items: flex-start;
+}
+.skill-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-self: start;
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+.skill-nav-label {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+}
+.skill-nav a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 14px;
+  background: transparent;
+  color: #4b4b4b;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: background 120ms ease, color 120ms ease;
+}
+.skill-nav a.is-sub { padding-left: 20px; font-weight: 600; color: #5b5b5b; font-size: 12.5px; }
+.skill-nav a.is-sub-2 { padding-left: 32px; font-weight: 500; color: #6b6b6b; font-size: 12px; }
+.skill-nav a:hover, .skill-nav a.active {
+  background: var(--blue-pale);
+  color: var(--ink);
+}
+.skill-body { display: block; min-width: 0; }
+.skill-body .section { scroll-margin-top: 36px; }
+
+@media (max-width: 980px) {
+  .skill-layout { grid-template-columns: 1fr; gap: 28px; }
+  .skill-nav {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid rgba(5,5,5,0.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+  }
+  .skill-nav-label { width: 100%; padding-left: 4px; }
+  .skill-nav a { padding: 6px 10px; font-size: 12px; }
+  .skill-nav a.is-sub, .skill-nav a.is-sub-2 { padding-left: 10px; }
+}
+
+/* === Install CTA + tooltip (from index.html) === */
+.install-cta-wrap { position: relative; display: inline-block; }
+.install-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 14px 22px;
+  font: 900 13px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  gap: 8px;
+}
+.install-cta:hover, .install-cta:focus-visible {
+  box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+  transform: translateY(-1px);
+  outline: none;
+}
+.install-cta:hover .install-cta-icon,
+.install-cta:focus-visible .install-cta-icon {
+  transform: translateY(2px);
+}
+.install-cta-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied .install-cta-label::after { content: " \2713"; }
+.install-cta-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 360px;
+  max-width: 420px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
+  transform: translateY(-4px);
+  z-index: 100;
+  box-shadow: 0 14px 30px rgba(5,5,5,0.18);
+}
+.install-cta:hover .install-cta-tooltip,
+.install-cta:focus-visible .install-cta-tooltip,
+.install-cta:focus-within .install-cta-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
+}
+
+/* Connector arrow from button up to tooltip */
+.install-cta-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  border-top: 2px solid var(--ink);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+/* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
+@media (hover: none) {
+  .install-cta-tooltip { display: none; }
+}
+.tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
+.tooltip-cmd {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.tooltip-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.install-cta--final { background: #ffffff; color: var(--ink); }
+.install-cta--final:hover, .install-cta--final:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
+}
+.install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+.install-cta-wrap--final .install-cta-tooltip { left: auto; right: 0; }
+
+@media (max-width: 640px) {
+  .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
+}
+
+/* === Final CTA (mirrors index.html .final-cta dark surface) === */
+.final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 56px;
+  border: var(--line);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 32px 34px;
+}
+.final-cta strong {
+  display: block;
+  max-width: 620px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.final-cta span { display: block; margin-top: 12px; color: #d6d6d6; font-size: 15px; font-weight: 550; }
+@media (max-width: 860px) {
+  .final-cta { flex-direction: column; align-items: flex-start; }
+  .final-cta strong { font-size: 24px; }
+}
+
+/* skill-cta-label-fix */
+.final-cta .install-cta--final .install-cta-label { color: var(--ink); }
+.final-cta .install-cta--final .install-cta-icon { color: var(--ink); }
+.final-cta .install-cta--final.is-copied .install-cta-label,
+.final-cta .install-cta--final.is-copied .install-cta-icon { color: #ffffff; }
+.final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+</style>
+</head>
+<body>
+<main class="page">
+<nav aria-label="Main navigation" class="nav">
+<a class="wordmark" href="../index.html">
+<strong>Floom</strong>
+<span>Open source · MIT</span>
+</a>
+<div class="nav-right">
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a aria-current="page" href="../library.html">Skills</a>
+<a href="../docs.html">Docs</a>
+<a href="../about.html">About</a>
+</div>
+</div>
+</nav>
+<a class="back-link" href="../library.html">← Back to Skills</a>
+
+
+
+
+
+
+<div class="skill-layout"><nav aria-label="On this page" class="skill-nav">
+<span class="skill-nav-label">On this page</span>
+<a href="#overview">Overview</a>
+<a href="#install">Install</a>
+<a href="#fires-when">Fires when</a>
+<a href="#files">Files</a>
+<a href="#skill-md">SKILL.md</a>
+<a class="is-sub" href="#skillmd-seo-audit">SEO Audit</a>
+<a class="is-sub-2" href="#skillmd-initial-assessment">Initial Assessment</a>
+<a class="is-sub-2" href="#skillmd-audit-framework">Audit Framework</a>
+<a class="is-sub-2" href="#skillmd-technical-seo-audit">Technical SEO Audit</a>
+<a class="is-sub-2" href="#skillmd-international-seo-localization">International SEO &amp; Localization</a>
+<a class="is-sub-2" href="#skillmd-on-page-seo-audit">On-Page SEO Audit</a>
+<a class="is-sub-2" href="#skillmd-content-quality-assessment">Content Quality Assessment</a>
+<a class="is-sub-2" href="#skillmd-common-issues-by-site-type">Common Issues by Site Type</a>
+<a class="is-sub-2" href="#skillmd-output-format">Output Format</a>
+<a class="is-sub-2" href="#skillmd-references">References</a>
+<a class="is-sub-2" href="#skillmd-tools-referenced">Tools Referenced</a>
+<a class="is-sub-2" href="#skillmd-task-specific-questions">Task-Specific Questions</a>
+<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
+<a href="#source">Source</a>
+</nav><div class="skill-body"><header class="hero" id="overview">
+<h1>seo-audit</h1>
+<p class="hero-desc">Full SEO audit: on-page, schema, sitemap, indexability, keyword analysis.</p>
+<div class="hero-meta">
+<span class="badge">↓ 103.4K on skills.sh</span><span class="badge mute">coreyhaines31</span><span class="badge mute">MIT</span>
+<span class="profile-tag">marketing</span><span class="profile-tag">founder</span>
+</div>
+</header><section class="section" id="install">
+<div class="section-label">Install</div>
+<div class="install-cta-wrap">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --skills seo-audit" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>seo-audit</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills seo-audit</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+<div class="cmd-block">
+<div class="cmd-text" id="cmdText">npx @floomhq/starter install --skills seo-audit</div>
+<button class="cmd-copy" id="cmdCopy" onclick="copyCmd()">Copy</button>
+</div>
+</section><section class="section" id="fires-when">
+<div class="section-label">Fires when</div>
+<div class="fires-block">"seo audit", "check seo", any landing page work</div>
+</section><section class="section" id="files">
+<div class="section-label">Files</div>
+<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">16,438 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
+</section><section class="section" id="skill-md">
+<div class="section-label">SKILL.md</div>
+<div class="md-block"><h2 id="skillmd-seo-audit">SEO Audit</h2>
+<p>You are an expert in search engine optimization. Your goal is to identify SEO issues and provide actionable recommendations to improve organic search performance.</p>
+<h3 id="skillmd-initial-assessment">Initial Assessment</h3>
+<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.</p>
+<p>Before auditing, understand:</p>
+<p>- What type of site? (SaaS, e-commerce, blog, etc.)    - What's the primary business goal for SEO?    - What keywords/topics are priorities?</p>
+<ol><li><strong>Site Context</strong></li></ol>
+<p>- Any known issues or concerns?    - Current organic traffic level?    - Recent changes or migrations?</p>
+<ol><li><strong>Current State</strong></li></ol>
+<p>- Full site audit or specific pages?    - Technical + on-page, or one focus area?    - Access to Search Console / analytics?</p>
+<ol><li><strong>Scope</strong></li></ol>
+<hr/>
+<h3 id="skillmd-audit-framework">Audit Framework</h3>
+<h4>Schema Markup Detection Limitation</h4>
+<p><strong><code>web_fetch</code> and <code>curl</code> cannot reliably detect structured data / schema markup.</strong></p>
+<p>Many CMS plugins (AIOSEO, Yoast, RankMath) inject JSON-LD via client-side JavaScript — it won't appear in static HTML or <code>web_fetch</code> output (which strips <code>&lt;script&gt;</code> tags during conversion).</p>
+<p><strong>To accurately check for schema markup, use one of these methods:</strong></p>
+<ol><li><strong>Browser tool</strong> — render the page and run: <code>document.querySelectorAll('script[type="application/ld+json"]')</code></li><li><strong>Google Rich Results Test</strong> — https://search.google.com/test/rich-results</li><li><strong>Screaming Frog export</strong> — if the client provides one, use it (SF renders JavaScript)</li></ol>
+<p>Reporting "no schema found" based solely on <code>web_fetch</code> or <code>curl</code> leads to false audit findings — these tools can't see JS-injected schema.</p>
+<h4>Priority Order</h4>
+<ol><li><strong>Crawlability &amp; Indexation</strong> (can Google find and index it?)</li><li><strong>Technical Foundations</strong> (is the site fast and functional?)</li><li><strong>On-Page Optimization</strong> (is content optimized?)</li><li><strong>Content Quality</strong> (does it deserve to rank?)</li><li><strong>Authority &amp; Links</strong> (does it have credibility?)</li></ol>
+<hr/>
+<h3 id="skillmd-technical-seo-audit">Technical SEO Audit</h3>
+<h4>Crawlability</h4>
+<p><strong>Robots.txt</strong></p>
+<ul><li>Check for unintentional blocks</li><li>Verify important pages allowed</li><li>Check sitemap reference</li></ul>
+<p><strong>XML Sitemap</strong></p>
+<ul><li>Exists and accessible</li><li>Submitted to Search Console</li><li>Contains only canonical, indexable URLs</li><li>Updated regularly</li><li>Proper formatting</li></ul>
+<p><strong>Site Architecture</strong></p>
+<ul><li>Important pages within 3 clicks of homepage</li><li>Logical hierarchy</li><li>Internal linking structure</li><li>No orphan pages</li></ul>
+<p><strong>Crawl Budget Issues</strong> (for large sites)</p>
+<ul><li>Parameterized URLs under control</li><li>Faceted navigation handled properly</li><li>Infinite scroll with pagination fallback</li><li>Session IDs not in URLs</li></ul>
+<h4>Indexation</h4>
+<p><strong>Index Status</strong></p>
+<ul><li>site:domain.com check</li><li>Search Console coverage report</li><li>Compare indexed vs. expected</li></ul>
+<p><strong>Indexation Issues</strong></p>
+<ul><li>Noindex tags on important pages</li><li>Canonicals pointing wrong direction</li><li>Redirect chains/loops</li><li>Soft 404s</li><li>Duplicate content without canonicals</li></ul>
+<p><strong>Canonicalization</strong></p>
+<ul><li>All pages have canonical tags</li><li>Self-referencing canonicals on unique pages</li><li>HTTP → HTTPS canonicals</li><li>www vs. non-www consistency</li><li>Trailing slash consistency</li></ul>
+<h4>Site Speed &amp; Core Web Vitals</h4>
+<p><strong>Core Web Vitals</strong></p>
+<ul><li>LCP (Largest Contentful Paint): &lt; 2.5s</li><li>INP (Interaction to Next Paint): &lt; 200ms</li><li>CLS (Cumulative Layout Shift): &lt; 0.1</li></ul>
+<p><strong>Speed Factors</strong></p>
+<ul><li>Server response time (TTFB)</li><li>Image optimization</li><li>JavaScript execution</li><li>CSS delivery</li><li>Caching headers</li><li>CDN usage</li><li>Font loading</li></ul>
+<p><strong>Tools</strong></p>
+<ul><li>PageSpeed Insights</li><li>WebPageTest</li><li>Chrome DevTools</li><li>Search Console Core Web Vitals report</li></ul>
+<h4>Mobile-Friendliness</h4>
+<ul><li>Responsive design (not separate m. site)</li><li>Tap target sizes</li><li>Viewport configured</li><li>No horizontal scroll</li><li>Same content as desktop</li><li>Mobile-first indexing readiness</li></ul>
+<h4>Security &amp; HTTPS</h4>
+<ul><li>HTTPS across entire site</li><li>Valid SSL certificate</li><li>No mixed content</li><li>HTTP → HTTPS redirects</li><li>HSTS header (bonus)</li></ul>
+<h4>URL Structure</h4>
+<ul><li>Readable, descriptive URLs</li><li>Keywords in URLs where natural</li><li>Consistent structure</li><li>No unnecessary parameters</li><li>Lowercase and hyphen-separated</li></ul>
+<hr/>
+<h3 id="skillmd-international-seo-localization">International SEO &amp; Localization</h3>
+<p>Check when the site serves multiple languages or regions. Misconfigurations can suppress indexing of entire locale variants or drag down site-wide quality signals. See <a href="references/international-seo.md" rel="noopener" target="_blank">International SEO reference</a> for evidence and source URLs.</p>
+<h4>Hreflang</h4>
+<p>Three equivalent placement methods: HTML <code>&lt;link&gt;</code> in <code>&lt;head&gt;</code>, HTTP <code>Link</code> headers, XML sitemap <code>&lt;xhtml:link&gt;</code>. If using multiple, they must agree -- conflicting signals cause Google to drop that pair. For 10+ locales, prefer sitemap-based (no page weight, no per-request cost).</p>
+<p><strong>Check for:</strong></p>
+<ul><li>Self-referencing entry on every page (page must include itself in the hreflang set)</li><li>Reciprocal links (if A points to B, B must point back to A -- or both are ignored)</li><li>Valid codes: ISO 639-1 language + optional ISO 3166-1 Alpha 2 region (e.g., <code>en</code>, <code>en-GB</code> -- never <code>en-UK</code>)</li><li><code>x-default</code> present, pointing to fallback page (language selector or default locale)</li><li>All target URLs return 200, are indexable, and match their canonical URL</li><li>No duplicate language-region codes pointing to different URLs</li></ul>
+<p><strong>Common errors:</strong> Missing self-referencing entry (all hreflang ignored). No return tag / one-directional (pair dropped). Invalid codes like <code>en-UK</code> (use <code>en-GB</code>). Hreflang target is non-canonical, 404, or blocked (cluster discarded). HTML and sitemap annotations disagree (conflicting pair dropped).</p>
+<p><strong>At scale:</strong> <code>&lt;xhtml:link&gt;</code> children don't count toward 50K URL sitemap limit, but the 50MB file size limit becomes the bottleneck (plan 2K-5K URLs per file with full hreflang). Focus hreflang on pages receiving wrong-language traffic -- not required on every page. For Bing: supplement with <code>&lt;html lang&gt;</code> and <code>&lt;meta http-equiv="content-language"&gt;</code> (Bing treats hreflang as a weak signal).</p>
+<h4>Canonicalization for Multilingual Sites</h4>
+<ul><li>Each locale page must self-canonical (e.g., <code>/ar/page</code> canonicals to <code>/ar/page</code>)</li><li>Never cross-locale canonical (French to English) -- suppresses the non-canonical locale entirely</li><li>Canonical URL must appear in the hreflang set -- if not, all hreflang is ignored</li><li>Canonical overrides hreflang when they conflict</li><li>Protocol/domain must be consistent across canonical, hreflang, and sitemap (<code>https</code> + same domain variant)</li><li>Paginated locale pages: self-referencing canonical per page (never canonical page 2+ to page 1)</li></ul>
+<p><strong>Common mistakes:</strong> all locales canonical to English (kills indexing), canonical URL not in hreflang set (silently ignored), protocol mismatch between canonical and hreflang, CMS setting deep page canonical to homepage.</p>
+<h4>International Sitemaps</h4>
+<p><strong>Check for:</strong></p>
+<ul><li><code>xmlns:xhtml</code> namespace on <code>&lt;urlset&gt;</code>, each <code>&lt;url&gt;</code> includes <code>&lt;xhtml:link&gt;</code> for all locales including itself</li><li><code>x-default</code> alternate included; all URLs absolute (full protocol + domain)</li><li>Sitemap index in Search Console and robots.txt; split by content type, not by locale</li></ul>
+<p><strong>Next.js caveat:</strong> <code>alternates.languages</code> does NOT auto-include a self-referencing <code>&lt;xhtml:link&gt;</code> for the <code>&lt;loc&gt;</code> URL -- you must add the current locale explicitly.</p>
+<h4>Locale URL Structure</h4>
+<p><strong>Recommended:</strong> Subdirectories (<code>/en/</code>, <code>/ar/</code>). <strong>Acceptable:</strong> Subdomains or ccTLDs. <strong>Not recommended:</strong> URL parameters (<code>?lang=en</code>).</p>
+<p><strong>Check for:</strong></p>
+<ul><li>Consistent locale prefix strategy; all locales prefixed (hiding locale from URLs prevents Google from distinguishing versions)</li><li>Root URL handled as <code>x-default</code> with redirect, or serves default locale content</li><li>No IP/Accept-Language content negotiation (Googlebot: US IPs, no Accept-Language header)</li><li>Trailing slash + case consistency across locale paths, canonicals, hreflang, and sitemaps</li><li>301 redirects from non-canonical format to canonical</li></ul>
+<p><strong>Note:</strong> Google's International Targeting report in Search Console is deprecated. Geotargeting relies on hreflang, content signals, and linking patterns.</p>
+<h4>Content Quality Across Locales</h4>
+<p><strong>Translation quality:</strong></p>
+<ul><li>AI-translated content is not inherently spam (Google's 2025 stance), but scaled low-value translations can trigger scaled content abuse policy</li><li>Google uses visible content to determine language -- translate ALL page content (title, description, headings, body), not just boilerplate</li><li>Translating only template/nav while main content stays in original language creates duplicates</li></ul>
+<p><strong>Thin locale pages:</strong></p>
+<ul><li>Helpful content system is site-wide -- many thin locale pages can suppress rankings for strong pages too</li><li>Don't noindex thin locales (wastes crawl budget) or cross-locale canonical (conflicts with hreflang)</li><li>Best approach: don't create locale pages you cannot make genuinely helpful</li></ul>
+<p><strong>Check for:</strong></p>
+<ul><li>All locale pages have fully translated main content (not just UI chrome)</li><li>No near-identical content across locales ("Duplicate, Google chose different canonical" in GSC)</li><li>Hreflang only for locales with genuine content and search demand</li><li>Localized signals: currency, phone format, addresses where applicable</li><li>Broken hreflang links (404s, redirects) waste crawl budget AND invalidate hreflang clusters</li></ul>
+<hr/>
+<h3 id="skillmd-on-page-seo-audit">On-Page SEO Audit</h3>
+<h4>Title Tags</h4>
+<p><strong>Check for:</strong></p>
+<ul><li>Unique titles for each page</li><li>Primary keyword near beginning</li><li>50-60 characters (visible in SERP)</li><li>Compelling and click-worthy</li><li>Brand name placement (end, usually)</li></ul>
+<p><strong>Common issues:</strong></p>
+<ul><li>Duplicate titles</li><li>Too long (truncated)</li><li>Too short (wasted opportunity)</li><li>Keyword stuffing</li><li>Missing entirely</li></ul>
+<h4>Meta Descriptions</h4>
+<p><strong>Check for:</strong></p>
+<ul><li>Unique descriptions per page</li><li>150-160 characters</li><li>Includes primary keyword</li><li>Clear value proposition</li><li>Call to action</li></ul>
+<p><strong>Common issues:</strong></p>
+<ul><li>Duplicate descriptions</li><li>Auto-generated garbage</li><li>Too long/short</li><li>No compelling reason to click</li></ul>
+<h4>Heading Structure</h4>
+<p><strong>Check for:</strong></p>
+<ul><li>One H1 per page</li><li>H1 contains primary keyword</li><li>Logical hierarchy (H1 → H2 → H3)</li><li>Headings describe content</li><li>Not just for styling</li></ul>
+<p><strong>Common issues:</strong></p>
+<ul><li>Multiple H1s</li><li>Skip levels (H1 → H3)</li><li>Headings used for styling only</li><li>No H1 on page</li></ul>
+<h4>Content Optimization</h4>
+<p><strong>Primary Page Content</strong></p>
+<ul><li>Keyword in first 100 words</li><li>Related keywords naturally used</li><li>Sufficient depth/length for topic</li><li>Answers search intent</li><li>Better than competitors</li></ul>
+<p><strong>Thin Content Issues</strong></p>
+<ul><li>Pages with little unique content</li><li>Tag/category pages with no value</li><li>Doorway pages</li><li>Duplicate or near-duplicate content</li></ul>
+<h4>Image Optimization</h4>
+<p><strong>Check for:</strong></p>
+<ul><li>Descriptive file names</li><li>Alt text on all images</li><li>Alt text describes image</li><li>Compressed file sizes</li><li>Modern formats (WebP)</li><li>Lazy loading implemented</li><li>Responsive images</li></ul>
+<h4>Internal Linking</h4>
+<p><strong>Check for:</strong></p>
+<ul><li>Important pages well-linked</li><li>Descriptive anchor text</li><li>Logical link relationships</li><li>No broken internal links</li><li>Reasonable link count per page</li></ul>
+<p><strong>Common issues:</strong></p>
+<ul><li>Orphan pages (no internal links)</li><li>Over-optimized anchor text</li><li>Important pages buried</li><li>Excessive footer/sidebar links</li></ul>
+<h4>Keyword Targeting</h4>
+<p><strong>Per Page</strong></p>
+<ul><li>Clear primary keyword target</li><li>Title, H1, URL aligned</li><li>Content satisfies search intent</li><li>Not competing with other pages (cannibalization)</li></ul>
+<p><strong>Site-Wide</strong></p>
+<ul><li>Keyword mapping document</li><li>No major gaps in coverage</li><li>No keyword cannibalization</li><li>Logical topical clusters</li></ul>
+<hr/>
+<h3 id="skillmd-content-quality-assessment">Content Quality Assessment</h3>
+<h4>E-E-A-T Signals</h4>
+<p><strong>Experience</strong></p>
+<ul><li>First-hand experience demonstrated</li><li>Original insights/data</li><li>Real examples and case studies</li></ul>
+<p><strong>Expertise</strong></p>
+<ul><li>Author credentials visible</li><li>Accurate, detailed information</li><li>Properly sourced claims</li></ul>
+<p><strong>Authoritativeness</strong></p>
+<ul><li>Recognized in the space</li><li>Cited by others</li><li>Industry credentials</li></ul>
+<p><strong>Trustworthiness</strong></p>
+<ul><li>Accurate information</li><li>Transparent about business</li><li>Contact information available</li><li>Privacy policy, terms</li><li>Secure site (HTTPS)</li></ul>
+<h4>Content Depth</h4>
+<ul><li>Comprehensive coverage of topic</li><li>Answers follow-up questions</li><li>Better than top-ranking competitors</li><li>Updated and current</li></ul>
+<h4>User Engagement Signals</h4>
+<ul><li>Time on page</li><li>Bounce rate in context</li><li>Pages per session</li><li>Return visits</li></ul>
+<hr/>
+<h3 id="skillmd-common-issues-by-site-type">Common Issues by Site Type</h3>
+<h4>SaaS/Product Sites</h4>
+<ul><li>Product pages lack content depth</li><li>Blog not integrated with product pages</li><li>Missing comparison/alternative pages</li><li>Feature pages thin on content</li><li>No glossary/educational content</li></ul>
+<h4>E-commerce</h4>
+<ul><li>Thin category pages</li><li>Duplicate product descriptions</li><li>Missing product schema</li><li>Faceted navigation creating duplicates</li><li>Out-of-stock pages mishandled</li></ul>
+<h4>Content/Blog Sites</h4>
+<ul><li>Outdated content not refreshed</li><li>Keyword cannibalization</li><li>No topical clustering</li><li>Poor internal linking</li><li>Missing author pages</li></ul>
+<h4>Multilingual / Multi-Regional Sites</h4>
+<ul><li>Hreflang errors (missing return tags, invalid codes, no self-reference)</li><li>Canonical conflicting with hreflang (cross-locale canonical suppresses indexing)</li><li>Thin locale pages dragging down site-wide quality signal</li><li>Only boilerplate translated, main content identical across locales</li><li>No x-default fallback declared</li><li>Sitemap missing hreflang alternates or missing reciprocal entries</li><li>IP-based redirects hiding content from Googlebot</li><li>Framework locale mode hiding locale from URLs</li></ul>
+<h4>Local Business</h4>
+<ul><li>Inconsistent NAP</li><li>Missing local schema</li><li>No Google Business Profile optimization</li><li>Missing location pages</li><li>No local content</li></ul>
+<hr/>
+<h3 id="skillmd-output-format">Output Format</h3>
+<h4>Audit Report Structure</h4>
+<p><strong>Executive Summary</strong></p>
+<ul><li>Overall health assessment</li><li>Top 3-5 priority issues</li><li>Quick wins identified</li></ul>
+<p><strong>Technical SEO Findings</strong> For each issue:</p>
+<ul><li><strong>Issue</strong>: What's wrong</li><li><strong>Impact</strong>: SEO impact (High/Medium/Low)</li><li><strong>Evidence</strong>: How you found it</li><li><strong>Fix</strong>: Specific recommendation</li><li><strong>Priority</strong>: 1-5 or High/Medium/Low</li></ul>
+<p><strong>On-Page SEO Findings</strong> Same format as above</p>
+<p><strong>Content Findings</strong> Same format as above</p>
+<p><strong>Prioritized Action Plan</strong></p>
+<ol><li>Critical fixes (blocking indexation/ranking)</li><li>High-impact improvements</li><li>Quick wins (easy, immediate benefit)</li><li>Long-term recommendations</li></ol>
+<hr/>
+<h3 id="skillmd-references">References</h3>
+<ul><li><a href="references/ai-writing-detection.md" rel="noopener" target="_blank">AI Writing Detection</a>: Common AI writing patterns to avoid (em dashes, overused phrases, filler words)</li><li><a href="references/international-seo.md" rel="noopener" target="_blank">International SEO</a>: Evidence and sources for hreflang, canonical + i18n, sitemaps, URL structure, and content quality across locales</li><li>For AI search optimization (AEO, GEO, LLMO, AI Overviews), see the <strong>ai-seo</strong> skill</li></ul>
+<hr/>
+<h3 id="skillmd-tools-referenced">Tools Referenced</h3>
+<p><strong>Free Tools</strong></p>
+<ul><li>Google Search Console (essential)</li><li>Google PageSpeed Insights</li><li>Bing Webmaster Tools</li><li>Rich Results Test (<strong>use this for schema validation — it renders JavaScript</strong>)</li><li>Mobile-Friendly Test</li><li>Schema Validator</li></ul>
+<blockquote><strong>Note on schema detection:</strong> <code>web_fetch</code> strips <code>&lt;script&gt;</code> tags (including JSON-LD) and cannot detect JS-injected schema. Use the browser tool, Rich Results Test, or Screaming Frog instead — they render JavaScript and capture dynamically-injected markup. See the Schema Markup Detection Limitation section above.</blockquote>
+<p><strong>Paid Tools</strong> (if available)</p>
+<ul><li>Screaming Frog</li><li>Ahrefs / Semrush</li><li>Sitebulb</li><li>ContentKing</li></ul>
+<hr/>
+<h3 id="skillmd-task-specific-questions">Task-Specific Questions</h3>
+<ol><li>What pages/keywords matter most?</li><li>Do you have Search Console access?</li><li>Any recent changes or migrations?</li><li>Who are your top organic competitors?</li><li>What's your current organic traffic baseline?</li></ol>
+<hr/>
+<h3 id="skillmd-related-skills">Related Skills</h3>
+<ul><li><strong>ai-seo</strong>: For optimizing content for AI search engines (AEO, GEO, LLMO)</li><li><strong>programmatic-seo</strong>: For building SEO pages at scale</li><li><strong>site-architecture</strong>: For page hierarchy, navigation design, and URL structure</li><li><strong>schema-markup</strong>: For implementing structured data</li><li><strong>page-cro</strong>: For optimizing pages for conversion (not just ranking)</li><li><strong>analytics-tracking</strong>: For measuring SEO performance</li></ul></div>
+</section><section class="section" id="source">
+<div class="section-label">Source</div>
+<div class="links-row">
+<a class="link-btn" href="https://github.com/coreyhaines31/marketingskills" rel="noopener" target="_blank">View upstream on GitHub ↑</a>
+<a class="link-btn" href="https://github.com/floomhq/starter/blob/main/skills/seo-audit.json" rel="noopener" target="_blank">View on Floom GitHub ↑</a>
+<a class="link-btn" href="https://skills.sh/coreyhaines31/marketingskills/seo-audit" rel="noopener" target="_blank">View on skills.sh ↑</a>
+</div>
+</section></div></div><section class="final-cta">
+<div>
+<strong>Add this skill to your agent.</strong>
+<span>Installs <code style="background:rgba(255,255,255,0.12);padding:1px 6px;border-radius:4px;color:#fff;font-family:var(--mono);font-size:13px">seo-audit</code> into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+</div>
+<div class="install-cta-wrap install-cta-wrap--final">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --skills seo-audit" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>seo-audit</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills seo-audit</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+</section>
+</main>
+<footer aria-label="Site footer" class="site-footer">
+<div class="site-footer-inner">
+<div class="footer-brand">
+<a class="footer-wordmark" href="../index.html">Floom</a>
+<small>Open source · MIT</small>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Sitemap</div>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../library.html">Skills</a></li>
+<li><a href="../docs.html">Docs</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Resources</div>
+<ul>
+<li><a href="https://github.com/floomhq/starter" rel="noopener" target="_blank">GitHub</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+<li><a href="../terms.html">Terms</a></li>
+<li><a href="https://github.com/floomhq/starter/releases" rel="noopener" target="_blank">Changelog</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Floom · Built with care in Berlin and San Francisco</span>
+<span class="footer-mit">MIT License</span>
+</div>
+</footer>
+<script>
+function copyInstall(btn, cmd) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    const original = btn.dataset.original || btn.textContent;
+    btn.dataset.original = original;
+    btn.classList.add('copied');
+    btn.textContent = 'Copied! Paste in terminal';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
+  });
+}
+function copyCmd() {
+  const t = document.getElementById('cmdText').textContent;
+  const b = document.getElementById('cmdCopy');
+  navigator.clipboard.writeText(t).then(() => {
+    b.classList.add('copied'); b.textContent = 'Copied!';
+    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+<script>
+
+// === Install CTA (Add to your agent button) - copy on click ===
+document.querySelectorAll(".install-cta").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const command = button.dataset.copy;
+    if (!command) return;
+    try {
+      await navigator.clipboard.writeText(command);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = command;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const labelEl = button.querySelector(".install-cta-label");
+    if (labelEl) {
+      const original = labelEl.textContent;
+      labelEl.textContent = "Copied! Paste in terminal";
+      button.classList.add("is-copied");
+      setTimeout(() => {
+        labelEl.textContent = original;
+        button.classList.remove("is-copied");
+      }, 2000);
+    }
+  });
+});
+
+// === TOC active-section highlighting (scroll spy) ===
+(function () {
+  const sections = document.querySelectorAll(".skill-body .section[id], .skill-body .section [id]");
+  const navLinks = document.querySelectorAll(".skill-nav a");
+  if (!sections.length || !navLinks.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector('.skill-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add("active");
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
+  sections.forEach((s) => observer.observe(s));
+})();
+</script></body>
+</html>

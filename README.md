@@ -105,8 +105,8 @@ Individual skills retain their own licenses. See [licenses/README.md](licenses/R
 
 ## Contributors
 
-- [Federico de Ponte](https://x.com/fede_vault)
-- Adam Beaudoin
+- [Federico de Ponte](https://x.com/fede_vault), Founder, Floom
+- Adam Beaudoin, Founder, Floom
 
 Pull requests welcome.
 
@@ -116,3 +116,4 @@ Pull requests welcome.
 - npm: [@floomhq/starter](https://www.npmjs.com/package/@floomhq/starter)
 - Library: [Browse all 65 skills](https://starter.floom.dev/library)
 - Docs: [starter.floom.dev/docs](https://starter.floom.dev/docs)
+- X: [@floomhq](https://x.com/floomhq)

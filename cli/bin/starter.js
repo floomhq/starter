@@ -6,7 +6,7 @@
  *
  * Usage:
  *   npx @floomhq/starter install --profiles core,dev
- *   npx @floomhq/starter install --skills pr-review,task-brief
+ *   npx @floomhq/starter install --skills find-skills,skill-creator
  *   npx @floomhq/starter install --all
  *   npx @floomhq/starter init
  *   npx @floomhq/starter list
@@ -22,7 +22,7 @@
 import { install, remove, uninstall, update, list } from "../src/install.js";
 import { runInit } from "../src/init-interactive.js";
 
-const PACKAGE_VERSION = "0.2.4";
+const PACKAGE_VERSION = "0.2.5";
 
 function usage() {
   return `
@@ -57,7 +57,7 @@ function usage() {
 
   Examples:
     npx @floomhq/starter install --profiles core,dev
-    npx @floomhq/starter install --skills pr-review,task-brief --harness claude
+    npx @floomhq/starter install --skills find-skills,skill-creator --harness claude
     npx @floomhq/starter install --all
     npx @floomhq/starter install --global --profiles core
     npx @floomhq/starter init

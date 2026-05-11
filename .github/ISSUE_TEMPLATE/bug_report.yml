@@ -16,7 +16,7 @@ body:
     attributes:
       label: Floom Starter version
       description: Output of `npx @floomhq/starter --version`
-      placeholder: 0.2.4
+      placeholder: 0.2.5
     validations:
       required: true
   - type: textarea

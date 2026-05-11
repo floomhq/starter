@@ -37,7 +37,7 @@ npx @floomhq/starter install --profiles core
 npx @floomhq/starter install --profiles core,dev,writing
 
 # Install specific skills
-npx @floomhq/starter install --skills pr-review,task-brief
+npx @floomhq/starter install --skills find-skills,skill-creator
 
 # Install everything
 npx @floomhq/starter install --all
@@ -135,7 +135,7 @@ npx @floomhq/starter uninstall
 npx @floomhq/starter remove --all
 
 # Remove specific skills
-npx @floomhq/starter remove --skills pr-review,brand-voice
+npx @floomhq/starter remove --skills find-skills,skill-creator
 
 # Remove an entire profile
 npx @floomhq/starter remove --profiles dev
@@ -153,9 +153,9 @@ Lists every skill installed via Floom in the current scope, which profile it bel
 
 ## After install
 
-Ask your agent: *"review the changes in this branch"*: the `pr-review` skill fires automatically.
+Ask your agent: *"find a skill for this task"*: the `find-skills` skill searches your installed skills.
 
-Or: *"find a skill for this task"*: `local-find-skills` searches your installed skills.
+Or: *"write a plan for this work"*: the `workplan` skill guides the planning flow.
 
 ## Supported agents
 

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#fafaf7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<title>playwright-best-practices: Floom Starter Pack skill</title>
+<meta content="Official Playwright end-to-end testing patterns and best practices." name="description"/>
+<!-- Open Graph -->
+<meta content="Floom Starter Pack" property="og:site_name"/>
+<meta content="article" property="og:type"/>
+<meta content="playwright-best-practices: Floom Starter Pack skill" property="og:title"/>
+<meta content="Official Playwright end-to-end testing patterns and best practices." property="og:description"/>
+<meta content="https://starter.floom.dev/skill/playwright-best-practices" property="og:url"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="playwright-best-practices: Floom Starter Pack skill" name="twitter:title"/>
+<meta content="Official Playwright end-to-end testing patterns and best practices." name="twitter:description"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="@floomhq" name="twitter:creator"/>
+<meta content="@floomhq" name="twitter:site"/>
+<!-- Favicon -->
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Canonical -->
+<link href="https://starter.floom.dev/skill/playwright-best-practices" rel="canonical"/>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "playwright-best-practices",
+  "description": "Official Playwright end-to-end testing patterns and best practices.",
+  "codeRepository": "https://github.com/currents-dev/playwright-best-practices-skill",
+  "license": "MIT",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "Floom Starter Pack",
+    "url": "https://starter.floom.dev/"
+  }
+}
+</script>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #050505;
+  --muted: #333333;
+  --dim: #6b6b6b;
+  --blue: #0094ff;
+  --blue-soft: #bfe6ff;
+  --blue-pale: #eaf7ff;
+  --line: 2px solid var(--ink);
+  --line-light: 1px solid #e0dfdb;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scrollbar-gutter: stable; overflow-y: scroll; }
+body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+.page { width: min(100%, 1100px); margin: 0 auto; padding: 44px 70px 72px; }
+
+.nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
+.nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
+.wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
+.wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+.wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; max-width: 100%; }
+.nav-links a { color: inherit; text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+
+@media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
+@media (max-width: 980px) { .page { padding: 30px 22px 52px; } }
+@media (max-width: 640px) { .page { padding: 22px 16px 44px; } .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--dim); text-decoration: none; margin-top: 24px; margin-bottom: 8px; }
+.back-link:hover { color: var(--ink); }
+
+.hero { margin-top: 8px; padding: 28px 0 32px; border-bottom: var(--line-light); }
+.hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 14px; word-break: break-word; }
+.hero-desc { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 18px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
+.badge.mute { color: var(--muted); background: #fff; border-color: #ddd; }
+
+.section { margin-top: 40px; }
+.section-label { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+.install-btn-wrap { position: relative; display: inline-block; }
+.install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.install-btn.copied { background: var(--blue); border-color: var(--blue); }
+.install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
+.install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.install-tooltip-cmd { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; word-break: break-all; }
+
+.cmd-block { display: flex; align-items: stretch; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; max-width: 720px; margin-top: 8px; }
+.cmd-text { flex: 1; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); padding: 12px 14px; word-break: break-all; line-height: 1.55; }
+.cmd-copy { flex-shrink: 0; background: var(--ink); color: #fff; border: none; cursor: pointer; padding: 12px 18px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; transition: background 0.15s; text-transform: uppercase; }
+.cmd-copy:hover { background: #333; }
+.cmd-copy.copied { background: var(--blue); }
+
+.fires-block { font-size: 16px; color: var(--ink); line-height: 1.6; background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 16px 18px; max-width: 720px; }
+
+.files-list { display: flex; flex-direction: column; gap: 6px; max-width: 720px; }
+.file-row { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; padding: 8px 12px; background: #fff; border: 1px solid #e0dfdb; border-radius: 8px; }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; }
+.file-size { color: var(--muted); flex-shrink: 0; }
+.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+
+.md-block { font-size: 15px; line-height: 1.7; color: var(--ink); background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 22px 26px; max-width: 860px; }
+.md-block h2, .md-block h3, .md-block h4 { font-weight: 700; margin: 18px 0 8px; letter-spacing: -0.01em; }
+.md-block h2 { font-size: 22px; }
+.md-block h3 { font-size: 18px; }
+.md-block h4 { font-size: 16px; }
+.md-block p { margin: 8px 0; }
+.md-block ul, .md-block ol { margin: 8px 0 8px 22px; }
+.md-block li { margin: 3px 0; }
+.md-block code { font-family: var(--mono); font-size: 13px; background: #f0efeb; padding: 1px 5px; border-radius: 3px; }
+.md-block pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 10px 0; }
+.md-block pre code { background: none; padding: 0; }
+.md-block a { color: var(--blue); }
+.md-block blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 14px; color: var(--muted); margin: 12px 0; }
+.md-block hr { border: none; border-top: 1px solid #e0dfdb; margin: 14px 0; }
+
+.links-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+.link-btn { font-family: var(--mono); font-size: 12px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.link-btn:hover { color: var(--ink); }
+
+.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
+
+.footer-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; border: var(--line); border-radius: 28px; background: var(--blue); color: #ffffff; padding: 28px; }
+.footer-cta h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.footer-cta p { color: rgba(255,255,255,0.92); margin-top: 8px; font-size: 15px; font-weight: 500; }
+.footer-cta .button { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #ffffff; border-radius: 14px; background: #ffffff; color: var(--ink); padding: 14px 20px; font: 900 13px/1 var(--sans); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: box-shadow 150ms ease, transform 150ms ease; }
+.footer-cta .button:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.22); transform: translateY(-2px); }
+@media (max-width: 860px) { .footer-cta { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 36px; } }
+
+.site-footer { border-top: 2px solid var(--ink); background: var(--paper); padding: 48px 70px 0; margin-top: 56px; }
+.site-footer-inner { width: min(100%, 1100px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+.footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
+.footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
+.footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom { width: min(100%, 1100px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
+.footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
+@media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
+@media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
+
+
+/* === Skill page TOC layout (mirrors docs.html .doc-layout) === */
+.skill-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 24px;
+  align-items: flex-start;
+}
+.skill-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-self: start;
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+.skill-nav-label {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+}
+.skill-nav a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 14px;
+  background: transparent;
+  color: #4b4b4b;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: background 120ms ease, color 120ms ease;
+}
+.skill-nav a.is-sub { padding-left: 20px; font-weight: 600; color: #5b5b5b; font-size: 12.5px; }
+.skill-nav a.is-sub-2 { padding-left: 32px; font-weight: 500; color: #6b6b6b; font-size: 12px; }
+.skill-nav a:hover, .skill-nav a.active {
+  background: var(--blue-pale);
+  color: var(--ink);
+}
+.skill-body { display: block; min-width: 0; }
+.skill-body .section { scroll-margin-top: 36px; }
+
+@media (max-width: 980px) {
+  .skill-layout { grid-template-columns: 1fr; gap: 28px; }
+  .skill-nav {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid rgba(5,5,5,0.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+  }
+  .skill-nav-label { width: 100%; padding-left: 4px; }
+  .skill-nav a { padding: 6px 10px; font-size: 12px; }
+  .skill-nav a.is-sub, .skill-nav a.is-sub-2 { padding-left: 10px; }
+}
+
+/* === Install CTA + tooltip (from index.html) === */
+.install-cta-wrap { position: relative; display: inline-block; }
+.install-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 14px 22px;
+  font: 900 13px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  gap: 8px;
+}
+.install-cta:hover, .install-cta:focus-visible {
+  box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+  transform: translateY(-1px);
+  outline: none;
+}
+.install-cta:hover .install-cta-icon,
+.install-cta:focus-visible .install-cta-icon {
+  transform: translateY(2px);
+}
+.install-cta-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied .install-cta-label::after { content: " \2713"; }
+.install-cta-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 360px;
+  max-width: 420px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
+  transform: translateY(-4px);
+  z-index: 100;
+  box-shadow: 0 14px 30px rgba(5,5,5,0.18);
+}
+.install-cta:hover .install-cta-tooltip,
+.install-cta:focus-visible .install-cta-tooltip,
+.install-cta:focus-within .install-cta-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
+}
+
+/* Connector arrow from button up to tooltip */
+.install-cta-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  border-top: 2px solid var(--ink);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+/* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
+@media (hover: none) {
+  .install-cta-tooltip { display: none; }
+}
+.tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
+.tooltip-cmd {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.tooltip-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.install-cta--final { background: #ffffff; color: var(--ink); }
+.install-cta--final:hover, .install-cta--final:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
+}
+.install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+.install-cta-wrap--final .install-cta-tooltip { left: auto; right: 0; }
+
+@media (max-width: 640px) {
+  .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
+}
+
+/* === Final CTA (mirrors index.html .final-cta dark surface) === */
+.final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 56px;
+  border: var(--line);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 32px 34px;
+}
+.final-cta strong {
+  display: block;
+  max-width: 620px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.final-cta span { display: block; margin-top: 12px; color: #d6d6d6; font-size: 15px; font-weight: 550; }
+@media (max-width: 860px) {
+  .final-cta { flex-direction: column; align-items: flex-start; }
+  .final-cta strong { font-size: 24px; }
+}
+
+/* skill-cta-label-fix */
+.final-cta .install-cta--final .install-cta-label { color: var(--ink); }
+.final-cta .install-cta--final .install-cta-icon { color: var(--ink); }
+.final-cta .install-cta--final.is-copied .install-cta-label,
+.final-cta .install-cta--final.is-copied .install-cta-icon { color: #ffffff; }
+.final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+</style>
+</head>
+<body>
+<main class="page">
+<nav aria-label="Main navigation" class="nav">
+<a class="wordmark" href="../index.html">
+<strong>Floom</strong>
+<span>Open source · MIT</span>
+</a>
+<div class="nav-right">
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a aria-current="page" href="../library.html">Skills</a>
+<a href="../docs.html">Docs</a>
+<a href="../about.html">About</a>
+</div>
+</div>
+</nav>
+<a class="back-link" href="../library.html">← Back to Skills</a>
+
+
+
+
+
+
+<div class="skill-layout"><nav aria-label="On this page" class="skill-nav">
+<span class="skill-nav-label">On this page</span>
+<a href="#overview">Overview</a>
+<a href="#install">Install</a>
+<a href="#fires-when">Fires when</a>
+<a href="#files">Files</a>
+<a href="#skill-md">SKILL.md</a>
+<a class="is-sub" href="#skillmd-playwright-best-practices">Playwright Best Practices</a>
+<a class="is-sub-2" href="#skillmd-activity-based-reference-guide">Activity-Based Reference Guide</a>
+<a class="is-sub-2" href="#skillmd-quick-decision-tree">Quick Decision Tree</a>
+<a class="is-sub-2" href="#skillmd-test-validation-loop">Test Validation Loop</a>
+<a href="#source">Source</a>
+</nav><div class="skill-body"><header class="hero" id="overview">
+<h1>playwright-best-practices</h1>
+<p class="hero-desc">Official Playwright end-to-end testing patterns and best practices.</p>
+<div class="hero-meta">
+<span class="badge">↓ 37.1K on skills.sh</span><span class="badge mute">currents-dev</span><span class="badge mute">MIT</span>
+<span class="profile-tag">dev</span>
+</div>
+</header><section class="section" id="install">
+<div class="section-label">Install</div>
+<div class="install-cta-wrap">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --skills playwright-best-practices" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>playwright-best-practices</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills playwright-best-practices</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+<div class="cmd-block">
+<div class="cmd-text" id="cmdText">npx @floomhq/starter install --skills playwright-best-practices</div>
+<button class="cmd-copy" id="cmdCopy" onclick="copyCmd()">Copy</button>
+</div>
+</section><section class="section" id="fires-when">
+<div class="section-label">Fires when</div>
+<div class="fires-block">any Playwright/E2E test work</div>
+</section><section class="section" id="files">
+<div class="section-label">Files</div>
+<div class="files-list"><div class="file-row"><span class="file-name">.agnix.toml</span><span class="file-size">35 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">.github</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">LICENSE.md</span><span class="file-size">1,073 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">README.md</span><span class="file-size">10,123 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">26,306 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">advanced</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">architecture</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">browser-apis</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">core</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">debugging</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">frameworks</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">infrastructure-ci-cd</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">testing-patterns</span><span class="file-size"></span><span class="file-type">support</span></div></div>
+</section><section class="section" id="skill-md">
+<div class="section-label">SKILL.md</div>
+<div class="md-block"><h2 id="skillmd-playwright-best-practices">Playwright Best Practices</h2>
+<p>This skill provides comprehensive guidance for all aspects of Playwright test development, from writing new tests to debugging and maintaining existing test suites.</p>
+<h3 id="skillmd-activity-based-reference-guide">Activity-Based Reference Guide</h3>
+<p>Consult these references based on what you're doing:</p>
+<h4>Writing New Tests</h4>
+<p><strong>When to use</strong>: Creating new test files, writing test cases, implementing test scenarios</p>
+<p>| Activity                            | Reference Files                                                                                                                               | | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | | <strong>Writing E2E tests</strong>               | <a href="core/test-suite-structure.md" rel="noopener" target="_blank">test-suite-structure.md</a>, <a href="core/locators.md" rel="noopener" target="_blank">locators.md</a>, <a href="core/assertions-waiting.md" rel="noopener" target="_blank">assertions-waiting.md</a> | | <strong>Writing component tests</strong>         | <a href="testing-patterns/component-testing.md" rel="noopener" target="_blank">component-testing.md</a>, <a href="core/test-suite-structure.md" rel="noopener" target="_blank">test-suite-structure.md</a>                        | | <strong>Writing API tests</strong>               | <a href="testing-patterns/api-testing.md" rel="noopener" target="_blank">api-testing.md</a>, <a href="core/test-suite-structure.md" rel="noopener" target="_blank">test-suite-structure.md</a>                                    | | <strong>Writing GraphQL tests</strong>           | <a href="testing-patterns/graphql-testing.md" rel="noopener" target="_blank">graphql-testing.md</a>, <a href="testing-patterns/api-testing.md" rel="noopener" target="_blank">api-testing.md</a>                                  | | <strong>Writing visual regression tests</strong> | <a href="testing-patterns/visual-regression.md" rel="noopener" target="_blank">visual-regression.md</a>, <a href="testing-patterns/canvas-webgl.md" rel="noopener" target="_blank">canvas-webgl.md</a>                            | | <strong>Structuring test code with POM</strong>  | <a href="core/page-object-model.md" rel="noopener" target="_blank">page-object-model.md</a>, <a href="core/test-suite-structure.md" rel="noopener" target="_blank">test-suite-structure.md</a>                                    | | <strong>Setting up test data/fixtures</strong>   | <a href="core/fixtures-hooks.md" rel="noopener" target="_blank">fixtures-hooks.md</a>, <a href="core/test-data.md" rel="noopener" target="_blank">test-data.md</a>                                                                | | <strong>Handling authentication</strong>         | <a href="advanced/authentication.md" rel="noopener" target="_blank">authentication.md</a>, <a href="advanced/authentication-flows.md" rel="noopener" target="_blank">authentication-flows.md</a>                                  | | <strong>Testing date/time features</strong>      | <a href="advanced/clock-mocking.md" rel="noopener" target="_blank">clock-mocking.md</a>                                                                                                 | | <strong>Testing file upload/download</strong>    | <a href="testing-patterns/file-operations.md" rel="noopener" target="_blank">file-operations.md</a>, <a href="testing-patterns/file-upload-download.md" rel="noopener" target="_blank">file-upload-download.md</a>                | | <strong>Testing forms/validation</strong>        | <a href="testing-patterns/forms-validation.md" rel="noopener" target="_blank">forms-validation.md</a>                                                                                   | | <strong>Testing drag and drop</strong>           | <a href="testing-patterns/drag-drop.md" rel="noopener" target="_blank">drag-drop.md</a>                                                                                                 | | <strong>Testing accessibility</strong>           | <a href="testing-patterns/accessibility.md" rel="noopener" target="_blank">accessibility.md</a>                                                                                         | | <strong>Testing security (XSS, CSRF)</strong>    | <a href="testing-patterns/security-testing.md" rel="noopener" target="_blank">security-testing.md</a>                                                                                   | | <strong>Using test annotations</strong>          | <a href="core/annotations.md" rel="noopener" target="_blank">annotations.md</a>                                                                                                         | | <strong>Using test tags</strong>                 | <a href="core/test-tags.md" rel="noopener" target="_blank">test-tags.md</a>                                                                                                             | | <strong>Testing iframes</strong>                 | <a href="browser-apis/iframes.md" rel="noopener" target="_blank">iframes.md</a>                                                                                                         | | <strong>Testing canvas/WebGL</strong>            | <a href="testing-patterns/canvas-webgl.md" rel="noopener" target="_blank">canvas-webgl.md</a>                                                                                           | | <strong>Internationalization (i18n)</strong>     | <a href="testing-patterns/i18n.md" rel="noopener" target="_blank">i18n.md</a>                                                                                                           | | <strong>Testing Electron apps</strong>           | <a href="testing-patterns/electron.md" rel="noopener" target="_blank">electron.md</a>                                                                                                   | | <strong>Testing browser extensions</strong>      | <a href="testing-patterns/browser-extensions.md" rel="noopener" target="_blank">browser-extensions.md</a>                                                                               |</p>
+<h4>Mobile &amp; Responsive Testing</h4>
+<p><strong>When to use</strong>: Testing mobile devices, touch interactions, responsive layouts</p>
+<p>| Activity                        | Reference Files                                                                  | | ------------------------------- | -------------------------------------------------------------------------------- | | <strong>Device emulation</strong>            | <a href="advanced/mobile-testing.md" rel="noopener" target="_blank">mobile-testing.md</a>                                  | | <strong>Touch gestures (swipe, tap)</strong> | <a href="advanced/mobile-testing.md" rel="noopener" target="_blank">mobile-testing.md</a>                                  | | <strong>Viewport/breakpoint testing</strong> | <a href="advanced/mobile-testing.md" rel="noopener" target="_blank">mobile-testing.md</a>                                  | | <strong>Mobile-specific UI</strong>          | <a href="advanced/mobile-testing.md" rel="noopener" target="_blank">mobile-testing.md</a>, <a href="core/locators.md" rel="noopener" target="_blank">locators.md</a> |</p>
+<h4>Real-Time &amp; Browser APIs</h4>
+<p><strong>When to use</strong>: Testing WebSockets, geolocation, permissions, multi-tab flows</p>
+<p>| Activity                        | Reference Files                                                                          | | ------------------------------- | ---------------------------------------------------------------------------------------- | | <strong>WebSocket/real-time testing</strong> | <a href="browser-apis/websockets.md" rel="noopener" target="_blank">websockets.md</a>                                              | | <strong>Geolocation mocking</strong>         | <a href="browser-apis/browser-apis.md" rel="noopener" target="_blank">browser-apis.md</a>                                          | | <strong>Permission handling</strong>         | <a href="browser-apis/browser-apis.md" rel="noopener" target="_blank">browser-apis.md</a>                                          | | <strong>Clipboard testing</strong>           | <a href="browser-apis/browser-apis.md" rel="noopener" target="_blank">browser-apis.md</a>                                          | | <strong>Camera/microphone mocking</strong>   | <a href="browser-apis/browser-apis.md" rel="noopener" target="_blank">browser-apis.md</a>                                          | | <strong>Multi-tab/popup flows</strong>       | <a href="advanced/multi-context.md" rel="noopener" target="_blank">multi-context.md</a>                                            | | <strong>OAuth popup handling</strong>        | <a href="advanced/third-party.md" rel="noopener" target="_blank">third-party.md</a>, <a href="advanced/multi-context.md" rel="noopener" target="_blank">multi-context.md</a> |</p>
+<h4>Debugging &amp; Troubleshooting</h4>
+<p><strong>When to use</strong>: Test failures, element not found, timeouts, unexpected behavior</p>
+<p>| Activity                                          | Reference Files                                                                                                                                | | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | | <strong>Debugging test failures</strong>                       | <a href="debugging/debugging.md" rel="noopener" target="_blank">debugging.md</a>, <a href="core/assertions-waiting.md" rel="noopener" target="_blank">assertions-waiting.md</a>                                                    | | <strong>Fixing flaky tests</strong>                            | <a href="debugging/flaky-tests.md" rel="noopener" target="_blank">flaky-tests.md</a>, <a href="debugging/debugging.md" rel="noopener" target="_blank">debugging.md</a>, <a href="core/assertions-waiting.md" rel="noopener" target="_blank">assertions-waiting.md</a>        | | <strong>Debugging flaky parallel runs</strong>                 | <a href="debugging/flaky-tests.md" rel="noopener" target="_blank">flaky-tests.md</a>, <a href="infrastructure-ci-cd/performance.md" rel="noopener" target="_blank">performance.md</a>, <a href="core/fixtures-hooks.md" rel="noopener" target="_blank">fixtures-hooks.md</a> | | <strong>Ensuring test isolation / avoiding state leak</strong> | <a href="debugging/flaky-tests.md" rel="noopener" target="_blank">flaky-tests.md</a>, <a href="core/fixtures-hooks.md" rel="noopener" target="_blank">fixtures-hooks.md</a>, <a href="infrastructure-ci-cd/performance.md" rel="noopener" target="_blank">performance.md</a> | | <strong>Fixing selector issues</strong>                        | <a href="core/locators.md" rel="noopener" target="_blank">locators.md</a>, <a href="debugging/debugging.md" rel="noopener" target="_blank">debugging.md</a>                                                                        | | <strong>Investigating timeout issues</strong>                  | <a href="core/assertions-waiting.md" rel="noopener" target="_blank">assertions-waiting.md</a>, <a href="debugging/debugging.md" rel="noopener" target="_blank">debugging.md</a>                                                    | | <strong>Using trace viewer</strong>                            | <a href="debugging/debugging.md" rel="noopener" target="_blank">debugging.md</a>                                                                                                         | | <strong>Debugging race conditions</strong>                     | <a href="debugging/flaky-tests.md" rel="noopener" target="_blank">flaky-tests.md</a>, <a href="debugging/debugging.md" rel="noopener" target="_blank">debugging.md</a>, <a href="core/assertions-waiting.md" rel="noopener" target="_blank">assertions-waiting.md</a>        | | <strong>Debugging console/JS errors</strong>                   | <a href="debugging/console-errors.md" rel="noopener" target="_blank">console-errors.md</a>, <a href="debugging/debugging.md" rel="noopener" target="_blank">debugging.md</a>                                                       |</p>
+<h4>Error &amp; Edge Case Testing</h4>
+<p><strong>When to use</strong>: Testing error states, offline mode, network failures, validation</p>
+<p>| Activity                       | Reference Files                                                                                       | | ------------------------------ | ----------------------------------------------------------------------------------------------------- | | <strong>Error boundary testing</strong>     | <a href="debugging/error-testing.md" rel="noopener" target="_blank">error-testing.md</a>                                                        | | <strong>Network failure simulation</strong> | <a href="debugging/error-testing.md" rel="noopener" target="_blank">error-testing.md</a>, <a href="advanced/network-advanced.md" rel="noopener" target="_blank">network-advanced.md</a>   | | <strong>Offline mode testing</strong>       | <a href="debugging/error-testing.md" rel="noopener" target="_blank">error-testing.md</a>, <a href="browser-apis/service-workers.md" rel="noopener" target="_blank">service-workers.md</a> | | <strong>Service worker testing</strong>     | <a href="browser-apis/service-workers.md" rel="noopener" target="_blank">service-workers.md</a>                                                 | | <strong>Loading state testing</strong>      | <a href="debugging/error-testing.md" rel="noopener" target="_blank">error-testing.md</a>                                                        | | <strong>Form validation testing</strong>    | <a href="debugging/error-testing.md" rel="noopener" target="_blank">error-testing.md</a>                                                        |</p>
+<h4>Multi-User &amp; Collaboration Testing</h4>
+<p><strong>When to use</strong>: Testing features involving multiple users, roles, or real-time collaboration</p>
+<p>| Activity                       | Reference Files                                                                      | | ------------------------------ | ------------------------------------------------------------------------------------ | | <strong>Multiple users in one test</strong> | <a href="advanced/multi-user.md" rel="noopener" target="_blank">multi-user.md</a>                                              | | <strong>Real-time collaboration</strong>    | <a href="advanced/multi-user.md" rel="noopener" target="_blank">multi-user.md</a>, <a href="browser-apis/websockets.md" rel="noopener" target="_blank">websockets.md</a> | | <strong>Role-based access testing</strong>  | <a href="advanced/multi-user.md" rel="noopener" target="_blank">multi-user.md</a>                                              | | <strong>Concurrent action testing</strong>  | <a href="advanced/multi-user.md" rel="noopener" target="_blank">multi-user.md</a>                                              |</p>
+<h4>Architecture Decisions</h4>
+<p><strong>When to use</strong>: Choosing test patterns, deciding between approaches, planning test architecture</p>
+<p>| Activity                     | Reference Files                                           | | ---------------------------- | --------------------------------------------------------- | | <strong>POM vs fixtures decision</strong> | <a href="architecture/pom-vs-fixtures.md" rel="noopener" target="_blank">pom-vs-fixtures.md</a>     | | <strong>Test type selection</strong>      | <a href="architecture/test-architecture.md" rel="noopener" target="_blank">test-architecture.md</a> | | <strong>Mock vs real services</strong>    | <a href="architecture/when-to-mock.md" rel="noopener" target="_blank">when-to-mock.md</a>           | | <strong>Test suite structure</strong>     | <a href="core/test-suite-structure.md" rel="noopener" target="_blank">test-suite-structure.md</a>   |</p>
+<h4>Framework-Specific Testing</h4>
+<p><strong>When to use</strong>: Testing React, Angular, Vue, or Next.js applications</p>
+<p>| Activity                  | Reference Files                     | | ------------------------- | ----------------------------------- | | <strong>Testing React apps</strong>    | <a href="frameworks/react.md" rel="noopener" target="_blank">react.md</a>     | | <strong>Testing Angular apps</strong>  | <a href="frameworks/angular.md" rel="noopener" target="_blank">angular.md</a> | | <strong>Testing Vue/Nuxt apps</strong> | <a href="frameworks/vue.md" rel="noopener" target="_blank">vue.md</a>         | | <strong>Testing Next.js apps</strong>  | <a href="frameworks/nextjs.md" rel="noopener" target="_blank">nextjs.md</a>   |</p>
+<h4>Refactoring &amp; Maintenance</h4>
+<p><strong>When to use</strong>: Improving existing tests, code review, reducing duplication</p>
+<p>| Activity                             | Reference Files                                                                                            | | ------------------------------------ | ---------------------------------------------------------------------------------------------------------- | | <strong>Refactoring to Page Object Model</strong> | <a href="core/page-object-model.md" rel="noopener" target="_blank">page-object-model.md</a>, <a href="core/test-suite-structure.md" rel="noopener" target="_blank">test-suite-structure.md</a> | | <strong>Improving test organization</strong>      | <a href="core/test-suite-structure.md" rel="noopener" target="_blank">test-suite-structure.md</a>, <a href="core/page-object-model.md" rel="noopener" target="_blank">page-object-model.md</a> | | <strong>Extracting common setup/teardown</strong> | <a href="core/fixtures-hooks.md" rel="noopener" target="_blank">fixtures-hooks.md</a>                                                                | | <strong>Replacing brittle selectors</strong>      | <a href="core/locators.md" rel="noopener" target="_blank">locators.md</a>                                                                            | | <strong>Removing explicit waits</strong>          | <a href="core/assertions-waiting.md" rel="noopener" target="_blank">assertions-waiting.md</a>                                                        | | <strong>Creating test data factories</strong>     | <a href="core/test-data.md" rel="noopener" target="_blank">test-data.md</a>                                                                          | | <strong>Configuration setup</strong>              | <a href="core/configuration.md" rel="noopener" target="_blank">configuration.md</a>                                                                  |</p>
+<h4>Infrastructure &amp; Configuration</h4>
+<p><strong>When to use</strong>: Setting up projects, configuring CI/CD, optimizing performance</p>
+<p>| Activity                                | Reference Files                                                                                                          | | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | | <strong>Configuring Playwright project</strong>      | <a href="core/configuration.md" rel="noopener" target="_blank">configuration.md</a>, <a href="core/projects-dependencies.md" rel="noopener" target="_blank">projects-dependencies.md</a>                     | | <strong>Setting up CI/CD pipelines</strong>          | <a href="infrastructure-ci-cd/ci-cd.md" rel="noopener" target="_blank">ci-cd.md</a>, <a href="infrastructure-ci-cd/github-actions.md" rel="noopener" target="_blank">github-actions.md</a>                   | | <strong>GitHub Actions setup</strong>                | <a href="infrastructure-ci-cd/github-actions.md" rel="noopener" target="_blank">github-actions.md</a>                                                              | | <strong>GitLab CI setup</strong>                     | <a href="infrastructure-ci-cd/gitlab.md" rel="noopener" target="_blank">gitlab.md</a>                                                                              | | <strong>Other CI providers</strong>                  | <a href="infrastructure-ci-cd/other-providers.md" rel="noopener" target="_blank">other-providers.md</a>                                                            | | <strong>Docker/container setup</strong>              | <a href="infrastructure-ci-cd/docker.md" rel="noopener" target="_blank">docker.md</a>                                                                              | | <strong>Global setup &amp; teardown</strong>             | <a href="core/global-setup.md" rel="noopener" target="_blank">global-setup.md</a>                                                                                  | | <strong>Project dependencies</strong>                | <a href="core/projects-dependencies.md" rel="noopener" target="_blank">projects-dependencies.md</a>                                                                | | <strong>Optimizing test performance</strong>         | <a href="infrastructure-ci-cd/performance.md" rel="noopener" target="_blank">performance.md</a>, <a href="core/test-suite-structure.md" rel="noopener" target="_blank">test-suite-structure.md</a>           | | <strong>Configuring parallel execution</strong>      | <a href="infrastructure-ci-cd/parallel-sharding.md" rel="noopener" target="_blank">parallel-sharding.md</a>, <a href="infrastructure-ci-cd/performance.md" rel="noopener" target="_blank">performance.md</a> | | <strong>Isolating test data between workers</strong> | <a href="core/fixtures-hooks.md" rel="noopener" target="_blank">fixtures-hooks.md</a>, <a href="infrastructure-ci-cd/performance.md" rel="noopener" target="_blank">performance.md</a>                       | | <strong>Test coverage</strong>                       | <a href="infrastructure-ci-cd/test-coverage.md" rel="noopener" target="_blank">test-coverage.md</a>                                                                | | <strong>Test reporting/artifacts</strong>            | <a href="infrastructure-ci-cd/reporting.md" rel="noopener" target="_blank">reporting.md</a>                                                                        |</p>
+<h4>Advanced Patterns</h4>
+<p><strong>When to use</strong>: Complex scenarios, API mocking, network interception</p>
+<p>| Activity                             | Reference Files                                                                                              | | ------------------------------------ | ------------------------------------------------------------------------------------------------------------ | | <strong>Mocking API responses</strong>            | <a href="core/test-suite-structure.md" rel="noopener" target="_blank">test-suite-structure.md</a>, <a href="advanced/network-advanced.md" rel="noopener" target="_blank">network-advanced.md</a> | | <strong>Network interception</strong>             | <a href="advanced/network-advanced.md" rel="noopener" target="_blank">network-advanced.md</a>, <a href="core/assertions-waiting.md" rel="noopener" target="_blank">assertions-waiting.md</a>     | | <strong>GraphQL mocking</strong>                  | <a href="advanced/network-advanced.md" rel="noopener" target="_blank">network-advanced.md</a>                                                          | | <strong>HAR recording/playback</strong>           | <a href="advanced/network-advanced.md" rel="noopener" target="_blank">network-advanced.md</a>                                                          | | <strong>Custom fixtures</strong>                  | <a href="core/fixtures-hooks.md" rel="noopener" target="_blank">fixtures-hooks.md</a>                                                                  | | <strong>Advanced waiting strategies</strong>      | <a href="core/assertions-waiting.md" rel="noopener" target="_blank">assertions-waiting.md</a>                                                          | | <strong>OAuth/SSO mocking</strong>                | <a href="advanced/third-party.md" rel="noopener" target="_blank">third-party.md</a>, <a href="advanced/multi-context.md" rel="noopener" target="_blank">multi-context.md</a>                     | | <strong>Payment gateway mocking</strong>          | <a href="advanced/third-party.md" rel="noopener" target="_blank">third-party.md</a>                                                                    | | <strong>Email/SMS verification mocking</strong>   | <a href="advanced/third-party.md" rel="noopener" target="_blank">third-party.md</a>                                                                    | | <strong>Failing on console errors</strong>        | <a href="debugging/console-errors.md" rel="noopener" target="_blank">console-errors.md</a>                                                             | | <strong>Security testing (XSS, CSRF)</strong>     | <a href="testing-patterns/security-testing.md" rel="noopener" target="_blank">security-testing.md</a>                                                  | | <strong>Performance budgets &amp; Web Vitals</strong> | <a href="testing-patterns/performance-testing.md" rel="noopener" target="_blank">performance-testing.md</a>                                            | | <strong>Lighthouse integration</strong>           | <a href="testing-patterns/performance-testing.md" rel="noopener" target="_blank">performance-testing.md</a>                                            | | <strong>Test annotations (skip, fixme)</strong>   | <a href="core/annotations.md" rel="noopener" target="_blank">annotations.md</a>                                                                        | | <strong>Test tags (@smoke, @fast)</strong>        | <a href="core/test-tags.md" rel="noopener" target="_blank">test-tags.md</a>                                                                            | | <strong>Test steps for reporting</strong>         | <a href="core/annotations.md" rel="noopener" target="_blank">annotations.md</a>                                                                        |</p>
+<h3 id="skillmd-quick-decision-tree">Quick Decision Tree</h3>
+<pre><code class="lang-">What are you doing?
+│
+├─ Writing a new test?
+│  ├─ E2E test → core/test-suite-structure.md, core/locators.md, core/assertions-waiting.md
+│  ├─ Component test → testing-patterns/component-testing.md
+│  ├─ API test → testing-patterns/api-testing.md, core/test-suite-structure.md
+│  ├─ GraphQL test → testing-patterns/graphql-testing.md
+│  ├─ Visual regression → testing-patterns/visual-regression.md
+│  ├─ Visual/canvas test → testing-patterns/canvas-webgl.md, core/test-suite-structure.md
+│  ├─ Accessibility test → testing-patterns/accessibility.md
+│  ├─ Mobile/responsive test → advanced/mobile-testing.md
+│  ├─ i18n/locale test → testing-patterns/i18n.md
+│  ├─ Electron app test → testing-patterns/electron.md
+│  ├─ Browser extension test → testing-patterns/browser-extensions.md
+│  ├─ Multi-user test → advanced/multi-user.md
+│  ├─ Form validation test → testing-patterns/forms-validation.md
+│  └─ Drag and drop test → testing-patterns/drag-drop.md
+│
+├─ Testing specific features?
+│  ├─ File upload/download → testing-patterns/file-operations.md, testing-patterns/file-upload-download.md
+│  ├─ Date/time dependent → advanced/clock-mocking.md
+│  ├─ WebSocket/real-time → browser-apis/websockets.md
+│  ├─ Geolocation/permissions → browser-apis/browser-apis.md
+│  ├─ OAuth/SSO mocking → advanced/third-party.md, advanced/multi-context.md
+│  ├─ Payments/email/SMS → advanced/third-party.md
+│  ├─ iFrames → browser-apis/iframes.md
+│  ├─ Canvas/WebGL/charts → testing-patterns/canvas-webgl.md
+│  ├─ Service workers/PWA → browser-apis/service-workers.md
+│  ├─ i18n/localization → testing-patterns/i18n.md
+│  ├─ Security (XSS, CSRF) → testing-patterns/security-testing.md
+│  └─ Performance/Web Vitals → testing-patterns/performance-testing.md
+│
+├─ Architecture decisions?
+│  ├─ POM vs fixtures → architecture/pom-vs-fixtures.md
+│  ├─ Test type selection → architecture/test-architecture.md
+│  ├─ Mock vs real services → architecture/when-to-mock.md
+│  └─ Test suite structure → core/test-suite-structure.md
+│
+├─ Framework-specific testing?
+│  ├─ React app → frameworks/react.md
+│  ├─ Angular app → frameworks/angular.md
+│  ├─ Vue/Nuxt app → frameworks/vue.md
+│  └─ Next.js app → frameworks/nextjs.md
+│
+├─ Authentication testing?
+│  ├─ Basic auth patterns → advanced/authentication.md
+│  └─ Complex flows (MFA, reset) → advanced/authentication-flows.md
+│
+├─ Test is failing/flaky?
+│  ├─ Flaky test investigation → debugging/flaky-tests.md
+│  ├─ Element not found → core/locators.md, debugging/debugging.md
+│  ├─ Timeout issues → core/assertions-waiting.md, debugging/debugging.md
+│  ├─ Race conditions → debugging/flaky-tests.md, debugging/debugging.md
+│  ├─ Flaky only with multiple workers → debugging/flaky-tests.md, infrastructure-ci-cd/performance.md
+│  ├─ State leak / isolation → debugging/flaky-tests.md, core/fixtures-hooks.md
+│  ├─ Console/JS errors → debugging/console-errors.md, debugging/debugging.md
+│  └─ General debugging → debugging/debugging.md
+│
+├─ Testing error scenarios?
+│  ├─ Network failures → debugging/error-testing.md, advanced/network-advanced.md
+│  ├─ Offline (unexpected) → debugging/error-testing.md
+│  ├─ Offline-first/PWA → browser-apis/service-workers.md
+│  ├─ Error boundaries → debugging/error-testing.md
+│  └─ Form validation → testing-patterns/forms-validation.md, debugging/error-testing.md
+│
+├─ Refactoring existing code?
+│  ├─ Implementing POM → core/page-object-model.md
+│  ├─ Improving selectors → core/locators.md
+│  ├─ Extracting fixtures → core/fixtures-hooks.md
+│  ├─ Creating data factories → core/test-data.md
+│  └─ Configuration setup → core/configuration.md
+│
+├─ Setting up infrastructure?
+│  ├─ CI/CD → infrastructure-ci-cd/ci-cd.md
+│  ├─ GitHub Actions → infrastructure-ci-cd/github-actions.md
+│  ├─ GitLab CI → infrastructure-ci-cd/gitlab.md
+│  ├─ Other CI providers → infrastructure-ci-cd/other-providers.md
+│  ├─ Docker/containers → infrastructure-ci-cd/docker.md
+│  ├─ Sharding/parallel → infrastructure-ci-cd/parallel-sharding.md
+│  ├─ Reporting/artifacts → infrastructure-ci-cd/reporting.md
+│  ├─ Global setup/teardown → core/global-setup.md
+│  ├─ Project dependencies → core/projects-dependencies.md
+│  ├─ Test performance → infrastructure-ci-cd/performance.md
+│  ├─ Test coverage → infrastructure-ci-cd/test-coverage.md
+│  └─ Project config → core/configuration.md, core/projects-dependencies.md
+│
+├─ Organizing tests?
+│  ├─ Skip/fixme/slow tests → core/annotations.md
+│  ├─ Test tags (@smoke, @fast) → core/test-tags.md
+│  ├─ Filtering tests (--grep) → core/test-tags.md
+│  ├─ Test steps → core/annotations.md
+│  └─ Conditional execution → core/annotations.md
+│
+└─ Running subset of tests?
+   ├─ By tag (@smoke, @critical) → core/test-tags.md
+   ├─ Exclude slow/flaky tests → core/test-tags.md
+   ├─ PR vs nightly tests → core/test-tags.md, infrastructure-ci-cd/ci-cd.md
+   └─ Project-specific filtering → core/test-tags.md, core/configuration.md</code></pre>
+<h3 id="skillmd-test-validation-loop">Test Validation Loop</h3>
+<p>After writing or modifying tests:</p>
+<p>- Review error output and trace (<code>npx playwright show-trace</code>)    - Fix locators, waits, or assertions    - Re-run tests</p>
+<ol><li><strong>Run tests</strong>: <code>npx playwright test --reporter=list</code></li><li><strong>If tests fail</strong>:</li><li><strong>Only proceed when all tests pass</strong></li><li><strong>Run multiple times</strong> for critical tests: <code>npx playwright test --repeat-each=5</code></li></ol></div>
+</section><section class="section" id="source">
+<div class="section-label">Source</div>
+<div class="links-row">
+<a class="link-btn" href="https://github.com/currents-dev/playwright-best-practices-skill" rel="noopener" target="_blank">View upstream on GitHub ↑</a>
+<a class="link-btn" href="https://github.com/floomhq/starter/blob/main/skills/playwright-best-practices.json" rel="noopener" target="_blank">View on Floom GitHub ↑</a>
+<a class="link-btn" href="https://skills.sh/currents-dev/playwright-best-practices-skill/playwright-best-practices" rel="noopener" target="_blank">View on skills.sh ↑</a>
+</div>
+</section></div></div><section class="final-cta">
+<div>
+<strong>Add this skill to your agent.</strong>
+<span>Installs <code style="background:rgba(255,255,255,0.12);padding:1px 6px;border-radius:4px;color:#fff;font-family:var(--mono);font-size:13px">playwright-best-practices</code> into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+</div>
+<div class="install-cta-wrap install-cta-wrap--final">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --skills playwright-best-practices" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>playwright-best-practices</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills playwright-best-practices</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+</section>
+</main>
+<footer aria-label="Site footer" class="site-footer">
+<div class="site-footer-inner">
+<div class="footer-brand">
+<a class="footer-wordmark" href="../index.html">Floom</a>
+<small>Open source · MIT</small>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Sitemap</div>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../library.html">Skills</a></li>
+<li><a href="../docs.html">Docs</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Resources</div>
+<ul>
+<li><a href="https://github.com/floomhq/starter" rel="noopener" target="_blank">GitHub</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+<li><a href="../terms.html">Terms</a></li>
+<li><a href="https://github.com/floomhq/starter/releases" rel="noopener" target="_blank">Changelog</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Floom · Built with care in Berlin and San Francisco</span>
+<span class="footer-mit">MIT License</span>
+</div>
+</footer>
+<script>
+function copyInstall(btn, cmd) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    const original = btn.dataset.original || btn.textContent;
+    btn.dataset.original = original;
+    btn.classList.add('copied');
+    btn.textContent = 'Copied! Paste in terminal';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
+  });
+}
+function copyCmd() {
+  const t = document.getElementById('cmdText').textContent;
+  const b = document.getElementById('cmdCopy');
+  navigator.clipboard.writeText(t).then(() => {
+    b.classList.add('copied'); b.textContent = 'Copied!';
+    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+<script>
+
+// === Install CTA (Add to your agent button) - copy on click ===
+document.querySelectorAll(".install-cta").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const command = button.dataset.copy;
+    if (!command) return;
+    try {
+      await navigator.clipboard.writeText(command);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = command;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const labelEl = button.querySelector(".install-cta-label");
+    if (labelEl) {
+      const original = labelEl.textContent;
+      labelEl.textContent = "Copied! Paste in terminal";
+      button.classList.add("is-copied");
+      setTimeout(() => {
+        labelEl.textContent = original;
+        button.classList.remove("is-copied");
+      }, 2000);
+    }
+  });
+});
+
+// === TOC active-section highlighting (scroll spy) ===
+(function () {
+  const sections = document.querySelectorAll(".skill-body .section[id], .skill-body .section [id]");
+  const navLinks = document.querySelectorAll(".skill-nav a");
+  if (!sections.length || !navLinks.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector('.skill-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add("active");
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
+  sections.forEach((s) => observer.observe(s));
+})();
+</script></body>
+</html>

@@ -1,9 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- CLI source: `--version` now prints `0.2.5`, matching `cli/package.json`.
+- CLI docs/help: replaced stale example slugs with skills that exist in the locked 65-skill manifest.
+- Docs: updated stale `@floomhq/packs`, `floomhq/packs`, and `floom-packs` references to the current `@floomhq/starter` package and `floomhq/starter` repo.
+- Repo docs: added the missing per-source license table referenced by the README.
+
 ## v0.2.5 - 2026-05-11
 
 - CLI: activation block strips trailing `.` from skill descriptions before appending `. Path:` (no more `..` in CLAUDE.md/AGENTS.md bullets).
-- CLI: activation block instructs agent to use `find-skills` (was incorrectly `local-find-skills`).
+- CLI: activation block instructs agent to use `find-skills`.
+- Known publish issue: npm package metadata is `0.2.5`, but the published CLI entry point still prints `0.2.4` for `--version`.
 
 ## v0.2.4 - 2026-05-11
 
@@ -33,14 +41,20 @@
 
 ## v0.2.2 - 2026-05-11
 
-- Pre-flight P0 fix snapshot (test publish during repo rename + URL bump). See v0.2.3 release notes for the consolidated fixes.
+- CLI: `--version` constant updated from `0.1.0` to `0.2.2`.
+- CLI: `--non-interactive` added as an alias for `--yes`.
+- CLI: activation block and local manifest now use successfully written skills, not intended selections.
+- CLI: install exits non-zero when zero skills are written.
+- CLI: partial install failures print the first errors.
 
-## v0.2.1 - 2026-05-10
+## v0.2.1 - 2026-05-11
 
 - Per-skill JSON detail loading (slim manifest + lazy-fetch per skill).
 - SKILL.md collision behavior: skip with warning.
+- Known publish issue: the CLI entry point still printed `0.1.0` for `--version`.
 
 ## v0.2.0 - 2026-05-10
 
 - Schema split: slim `manifest.json` + per-skill JSONs at `skills/<slug>.json`.
 - Lazy-load skill detail to reduce initial fetch from ~700KB to ~29KB.
+- Known publish issue: the CLI entry point still printed `0.1.0` for `--version`.

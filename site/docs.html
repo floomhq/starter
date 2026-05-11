@@ -1,0 +1,1435 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fafaf7" />
+    <meta name="color-scheme" content="light" />
+    <title>Docs — Floom Starter Pack</title>
+    <meta name="description" content="Install, update, uninstall. How activation works. Architecture. Why curation beats kitchen-sink packs." />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Floom Starter Pack" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Docs — Floom Starter Pack" />
+    <meta property="og:description" content="Install, update, uninstall. How activation works. Architecture. Why curation beats kitchen-sink packs." />
+    <meta property="og:url" content="https://starter.floom.dev/docs" />
+    <meta property="og:image" content="https://starter.floom.dev/og-image-v2.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Docs — Floom Starter Pack" />
+    <meta name="twitter:description" content="Install, update, uninstall. How activation works. Architecture. Why curation beats kitchen-sink packs." />
+    <meta name="twitter:image" content="https://starter.floom.dev/og-image-v2.png" />
+    <meta name="twitter:creator" content="@floomhq" />
+    <meta name="twitter:site" content="@floomhq" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://starter.floom.dev/docs" />
+    <style>
+      :root {
+        --paper: #fafaf7;
+        --ink: #050505;
+        --muted: #333333;
+        --blue: #0094ff;
+        --blue-soft: #bfe6ff;
+        --blue-pale: #eaf7ff;
+        --cloud-pink: #ff4fd8;
+        --line: 2px solid var(--ink);
+        --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+      }
+
+      * { box-sizing: border-box; }
+      html { scrollbar-gutter: stable; overflow-y: scroll; scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+      }
+
+      a { color: inherit; }
+
+      .page {
+        width: min(100%, 1440px);
+        margin: 0 auto;
+        padding: 44px 70px 72px;
+      }
+
+      /* NAV (matches landing) */
+      .nav {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: flex-start;
+        border-bottom: var(--line);
+        padding-bottom: 18px;
+      }
+
+      .wordmark {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+      .wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+
+      .nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 34px;
+        row-gap: 10px;
+        line-height: 1;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .nav-links a { text-decoration: none; }
+      .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+
+      h1, h2, h3, p { margin: 0; }
+
+      /* DOCS HERO */
+      .docs-hero {
+        padding-top: 54px;
+        padding-bottom: 36px;
+        border-bottom: 1px solid rgba(5,5,5,0.12);
+        margin-bottom: 0;
+      }
+
+      .eyebrow {
+        display: block;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #006fbf;
+        margin-bottom: 14px;
+      }
+
+      .docs-hero h1 {
+        font-size: clamp(42px, 4.8vw, 68px);
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+
+      .docs-hero p {
+        max-width: 620px;
+        color: var(--muted);
+        font-size: 19px;
+        font-weight: 500;
+        line-height: 1.65;
+      }
+
+      /* LAYOUT */
+      .doc-layout {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 56px;
+        margin-top: 48px;
+        align-items: flex-start;
+      }
+
+      /* SIDEBAR TOC */
+      .doc-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        align-self: start;
+        position: sticky;
+        top: 28px;
+      }
+
+      .doc-nav-label {
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #4b4b4b;
+        padding: 4px 10px;
+        margin-bottom: 8px;
+      }
+
+      .doc-nav-section {
+        padding: 12px 10px 4px;
+        margin-top: 6px;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(5,5,5,0.42);
+      }
+
+      .doc-nav a {
+        display: block;
+        padding: 7px 10px;
+        border-radius: 14px;
+        background: transparent;
+        color: #4b4b4b;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        line-height: 1.35;
+        transition: background 120ms ease, color 120ms ease;
+      }
+
+      .doc-nav a.is-sub { padding-left: 20px; font-weight: 600; color: #5b5b5b; font-size: 12.5px; }
+
+      .doc-nav a:hover, .doc-nav a.active {
+        background: var(--blue-pale);
+        color: var(--ink);
+      }
+
+      /* DOC BODY */
+      .doc-body {
+        display: grid;
+        gap: 24px;
+        max-width: 760px;
+      }
+
+      .doc-section {
+        scroll-margin-top: 36px;
+        border: var(--line);
+        border-radius: 22px;
+        background: rgba(255,255,255,0.92);
+        padding: 32px 34px;
+      }
+
+      .doc-section h2 {
+        font-size: clamp(28px, 3vw, 44px);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1;
+        margin-bottom: 18px;
+      }
+
+      .doc-section h3 {
+        font-size: 22px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        margin-top: 36px;
+        margin-bottom: 14px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(5,5,5,0.12);
+        scroll-margin-top: 36px;
+      }
+
+      .doc-section h3:first-of-type { margin-top: 28px; }
+
+      .doc-section p {
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.65;
+        margin-bottom: 14px;
+      }
+
+      .doc-section p:last-child { margin-bottom: 0; }
+
+      .doc-section ul, .doc-section ol {
+        margin: 0 0 16px 1.3em;
+        padding: 0;
+      }
+
+      .doc-section li {
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.65;
+        margin-bottom: 6px;
+      }
+
+      .doc-section strong { color: var(--ink); font-weight: 700; }
+
+      .doc-section a { color: var(--blue); text-decoration: none; border-bottom: 1px solid rgba(0,148,255,0.32); padding-bottom: 1px; transition: border-color 120ms ease, color 120ms ease; }
+      .doc-section a:hover { border-bottom-color: var(--blue); }
+
+      /* Inline code (paper bg, ink border, mono) */
+      code, .inline-code {
+        border: 2px solid var(--ink);
+        border-radius: 8px;
+        background: var(--paper);
+        color: var(--ink);
+        padding: 1px 6px;
+        font-family: var(--mono);
+        font-size: 0.86em;
+        font-weight: 700;
+      }
+
+      /* Code block */
+      .code-block {
+        margin: 16px 0;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        background: var(--paper);
+        overflow: hidden;
+      }
+
+      .code-block-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 10px 14px;
+        border-bottom: 1px solid rgba(5,5,5,0.12);
+        background: rgba(5,5,5,0.04);
+      }
+
+      .code-block-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(5,5,5,0.62);
+      }
+
+      .code-copy-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        color: var(--ink);
+        background: transparent;
+        border: 1px solid rgba(5,5,5,0.16);
+        border-radius: 999px;
+        padding: 4px 10px;
+        cursor: pointer;
+        transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+      }
+
+      .code-copy-btn:hover { background: var(--blue-pale); border-color: rgba(0,148,255,0.3); color: var(--ink); }
+      .code-copy-btn.copied { background: var(--blue); border-color: var(--blue); color: #ffffff; }
+
+      .code-block pre {
+        margin: 0;
+        padding: 16px 18px;
+        font: 800 13px/1.6 var(--mono);
+        color: var(--ink);
+        background: transparent;
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-x: auto;
+      }
+
+      .code-block pre code {
+        border: none;
+        background: transparent;
+        padding: 0;
+        font-family: var(--mono);
+        font-size: inherit;
+        font-weight: inherit;
+        color: inherit;
+        border-radius: 0;
+      }
+
+      /* Tables */
+      .doc-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 16px 0;
+        font-size: 14px;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .doc-table th {
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink);
+        text-align: left;
+        padding: 11px 14px;
+        border-bottom: 2px solid var(--ink);
+        background: var(--blue-pale);
+      }
+
+      .doc-table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(5,5,5,0.12);
+        color: var(--muted);
+        vertical-align: top;
+        line-height: 1.5;
+      }
+
+      .doc-table td:first-child {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .doc-table tr:last-child td { border-bottom: none; }
+
+      /* Note callout */
+      .doc-note {
+        margin: 16px 0;
+        border: 2px solid var(--ink);
+        border-radius: 16px;
+        background: var(--blue-pale);
+        padding: 16px 20px;
+        font-size: 14px;
+        color: var(--ink);
+        line-height: 1.6;
+        font-weight: 500;
+      }
+
+      .doc-note strong { color: var(--ink); }
+
+      /* Badge pill */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink);
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        padding: 3px 9px;
+        background: var(--paper);
+        white-space: nowrap;
+      }
+
+      /* Stat row */
+      .stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin: 18px 0;
+      }
+
+      .stat-card {
+        border: 2px solid var(--ink);
+        border-radius: 18px;
+        background: var(--paper);
+        padding: 18px 16px;
+      }
+
+      .stat-num {
+        font-family: var(--mono);
+        font-size: 32px;
+        font-weight: 950;
+        letter-spacing: -0.06em;
+        color: var(--blue);
+        line-height: 0.9;
+        margin-bottom: 8px;
+      }
+
+      .stat-num.is-muted { color: rgba(5,5,5,0.55); }
+
+      .stat-label {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.45;
+        font-weight: 500;
+      }
+
+      .stat-source {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: rgba(5,5,5,0.5);
+        margin-top: 8px;
+        font-weight: 700;
+      }
+
+      .stat-source a { color: var(--blue); border-bottom: 1px solid rgba(0,148,255,0.32); padding-bottom: 1px; }
+
+      /* Criteria list */
+      .criteria-list {
+        display: grid;
+        gap: 10px;
+        margin: 18px 0;
+      }
+
+      .criteria-item {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 14px;
+        border: 2px solid var(--ink);
+        border-radius: 16px;
+        padding: 16px 18px;
+        background: var(--paper);
+      }
+
+      .criteria-num {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        color: var(--blue);
+      }
+
+      .criteria-title {
+        font-size: 15px;
+        font-weight: 900;
+        color: var(--ink);
+        margin-bottom: 4px;
+        letter-spacing: -0.01em;
+      }
+
+      .criteria-desc {
+        font-size: 13.5px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      /* Activation flow steps */
+      .activation-flow {
+        margin: 18px 0;
+        border: 2px solid var(--ink);
+        border-radius: 18px;
+        background: var(--paper);
+        padding: 18px 22px;
+      }
+
+      .flow-step {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(5,5,5,0.12);
+      }
+
+      .flow-step:last-child { border-bottom: none; }
+      .flow-step:first-child { padding-top: 4px; }
+
+      .flow-step-num {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 900;
+        color: #ffffff;
+        background: var(--ink);
+        border-radius: 999px;
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        margin-top: 1px;
+      }
+
+      .flow-step-text {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.6;
+        font-weight: 500;
+      }
+
+      .flow-step-text strong { color: var(--ink); font-weight: 700; }
+
+      /* Floom adds list */
+      .floom-adds-list {
+        display: grid;
+        gap: 10px;
+        margin: 16px 0;
+      }
+
+      .floom-add-item {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 14px 16px;
+        background: var(--paper);
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .floom-add-num {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 900;
+        color: var(--blue);
+      }
+
+      .floom-add-item strong { color: var(--ink); font-weight: 700; }
+
+      /* Architecture checklist */
+      .arch-checklist {
+        list-style: none;
+        margin: 16px 0;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .arch-checklist li {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 12px;
+        align-items: flex-start;
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.6;
+        font-weight: 500;
+      }
+
+      .arch-check {
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        border: 2px solid var(--ink);
+        background: var(--blue);
+        position: relative;
+        margin-top: 1px;
+      }
+
+      .arch-check::after {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 4px;
+        width: 7px;
+        height: 4px;
+        border-left: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+        transform: rotate(-45deg);
+      }
+
+      /* Methodology break */
+      .methodology-break {
+        scroll-margin-top: 36px;
+        border: var(--line);
+        border-radius: 22px;
+        background: var(--ink);
+        color: #ffffff;
+        padding: 26px 32px;
+      }
+
+      .methodology-break-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--blue-soft);
+        margin-bottom: 6px;
+      }
+
+      .methodology-break-heading {
+        font-size: clamp(22px, 2.4vw, 32px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        color: #ffffff;
+        margin: 0;
+      }
+
+      /* FOOTER (shared) */
+      .site-footer {
+        border-top: 2px solid var(--ink);
+        background: var(--paper);
+        padding: 48px 70px 0;
+      }
+
+      .site-footer-inner {
+        width: min(100%, 1440px);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr;
+        gap: 48px;
+        padding-bottom: 36px;
+      }
+
+      .footer-brand .footer-wordmark {
+        display: block;
+        font-size: 28px;
+        font-weight: 900;
+        letter-spacing: -0.06em;
+        line-height: 0.9;
+        color: var(--ink);
+        text-decoration: none;
+        margin-bottom: 6px;
+      }
+
+      .footer-brand small {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #4b4b4b;
+      }
+
+      .footer-col-label {
+        display: block;
+        margin: 0 0 14px;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+
+      .footer-col ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .footer-col a {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink);
+        text-decoration: none;
+        transition: color 120ms ease;
+      }
+
+      .footer-col a:hover { color: var(--blue); }
+
+      .footer-bottom {
+        width: min(100%, 1440px);
+        margin: 0 auto;
+        border-top: 1px solid rgba(5,5,5,0.12);
+        padding: 18px 0 28px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #4b4b4b;
+      }
+
+      .footer-bottom .footer-mit {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        border: 1px solid var(--ink);
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 4px 10px;
+        background: var(--paper);
+      }
+
+      @media (max-width: 980px) and (min-width: 641px) {
+        .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; }
+        .wordmark span { font-size: 9px; letter-spacing: 0.12em; }
+        .nav-right { gap: 18px; }
+      }
+
+      @media (max-width: 980px) {
+        .page { padding: 30px 22px 52px; }
+        .doc-layout { grid-template-columns: 1fr; gap: 28px; }
+        .doc-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px; padding: 14px; border: 1px solid rgba(5,5,5,0.12); border-radius: 16px; background: rgba(255,255,255,0.6); }
+        .doc-nav-label, .doc-nav-section { width: 100%; padding-left: 4px; }
+        .doc-section { padding: 24px 22px; }
+        .stat-row { grid-template-columns: 1fr; }
+        .site-footer { padding: 40px 22px 0; }
+        .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; }
+      }
+
+      @media (max-width: 640px) {
+        .page { padding: 22px 16px 44px; }
+        .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; }
+        .wordmark span { font-size: 9px; letter-spacing: 0.12em; }
+        .docs-hero h1 { font-size: clamp(36px, 10vw, 54px); }
+        .doc-section h2 { font-size: clamp(24px, 7vw, 32px); }
+        .site-footer { padding: 36px 16px 0; }
+        .footer-bottom { padding: 16px 0 24px; }
+      }
+
+      /* Mobile horizontal-overflow guards (375px and similar) */
+      @media (max-width: 980px) {
+        .doc-section pre, .code-block pre {
+          overflow-x: auto;
+          max-width: 100%;
+          white-space: pre;
+        }
+        .doc-section code:not(pre code) {
+          word-break: break-word;
+        }
+        .doc-section p, .doc-section li {
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
+        .doc-section table {
+          display: block;
+          overflow-x: auto;
+          max-width: 100%;
+        }
+        .stat-row, .criteria-list, .activation-flow, .arch-checklist {
+          overflow-x: hidden;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .doc-section pre { font-size: 12px; }
+        .code-block-label { font-size: 10px; }
+      }
+
+      /* Hard guard: prevent root horizontal scroll regardless */
+      html, body { overflow-x: hidden; }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="wordmark" href="index.html">
+          <strong>Floom</strong>
+          <span>Open source · MIT</span>
+        </a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="library.html">Skills</a>
+            <a href="docs.html" aria-current="page">Docs</a>
+            <a href="about.html">About</a>
+          </div>
+        </div>
+      </nav>
+
+      <header class="docs-hero">
+        <span class="eyebrow">Documentation</span>
+        <h1>Floom Starter Pack</h1>
+        <p>Reference and setup guide. Everything you need to install, update, and understand what the pack adds to your agent, plus the curation decisions behind it.</p>
+      </header>
+
+      <div class="doc-layout">
+        <nav class="doc-nav" aria-label="Docs navigation">
+          <span class="doc-nav-label">On this page</span>
+          <a href="#quickstart">Quickstart</a>
+          <a href="#what-gets-installed">What gets installed</a>
+          <a href="#supported-agents">Supported agents</a>
+          <a href="#updating">Updating</a>
+          <a href="#uninstalling">Uninstalling</a>
+          <a href="#listing">Listing installed</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#license">License</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#mental-model" class="is-sub">Mental model</a>
+          <a href="#install-flow" class="is-sub">Install flow</a>
+          <a href="#files-written-arch" class="is-sub">Files written</a>
+          <a href="#conflict-protection" class="is-sub">Conflict protection</a>
+          <a href="#skill-discovery" class="is-sub">Skill discovery</a>
+          <a href="#data-model" class="is-sub">Data model</a>
+          <a href="#verified-behaviors" class="is-sub">Verified behaviors</a>
+          <a href="#methodology">Methodology</a>
+          <a href="#curation-from-catalog" class="is-sub">Curated from 91k+</a>
+          <a href="#activation-pattern" class="is-sub">Activation (100% pattern)</a>
+          <a href="#curation-vs-quantity" class="is-sub">Curation vs quantity</a>
+          <a href="#what-floom-adds" class="is-sub">What Floom adds</a>
+          <a href="#inference" class="is-sub">Inference &amp; Floom</a>
+        </nav>
+
+        <div class="doc-body">
+
+          <!-- QUICKSTART -->
+          <section class="doc-section" id="quickstart">
+            <h2>Quickstart</h2>
+            <p>The simplest path is to paste a single prompt into your agent.</p>
+
+            <div class="code-block">
+              <div class="code-block-header">
+                <span class="code-block-label">Agent prompt (Claude Code, Cursor, Codex, OpenCode, Kimi)</span>
+                <button class="code-copy-btn" type="button" data-copy="Set up Floom Starter Pack: https://floom.dev/starter">Copy</button>
+              </div>
+              <pre><code>Set up Floom Starter Pack: https://floom.dev/starter</code></pre>
+            </div>
+
+            <p>Your agent reads the manifest at that URL and installs the right files for its runtime. No account needed. Nothing to configure.</p>
+
+            <p>If you prefer to run it yourself:</p>
+
+            <div class="code-block">
+              <div class="code-block-header">
+                <span class="code-block-label">Terminal</span>
+                <button class="code-copy-btn" type="button" data-copy="npx @floomhq/starter install">Copy</button>
+              </div>
+              <pre><code>npx @floomhq/starter install</code></pre>
+            </div>
+
+            <p>The CLI detects which agent config files exist on your machine and writes only to the appropriate paths.</p>
+          </section>
+
+          <!-- WHAT GETS INSTALLED -->
+          <section class="doc-section" id="what-gets-installed">
+            <h2>What gets installed</h2>
+            <p>The pack writes three things per supported agent.</p>
+
+            <table class="doc-table">
+              <thead>
+                <tr><th>File</th><th>Purpose</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AGENTS.md / CLAUDE.md</td>
+                  <td>Activation rules. Tell the agent when to invoke each skill, using the AGENTS.md pattern Vercel found achieves 100% invocation rate.</td>
+                </tr>
+                <tr>
+                  <td>.floom/skills.json</td>
+                  <td>Skill manifest. The full list of installed skills, their sources, install counts, and profile tags. Used by the <code>find-skills</code> meta-skill for discovery without loading all skills into context.</td>
+                </tr>
+                <tr>
+                  <td>.floom/starter.lock</td>
+                  <td>Lock file. Records the pack version and install date. Used by <code>npx @floomhq/starter update</code> to pull only changed skills.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="doc-note">
+              <strong>No executables.</strong> Nothing gets added to your PATH, no daemons are started, no network connections are opened after install. The pack is static config files only.
+            </div>
+
+            <p>Total size on disk: approximately <strong>120 KB</strong> for the full pack. Individual skill files average 1.2 KB.</p>
+          </section>
+
+          <!-- SUPPORTED AGENTS -->
+          <section class="doc-section" id="supported-agents">
+            <h2>Supported agents</h2>
+            <p>The pack supports five agents out of the box. Each agent reads skill context from a different path.</p>
+
+            <table class="doc-table">
+              <thead>
+                <tr><th>Agent</th><th>Activation file</th><th>Skills path</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Claude Code</td>
+                  <td><code>~/.claude/CLAUDE.md</code></td>
+                  <td><code>~/.claude/skills/</code></td>
+                </tr>
+                <tr>
+                  <td>Codex CLI</td>
+                  <td><code>~/.codex/AGENTS.md</code></td>
+                  <td><code>~/.codex/skills/</code></td>
+                </tr>
+                <tr>
+                  <td>Cursor</td>
+                  <td><code>.cursorrules</code> (project root)</td>
+                  <td><code>.cursor/skills/</code></td>
+                </tr>
+                <tr>
+                  <td>OpenCode</td>
+                  <td><code>AGENTS.md</code> (project root)</td>
+                  <td><code>.opencode/skills/</code></td>
+                </tr>
+                <tr>
+                  <td>Kimi</td>
+                  <td><code>AGENTS.md</code> (project root)</td>
+                  <td><code>.kimi/skills/</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>When you run the installer, it detects which of these directories exist and writes only to the ones that do. If none are found, it prompts you to choose.</p>
+          </section>
+
+          <!-- UPDATING -->
+          <section class="doc-section" id="updating">
+            <h2>Updating</h2>
+            <p>There is no auto-update. To pull the latest manifest and skills, re-run the install command with the <code>@latest</code> tag.</p>
+
+            <div class="code-block">
+              <div class="code-block-header">
+                <span class="code-block-label">Terminal</span>
+                <button class="code-copy-btn" type="button" data-copy="npx @floomhq/starter@latest install --profiles core,dev">Copy</button>
+              </div>
+              <pre><code>npx @floomhq/starter@latest install --profiles core,dev</code></pre>
+            </div>
+
+            <p><code>@latest</code> fetches the newest package version from npm and refetches the public manifest. The operation is <strong>idempotent</strong>: skills you have already customised are skipped. The collision check in CLI 0.2.1+ preserves your versions.</p>
+
+            <div class="doc-note">
+              <strong>Want to see what changed without applying?</strong> Add <code>--dry-run</code> to preview the plan without writing any files.
+            </div>
+          </section>
+
+          <!-- UNINSTALLING -->
+          <section class="doc-section" id="uninstalling">
+            <h2>Uninstalling</h2>
+            <p>To remove everything the pack installed:</p>
+
+            <div class="code-block">
+              <div class="code-block-header">
+                <span class="code-block-label">Terminal — remove all</span>
+                <button class="code-copy-btn" type="button" data-copy="npx @floomhq/starter remove --all">Copy</button>
+              </div>
+              <pre><code>npx @floomhq/starter remove --all</code></pre>
+            </div>
+
+            <p>To remove specific skills:</p>
+
+            <div class="code-block">
+              <div class="code-block-header">
+                <span class="code-block-label">Terminal — remove by skill</span>
+                <button class="code-copy-btn" type="button" data-copy="npx @floomhq/starter remove --skills pr-review,brand-voice">Copy</button>
+              </div>
+              <pre><code>npx @floomhq/starter remove --skills pr-review,brand-voice</code></pre>
+            </div>
+
+            <p>To remove an entire profile:</p>
+
+            <div class="code-block">
+              <div class="code-block-header">
+                <span class="code-block-label">Terminal — remove by profile</span>
+                <button class="code-copy-btn" type="button" data-copy="npx @floomhq/starter remove --profiles dev">Copy</button>
+              </div>
+              <pre><code>npx @floomhq/starter remove --profiles dev</code></pre>
+            </div>
+
+            <p><code>remove</code> deletes the SKILL.md files it installed, clears the Floom activation block from CLAUDE.md / AGENTS.md, and deletes <code>~/.floom/manifest.json</code>. Files the collision check skipped (your custom versions) are not touched.</p>
+          </section>
+
+          <!-- LISTING -->
+          <section class="doc-section" id="listing">
+            <h2>Listing what's installed</h2>
+            <p>To see every skill installed via Floom, which profile it belongs to, and which agent paths it was written to:</p>
+
+            <div class="code-block">
+              <div class="code-block-header">
+                <span class="code-block-label">Terminal</span>
+                <button class="code-copy-btn" type="button" data-copy="npx @floomhq/starter@latest list">Copy</button>
+              </div>
+              <pre><code>npx @floomhq/starter@latest list</code></pre>
+            </div>
+          </section>
+
+          <!-- PRIVACY -->
+          <section class="doc-section" id="privacy">
+            <h2>Privacy</h2>
+            <p>The Floom Starter Pack is a <strong>local install</strong>. After the initial download, it operates entirely on your machine.</p>
+
+            <ul>
+              <li>No telemetry. No analytics. No usage data is collected or transmitted.</li>
+              <li>No account required. No sign-in. No API key.</li>
+              <li>The installer downloads skill files from GitHub. After install, there are no ongoing network calls.</li>
+              <li>The skill files themselves are static text. They contain no code that executes automatically.</li>
+            </ul>
+
+            <div class="doc-note">
+              The <strong>find-skills</strong> meta-skill (by Vercel Labs, part of this pack) does make network calls to skills.sh when your agent invokes it to search for new skills. This is on demand, not automatic.
+            </div>
+          </section>
+
+          <!-- LICENSE -->
+          <section class="doc-section" id="license">
+            <h2>License</h2>
+            <p>The Floom Starter Pack installer and tooling is <span class="badge">MIT</span> licensed. You can use, modify, and redistribute it freely.</p>
+            <p>Individual skills in the pack carry their own licenses. The breakdown:</p>
+
+            <table class="doc-table">
+              <thead>
+                <tr><th>License</th><th>Skills</th><th>Count</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge">MIT</span></td>
+                  <td>All superpowers, mattpocock, vercel-labs, coreyhaines31, scrapegraphai, wshobson, currents-dev, remotion-dev skills</td>
+                  <td>62 skills</td>
+                </tr>
+                <tr>
+                  <td><span class="badge">Apache 2.0</span></td>
+                  <td>All benchflow-ai/skillsbench, pbakaus/impeccable, supabase/agent-skills, and most anthropics/skills</td>
+                  <td>29 skills</td>
+                </tr>
+                <tr>
+                  <td><span class="badge">Source-available</span></td>
+                  <td>docx, pdf, pptx, xlsx from anthropics/skills (use freely, not fully OSS)</td>
+                  <td>3 skills</td>
+                </tr>
+                <tr>
+                  <td><span class="badge">Proprietary</span></td>
+                  <td>workplan, wireframe-to-react, video-polish (Floom team, full rights granted for pack distribution)</td>
+                  <td>3 skills</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>Each skill file includes a license header. If you redistribute individual skills, preserve the header.</p>
+          </section>
+
+          <!-- ARCHITECTURE -->
+          <section class="doc-section" id="architecture">
+            <h2>Architecture</h2>
+            <p>The full technical shape of the pack: how the installer resolves targets, what files get written, how agents discover installed skills, and what V0 guarantees.</p>
+
+            <h3 id="mental-model">Mental model</h3>
+            <p>The package contains a manifest plus bundled skill folders. The installer resolves selected profiles, detects local agents, writes skills into their native roots, writes a local index, and adds instructions that teach agents to search locally.</p>
+            <div class="doc-note">
+              <strong>V0 scope.</strong> Local compatibility infrastructure. Proves user value of curated skills without waiting for cloud sync, account setup, or MCP adoption.
+            </div>
+
+            <h3 id="install-flow">Install flow</h3>
+            <p>When the user runs install, explicit targets win. If no target is passed, the CLI detects local agent config directories and installs only to those agents.</p>
+
+            <div class="code-block">
+              <div class="code-block-header">
+                <span class="code-block-label">Terminal</span>
+                <button class="code-copy-btn" type="button" data-copy="npx @floomhq/starter install --profiles core,dev,writing --yes">Copy</button>
+              </div>
+              <pre><code>npx @floomhq/starter install --profiles core,dev,writing --yes</code></pre>
+            </div>
+
+            <p>The decision tree:</p>
+            <ol>
+              <li>If <code>--harness</code> is provided, use the requested agents.</li>
+              <li>Otherwise, detect local agent config directories: <code>~/.claude</code>, <code>~/.codex</code> (or <code>CODEX_HOME</code>), <code>~/.cursor</code>, <code>~/.config/opencode</code>, <code>~/.kimi</code>.</li>
+              <li>If any are found, install only to detected agents.</li>
+              <li>If none are found, ask for explicit <code>--harness</code>.</li>
+            </ol>
+
+            <h3 id="files-written-arch">Files written</h3>
+            <p>Each target receives skill folders in its native root, a harness instruction file, and a shared local index at <code>~/.floom/packs/starter-index.json</code>.</p>
+
+            <table class="doc-table">
+              <thead>
+                <tr><th>Target</th><th>Skills folder</th><th>Instruction file</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Claude Code</td>
+                  <td><code>~/.claude/skills</code></td>
+                  <td><code>~/.claude/CLAUDE.md</code></td>
+                </tr>
+                <tr>
+                  <td>Codex CLI</td>
+                  <td><code>~/.codex/skills</code></td>
+                  <td><code>~/.codex/AGENTS.md</code></td>
+                </tr>
+                <tr>
+                  <td>Cursor</td>
+                  <td><code>~/.cursor/skills-cursor</code></td>
+                  <td><code>~/.cursor/rules/floom-packs.mdc</code></td>
+                </tr>
+                <tr>
+                  <td>OpenCode</td>
+                  <td><code>~/.config/opencode/skills</code></td>
+                  <td><code>~/.config/opencode/AGENTS.md</code></td>
+                </tr>
+                <tr>
+                  <td>Kimi</td>
+                  <td><code>~/.kimi/skills</code></td>
+                  <td><code>~/.kimi/agents/floom-system.md</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 id="conflict-protection">Conflict protection</h3>
+            <p>Every installed skill gets a provenance file. Managed pack skills can be replaced by later installs; untracked user-created folders are protected by default.</p>
+            <ol>
+              <li>Plan a skill write. If the destination does not exist, copy the skill folder.</li>
+              <li>If it does exist, check for a <code>.floom-pack.json</code> from <code>@floomhq/starter</code>.</li>
+              <li>If the provenance file exists, replace the managed copy.</li>
+              <li>If it does not, refuse to overwrite unless <code>--force</code> is passed.</li>
+            </ol>
+
+            <h3 id="skill-discovery">Skill discovery</h3>
+            <p>No MCP is required in V0. The discovery loop is local: injected instructions point the agent at the starter index and the <code>local-find-skills</code> skill.</p>
+            <p>The agent reads the injected instructions, searches the local <code>starter-index.json</code> via <code>local-find-skills</code>, picks the matching SKILL.md files, and uses them for task execution.</p>
+            <div class="doc-note">
+              MCP can come later for larger libraries and better search tooling. It is not a launch dependency for Floom Packs V0.
+            </div>
+
+            <h3 id="data-model">Data model</h3>
+            <p>The manifest links profiles to skills, and skills to their upstream source records, keeping provenance legible and auditable.</p>
+
+            <table class="doc-table">
+              <thead>
+                <tr><th>Entity</th><th>Fields</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>PackManifest</td><td>id, name, version, defaultProfiles, targets</td></tr>
+                <tr><td>Profile</td><td>id, name, description, skills[]</td></tr>
+                <tr><td>Skill</td><td>slug, name, source, upstream</td></tr>
+                <tr><td>Source</td><td>label, repo, commit, license, status</td></tr>
+              </tbody>
+            </table>
+
+            <p>Next curation pass planned sources:</p>
+
+            <table class="doc-table">
+              <thead>
+                <tr><th>Source</th><th>Goal</th><th>Gate</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>skills.sh</td><td>Broad public skill ecosystem</td><td>License and attribution verification</td></tr>
+                <tr><td>Native Claude skills</td><td>High-quality agent-native patterns</td><td>Redistribution rights and adaptation policy</td></tr>
+                <tr><td>gstack</td><td>Strong developer workflow ideas</td><td>Standalone extraction without telemetry coupling</td></tr>
+                <tr><td>superpowers</td><td>Potential broad workflow skills</td><td>License and provenance review</td></tr>
+                <tr><td>Other open sources</td><td>Fill profile gaps</td><td>Clear source URL, commit, license, and quality score</td></tr>
+              </tbody>
+            </table>
+
+            <h3 id="verified-behaviors">Verified behaviors</h3>
+            <p>Behaviors confirmed across all five launch targets. These are the acceptance criteria for any release.</p>
+            <ul class="arch-checklist">
+              <li><span class="arch-check"></span><span>Manifest references existing skill folders.</span></li>
+              <li><span class="arch-check"></span><span>Every bundled skill has frontmatter and description.</span></li>
+              <li><span class="arch-check"></span><span>Dry-run writes nothing.</span></li>
+              <li><span class="arch-check"></span><span>Temp-root install writes skills, index, provenance, and instructions.</span></li>
+              <li><span class="arch-check"></span><span>Target autodetection works.</span></li>
+              <li><span class="arch-check"></span><span>Missing detected targets produces a clear error.</span></li>
+              <li><span class="arch-check"></span><span><code>--harness claude,codex,cursor,opencode,kimi</code> writes all five launch agents.</span></li>
+              <li><span class="arch-check"></span><span>Untracked existing skills are not overwritten.</span></li>
+            </ul>
+          </section>
+
+          <!-- METHODOLOGY -->
+          <section class="doc-section" id="methodology">
+            <h2>Methodology</h2>
+            <p>Why we built it this way: curation, activation, and what Floom adds versus upstream catalogs.</p>
+
+            <h3 id="curation-from-catalog">How we curated 65 skills from 91,000</h3>
+            <p>Skills.sh indexes 91,035 skills. We curated a focused subset of 65. The selection rules:</p>
+
+            <div class="criteria-list">
+              <div class="criteria-item">
+                <div class="criteria-num">01</div>
+                <div>
+                  <div class="criteria-title">Install count floor: 32,900+</div>
+                  <div class="criteria-desc">Every skills.sh skill in the pack has been installed by at least 32,900 agents. This is a proxy for real-world validation. The median in the pack is 75,000 installs.</div>
+                </div>
+              </div>
+              <div class="criteria-item">
+                <div class="criteria-num">02</div>
+                <div>
+                  <div class="criteria-title">License compliance</div>
+                  <div class="criteria-desc">MIT, Apache 2.0, or Floom-owned. Skills requiring an API key are excluded. gstack skills were excluded because no redistributable license was confirmed.</div>
+                </div>
+              </div>
+              <div class="criteria-item">
+                <div class="criteria-num">03</div>
+                <div>
+                  <div class="criteria-title">Description quality</div>
+                  <div class="criteria-desc">Skills must have a clear "when it fires" trigger. A skill without an obvious trigger condition wastes context and won't be invoked reliably.</div>
+                </div>
+              </div>
+              <div class="criteria-item">
+                <div class="criteria-num">04</div>
+                <div>
+                  <div class="criteria-title">No API-key-required skills</div>
+                  <div class="criteria-desc">The pack must work out of the box with zero setup. Skills that require external credentials are excluded or replaced with equivalent free alternatives.</div>
+                </div>
+              </div>
+            </div>
+
+            <p>The four source tiers, in priority order:</p>
+
+            <table class="doc-table">
+              <thead>
+                <tr><th>Source</th><th>Skills in pack</th><th>Why this tier</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>skills.sh</td><td>62 skills (95%)</td><td>Battle-tested, real install counts, diverse publishers</td></tr>
+                <tr><td>Superpowers (obra, MIT)</td><td>8 (sub-source of skills.sh)</td><td>Highest install counts in workflow and planning category</td></tr>
+                <tr><td>SkillsBench / benchflow-ai (Apache 2.0)</td><td>7 (sub-source of skills.sh)</td><td>Academic validation on real benchmarks</td></tr>
+                <tr><td>Floom proprietary</td><td>3 skills (5%)</td><td>Last resort only: workplan, wireframe-to-react, video-polish fill gaps with no proven equivalent</td></tr>
+              </tbody>
+            </table>
+
+            <div class="doc-note">
+              <strong>From 22 Floom-proprietary to 3.</strong> Version 1 of this pack had 22 Floom-authored skills (35%). The current pack has 3 (5%). That reduction is the curation work.
+            </div>
+
+            <h3 id="activation-pattern">How activation works (the 100% pattern from Vercel)</h3>
+            <p>Vercel published research showing that agents skip 56% of installed skills by default. Even with an explicit "use these skills" prompt, invocation only reaches 70%. The AGENTS.md activation pattern achieves 100%.</p>
+            <p>The pattern works by embedding per-skill trigger conditions directly into the agent's context file (CLAUDE.md or AGENTS.md). Instead of telling the agent "you have many skills available," it tells the agent: "when the user says X, invoke Y."</p>
+
+            <div class="activation-flow">
+              <div class="flow-step">
+                <div class="flow-step-num">1</div>
+                <div class="flow-step-text"><strong>Installer writes AGENTS.md.</strong> Each skill gets one or two trigger sentences in the activation block: "When the user asks to debug anything or mentions a test failure, invoke <code>systematic-debugging</code>."</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-step-num">2</div>
+                <div class="flow-step-text"><strong>Skills manifest is written to <code>.floom/skills.json</code>.</strong> Compact: name, source, profile tags. The agent doesn't load full skill files into context until they're invoked.</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-step-num">3</div>
+                <div class="flow-step-text"><strong>find-skills (by Vercel Labs) handles discovery.</strong> When a task doesn't match any installed trigger, the agent can invoke find-skills to search for the right tool without loading every skill into context.</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-step-num">4</div>
+                <div class="flow-step-text"><strong>Skill is loaded on demand.</strong> The full skill file is read into context only when the trigger fires. Skills cost a few dozen tokens until invoked.</div>
+              </div>
+            </div>
+
+            <p>Source for the 100% claim: <a href="https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals" target="_blank" rel="noopener">Vercel's agent evals post</a>. The AGENTS.md pattern is also the basis for Anthropic's own Claude Code setup.</p>
+
+            <h3 id="curation-vs-quantity">Why curation beats quantity</h3>
+            <p>The SkillsBench paper (<a href="https://arxiv.org/abs/2602.12670" target="_blank" rel="noopener">arxiv.org/abs/2602.12670</a>) tested agent performance across three skill installation strategies.</p>
+
+            <div class="stat-row">
+              <div class="stat-card">
+                <div class="stat-num">+18.6pp</div>
+                <div class="stat-label">lift with 2-3 curated skills per task</div>
+                <div class="stat-source">Source: <a href="https://arxiv.org/abs/2602.12670" target="_blank" rel="noopener">SkillsBench</a></div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num is-muted">-2.9pp</div>
+                <div class="stat-label">drop with kitchen-sink install (all available skills)</div>
+                <div class="stat-source">Source: <a href="https://arxiv.org/abs/2602.12670" target="_blank" rel="noopener">SkillsBench</a></div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num is-muted">-1.3pp</div>
+                <div class="stat-label">drop with self-generated skills (agent writes its own)</div>
+                <div class="stat-source">Source: <a href="https://arxiv.org/abs/2602.12670" target="_blank" rel="noopener">SkillsBench</a></div>
+              </div>
+            </div>
+
+            <p>The mechanism: irrelevant skills confuse the agent about what to use. A kitchen-sink install forces the agent to evaluate 200+ options per task, increasing both latency and error rate. The sweet spot is 2-3 well-matched skills per task, which is exactly what profile-based curation produces.</p>
+
+            <p>This is why the pack uses profile tags. When you label yourself as a developer, you get the dev skills in your activation block, not every skill in the catalog. The agent doesn't know about skills outside your selected profiles unless it invokes find-skills specifically.</p>
+
+            <h3 id="what-floom-adds">What Floom adds to skills.sh skills</h3>
+            <p>Floom doesn't author most of the skills in this pack. We curate them from the open ecosystem (mostly skills.sh) and add five things on top.</p>
+
+            <div class="floom-adds-list">
+              <div class="floom-add-item">
+                <span class="floom-add-num">1.</span>
+                <span><strong>AGENTS.md / CLAUDE.md activation rule per skill</strong> so they actually fire. Vercel showed this lifts activation from 53% to 100%.</span>
+              </div>
+              <div class="floom-add-item">
+                <span class="floom-add-num">2.</span>
+                <span><strong>Cross-agent format translation.</strong> Same skill, native install in five agents.</span>
+              </div>
+              <div class="floom-add-item">
+                <span class="floom-add-num">3.</span>
+                <span><strong>License vetting.</strong> We exclude API-keyed and ambiguous-license skills.</span>
+              </div>
+              <div class="floom-add-item">
+                <span class="floom-add-num">4.</span>
+                <span><strong>Daily refresh and version tracking</strong> from upstream sources.</span>
+              </div>
+              <div class="floom-add-item">
+                <span class="floom-add-num">5.</span>
+                <span><strong>Curated portfolio.</strong> Picking dozens from 91,000 is editorial labor.</span>
+              </div>
+            </div>
+
+            <p>When you install via Floom, you're getting the original author's skill, with the activation, distribution, and update layer Floom provides on top. We link every skill to its source repo. Floom doesn't intermediate the code.</p>
+
+            <h3 id="inference">Why Floom doesn't pay for inference</h3>
+            <p>Skills run inside your agent, on your API key, using your token budget. Floom is the distribution layer. We curate, package, and activate. Your agent executes.</p>
+            <p>This is intentional. Skills that run on a third-party runtime can't access your local filesystem, your git repo, or your project context. Skills that run in your agent can do all three. The power of skills is that they run where your agent runs.</p>
+            <p>Floom's business is the distribution infrastructure: the manifest, the installer, the activation pattern, and the curation. Not the inference.</p>
+          </section>
+
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+    </main>
+
+    <footer class="site-footer" aria-label="Site footer">
+      <div class="site-footer-inner">
+        <div class="footer-brand">
+          <a class="footer-wordmark" href="index.html">Floom</a>
+          <small>Open source · MIT</small>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">Sitemap</div>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="library.html">Skills</a></li>
+            <li><a href="docs.html">Docs</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">Resources</div>
+          <ul>
+            <li><a href="https://github.com/floomhq/starter" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="https://github.com/floomhq/starter/releases" target="_blank" rel="noopener">Changelog</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Floom · Built with care in Berlin and San Francisco</span>
+        <span class="footer-mit">MIT License</span>
+      </div>
+    </footer>
+
+    <script>
+      // Active TOC highlighting (watches both top-level sections and nested h3 sub-sections)
+      const targets = document.querySelectorAll('.doc-section[id], .doc-section h3[id]');
+      const navLinks = document.querySelectorAll('.doc-nav a');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            const active = document.querySelector('.doc-nav a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+
+      targets.forEach(t => observer.observe(t));
+
+      // Copy buttons
+      document.querySelectorAll('.code-copy-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const cmd = btn.dataset.copy;
+          try {
+            await navigator.clipboard.writeText(cmd);
+          } catch {
+            const ta = document.createElement('textarea');
+            ta.value = cmd;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+          }
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove('copied');
+          }, 1400);
+        });
+      });
+    </script>
+  </body>
+</html>

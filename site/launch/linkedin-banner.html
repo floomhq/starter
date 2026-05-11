@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Floom Starter Pack — LinkedIn Banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #fafaf7;
+    --ink: #050505;
+    --muted: #4b4b4b;
+    --blue: #0094ff;
+    --blue-pale: #eaf7ff;
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1584px;
+    height: 396px;
+    overflow: hidden;
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    color: var(--ink);
+  }
+  body {
+    background:
+      radial-gradient(circle at 6% 30%, rgba(0, 148, 255, 0.16), transparent 32rem),
+      radial-gradient(circle at 96% 10%, rgba(255, 79, 216, 0.10), transparent 28rem),
+      var(--paper);
+    position: relative;
+  }
+  /*
+   * LinkedIn safe-area:
+   * - Personal page: profile pic ~200px circle, bottom-left, ~50px from edge.
+   * - Company page: logo ~150px square, top-left, ~50px from edge.
+   * - Union avoid-zone: leftmost ~300px column.
+   * Approach: shift all content RIGHT past the avoid-zone via left padding.
+   * Three-column flex: wordmark | headline (centered in remaining space) | install.
+   */
+  .stage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 36px 72px 36px 320px;
+    gap: 48px;
+  }
+  .wordmark {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+    width: 240px;
+  }
+  .wordmark strong {
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .wordmark .meta {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .wordmark .tagline {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    line-height: 1.3;
+    margin-top: 6px;
+    white-space: nowrap;
+  }
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  h1 {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.0;
+    color: var(--ink);
+  }
+  h1 .lead { display: block; }
+  h1 em {
+    font-style: normal;
+    color: var(--blue);
+    font-weight: 700;
+    display: block;
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 14px;
+    flex-shrink: 0;
+    width: 280px;
+  }
+  .terminal {
+    display: inline-flex;
+    align-items: center;
+    background: var(--ink);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 14px 20px;
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0;
+    border: 2px solid var(--ink);
+    white-space: nowrap;
+  }
+  .url {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="wordmark">
+      <strong>floom</strong>
+      <span class="meta">Open source &middot; MIT</span>
+      <p class="tagline">Open source skills for AI agents.</p>
+    </div>
+
+    <div class="center">
+      <h1>
+        <span class="lead">65 hand-picked.</span>
+        <em>One install.</em>
+      </h1>
+    </div>
+
+    <div class="right">
+      <div class="terminal">$ npx @floomhq/starter install</div>
+      <div class="url">starter.floom.dev</div>
+    </div>
+  </div>
+</body>
+</html>

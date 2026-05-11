@@ -1,10 +1,10 @@
 ## What
 
-<one-sentence description>
+Describe the change in one sentence.
 
 ## Why
 
-<motivation: bug fix, new skill, doc update, etc>
+Explain the motivation: bug fix, docs update, skill metadata correction, or release prep.
 
 ## Verification
 
@@ -12,8 +12,8 @@
 - [ ] If touching manifest: schema valid (CI will check)
 - [ ] If touching cron: dry-run preserves enrichment
 - [ ] No new em-dashes in user-facing copy
-- [ ] No Gemini references (5 supported agents only)
+- [ ] Supported agents remain exactly Claude Code, Codex, Cursor, Kimi, and OpenCode
 
 ## Notes
 
-<any context reviewers need>
+Add reviewer context here, or write `None`.

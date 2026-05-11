@@ -431,7 +431,7 @@ export async function install(opts = {}) {
   for (const f of activationFiles) log(`    ${f}`);
   log(`  Manifest: ${manifestPath}`);
   log("");
-  log(`  Try: ask your agent "review the changes in this branch", pr-review will fire.`);
+  log(`  Try: ask your agent "find a skill for this task", find-skills will fire.`);
 
   // 11. Decide exit signal. Per 0.2.4 spec:
   //   - any installs landed:        exit 0 (partial success is success)

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#fafaf7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<title>systematic-debugging: Floom Starter Pack skill</title>
+<meta content="Structured symptom-to-root-cause debugging methodology." name="description"/>
+<!-- Open Graph -->
+<meta content="Floom Starter Pack" property="og:site_name"/>
+<meta content="article" property="og:type"/>
+<meta content="systematic-debugging: Floom Starter Pack skill" property="og:title"/>
+<meta content="Structured symptom-to-root-cause debugging methodology." property="og:description"/>
+<meta content="https://starter.floom.dev/skill/systematic-debugging" property="og:url"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="systematic-debugging: Floom Starter Pack skill" name="twitter:title"/>
+<meta content="Structured symptom-to-root-cause debugging methodology." name="twitter:description"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="@floomhq" name="twitter:creator"/>
+<meta content="@floomhq" name="twitter:site"/>
+<!-- Favicon -->
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Canonical -->
+<link href="https://starter.floom.dev/skill/systematic-debugging" rel="canonical"/>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "systematic-debugging",
+  "description": "Structured symptom-to-root-cause debugging methodology.",
+  "codeRepository": "https://github.com/obra/superpowers",
+  "license": "MIT",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "Floom Starter Pack",
+    "url": "https://starter.floom.dev/"
+  }
+}
+</script>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #050505;
+  --muted: #333333;
+  --dim: #6b6b6b;
+  --blue: #0094ff;
+  --blue-soft: #bfe6ff;
+  --blue-pale: #eaf7ff;
+  --line: 2px solid var(--ink);
+  --line-light: 1px solid #e0dfdb;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scrollbar-gutter: stable; overflow-y: scroll; }
+body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+.page { width: min(100%, 1100px); margin: 0 auto; padding: 44px 70px 72px; }
+
+.nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
+.nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
+.wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
+.wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+.wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; max-width: 100%; }
+.nav-links a { color: inherit; text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+
+@media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
+@media (max-width: 980px) { .page { padding: 30px 22px 52px; } }
+@media (max-width: 640px) { .page { padding: 22px 16px 44px; } .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--dim); text-decoration: none; margin-top: 24px; margin-bottom: 8px; }
+.back-link:hover { color: var(--ink); }
+
+.hero { margin-top: 8px; padding: 28px 0 32px; border-bottom: var(--line-light); }
+.hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 14px; word-break: break-word; }
+.hero-desc { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 18px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
+.badge.mute { color: var(--muted); background: #fff; border-color: #ddd; }
+
+.section { margin-top: 40px; }
+.section-label { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+.install-btn-wrap { position: relative; display: inline-block; }
+.install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.install-btn.copied { background: var(--blue); border-color: var(--blue); }
+.install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
+.install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.install-tooltip-cmd { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; word-break: break-all; }
+
+.cmd-block { display: flex; align-items: stretch; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; max-width: 720px; margin-top: 8px; }
+.cmd-text { flex: 1; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); padding: 12px 14px; word-break: break-all; line-height: 1.55; }
+.cmd-copy { flex-shrink: 0; background: var(--ink); color: #fff; border: none; cursor: pointer; padding: 12px 18px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; transition: background 0.15s; text-transform: uppercase; }
+.cmd-copy:hover { background: #333; }
+.cmd-copy.copied { background: var(--blue); }
+
+.fires-block { font-size: 16px; color: var(--ink); line-height: 1.6; background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 16px 18px; max-width: 720px; }
+
+.files-list { display: flex; flex-direction: column; gap: 6px; max-width: 720px; }
+.file-row { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; padding: 8px 12px; background: #fff; border: 1px solid #e0dfdb; border-radius: 8px; }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; }
+.file-size { color: var(--muted); flex-shrink: 0; }
+.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+
+.md-block { font-size: 15px; line-height: 1.7; color: var(--ink); background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 22px 26px; max-width: 860px; }
+.md-block h2, .md-block h3, .md-block h4 { font-weight: 700; margin: 18px 0 8px; letter-spacing: -0.01em; }
+.md-block h2 { font-size: 22px; }
+.md-block h3 { font-size: 18px; }
+.md-block h4 { font-size: 16px; }
+.md-block p { margin: 8px 0; }
+.md-block ul, .md-block ol { margin: 8px 0 8px 22px; }
+.md-block li { margin: 3px 0; }
+.md-block code { font-family: var(--mono); font-size: 13px; background: #f0efeb; padding: 1px 5px; border-radius: 3px; }
+.md-block pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 10px 0; }
+.md-block pre code { background: none; padding: 0; }
+.md-block a { color: var(--blue); }
+.md-block blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 14px; color: var(--muted); margin: 12px 0; }
+.md-block hr { border: none; border-top: 1px solid #e0dfdb; margin: 14px 0; }
+
+.links-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+.link-btn { font-family: var(--mono); font-size: 12px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.link-btn:hover { color: var(--ink); }
+
+.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
+
+.footer-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; border: var(--line); border-radius: 28px; background: var(--blue); color: #ffffff; padding: 28px; }
+.footer-cta h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.footer-cta p { color: rgba(255,255,255,0.92); margin-top: 8px; font-size: 15px; font-weight: 500; }
+.footer-cta .button { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #ffffff; border-radius: 14px; background: #ffffff; color: var(--ink); padding: 14px 20px; font: 900 13px/1 var(--sans); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: box-shadow 150ms ease, transform 150ms ease; }
+.footer-cta .button:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.22); transform: translateY(-2px); }
+@media (max-width: 860px) { .footer-cta { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 36px; } }
+
+.site-footer { border-top: 2px solid var(--ink); background: var(--paper); padding: 48px 70px 0; margin-top: 56px; }
+.site-footer-inner { width: min(100%, 1100px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+.footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
+.footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
+.footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom { width: min(100%, 1100px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
+.footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
+@media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
+@media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
+
+
+/* === Skill page TOC layout (mirrors docs.html .doc-layout) === */
+.skill-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 24px;
+  align-items: flex-start;
+}
+.skill-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-self: start;
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+.skill-nav-label {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+}
+.skill-nav a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 14px;
+  background: transparent;
+  color: #4b4b4b;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: background 120ms ease, color 120ms ease;
+}
+.skill-nav a.is-sub { padding-left: 20px; font-weight: 600; color: #5b5b5b; font-size: 12.5px; }
+.skill-nav a.is-sub-2 { padding-left: 32px; font-weight: 500; color: #6b6b6b; font-size: 12px; }
+.skill-nav a:hover, .skill-nav a.active {
+  background: var(--blue-pale);
+  color: var(--ink);
+}
+.skill-body { display: block; min-width: 0; }
+.skill-body .section { scroll-margin-top: 36px; }
+
+@media (max-width: 980px) {
+  .skill-layout { grid-template-columns: 1fr; gap: 28px; }
+  .skill-nav {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid rgba(5,5,5,0.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+  }
+  .skill-nav-label { width: 100%; padding-left: 4px; }
+  .skill-nav a { padding: 6px 10px; font-size: 12px; }
+  .skill-nav a.is-sub, .skill-nav a.is-sub-2 { padding-left: 10px; }
+}
+
+/* === Install CTA + tooltip (from index.html) === */
+.install-cta-wrap { position: relative; display: inline-block; }
+.install-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 14px 22px;
+  font: 900 13px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  gap: 8px;
+}
+.install-cta:hover, .install-cta:focus-visible {
+  box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+  transform: translateY(-1px);
+  outline: none;
+}
+.install-cta:hover .install-cta-icon,
+.install-cta:focus-visible .install-cta-icon {
+  transform: translateY(2px);
+}
+.install-cta-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied .install-cta-label::after { content: " \2713"; }
+.install-cta-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 360px;
+  max-width: 420px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
+  transform: translateY(-4px);
+  z-index: 100;
+  box-shadow: 0 14px 30px rgba(5,5,5,0.18);
+}
+.install-cta:hover .install-cta-tooltip,
+.install-cta:focus-visible .install-cta-tooltip,
+.install-cta:focus-within .install-cta-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
+}
+
+/* Connector arrow from button up to tooltip */
+.install-cta-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  border-top: 2px solid var(--ink);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+/* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
+@media (hover: none) {
+  .install-cta-tooltip { display: none; }
+}
+.tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
+.tooltip-cmd {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.tooltip-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.install-cta--final { background: #ffffff; color: var(--ink); }
+.install-cta--final:hover, .install-cta--final:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
+}
+.install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+.install-cta-wrap--final .install-cta-tooltip { left: auto; right: 0; }
+
+@media (max-width: 640px) {
+  .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
+}
+
+/* === Final CTA (mirrors index.html .final-cta dark surface) === */
+.final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 56px;
+  border: var(--line);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 32px 34px;
+}
+.final-cta strong {
+  display: block;
+  max-width: 620px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.final-cta span { display: block; margin-top: 12px; color: #d6d6d6; font-size: 15px; font-weight: 550; }
+@media (max-width: 860px) {
+  .final-cta { flex-direction: column; align-items: flex-start; }
+  .final-cta strong { font-size: 24px; }
+}
+
+/* skill-cta-label-fix */
+.final-cta .install-cta--final .install-cta-label { color: var(--ink); }
+.final-cta .install-cta--final .install-cta-icon { color: var(--ink); }
+.final-cta .install-cta--final.is-copied .install-cta-label,
+.final-cta .install-cta--final.is-copied .install-cta-icon { color: #ffffff; }
+.final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+</style>
+</head>
+<body>
+<main class="page">
+<nav aria-label="Main navigation" class="nav">
+<a class="wordmark" href="../index.html">
+<strong>Floom</strong>
+<span>Open source · MIT</span>
+</a>
+<div class="nav-right">
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a aria-current="page" href="../library.html">Skills</a>
+<a href="../docs.html">Docs</a>
+<a href="../about.html">About</a>
+</div>
+</div>
+</nav>
+<a class="back-link" href="../library.html">← Back to Skills</a>
+
+
+
+
+
+
+<div class="skill-layout"><nav aria-label="On this page" class="skill-nav">
+<span class="skill-nav-label">On this page</span>
+<a href="#overview">Overview</a>
+<a href="#install">Install</a>
+<a href="#fires-when">Fires when</a>
+<a href="#files">Files</a>
+<a href="#skill-md">SKILL.md</a>
+<a class="is-sub" href="#skillmd-systematic-debugging">Systematic Debugging</a>
+<a class="is-sub-2" href="#skillmd-overview">Overview</a>
+<a class="is-sub-2" href="#skillmd-the-iron-law">The Iron Law</a>
+<a class="is-sub-2" href="#skillmd-when-to-use">When to Use</a>
+<a class="is-sub-2" href="#skillmd-the-four-phases">The Four Phases</a>
+<a class="is-sub-2" href="#skillmd-red-flags---stop-and-follow-process">Red Flags - STOP and Follow Process</a>
+<a class="is-sub-2" href="#skillmd-your-human-partners-signals-youre-doing-it-wrong">your human partner's Signals You're Doing It W…</a>
+<a class="is-sub-2" href="#skillmd-common-rationalizations">Common Rationalizations</a>
+<a class="is-sub-2" href="#skillmd-quick-reference">Quick Reference</a>
+<a class="is-sub-2" href="#skillmd-when-process-reveals-no-root-cause">When Process Reveals "No Root Cause"</a>
+<a class="is-sub-2" href="#skillmd-supporting-techniques">Supporting Techniques</a>
+<a class="is-sub-2" href="#skillmd-real-world-impact">Real-World Impact</a>
+<a href="#source">Source</a>
+</nav><div class="skill-body"><header class="hero" id="overview">
+<h1>systematic-debugging</h1>
+<p class="hero-desc">Structured symptom-to-root-cause debugging methodology.</p>
+<div class="hero-meta">
+<span class="badge">↓ 88.5K on skills.sh</span><span class="badge mute">obra</span><span class="badge mute">MIT</span>
+<span class="profile-tag">core</span>
+</div>
+</header><section class="section" id="install">
+<div class="section-label">Install</div>
+<div class="install-cta-wrap">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --skills systematic-debugging" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>systematic-debugging</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills systematic-debugging</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+<div class="cmd-block">
+<div class="cmd-text" id="cmdText">npx @floomhq/starter install --skills systematic-debugging</div>
+<button class="cmd-copy" id="cmdCopy" onclick="copyCmd()">Copy</button>
+</div>
+</section><section class="section" id="fires-when">
+<div class="section-label">Fires when</div>
+<div class="fires-block">any bug, test failure, unexpected behavior</div>
+</section><section class="section" id="files">
+<div class="section-label">Files</div>
+<div class="files-list"><div class="file-row"><span class="file-name">CREATION-LOG.md</span><span class="file-size">4,257 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">9,884 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">condition-based-waiting-example.ts</span><span class="file-size">5,054 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">condition-based-waiting.md</span><span class="file-size">3,516 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">defense-in-depth.md</span><span class="file-size">3,650 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">find-polluter.sh</span><span class="file-size">1,528 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">root-cause-tracing.md</span><span class="file-size">5,316 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">test-academic.md</span><span class="file-size">653 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">test-pressure-1.md</span><span class="file-size">1,900 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">test-pressure-2.md</span><span class="file-size">2,283 bytes</span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">test-pressure-3.md</span><span class="file-size">2,692 bytes</span><span class="file-type">support</span></div></div>
+</section><section class="section" id="skill-md">
+<div class="section-label">SKILL.md</div>
+<div class="md-block"><h2 id="skillmd-systematic-debugging">Systematic Debugging</h2>
+<h3 id="skillmd-overview">Overview</h3>
+<p>Random fixes waste time and create new bugs. Quick patches mask underlying issues.</p>
+<p><strong>Core principle:</strong> ALWAYS find root cause before attempting fixes. Symptom fixes are failure.</p>
+<p><strong>Violating the letter of this process is violating the spirit of debugging.</strong></p>
+<h3 id="skillmd-the-iron-law">The Iron Law</h3>
+<pre><code class="lang-">NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST</code></pre>
+<p>If you haven't completed Phase 1, you cannot propose fixes.</p>
+<h3 id="skillmd-when-to-use">When to Use</h3>
+<p>Use for ANY technical issue:</p>
+<ul><li>Test failures</li><li>Bugs in production</li><li>Unexpected behavior</li><li>Performance problems</li><li>Build failures</li><li>Integration issues</li></ul>
+<p><strong>Use this ESPECIALLY when:</strong></p>
+<ul><li>Under time pressure (emergencies make guessing tempting)</li><li>"Just one quick fix" seems obvious</li><li>You've already tried multiple fixes</li><li>Previous fix didn't work</li><li>You don't fully understand the issue</li></ul>
+<p><strong>Don't skip when:</strong></p>
+<ul><li>Issue seems simple (simple bugs have root causes too)</li><li>You're in a hurry (rushing guarantees rework)</li><li>Manager wants it fixed NOW (systematic is faster than thrashing)</li></ul>
+<h3 id="skillmd-the-four-phases">The Four Phases</h3>
+<p>You MUST complete each phase before proceeding to the next.</p>
+<h4>Phase 1: Root Cause Investigation</h4>
+<p><strong>BEFORE attempting ANY fix:</strong></p>
+<p>- Don't skip past errors or warnings    - They often contain the exact solution    - Read stack traces completely    - Note line numbers, file paths, error codes</p>
+<ol><li><strong>Read Error Messages Carefully</strong></li></ol>
+<p>- Can you trigger it reliably?    - What are the exact steps?    - Does it happen every time?    - If not reproducible → gather more data, don't guess</p>
+<ol><li><strong>Reproduce Consistently</strong></li></ol>
+<p>- What changed that could cause this?    - Git diff, recent commits    - New dependencies, config changes    - Environmental differences</p>
+<ol><li><strong>Check Recent Changes</strong></li></ol>
+<ol><li><strong>Gather Evidence in Multi-Component Systems</strong></li></ol>
+<p><strong>WHEN system has multiple components (CI → build → signing, API → service → database):</strong></p>
+<p><strong>BEFORE proposing fixes, add diagnostic instrumentation:</strong>    ```    For EACH component boundary:      - Log what data enters component      - Log what data exits component      - Verify environment/config propagation      - Check state at each layer</p>
+<p>Run once to gather evidence showing WHERE it breaks    THEN analyze evidence to identify failing component    THEN investigate that specific component    ```</p>
+<p><strong>Example (multi-layer system):</strong>    ```bash    # Layer 1: Workflow    echo "=== Secrets available in workflow: ==="    echo "IDENTITY: ${IDENTITY:+SET}${IDENTITY:-UNSET}"</p>
+<p># Layer 2: Build script    echo "=== Env vars in build script: ==="    env | grep IDENTITY || echo "IDENTITY not in environment"</p>
+<p># Layer 3: Signing script    echo "=== Keychain state: ==="    security list-keychains    security find-identity -v</p>
+<p># Layer 4: Actual signing    codesign --sign "$IDENTITY" --verbose=4 "$APP"    ```</p>
+<p><strong>This reveals:</strong> Which layer fails (secrets → workflow ✓, workflow → build ✗)</p>
+<ol><li><strong>Trace Data Flow</strong></li></ol>
+<p><strong>WHEN error is deep in call stack:</strong></p>
+<p>See <code>root-cause-tracing.md</code> in this directory for the complete backward tracing technique.</p>
+<p><strong>Quick version:</strong>    - Where does bad value originate?    - What called this with bad value?    - Keep tracing up until you find the source    - Fix at source, not at symptom</p>
+<h4>Phase 2: Pattern Analysis</h4>
+<p><strong>Find the pattern before fixing:</strong></p>
+<p>- Locate similar working code in same codebase    - What works that's similar to what's broken?</p>
+<ol><li><strong>Find Working Examples</strong></li></ol>
+<p>- If implementing pattern, read reference implementation COMPLETELY    - Don't skim - read every line    - Understand the pattern fully before applying</p>
+<ol><li><strong>Compare Against References</strong></li></ol>
+<p>- What's different between working and broken?    - List every difference, however small    - Don't assume "that can't matter"</p>
+<ol><li><strong>Identify Differences</strong></li></ol>
+<p>- What other components does this need?    - What settings, config, environment?    - What assumptions does it make?</p>
+<ol><li><strong>Understand Dependencies</strong></li></ol>
+<h4>Phase 3: Hypothesis and Testing</h4>
+<p><strong>Scientific method:</strong></p>
+<p>- State clearly: "I think X is the root cause because Y"    - Write it down    - Be specific, not vague</p>
+<ol><li><strong>Form Single Hypothesis</strong></li></ol>
+<p>- Make the SMALLEST possible change to test hypothesis    - One variable at a time    - Don't fix multiple things at once</p>
+<ol><li><strong>Test Minimally</strong></li></ol>
+<p>- Did it work? Yes → Phase 4    - Didn't work? Form NEW hypothesis    - DON'T add more fixes on top</p>
+<ol><li><strong>Verify Before Continuing</strong></li></ol>
+<p>- Say "I don't understand X"    - Don't pretend to know    - Ask for help    - Research more</p>
+<ol><li><strong>When You Don't Know</strong></li></ol>
+<h4>Phase 4: Implementation</h4>
+<p><strong>Fix the root cause, not the symptom:</strong></p>
+<p>- Simplest possible reproduction    - Automated test if possible    - One-off test script if no framework    - MUST have before fixing    - Use the <code>superpowers:test-driven-development</code> skill for writing proper failing tests</p>
+<ol><li><strong>Create Failing Test Case</strong></li></ol>
+<p>- Address the root cause identified    - ONE change at a time    - No "while I'm here" improvements    - No bundled refactoring</p>
+<ol><li><strong>Implement Single Fix</strong></li></ol>
+<p>- Test passes now?    - No other tests broken?    - Issue actually resolved?</p>
+<ol><li><strong>Verify Fix</strong></li></ol>
+<p>- STOP    - Count: How many fixes have you tried?    - If &lt; 3: Return to Phase 1, re-analyze with new information    - <strong>If ≥ 3: STOP and question the architecture (step 5 below)</strong>    - DON'T attempt Fix #4 without architectural discussion</p>
+<ol><li><strong>If Fix Doesn't Work</strong></li></ol>
+<ol><li><strong>If 3+ Fixes Failed: Question Architecture</strong></li></ol>
+<p><strong>Pattern indicating architectural problem:</strong>    - Each fix reveals new shared state/coupling/problem in different place    - Fixes require "massive refactoring" to implement    - Each fix creates new symptoms elsewhere</p>
+<p><strong>STOP and question fundamentals:</strong>    - Is this pattern fundamentally sound?    - Are we "sticking with it through sheer inertia"?    - Should we refactor architecture vs. continue fixing symptoms?</p>
+<p><strong>Discuss with your human partner before attempting more fixes</strong></p>
+<p>This is NOT a failed hypothesis - this is a wrong architecture.</p>
+<h3 id="skillmd-red-flags---stop-and-follow-process">Red Flags - STOP and Follow Process</h3>
+<p>If you catch yourself thinking:</p>
+<ul><li>"Quick fix for now, investigate later"</li><li>"Just try changing X and see if it works"</li><li>"Add multiple changes, run tests"</li><li>"Skip the test, I'll manually verify"</li><li>"It's probably X, let me fix that"</li><li>"I don't fully understand but this might work"</li><li>"Pattern says X but I'll adapt it differently"</li><li>"Here are the main problems: [lists fixes without investigation]"</li><li>Proposing solutions before tracing data flow</li><li><strong>"One more fix attempt" (when already tried 2+)</strong></li><li><strong>Each fix reveals new problem in different place</strong></li></ul>
+<p><strong>ALL of these mean: STOP. Return to Phase 1.</strong></p>
+<p><strong>If 3+ fixes failed:</strong> Question the architecture (see Phase 4.5)</p>
+<h3 id="skillmd-your-human-partners-signals-youre-doing-it-wrong">your human partner's Signals You're Doing It Wrong</h3>
+<p><strong>Watch for these redirections:</strong></p>
+<ul><li>"Is that not happening?" - You assumed without verifying</li><li>"Will it show us...?" - You should have added evidence gathering</li><li>"Stop guessing" - You're proposing fixes without understanding</li><li>"Ultrathink this" - Question fundamentals, not just symptoms</li><li>"We're stuck?" (frustrated) - Your approach isn't working</li></ul>
+<p><strong>When you see these:</strong> STOP. Return to Phase 1.</p>
+<h3 id="skillmd-common-rationalizations">Common Rationalizations</h3>
+<p>| Excuse | Reality | |--------|---------| | "Issue is simple, don't need process" | Simple issues have root causes too. Process is fast for simple bugs. | | "Emergency, no time for process" | Systematic debugging is FASTER than guess-and-check thrashing. | | "Just try this first, then investigate" | First fix sets the pattern. Do it right from the start. | | "I'll write test after confirming fix works" | Untested fixes don't stick. Test first proves it. | | "Multiple fixes at once saves time" | Can't isolate what worked. Causes new bugs. | | "Reference too long, I'll adapt the pattern" | Partial understanding guarantees bugs. Read it completely. | | "I see the problem, let me fix it" | Seeing symptoms ≠ understanding root cause. | | "One more fix attempt" (after 2+ failures) | 3+ failures = architectural problem. Question pattern, don't fix again. |</p>
+<h3 id="skillmd-quick-reference">Quick Reference</h3>
+<p>| Phase | Key Activities | Success Criteria | |-------|---------------|------------------| | <strong>1. Root Cause</strong> | Read errors, reproduce, check changes, gather evidence | Understand WHAT and WHY | | <strong>2. Pattern</strong> | Find working examples, compare | Identify differences | | <strong>3. Hypothesis</strong> | Form theory, test minimally | Confirmed or new hypothesis | | <strong>4. Implementation</strong> | Create test, fix, verify | Bug resolved, tests pass |</p>
+<h3 id="skillmd-when-process-reveals-no-root-cause">When Process Reveals "No Root Cause"</h3>
+<p>If systematic investigation reveals issue is truly environmental, timing-dependent, or external:</p>
+<ol><li>You've completed the process</li><li>Document what you investigated</li><li>Implement appropriate handling (retry, timeout, error message)</li><li>Add monitoring/logging for future investigation</li></ol>
+<p><strong>But:</strong> 95% of "no root cause" cases are incomplete investigation.</p>
+<h3 id="skillmd-supporting-techniques">Supporting Techniques</h3>
+<p>These techniques are part of systematic debugging and available in this directory:</p>
+<ul><li><strong><code>root-cause-tracing.md</code></strong> - Trace bugs backward through call stack to find original trigger</li><li><strong><code>defense-in-depth.md</code></strong> - Add validation at multiple layers after finding root cause</li><li><strong><code>condition-based-waiting.md</code></strong> - Replace arbitrary timeouts with condition polling</li></ul>
+<p><strong>Related skills:</strong></p>
+<ul><li><strong>superpowers:test-driven-development</strong> - For creating failing test case (Phase 4, Step 1)</li><li><strong>superpowers:verification-before-completion</strong> - Verify fix worked before claiming success</li></ul>
+<h3 id="skillmd-real-world-impact">Real-World Impact</h3>
+<p>From debugging sessions:</p>
+<ul><li>Systematic approach: 15-30 minutes to fix</li><li>Random fixes approach: 2-3 hours of thrashing</li><li>First-time fix rate: 95% vs 40%</li><li>New bugs introduced: Near zero vs common</li></ul></div>
+</section><section class="section" id="source">
+<div class="section-label">Source</div>
+<div class="links-row">
+<a class="link-btn" href="https://github.com/obra/superpowers" rel="noopener" target="_blank">View upstream on GitHub ↑</a>
+<a class="link-btn" href="https://github.com/floomhq/starter/blob/main/skills/systematic-debugging.json" rel="noopener" target="_blank">View on Floom GitHub ↑</a>
+<a class="link-btn" href="https://skills.sh/obra/superpowers/systematic-debugging" rel="noopener" target="_blank">View on skills.sh ↑</a>
+</div>
+</section></div></div><section class="final-cta">
+<div>
+<strong>Add this skill to your agent.</strong>
+<span>Installs <code style="background:rgba(255,255,255,0.12);padding:1px 6px;border-radius:4px;color:#fff;font-family:var(--mono);font-size:13px">systematic-debugging</code> into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+</div>
+<div class="install-cta-wrap install-cta-wrap--final">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --skills systematic-debugging" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>systematic-debugging</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills systematic-debugging</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+</section>
+</main>
+<footer aria-label="Site footer" class="site-footer">
+<div class="site-footer-inner">
+<div class="footer-brand">
+<a class="footer-wordmark" href="../index.html">Floom</a>
+<small>Open source · MIT</small>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Sitemap</div>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../library.html">Skills</a></li>
+<li><a href="../docs.html">Docs</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Resources</div>
+<ul>
+<li><a href="https://github.com/floomhq/starter" rel="noopener" target="_blank">GitHub</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+<li><a href="../terms.html">Terms</a></li>
+<li><a href="https://github.com/floomhq/starter/releases" rel="noopener" target="_blank">Changelog</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Floom · Built with care in Berlin and San Francisco</span>
+<span class="footer-mit">MIT License</span>
+</div>
+</footer>
+<script>
+function copyInstall(btn, cmd) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    const original = btn.dataset.original || btn.textContent;
+    btn.dataset.original = original;
+    btn.classList.add('copied');
+    btn.textContent = 'Copied! Paste in terminal';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
+  });
+}
+function copyCmd() {
+  const t = document.getElementById('cmdText').textContent;
+  const b = document.getElementById('cmdCopy');
+  navigator.clipboard.writeText(t).then(() => {
+    b.classList.add('copied'); b.textContent = 'Copied!';
+    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+<script>
+
+// === Install CTA (Add to your agent button) - copy on click ===
+document.querySelectorAll(".install-cta").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const command = button.dataset.copy;
+    if (!command) return;
+    try {
+      await navigator.clipboard.writeText(command);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = command;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const labelEl = button.querySelector(".install-cta-label");
+    if (labelEl) {
+      const original = labelEl.textContent;
+      labelEl.textContent = "Copied! Paste in terminal";
+      button.classList.add("is-copied");
+      setTimeout(() => {
+        labelEl.textContent = original;
+        button.classList.remove("is-copied");
+      }, 2000);
+    }
+  });
+});
+
+// === TOC active-section highlighting (scroll spy) ===
+(function () {
+  const sections = document.querySelectorAll(".skill-body .section[id], .skill-body .section [id]");
+  const navLinks = document.querySelectorAll(".skill-nav a");
+  if (!sections.length || !navLinks.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector('.skill-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add("active");
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
+  sections.forEach((s) => observer.observe(s));
+})();
+</script></body>
+</html>

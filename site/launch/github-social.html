@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Floom Starter Pack — GitHub Social Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #fafaf7;
+    --ink: #050505;
+    --muted: #4b4b4b;
+    --blue: #0094ff;
+    --blue-pale: #eaf7ff;
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1280px;
+    height: 640px;
+    overflow: hidden;
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    color: var(--ink);
+  }
+  body {
+    background:
+      radial-gradient(circle at 12% 14%, rgba(0, 148, 255, 0.16), transparent 30rem),
+      radial-gradient(circle at 90% 4%, rgba(255, 79, 216, 0.12), transparent 26rem),
+      var(--paper);
+    padding: 56px;
+  }
+  .card {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border: 2px solid var(--ink);
+    border-radius: 22px;
+    padding: 56px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0;
+    box-shadow: 0 18px 40px rgba(5, 5, 5, 0.06);
+  }
+  .top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .wordmark {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .wordmark strong {
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+    color: var(--ink);
+  }
+  .wordmark span {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    background: var(--blue-pale);
+    padding: 10px 18px;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 22px;
+  }
+  h1 {
+    font-size: 88px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.96;
+    color: var(--ink);
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .sub {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .terminal {
+    display: inline-flex;
+    align-items: center;
+    background: var(--ink);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 14px 22px;
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .url {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="top">
+      <div class="wordmark">
+        <strong>floom</strong>
+        <span>Open source &middot; MIT</span>
+      </div>
+      <div class="pill">Starter Pack</div>
+    </div>
+
+    <div class="center">
+      <h1>65 hand-picked skills for your <em>AI agent.</em></h1>
+      <p class="sub">+18.6pp pass-rate lift on SkillsBench &middot; Works with Claude, Codex, Cursor, Kimi, OpenCode</p>
+    </div>
+
+    <div class="bottom">
+      <div class="terminal">$ npx @floomhq/starter install</div>
+      <div class="url">github.com/floomhq/starter</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -29,7 +29,7 @@ export async function runInit(opts = {}) {
   const log = opts.log || console.log;
 
   log("");
-  log("  Floom Starter — skill installer for AI agents");
+  log("  Floom Starter, skill installer for AI agents");
   log("  ─────────────────────────────────────────────");
   log("");
   log("  What best describes your work?");

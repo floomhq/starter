@@ -11,3 +11,5 @@ SkillsBench source:
 
 The full Apache-2.0 license text for SkillsBench is included at
 `licenses/LICENSE.skillsbench`.
+
+The per-source attribution table is maintained at `licenses/README.md`.

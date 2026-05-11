@@ -1,124 +1,92 @@
 # Website Integration
 
-This document is the UI/data contract for adding a Floom Packs page to the
-website.
+This document is the data contract for `starter.floom.dev`.
 
-The UI design work is separate from this repo. The website needs to treat the
-manifest as the source of truth.
+The public site treats this repository as the source of truth. The package name,
+repo links, supported agents, and skill counts must match the files in this repo.
 
 ## Primary CTA
 
 Default install command:
 
 ```bash
-npx @floomhq/packs install
+npx @floomhq/starter install
 ```
 
 Profile examples:
 
 ```bash
-npx @floomhq/packs install --profiles core,dev,writing --yes
-npx @floomhq/packs install --profiles founder,marketing,sales --yes
-npx @floomhq/packs install --all --targets all --yes
+npx @floomhq/starter install --profiles core,dev,writing
+npx @floomhq/starter install --profiles founder,marketing,sales
+npx @floomhq/starter install --all
 ```
 
 ## Manifest Data
 
-The package exposes the full manifest:
+The site can read `manifest.json` from the repo root.
 
-```bash
-floom-packs manifest --json
+```text
+https://raw.githubusercontent.com/floomhq/starter/main/manifest.json
 ```
 
-Shape:
+Important fields:
 
-```json
-{
-  "id": "starter",
-  "name": "Floom Starter",
-  "description": "A broad local-first starter portfolio of curated agent skills.",
-  "version": "0.1.0",
-  "defaultProfiles": ["core"],
-  "targets": ["claude", "codex", "cursor", "opencode", "kimi"],
-  "profiles": [],
-  "skills": [],
-  "sources": {}
-}
-```
+- `total_skills`: locked at 65;
+- `profiles`: 11 profile records with `skill_slugs`;
+- `skills`: slim skill index with names, descriptions, profile membership, and detail URLs;
+- `defaultProfiles`: currently `["core"]`.
 
-The UI can read:
+## Supported Agents
 
-- profile id/name/description;
-- profile skill counts;
-- total unique selected skill count;
-- supported target labels;
-- source labels and source status.
+Show exactly five supported agents:
 
-## Website Sections
-
-Recommended page sections:
-
-1. Hero: "Curated skills for every agent."
-2. Install command with copy button.
-3. Profile selector.
-4. "What gets installed" summary.
-5. Supported agents row.
-6. Safety/trust block.
-7. Source/provenance block.
-8. Architecture explainer link.
-9. FAQ.
+- Claude Code
+- Codex
+- Cursor
+- Kimi
+- OpenCode
 
 ## Profile Selector Behavior
 
-Core is selected by default.
+Core is selected by default. Users can add any profile:
 
-Users can add any profile:
-
-- dev;
-- writing;
-- research;
-- marketing;
-- sales;
-- ops;
-- founder;
-- data;
-- design;
-- video.
+- dev
+- writing
+- research
+- marketing
+- sales
+- ops
+- founder
+- data
+- design
+- video
 
 Command generation:
 
 ```text
-npx @floomhq/packs install --profiles core,dev,writing --yes
+npx @floomhq/starter install --profiles core,dev,writing
 ```
 
 If every profile is selected:
 
 ```text
-npx @floomhq/packs install --all --yes
-```
-
-Target selection can be hidden in the primary UI because the installer
-autodetects local agents. Advanced UI can expose:
-
-```text
---targets claude,codex
---targets all
+npx @floomhq/starter install --all
 ```
 
 ## Social Proof Metrics
 
-Use public, low-trust-risk metrics first:
+Use public metrics only:
 
 | Metric | Source |
 | --- | --- |
-| npm weekly downloads | `https://api.npmjs.org/downloads/point/last-week/@floomhq/packs` |
-| npm monthly downloads | `https://api.npmjs.org/downloads/point/last-month/@floomhq/packs` |
-| package version | npm registry metadata |
-| GitHub stars | GitHub API for `floomhq/packs` |
-| bundled skills | `manifest.skills.length` |
-| supported agents | `manifest.targets.length` |
+| npm weekly downloads | `https://api.npmjs.org/downloads/point/last-week/@floomhq/starter` |
+| npm monthly downloads | `https://api.npmjs.org/downloads/point/last-month/@floomhq/starter` |
+| package version | npm registry metadata for `@floomhq/starter` |
+| GitHub stars | GitHub API for `floomhq/starter` |
+| bundled skills | `manifest.total_skills` |
+| supported agents | hard-coded from this document and CLI help |
 
-Do not claim install counts from telemetry in V0. V0 has no install telemetry.
+Do not claim private install telemetry. The CLI sends none.
 
 ## Copy Rules
 
@@ -129,7 +97,7 @@ Use:
 - "No daemon"
 - "No MCP setup required"
 - "Adds skills beside your existing local skills"
-- "Refuses to overwrite untracked skills"
+- "Keeps user-modified skill files unless `--force` is passed"
 - "Curated starter profiles"
 
 Avoid:
@@ -141,54 +109,15 @@ Avoid:
 - "all skills are benchmark-proven"
 - "replaces your existing skills"
 
-## UI States
-
-Required states:
-
-- default core-only command;
-- multiple profiles selected;
-- all profiles selected;
-- command copied;
-- source/provenance expanded;
-- safety block expanded;
-- mobile stacked layout;
-- package not yet published on npm;
-- npm stats unavailable or zero;
-- GitHub stars unavailable.
-
-## Launch Page Data Contract
-
-The UI can use this normalized model:
+## Normalized Model
 
 ```json
 {
-  "packageName": "@floomhq/packs",
-  "cliName": "floom-packs",
-  "installCommand": "npx @floomhq/packs install",
-  "profiles": [
-    {
-      "id": "dev",
-      "name": "Dev",
-      "description": "Code review, tests, security, browser checks, and repo analysis.",
-      "skillCount": 5
-    }
-  ],
-  "targets": ["claude", "codex", "cursor", "opencode", "kimi"],
-  "metrics": {
-    "skills": 29,
-    "targets": 5
-  }
+  "packageName": "@floomhq/starter",
+  "repo": "floomhq/starter",
+  "installCommand": "npx @floomhq/starter install",
+  "profiles": 11,
+  "skills": 65,
+  "targets": ["claude", "codex", "cursor", "kimi", "opencode"]
 }
 ```
-
-## Architecture Link
-
-Use:
-
-```text
-https://floom-packs-architecture-2026-05-10.surge.sh/
-```
-
-for the visual architecture explainer until the page is migrated into the main
-docs site.
-

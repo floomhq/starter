@@ -57,7 +57,7 @@ export function convertToCursorMdc(slug, content) {
   // Extract YAML frontmatter
   const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!frontmatterMatch) {
-    // No frontmatter — wrap in minimal mdc header
+    // No frontmatter, wrap in minimal mdc header
     return `---\ndescription: Floom skill: ${slug}\nglobs: []\nalwaysApply: false\n---\n${content}`;
   }
 

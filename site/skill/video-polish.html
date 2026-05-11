@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#fafaf7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<title>video-polish: Floom Starter Pack skill</title>
+<meta content="ElevenLabs audio isolation + Gemini-aligned captions; integrated audio cleanup and captioning pipeline." name="description"/>
+<!-- Open Graph -->
+<meta content="Floom Starter Pack" property="og:site_name"/>
+<meta content="article" property="og:type"/>
+<meta content="video-polish: Floom Starter Pack skill" property="og:title"/>
+<meta content="ElevenLabs audio isolation + Gemini-aligned captions; integrated audio cleanup and captioning pipeline." property="og:description"/>
+<meta content="https://starter.floom.dev/skill/video-polish" property="og:url"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="video-polish: Floom Starter Pack skill" name="twitter:title"/>
+<meta content="ElevenLabs audio isolation + Gemini-aligned captions; integrated audio cleanup and captioning pipeline." name="twitter:description"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="@floomhq" name="twitter:creator"/>
+<meta content="@floomhq" name="twitter:site"/>
+<!-- Favicon -->
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Canonical -->
+<link href="https://starter.floom.dev/skill/video-polish" rel="canonical"/>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "video-polish",
+  "description": "ElevenLabs audio isolation + Gemini-aligned captions; integrated audio cleanup and captioning pipeline.",
+  "codeRepository": "https://github.com/floomhq/floom",
+  "license": "Proprietary (Floom team)",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "Floom Starter Pack",
+    "url": "https://starter.floom.dev/"
+  }
+}
+</script>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #050505;
+  --muted: #333333;
+  --dim: #6b6b6b;
+  --blue: #0094ff;
+  --blue-soft: #bfe6ff;
+  --blue-pale: #eaf7ff;
+  --line: 2px solid var(--ink);
+  --line-light: 1px solid #e0dfdb;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scrollbar-gutter: stable; overflow-y: scroll; }
+body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+.page { width: min(100%, 1100px); margin: 0 auto; padding: 44px 70px 72px; }
+
+.nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
+.nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
+.wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
+.wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+.wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; max-width: 100%; }
+.nav-links a { color: inherit; text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+
+@media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
+@media (max-width: 980px) { .page { padding: 30px 22px 52px; } }
+@media (max-width: 640px) { .page { padding: 22px 16px 44px; } .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--dim); text-decoration: none; margin-top: 24px; margin-bottom: 8px; }
+.back-link:hover { color: var(--ink); }
+
+.hero { margin-top: 8px; padding: 28px 0 32px; border-bottom: var(--line-light); }
+.hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 14px; word-break: break-word; }
+.hero-desc { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 18px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
+.badge.mute { color: var(--muted); background: #fff; border-color: #ddd; }
+
+.section { margin-top: 40px; }
+.section-label { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+.install-btn-wrap { position: relative; display: inline-block; }
+.install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.install-btn.copied { background: var(--blue); border-color: var(--blue); }
+.install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
+.install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.install-tooltip-cmd { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; word-break: break-all; }
+
+.cmd-block { display: flex; align-items: stretch; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; max-width: 720px; margin-top: 8px; }
+.cmd-text { flex: 1; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); padding: 12px 14px; word-break: break-all; line-height: 1.55; }
+.cmd-copy { flex-shrink: 0; background: var(--ink); color: #fff; border: none; cursor: pointer; padding: 12px 18px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; transition: background 0.15s; text-transform: uppercase; }
+.cmd-copy:hover { background: #333; }
+.cmd-copy.copied { background: var(--blue); }
+
+.fires-block { font-size: 16px; color: var(--ink); line-height: 1.6; background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 16px 18px; max-width: 720px; }
+
+.files-list { display: flex; flex-direction: column; gap: 6px; max-width: 720px; }
+.file-row { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; padding: 8px 12px; background: #fff; border: 1px solid #e0dfdb; border-radius: 8px; }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; }
+.file-size { color: var(--muted); flex-shrink: 0; }
+.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+
+.md-block { font-size: 15px; line-height: 1.7; color: var(--ink); background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 22px 26px; max-width: 860px; }
+.md-block h2, .md-block h3, .md-block h4 { font-weight: 700; margin: 18px 0 8px; letter-spacing: -0.01em; }
+.md-block h2 { font-size: 22px; }
+.md-block h3 { font-size: 18px; }
+.md-block h4 { font-size: 16px; }
+.md-block p { margin: 8px 0; }
+.md-block ul, .md-block ol { margin: 8px 0 8px 22px; }
+.md-block li { margin: 3px 0; }
+.md-block code { font-family: var(--mono); font-size: 13px; background: #f0efeb; padding: 1px 5px; border-radius: 3px; }
+.md-block pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 10px 0; }
+.md-block pre code { background: none; padding: 0; }
+.md-block a { color: var(--blue); }
+.md-block blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 14px; color: var(--muted); margin: 12px 0; }
+.md-block hr { border: none; border-top: 1px solid #e0dfdb; margin: 14px 0; }
+
+.links-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+.link-btn { font-family: var(--mono); font-size: 12px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.link-btn:hover { color: var(--ink); }
+
+.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
+
+.footer-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; border: var(--line); border-radius: 28px; background: var(--blue); color: #ffffff; padding: 28px; }
+.footer-cta h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.footer-cta p { color: rgba(255,255,255,0.92); margin-top: 8px; font-size: 15px; font-weight: 500; }
+.footer-cta .button { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #ffffff; border-radius: 14px; background: #ffffff; color: var(--ink); padding: 14px 20px; font: 900 13px/1 var(--sans); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: box-shadow 150ms ease, transform 150ms ease; }
+.footer-cta .button:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.22); transform: translateY(-2px); }
+@media (max-width: 860px) { .footer-cta { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 36px; } }
+
+.site-footer { border-top: 2px solid var(--ink); background: var(--paper); padding: 48px 70px 0; margin-top: 56px; }
+.site-footer-inner { width: min(100%, 1100px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+.footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
+.footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
+.footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom { width: min(100%, 1100px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
+.footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
+@media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
+@media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
+
+
+/* === Skill page TOC layout (mirrors docs.html .doc-layout) === */
+.skill-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 24px;
+  align-items: flex-start;
+}
+.skill-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-self: start;
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+.skill-nav-label {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+}
+.skill-nav a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 14px;
+  background: transparent;
+  color: #4b4b4b;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: background 120ms ease, color 120ms ease;
+}
+.skill-nav a.is-sub { padding-left: 20px; font-weight: 600; color: #5b5b5b; font-size: 12.5px; }
+.skill-nav a.is-sub-2 { padding-left: 32px; font-weight: 500; color: #6b6b6b; font-size: 12px; }
+.skill-nav a:hover, .skill-nav a.active {
+  background: var(--blue-pale);
+  color: var(--ink);
+}
+.skill-body { display: block; min-width: 0; }
+.skill-body .section { scroll-margin-top: 36px; }
+
+@media (max-width: 980px) {
+  .skill-layout { grid-template-columns: 1fr; gap: 28px; }
+  .skill-nav {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid rgba(5,5,5,0.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+  }
+  .skill-nav-label { width: 100%; padding-left: 4px; }
+  .skill-nav a { padding: 6px 10px; font-size: 12px; }
+  .skill-nav a.is-sub, .skill-nav a.is-sub-2 { padding-left: 10px; }
+}
+
+/* === Install CTA + tooltip (from index.html) === */
+.install-cta-wrap { position: relative; display: inline-block; }
+.install-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 14px 22px;
+  font: 900 13px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  gap: 8px;
+}
+.install-cta:hover, .install-cta:focus-visible {
+  box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+  transform: translateY(-1px);
+  outline: none;
+}
+.install-cta:hover .install-cta-icon,
+.install-cta:focus-visible .install-cta-icon {
+  transform: translateY(2px);
+}
+.install-cta-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied .install-cta-label::after { content: " \2713"; }
+.install-cta-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 360px;
+  max-width: 420px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
+  transform: translateY(-4px);
+  z-index: 100;
+  box-shadow: 0 14px 30px rgba(5,5,5,0.18);
+}
+.install-cta:hover .install-cta-tooltip,
+.install-cta:focus-visible .install-cta-tooltip,
+.install-cta:focus-within .install-cta-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
+}
+
+/* Connector arrow from button up to tooltip */
+.install-cta-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  border-top: 2px solid var(--ink);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+/* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
+@media (hover: none) {
+  .install-cta-tooltip { display: none; }
+}
+.tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
+.tooltip-cmd {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.tooltip-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.install-cta--final { background: #ffffff; color: var(--ink); }
+.install-cta--final:hover, .install-cta--final:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
+}
+.install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+.install-cta-wrap--final .install-cta-tooltip { left: auto; right: 0; }
+
+@media (max-width: 640px) {
+  .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
+}
+
+/* === Final CTA (mirrors index.html .final-cta dark surface) === */
+.final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 56px;
+  border: var(--line);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 32px 34px;
+}
+.final-cta strong {
+  display: block;
+  max-width: 620px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.final-cta span { display: block; margin-top: 12px; color: #d6d6d6; font-size: 15px; font-weight: 550; }
+@media (max-width: 860px) {
+  .final-cta { flex-direction: column; align-items: flex-start; }
+  .final-cta strong { font-size: 24px; }
+}
+
+/* skill-cta-label-fix */
+.final-cta .install-cta--final .install-cta-label { color: var(--ink); }
+.final-cta .install-cta--final .install-cta-icon { color: var(--ink); }
+.final-cta .install-cta--final.is-copied .install-cta-label,
+.final-cta .install-cta--final.is-copied .install-cta-icon { color: #ffffff; }
+.final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+</style>
+</head>
+<body>
+<main class="page">
+<nav aria-label="Main navigation" class="nav">
+<a class="wordmark" href="../index.html">
+<strong>Floom</strong>
+<span>Open source · MIT</span>
+</a>
+<div class="nav-right">
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a aria-current="page" href="../library.html">Skills</a>
+<a href="../docs.html">Docs</a>
+<a href="../about.html">About</a>
+</div>
+</div>
+</nav>
+<a class="back-link" href="../library.html">← Back to Skills</a>
+
+
+
+
+
+
+<div class="skill-layout"><nav aria-label="On this page" class="skill-nav">
+<span class="skill-nav-label">On this page</span>
+<a href="#overview">Overview</a>
+<a href="#install">Install</a>
+<a href="#fires-when">Fires when</a>
+<a href="#files">Files</a>
+<a href="#skill-md">SKILL.md</a>
+<a class="is-sub" href="#skillmd-video-polish">video-polish</a>
+<a class="is-sub-2" href="#skillmd-default-invocation">Default invocation</a>
+<a class="is-sub-2" href="#skillmd-required-env-vars">Required env vars</a>
+<a class="is-sub-2" href="#skillmd-optional-flags">Optional flags</a>
+<a class="is-sub-2" href="#skillmd-pipeline-stages">Pipeline stages</a>
+<a class="is-sub-2" href="#skillmd-cache">Cache</a>
+<a class="is-sub-2" href="#skillmd-verification-mandatory-before-claiming-done">Verification (mandatory before claiming done)</a>
+<a class="is-sub-2" href="#skillmd-automatic-introoutro-with---with-remotion">Automatic intro/outro with --with-remotion</a>
+<a class="is-sub-2" href="#skillmd-adding-remotion-visuals-b-roll-motion-graphics-branded-scenes">Adding Remotion visuals (b-roll, motion graphi…</a>
+<a class="is-sub-2" href="#skillmd-common-follow-ups">Common follow-ups</a>
+<a class="is-sub-2" href="#skillmd-auto-review">Auto-review</a>
+<a class="is-sub-2" href="#skillmd-constraints">Constraints</a>
+<a class="is-sub-2" href="#skillmd-reference-run">Reference run</a>
+<a href="#source">Source</a>
+</nav><div class="skill-body"><header class="hero" id="overview">
+<h1>video-polish</h1>
+<p class="hero-desc">ElevenLabs audio isolation + Gemini-aligned captions; integrated audio cleanup and captioning pipeline.</p>
+<div class="hero-meta">
+<span class="badge mute">floomhq</span><span class="badge mute">Proprietary (Floom team)</span>
+<span class="profile-tag">video</span>
+</div>
+</header><section class="section" id="install">
+<div class="section-label">Install</div>
+<div class="install-cta-wrap">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --skills video-polish" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>video-polish</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills video-polish</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+<div class="cmd-block">
+<div class="cmd-text" id="cmdText">npx @floomhq/starter install --skills video-polish</div>
+<button class="cmd-copy" id="cmdCopy" onclick="copyCmd()">Copy</button>
+</div>
+</section><section class="section" id="fires-when">
+<div class="section-label">Fires when</div>
+<div class="fires-block">"polish this video", "clean the audio", "add captions"</div>
+</section><section class="section" id="files">
+<div class="section-label">Files</div>
+<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">13,079 bytes</span><span class="file-type">main</span></div></div>
+</section><section class="section" id="skill-md">
+<div class="section-label">SKILL.md</div>
+<div class="md-block"><h2 id="skillmd-video-polish">video-polish</h2>
+<p>Cleans a video's audio with ElevenLabs Audio Isolation and burns in narratively-grouped, word-level-aligned captions generated by Gemini 3.1 Pro.</p>
+<p>The canonical library lives at <code>/root/scripts/video_polish/video_polish.py</code>. This skill wraps it. Do NOT modify the canonical lib from this skill — open a PR against <code>/root/scripts/video_polish/</code> instead.</p>
+<h3 id="skillmd-default-invocation">Default invocation</h3>
+<pre><code class="lang-bash">ELEVENLABS_API_KEY=&lt;key&gt; \
+  python3 ~/.claude/skills/video-polish/scripts/video_polish.py \
+    --input  &lt;path-in&gt; \
+    --output &lt;path-out&gt;</code></pre>
+<p>For Floom team videos, the default <code>--known-names</code> covers Federico, Falco, Floom, etc. Override only when the cast is different.</p>
+<p>By default the pipeline speeds the audio + video up by <strong>1.15x</strong> (pitch preserved via rubberband), which matches Federico's standard pacing for Rocketlist + Floom launch videos. Override with <code>--speed 1.0</code> to keep the original tempo, or <code>--speed 1.2</code> for tighter pacing.</p>
+<h3 id="skillmd-required-env-vars">Required env vars</h3>
+<p>| Var | Source | |-----|--------| | <code>ELEVENLABS_API_KEY</code> | Pass in env or <code>--eleven-key</code>. Federico's key in <code>~/.config/elevenlabs.env</code> if present, else ask. | | <code>GEMINI_API_KEY</code> | Auto-loaded from <code>/root/.config/gemini/floom.env</code>. Override path with <code>--gemini-env</code>. |</p>
+<p>If either is missing the script will fail fast at stage 2 (ElevenLabs) or stage 5 (Gemini name correction). Do not retry — surface to Federico.</p>
+<h3 id="skillmd-optional-flags">Optional flags</h3>
+<p>| Flag | Default | When to change | |------|---------|---------------| | <code>--known-names</code> | <code>Fede,Federico,Falco,Floom,YC,UltraRelevant,Max,Mahir</code> | Add cast names + product names + acronyms specific to this video. Passing <code>""</code> disables correction. | | <code>--speed</code> | <code>1.15</code> | Pitch-preserving playback speed (rubberband). 1.15x is Federico's standard pacing for Rocketlist + Floom launch videos. Pass <code>1.0</code> to skip the speedup stage entirely. The audio is sped up BEFORE Whisper transcribes, so all caption timestamps are natively at the output speed; no scaling needed downstream. | | <code>--no-captions</code> | off | Skip caption burn-in but still compute + cache <code>captions.json</code>. Use when downstream tooling (the Remotion starter) will render its own caption track. See REMOTION_PROTOCOL.md. | | <code>--whisper-model</code> | <code>small</code> | Use <code>base</code> or <code>tiny</code> if the speaker is clear and you want speed. NEVER use <code>medium</code> or <code>large</code> on AX41 — they OOM-crash tmux (per CLAUDE.md). | | <code>--gemini-model</code> | <code>gemini-3.1-pro-preview</code> | Use <code>gemini-3-flash-preview</code> only if Pro is throttled. Never drop to 2.x — global rule. | | <code>--workdir</code> | <code>/tmp/video_polish_work</code> | Override only if /tmp is full or you want a different cache namespace. | | <code>--eleven-key</code> | env <code>ELEVENLABS_API_KEY</code> | Use to scope a specific key per run. | | <code>--with-remotion</code> | off | Auto-generate Remotion intro + outro bookends via Gemini storyboard. Wraps final output as <code>intro.mp4 + body.mp4 + outro.mp4</code>. | | <code>--cta-url</code> | None | CTA URL for the Remotion outro EndCard (e.g. <code>github.com/you/repo</code>). Passed to <code>storyboard.py</code> and overrides Gemini's guess. | | <code>--brand-name</code> | None | Brand name for the outro EndCard. Overrides Gemini's guess. | | <code>--storyboard-json</code> | None | Path to a pre-built <code>storyboard.json</code> to skip Gemini storyboard generation entirely. | | <code>--no-review</code> | off | Skip Gemini quality review after polish. By default the review runs automatically and prints a scored summary to stdout. |</p>
+<h3 id="skillmd-pipeline-stages">Pipeline stages</h3>
+<p>| # | Stage | Output | |---|-------|--------| | 1 | <code>extract_audio</code> | mono mp3 48kHz | | 2 | <code>isolate_voice</code> | ElevenLabs voice-isolated mp3 (HTTP API call) | | 3 | <code>normalize_voice</code> | ffmpeg loudnorm I=-14 TP=-1 LRA=9 wav | | 3.5 | <code>speedup_voice</code> | rubberband pitch-preserving tempo at <code>--speed</code> (skipped when 1.0) | | 4 | <code>transcribe</code> | faster-whisper word-timestamped JSON (timestamps already at output speed) | | 5 | <code>correct_transcription</code> | Gemini fixes proper nouns + tech terms + number tokenization | | 6 | <code>ai_caption_groups</code> | Gemini 3.1 Pro narrative-grouped windows + emphasis words | | 7 | <code>render_ass</code> | Aegisub <code>.ass</code> with karaoke emphasis tags (skipped with <code>--no-captions</code>) | | 8 | <code>assemble_video</code> | ffmpeg burn-in subs + replace audio + setpts retime to match speed | | 9 | <code>storyboard</code> | Gemini-driven scene decision: palette, intro headline/subline, outro brand/tagline/cta (skipped without <code>--with-remotion</code>) | | 10 | <code>render_remotion</code> | Remotion renders AutoIntro + AutoOutro, then ffmpeg-concats intro + body + outro (skipped without <code>--with-remotion</code>) | | 11 | <code>review</code> | Gemini multimodal quality review: 8 strategic frames + LUFS + freeze probe -&gt; scored JSON + terminal summary (skip with <code>--no-review</code>) |</p>
+<p>Each stage caches independently. Re-running the same input skips completed stages. The cache key includes the speed factor, so different <code>--speed</code> values keep separate caches and never collide.</p>
+<h3 id="skillmd-cache">Cache</h3>
+<p>Layout: <code>&lt;workdir&gt;/.video_polish_cache/v&lt;CACHE_VERSION&gt;/&lt;sha8(input_bytes)&gt;/[speed_&lt;S&gt;/]</code></p>
+<p>Top level (per-input, speed-independent):</p>
+<p><code>.isolation_method</code></p>
+<ul><li><code>audio.mp3</code>, <code>voice-isolated.mp3</code>, <code>voice-clean.wav</code>,</li></ul>
+<p>Per-speed subdir (<code>speed_&lt;S&gt;/</code>):</p>
+<p><code>transcript.raw.json</code>, <code>transcript.json</code>, <code>captions.json</code>,   <code>captions.ass</code></p>
+<ul><li><code>voice-clean_s&lt;NN&gt;.wav</code> (sped-up audio, when speed != 1.0),</li></ul>
+<p>Cache version is bumped to v2 in May 2026 (added <code>--speed</code>). Old v1 caches are untouched until manually deleted; they will not be reused.</p>
+<p>To force re-isolation on the same input (for example, to consume a fresh ElevenLabs run):</p>
+<pre><code class="lang-bash">rm /tmp/video_polish_work/.video_polish_cache/v2/&lt;hash&gt;/voice-isolated.mp3</code></pre>
+<p>To nuke the whole cache for an input:</p>
+<pre><code class="lang-bash">rm -rf /tmp/video_polish_work/.video_polish_cache/v2/&lt;hash&gt;</code></pre>
+<h3 id="skillmd-verification-mandatory-before-claiming-done">Verification (mandatory before claiming done)</h3>
+<p>(within 100ms). At default <code>--speed 1.15</code>, a 65s source becomes ~56.5s.</p>
+<p>rubberband can pull it slightly low; if more than 2 LUFS off, re-run    loudnorm with two-pass (not yet wired).</p>
+<p>says <code>ffmpeg-arnndn</code> the API call failed; surface and stop.</p>
+<p>at varied timestamps (~10%, 50%, 90% of duration), READ them with the    Read tool, confirm captions are visible AND match the transcript at    those timestamps.</p>
+<p>vs visible mouth motion. Off by &gt;150ms = stop and surface.</p>
+<ol><li><strong>Duration parity</strong> — <code>ffprobe</code> output ≈ <code>source_duration / speed</code></li><li><strong>LUFS</strong> — <code>info["lufs"]</code> should land in <code>-14 ± 2</code>. Speed-up via</li><li><strong>Isolation method</strong> — <code>info["isolation_method"] == "elevenlabs"</code>. If it</li><li><strong>Caption visibility</strong> (when captions are burned in) — extract 3 frames</li><li><strong>Lip-sync sanity</strong> — pick one random timestamp, check the audio peak</li></ol>
+<pre><code class="lang-bash"># extract 3 frames
+ffmpeg -ss &lt;t&gt; -i &lt;output&gt; -frames:v 1 -y /tmp/frame_&lt;t&gt;s.png</code></pre>
+<h3 id="skillmd-automatic-introoutro-with---with-remotion">Automatic intro/outro with --with-remotion</h3>
+<p>Pass <code>--with-remotion</code> (plus optionally <code>--brand-name</code> and <code>--cta-url</code>) to get a fully rendered final video with animated bookends in one command:</p>
+<pre><code class="lang-bash">python3 video_polish.py \
+  --input source.mov \
+  --output final.mp4 \
+  --with-remotion \
+  --brand-name "iContext" \
+  --cta-url "github.com/you/repo"</code></pre>
+<h4>How storyboard auto-decision works</h4>
+<p><code>scripts/storyboard.py</code> calls Gemini 3 Pro with a JSON-schema-enforced prompt that reads the full transcript and outputs:</p>
+<pre><code class="lang-json">{
+  "palette": "dark-orange",
+  "intro": {"headline": "I solved *AI memory*.", "subline": "AI forgets everything until it doesn't.", "duration_s": 3.0},
+  "outro": {"brand": "iContext", "tagline": "Your AI will never forget anything again.", "cta": "github.com/federicodeponte/icontext", "duration_s": 3.0}
+}</code></pre>
+<ul><li><code>palette</code>: one of <code>dark-orange | dark-green | cream | ink</code>. Gemini picks based on content topic.</li><li><code>intro.headline</code>: hook extracted from first 3 sentences. Words wrapped in <code><em>asterisks</em></code> render in accent color.</li><li><code>outro.cta</code>: overridden by <code>--cta-url</code> if passed; otherwise Gemini guesses from transcript.</li><li>Result cached at <code>&lt;cache&gt;/&lt;speed_dir&gt;/storyboard.json</code> (idempotent via sha256 of inputs).</li></ul>
+<p><code>scripts/render_remotion.py</code> then copies the remotion-starter, writes <code>Root.tsx</code> + <code>index.ts</code>, runs <code>npx remotion render</code> for AutoIntro + AutoOutro, and ffmpeg-concats the three segments. Remotion render output cached at <code>&lt;workdir&gt;/.remotion_render/&lt;hash&gt;/</code> with a <code>.done</code> stamp.</p>
+<h4>Verification checklist (--with-remotion)</h4>
+<ol><li><strong>Duration</strong> = <code>source_duration / speed + intro_duration_s + outro_duration_s</code> (within 200ms)</li><li><strong>Intro frame</strong> at t=1.5s — shows headline in large type with accent color on emphasized word</li><li><strong>Body frame</strong> at t=(intro_dur + 2)s — facecam with captions</li><li><strong>Outro frame</strong> at t=(total - 1.5)s — brand name, tagline, and cta visible</li></ol>
+<h3 id="skillmd-adding-remotion-visuals-b-roll-motion-graphics-branded-scenes">Adding Remotion visuals (b-roll, motion graphics, branded scenes)</h3>
+<p>When Federico wants the polished video to feel "more produced" — animated problem cards, terminal reveals, demo stills, shareable-link moments, end cards — bolt a Remotion layer on top of the polished facecam.</p>
+<p>The starter project at <code>/root/scripts/video_polish/remotion-starter/</code> ships six scene components, a circular face-cam PIP overlay, and an optional Remotion-rendered caption track. Follow <code>REMOTION_PROTOCOL.md</code> (in this skill's directory) step by step. It is reproducible: any agent can author visuals without inventing the structure each time.</p>
+<p>When using Remotion, decide up front whether to keep captions burned into the polished video (default, simpler) or to render captions in Remotion (cleaner control). For the latter, run <code>video_polish.py --no-captions</code> and enable the caption overlay in <code>Composition.tsx</code>.</p>
+<h3 id="skillmd-common-follow-ups">Common follow-ups</h3>
+<p>separately then concat. Re-run the polish per cut.</p>
+<p>cross-correlation block in the canonical README at   <code>/root/scripts/video_polish/README.md</code>. Matching codec/fps/resolution is   mandatory or concat will stutter.</p>
+<p>baked in so they will recenter — if margin gets ugly, re-run with a   vertical-aware ASS style override (not yet wired into the lib; surface it).</p>
+<p><code>polish_video()</code> is the handler-shaped entry point.</p>
+<ul><li><strong>Per-speaker resync</strong>: if the input was multi-camera, polish each angle</li><li><strong>Intro/outro bookends from a parallel recording</strong>: see the audio</li><li><strong>Vertical reformat (9:16)</strong>: pad/scale the polished output. Captions are</li><li><strong>Floom-app wrapping</strong>: see <code>/root/scripts/video_polish/floom-app/</code>.</li><li><strong>Adding b-roll / motion graphics</strong>: see REMOTION_PROTOCOL.md.</li></ul>
+<h3 id="skillmd-auto-review">Auto-review</h3>
+<p>Every polish run automatically scores the output with <code>scripts/review_video.py</code>. The review:</p>
+<ol><li>Probes metadata (duration, dimensions, LUFS integrated, freeze detection).</li><li>Extracts <strong>8 strategic frames</strong> (intro mid, intro/body seam, body 25/50/75%, body/outro seam, outro mid, end).</li><li>Calls <strong>Gemini 3.1 Pro multimodal</strong> with all frames + metadata + storyboard + transcript excerpt.</li><li>Enforces <code>score = MIN(all 6 dimension scores)</code> client-side (anti-anchoring).</li><li>Applies verdict rules: <code>ship</code> if MIN&gt;=9 and no critical flaws; <code>fail</code> if MIN&lt;6 or any critical; else <code>iterate</code>.</li><li>Writes <code>&lt;output&gt;.review.json</code> and prints a terminal summary.</li></ol>
+<p>To run standalone (without re-running the full pipeline):</p>
+<pre><code class="lang-bash">python3 ~/.claude/skills/video-polish/scripts/review_video.py \
+  --video /path/to/output.mp4 \
+  --storyboard /path/to/storyboard.json \
+  --out /path/to/review.json</code></pre>
+<p>To skip (e.g. when iterating quickly):</p>
+<pre><code class="lang-bash">python3 video_polish.py --input source.mov --output final.mp4 --no-review</code></pre>
+<h3 id="skillmd-constraints">Constraints</h3>
+<p>the log. Common causes: ElevenLabs credits exhausted, Gemini throttle,   fonts missing, <code>rubberband</code> not on PATH (fallback to ffmpeg filter is   automatic).</p>
+<p><code>/root/scripts/video_polish/</code>.</p>
+<p>over input bytes — different videos = different caches automatically.</p>
+<p>makes a fresh cache subdir; old caches stay until manually deleted.</p>
+<ul><li><strong>No <code>medium</code>/<code>large</code> Whisper on AX41</strong> — OOM kills tmux.</li><li><strong>Don't loop on stage failure.</strong> If a stage fails twice, STOP and surface</li><li><strong>Don't modify the canonical lib from this skill.</strong> All edits go to</li><li><strong>Cache hash collisions across projects are impossible</strong> because hash is</li><li><strong>Speed is part of the cache key.</strong> Re-running with a different <code>--speed</code></li></ul>
+<h3 id="skillmd-reference-run">Reference run</h3>
+<p>The <code>introducing-icontext.mov</code> polish (May 2026) ran a 65s 1620x1080 H264 input through the full pipeline at <code>--speed 1.15</code> in ~140s wallclock with whisper-small + Gemini 3.1 Pro. Output landed at 56.5s, LUFS -17.8, isolation_method elevenlabs, 16 caption groups.</p>
+<p>The same video was then processed with <code>--with-remotion --brand-name iContext --cta-url github.com/federicodeponte/icontext</code> in ~92s additional wallclock. Final output: 62.6s total (3s intro + 56.5s body + 3s outro), LUFS -15.4, dark-orange palette, headline "I solved <em>AI memory</em>.", outro brand "iContext".</p></div>
+</section><section class="section" id="source">
+<div class="section-label">Source</div>
+<div class="links-row">
+<a class="link-btn" href="https://github.com/floomhq/floom" rel="noopener" target="_blank">View upstream on GitHub ↑</a>
+<a class="link-btn" href="https://github.com/floomhq/starter/blob/main/skills/video-polish.json" rel="noopener" target="_blank">View on Floom GitHub ↑</a>
+<a class="link-btn" href="" rel="noopener" target="_blank">View on skills.sh ↑</a>
+</div>
+</section></div></div><section class="final-cta">
+<div>
+<strong>Add this skill to your agent.</strong>
+<span>Installs <code style="background:rgba(255,255,255,0.12);padding:1px 6px;border-radius:4px;color:#fff;font-family:var(--mono);font-size:13px">video-polish</code> into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+</div>
+<div class="install-cta-wrap install-cta-wrap--final">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --skills video-polish" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>video-polish</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills video-polish</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+</section>
+</main>
+<footer aria-label="Site footer" class="site-footer">
+<div class="site-footer-inner">
+<div class="footer-brand">
+<a class="footer-wordmark" href="../index.html">Floom</a>
+<small>Open source · MIT</small>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Sitemap</div>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../library.html">Skills</a></li>
+<li><a href="../docs.html">Docs</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Resources</div>
+<ul>
+<li><a href="https://github.com/floomhq/starter" rel="noopener" target="_blank">GitHub</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+<li><a href="../terms.html">Terms</a></li>
+<li><a href="https://github.com/floomhq/starter/releases" rel="noopener" target="_blank">Changelog</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Floom · Built with care in Berlin and San Francisco</span>
+<span class="footer-mit">MIT License</span>
+</div>
+</footer>
+<script>
+function copyInstall(btn, cmd) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    const original = btn.dataset.original || btn.textContent;
+    btn.dataset.original = original;
+    btn.classList.add('copied');
+    btn.textContent = 'Copied! Paste in terminal';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
+  });
+}
+function copyCmd() {
+  const t = document.getElementById('cmdText').textContent;
+  const b = document.getElementById('cmdCopy');
+  navigator.clipboard.writeText(t).then(() => {
+    b.classList.add('copied'); b.textContent = 'Copied!';
+    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+<script>
+
+// === Install CTA (Add to your agent button) - copy on click ===
+document.querySelectorAll(".install-cta").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const command = button.dataset.copy;
+    if (!command) return;
+    try {
+      await navigator.clipboard.writeText(command);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = command;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const labelEl = button.querySelector(".install-cta-label");
+    if (labelEl) {
+      const original = labelEl.textContent;
+      labelEl.textContent = "Copied! Paste in terminal";
+      button.classList.add("is-copied");
+      setTimeout(() => {
+        labelEl.textContent = original;
+        button.classList.remove("is-copied");
+      }, 2000);
+    }
+  });
+});
+
+// === TOC active-section highlighting (scroll spy) ===
+(function () {
+  const sections = document.querySelectorAll(".skill-body .section[id], .skill-body .section [id]");
+  const navLinks = document.querySelectorAll(".skill-nav a");
+  if (!sections.length || !navLinks.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector('.skill-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add("active");
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
+  sections.forEach((s) => observer.observe(s));
+})();
+</script></body>
+</html>

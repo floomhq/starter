@@ -1,32 +1,32 @@
 # Privacy And Safety
 
-Floom Packs V0 is local-first.
+Floom Starter is local-first.
 
-It installs skill folders and instruction snippets on the user's machine. It
-does not require Floom cloud, a Floom account, a daemon, or MCP.
+It installs skill files and activation instructions on the user's machine. It
+does not require Floom cloud, a Floom account, a daemon, telemetry, or MCP.
 
 ## What The Installer Writes
 
-Depending on selected targets, Floom Packs writes:
+Project-local is the default scope. In a project directory, Floom Starter writes:
 
-- skill folders under local agent skill roots;
-- `.floom-pack.json` provenance files inside managed skill folders;
-- `~/.floom/packs/starter-index.json`;
-- a bounded instruction block in supported harness instruction files.
+- skill files under `./.claude/skills/`, `./.codex/skills/`, `./.cursor/rules/`,
+  `./.opencode/skills/`, or `./.kimi/skills/`;
+- activation instructions in the matching local agent file;
+- `./.floom/manifest.json` to track installed skills.
 
-Supported instruction files:
+With `--global`, the same files are written under the user's home directory:
 
-| Target | Instruction file |
-| --- | --- |
-| Claude Code | `~/.claude/CLAUDE.md` |
-| Codex CLI | `~/.codex/AGENTS.md` |
-| Cursor | `~/.cursor/rules/floom-packs.mdc` |
-| OpenCode | `~/.config/opencode/AGENTS.md` |
-| Kimi | `~/.kimi/agents/floom-system.md` |
+| Agent | Skill directory | Activation file |
+| --- | --- | --- |
+| Claude Code | `~/.claude/skills/<slug>/SKILL.md` | `~/.claude/CLAUDE.md` |
+| Codex CLI | `~/.codex/skills/<slug>/SKILL.md` | `~/.codex/AGENTS.md` |
+| Cursor | `~/.cursor/rules/<slug>.mdc` | `~/.cursor/rules/floom-skills.mdc` |
+| OpenCode | `~/.config/opencode/skills/<slug>/SKILL.md` | `~/.config/opencode/AGENTS.md` |
+| Kimi | `~/.kimi/skills/<slug>/SKILL.md` | `~/.kimi/agents/floom-system.md` |
 
 ## What The Installer Does Not Do
 
-Floom Packs does not:
+Floom Starter does not:
 
 - upload local skills;
 - read unrelated local documents;
@@ -36,81 +36,46 @@ Floom Packs does not:
 - call Floom cloud;
 - send install telemetry;
 - delete unrelated user skills;
-- silently replace untracked local skill folders.
+- silently replace untracked local skill files.
 
-## Dry-Run First
+## Preview Mode
 
-`install` is read-only unless `--yes` is passed.
-
-```bash
-npx @floomhq/packs install
-```
-
-prints the plan and writes nothing.
+Use `--dry-run` to print the install plan without writing files.
 
 ```bash
-npx @floomhq/packs install --yes
+npx @floomhq/starter install --dry-run
 ```
 
-executes the plan.
+Run without `--dry-run` to install.
+
+```bash
+npx @floomhq/starter install
+```
 
 ## Conflict Protection
 
-Every Floom-managed skill folder gets:
-
-```text
-.floom-pack.json
-```
-
-That file records:
-
-- package name;
-- package version;
-- pack id;
-- skill slug;
-- source;
-- install timestamp.
-
-If a destination folder exists without Floom Packs provenance, the installer
-reports a conflict and refuses to overwrite it.
-
-`--force` exists for explicit replacement only.
+If a target skill file exists and differs from the bundled version, Floom Starter
+keeps the user's file and prints a warning. `--force` is available for explicit
+replacement.
 
 ## Local Skill Coexistence
 
-Floom Packs coexists with existing local skills:
-
-```text
-existing user skills remain untouched
-Floom-managed skills are added beside them
-name collisions become conflicts
-managed skills can be updated by later installs
-```
-
-The local index includes Floom Packs skills only. It does not claim ownership of
+Floom Starter installs managed skills beside existing local skills. The local
+manifest includes only Floom-managed skills. It does not claim ownership of
 unrelated user skills.
 
 ## Privacy-Safe Metrics
 
-V0 does not send install telemetry.
+The package does not send install telemetry. Public social proof can use:
 
-For launch social proof, use public package and repository metrics:
-
-- npm weekly downloads for `@floomhq/packs`;
-- GitHub stars for `floomhq/packs`;
-- current skill count from `floom-packs manifest --json`;
-- supported target count from the manifest.
-
-If product telemetry is added later, it needs to be explicit, documented, and
-privacy-safe.
+- npm weekly downloads for `@floomhq/starter`;
+- GitHub stars for `floomhq/starter`;
+- the locked `manifest.json` count of 65 skills;
+- the five supported agents listed in the CLI help.
 
 ## Security Notes
 
-Bundled skills can include supporting scripts or reference files. The installer
-copies those files locally but does not execute them.
+Bundled skills may include instructions, supporting text, or script references.
+The installer copies skill content locally but does not execute skill scripts.
 
-The agent may execute scripts later if a specific skill instructs it to and the
-user authorizes that workflow in their agent environment.
-
-Third-party skills need source and license review before bundling.
-
+Third-party skill sources and licenses are tracked in `licenses/README.md`.

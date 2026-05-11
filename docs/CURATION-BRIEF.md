@@ -1,4 +1,4 @@
-# Floom Packs Curation Brief
+# Floom Starter Curation Brief
 
 Purpose: curate the next Floom Starter source set from high-quality existing
 skill ecosystems.
@@ -7,7 +7,7 @@ This task is source curation only. Do not edit installer code.
 
 ## Goal
 
-Create a candidate list of skills for the broad Floom Starter pack.
+Create a candidate list of skills for future Floom Starter updates.
 
 The pack is for a broad agent-user audience:
 
@@ -110,10 +110,10 @@ Core is reserved for skills that nearly every user benefits from.
 
 ## Desired Pack Shape
 
-Initial target:
+Current pack shape:
 
-- 40-60 total skills.
-- 3-6 skills per profile.
+- 65 total skills.
+- 11 profiles.
 - Minimal overlap.
 - Enough coverage for broad demos.
 - Small enough that install remains lightweight.
@@ -163,4 +163,3 @@ Return:
 3. top 10 promising but blocked by license/provenance;
 4. top 10 excluded items with reasons;
 5. gaps where no strong source skill was found.
-

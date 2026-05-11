@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#fafaf7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<title>revops: Floom Starter Pack skill</title>
+<meta content="Revenue ops: pipeline management, reporting, and CRM cleanup." name="description"/>
+<!-- Open Graph -->
+<meta content="Floom Starter Pack" property="og:site_name"/>
+<meta content="article" property="og:type"/>
+<meta content="revops: Floom Starter Pack skill" property="og:title"/>
+<meta content="Revenue ops: pipeline management, reporting, and CRM cleanup." property="og:description"/>
+<meta content="https://starter.floom.dev/skill/revops" property="og:url"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="revops: Floom Starter Pack skill" name="twitter:title"/>
+<meta content="Revenue ops: pipeline management, reporting, and CRM cleanup." name="twitter:description"/>
+<meta content="https://starter.floom.dev/og-image-v2.png" name="twitter:image"/>
+<meta content="@floomhq" name="twitter:creator"/>
+<meta content="@floomhq" name="twitter:site"/>
+<!-- Favicon -->
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Canonical -->
+<link href="https://starter.floom.dev/skill/revops" rel="canonical"/>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "revops",
+  "description": "Revenue ops: pipeline management, reporting, and CRM cleanup.",
+  "codeRepository": "https://github.com/coreyhaines31/marketingskills",
+  "license": "MIT",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "Floom Starter Pack",
+    "url": "https://starter.floom.dev/"
+  }
+}
+</script>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #050505;
+  --muted: #333333;
+  --dim: #6b6b6b;
+  --blue: #0094ff;
+  --blue-soft: #bfe6ff;
+  --blue-pale: #eaf7ff;
+  --line: 2px solid var(--ink);
+  --line-light: 1px solid #e0dfdb;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scrollbar-gutter: stable; overflow-y: scroll; }
+body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+.page { width: min(100%, 1100px); margin: 0 auto; padding: 44px 70px 72px; }
+
+.nav { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 12px; justify-content: flex-start; border-bottom: var(--line); padding-bottom: 18px; }
+.nav-right { display: flex; align-items: center; margin-left: auto; gap: 30px; }
+.wordmark { display: flex; flex-direction: column; gap: 3px; color: inherit; text-decoration: none; }
+.wordmark strong { font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; }
+.wordmark span { color: #4b4b4b; font-size: 10px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 34px; row-gap: 10px; line-height: 1; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; max-width: 100%; }
+.nav-links a { color: inherit; text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--blue); }
+
+@media (max-width: 980px) and (min-width: 641px) { .nav-links { gap: 18px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } .nav-right { gap: 18px; } }
+@media (max-width: 980px) { .page { padding: 30px 22px 52px; } }
+@media (max-width: 640px) { .page { padding: 22px 16px 44px; } .nav-links { column-gap: 14px; row-gap: 10px; font-size: 11px; letter-spacing: 0.08em; } .wordmark span { font-size: 9px; letter-spacing: 0.12em; } }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--dim); text-decoration: none; margin-top: 24px; margin-bottom: 8px; }
+.back-link:hover { color: var(--ink); }
+
+.hero { margin-top: 8px; padding: 28px 0 32px; border-bottom: var(--line-light); }
+.hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 14px; word-break: break-word; }
+.hero-desc { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 18px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.badge { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); border: 0.5px solid var(--blue-soft); border-radius: 4px; padding: 3px 9px; }
+.badge.mute { color: var(--muted); background: #fff; border-color: #ddd; }
+
+.section { margin-top: 40px; }
+.section-label { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+.install-btn-wrap { position: relative; display: inline-block; }
+.install-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--ink); color: #fff; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 14px; font-family: var(--sans); font-size: 12px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.install-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.install-btn.copied { background: var(--blue); border-color: var(--blue); }
+.install-tooltip { position: absolute; bottom: calc(100% + 10px); left: 0; width: min(420px, 92vw); background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; transform: translateY(4px); z-index: 50; cursor: pointer; }
+.install-btn-wrap:hover .install-tooltip, .install-btn-wrap:focus-within .install-tooltip { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.install-tooltip-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.install-tooltip-cmd { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; word-break: break-all; }
+
+.cmd-block { display: flex; align-items: stretch; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; max-width: 720px; margin-top: 8px; }
+.cmd-text { flex: 1; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); padding: 12px 14px; word-break: break-all; line-height: 1.55; }
+.cmd-copy { flex-shrink: 0; background: var(--ink); color: #fff; border: none; cursor: pointer; padding: 12px 18px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; transition: background 0.15s; text-transform: uppercase; }
+.cmd-copy:hover { background: #333; }
+.cmd-copy.copied { background: var(--blue); }
+
+.fires-block { font-size: 16px; color: var(--ink); line-height: 1.6; background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 16px 18px; max-width: 720px; }
+
+.files-list { display: flex; flex-direction: column; gap: 6px; max-width: 720px; }
+.file-row { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; padding: 8px 12px; background: #fff; border: 1px solid #e0dfdb; border-radius: 8px; }
+.file-name { flex: 1; color: var(--ink); word-break: break-all; }
+.file-size { color: var(--muted); flex-shrink: 0; }
+.file-type { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+
+.md-block { font-size: 15px; line-height: 1.7; color: var(--ink); background: #fff; border: 1px solid #e0dfdb; border-radius: 10px; padding: 22px 26px; max-width: 860px; }
+.md-block h2, .md-block h3, .md-block h4 { font-weight: 700; margin: 18px 0 8px; letter-spacing: -0.01em; }
+.md-block h2 { font-size: 22px; }
+.md-block h3 { font-size: 18px; }
+.md-block h4 { font-size: 16px; }
+.md-block p { margin: 8px 0; }
+.md-block ul, .md-block ol { margin: 8px 0 8px 22px; }
+.md-block li { margin: 3px 0; }
+.md-block code { font-family: var(--mono); font-size: 13px; background: #f0efeb; padding: 1px 5px; border-radius: 3px; }
+.md-block pre { background: #f0efeb; padding: 10px 12px; border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 10px 0; }
+.md-block pre code { background: none; padding: 0; }
+.md-block a { color: var(--blue); }
+.md-block blockquote { border-left: 3px solid var(--blue-soft); padding: 4px 0 4px 14px; color: var(--muted); margin: 12px 0; }
+.md-block hr { border: none; border-top: 1px solid #e0dfdb; margin: 14px 0; }
+
+.links-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+.link-btn { font-family: var(--mono); font-size: 12px; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.link-btn:hover { color: var(--ink); }
+
+.profile-tag { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--blue); background: var(--blue-pale); border-radius: 3px; padding: 2px 7px; }
+
+.footer-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 56px; border: var(--line); border-radius: 28px; background: var(--blue); color: #ffffff; padding: 28px; }
+.footer-cta h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.footer-cta p { color: rgba(255,255,255,0.92); margin-top: 8px; font-size: 15px; font-weight: 500; }
+.footer-cta .button { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #ffffff; border-radius: 14px; background: #ffffff; color: var(--ink); padding: 14px 20px; font: 900 13px/1 var(--sans); letter-spacing: 0.12em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: box-shadow 150ms ease, transform 150ms ease; }
+.footer-cta .button:hover { box-shadow: 0 8px 22px rgba(0,0,0,0.22); transform: translateY(-2px); }
+@media (max-width: 860px) { .footer-cta { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 36px; } }
+
+.site-footer { border-top: 2px solid var(--ink); background: var(--paper); padding: 48px 70px 0; margin-top: 56px; }
+.site-footer-inner { width: min(100%, 1100px); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 1.2fr) 1fr 1fr; gap: 48px; padding-bottom: 36px; }
+.footer-brand .footer-wordmark { display: block; font-size: 28px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.9; color: var(--ink); text-decoration: none; margin-bottom: 6px; }
+.footer-brand small { font-size: 11px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: #4b4b4b; }
+.footer-col-label { display: block; margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.footer-col a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; transition: color 120ms ease; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom { width: min(100%, 1100px); margin: 0 auto; border-top: 1px solid rgba(5,5,5,0.12); padding: 18px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; font-size: 12px; font-weight: 600; color: #4b4b4b; }
+.footer-bottom .footer-mit { display: inline-flex; align-items: center; font-family: var(--mono); font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: 4px 10px; background: var(--paper); }
+@media (max-width: 980px) { .site-footer { padding: 40px 22px 0; } .site-footer-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; } }
+@media (max-width: 640px) { .site-footer { padding: 36px 16px 0; } .footer-bottom { padding: 16px 0 24px; } }
+
+
+/* === Skill page TOC layout (mirrors docs.html .doc-layout) === */
+.skill-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 24px;
+  align-items: flex-start;
+}
+.skill-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-self: start;
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+.skill-nav-label {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+}
+.skill-nav a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 14px;
+  background: transparent;
+  color: #4b4b4b;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+  transition: background 120ms ease, color 120ms ease;
+}
+.skill-nav a.is-sub { padding-left: 20px; font-weight: 600; color: #5b5b5b; font-size: 12.5px; }
+.skill-nav a.is-sub-2 { padding-left: 32px; font-weight: 500; color: #6b6b6b; font-size: 12px; }
+.skill-nav a:hover, .skill-nav a.active {
+  background: var(--blue-pale);
+  color: var(--ink);
+}
+.skill-body { display: block; min-width: 0; }
+.skill-body .section { scroll-margin-top: 36px; }
+
+@media (max-width: 980px) {
+  .skill-layout { grid-template-columns: 1fr; gap: 28px; }
+  .skill-nav {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid rgba(5,5,5,0.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.6);
+  }
+  .skill-nav-label { width: 100%; padding-left: 4px; }
+  .skill-nav a { padding: 6px 10px; font-size: 12px; }
+  .skill-nav a.is-sub, .skill-nav a.is-sub-2 { padding-left: 10px; }
+}
+
+/* === Install CTA + tooltip (from index.html) === */
+.install-cta-wrap { position: relative; display: inline-block; }
+.install-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 14px 22px;
+  font: 900 13px/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 200ms ease, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  gap: 8px;
+}
+.install-cta:hover, .install-cta:focus-visible {
+  box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+  transform: translateY(-1px);
+  outline: none;
+}
+.install-cta:hover .install-cta-icon,
+.install-cta:focus-visible .install-cta-icon {
+  transform: translateY(2px);
+}
+.install-cta-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.install-cta.is-copied { background: var(--blue); }
+.install-cta.is-copied .install-cta-label::after { content: " \2713"; }
+.install-cta-tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 360px;
+  max-width: 420px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease 60ms, visibility 0s linear 240ms, transform 180ms ease 60ms;
+  transform: translateY(-4px);
+  z-index: 100;
+  box-shadow: 0 14px 30px rgba(5,5,5,0.18);
+}
+.install-cta:hover .install-cta-tooltip,
+.install-cta:focus-visible .install-cta-tooltip,
+.install-cta:focus-within .install-cta-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 180ms ease, visibility 0s linear, transform 180ms ease;
+}
+
+/* Connector arrow from button up to tooltip */
+.install-cta-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  border-top: 2px solid var(--ink);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+/* Touch devices: skip the desktop-hover tooltip; tap = direct copy */
+@media (hover: none) {
+  .install-cta-tooltip { display: none; }
+}
+.tooltip-line { display: block; color: var(--muted); margin-bottom: 8px; }
+.tooltip-cmd {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.tooltip-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.install-cta--final { background: #ffffff; color: var(--ink); }
+.install-cta--final:hover, .install-cta--final:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
+}
+.install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
+.install-cta-wrap--final .install-cta-tooltip { left: auto; right: 0; }
+
+@media (max-width: 640px) {
+  .install-cta-tooltip { min-width: 280px; max-width: calc(100vw - 40px); right: 0; left: auto; }
+}
+
+/* === Final CTA (mirrors index.html .final-cta dark surface) === */
+.final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 56px;
+  border: var(--line);
+  background: var(--ink);
+  color: #ffffff;
+  padding: 32px 34px;
+}
+.final-cta strong {
+  display: block;
+  max-width: 620px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.final-cta span { display: block; margin-top: 12px; color: #d6d6d6; font-size: 15px; font-weight: 550; }
+@media (max-width: 860px) {
+  .final-cta { flex-direction: column; align-items: flex-start; }
+  .final-cta strong { font-size: 24px; }
+}
+
+/* skill-cta-label-fix */
+.final-cta .install-cta--final .install-cta-label { color: var(--ink); }
+.final-cta .install-cta--final .install-cta-icon { color: var(--ink); }
+.final-cta .install-cta--final.is-copied .install-cta-label,
+.final-cta .install-cta--final.is-copied .install-cta-icon { color: #ffffff; }
+.final-cta .install-cta-tooltip .tooltip-line { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-hint { color: var(--muted); }
+.final-cta .install-cta-tooltip .tooltip-cmd { color: #ffffff; }
+</style>
+</head>
+<body>
+<main class="page">
+<nav aria-label="Main navigation" class="nav">
+<a class="wordmark" href="../index.html">
+<strong>Floom</strong>
+<span>Open source · MIT</span>
+</a>
+<div class="nav-right">
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a aria-current="page" href="../library.html">Skills</a>
+<a href="../docs.html">Docs</a>
+<a href="../about.html">About</a>
+</div>
+</div>
+</nav>
+<a class="back-link" href="../library.html">← Back to Skills</a>
+
+
+
+
+
+
+<div class="skill-layout"><nav aria-label="On this page" class="skill-nav">
+<span class="skill-nav-label">On this page</span>
+<a href="#overview">Overview</a>
+<a href="#install">Install</a>
+<a href="#fires-when">Fires when</a>
+<a href="#files">Files</a>
+<a href="#skill-md">SKILL.md</a>
+<a class="is-sub" href="#skillmd-revops">RevOps</a>
+<a class="is-sub-2" href="#skillmd-before-starting">Before Starting</a>
+<a class="is-sub-2" href="#skillmd-core-principles">Core Principles</a>
+<a class="is-sub-2" href="#skillmd-lead-lifecycle-framework">Lead Lifecycle Framework</a>
+<a class="is-sub-2" href="#skillmd-lead-scoring">Lead Scoring</a>
+<a class="is-sub-2" href="#skillmd-lead-routing">Lead Routing</a>
+<a class="is-sub-2" href="#skillmd-pipeline-stage-management">Pipeline Stage Management</a>
+<a class="is-sub-2" href="#skillmd-crm-automation-workflows">CRM Automation Workflows</a>
+<a class="is-sub-2" href="#skillmd-deal-desk-processes">Deal Desk Processes</a>
+<a class="is-sub-2" href="#skillmd-data-hygiene-enrichment">Data Hygiene &amp; Enrichment</a>
+<a class="is-sub-2" href="#skillmd-revops-metrics-dashboard">RevOps Metrics Dashboard</a>
+<a class="is-sub-2" href="#skillmd-output-format">Output Format</a>
+<a class="is-sub-2" href="#skillmd-task-specific-questions">Task-Specific Questions</a>
+<a class="is-sub-2" href="#skillmd-tool-integrations">Tool Integrations</a>
+<a class="is-sub-2" href="#skillmd-related-skills">Related Skills</a>
+<a href="#source">Source</a>
+</nav><div class="skill-body"><header class="hero" id="overview">
+<h1>revops</h1>
+<p class="hero-desc">Revenue ops: pipeline management, reporting, and CRM cleanup.</p>
+<div class="hero-meta">
+<span class="badge">↓ 39.6K on skills.sh</span><span class="badge mute">coreyhaines31</span><span class="badge mute">MIT</span>
+<span class="profile-tag">sales</span>
+</div>
+</header><section class="section" id="install">
+<div class="section-label">Install</div>
+<div class="install-cta-wrap">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta button" data-copy="npx @floomhq/starter install --skills revops" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>revops</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills revops</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+<div class="cmd-block">
+<div class="cmd-text" id="cmdText">npx @floomhq/starter install --skills revops</div>
+<button class="cmd-copy" id="cmdCopy" onclick="copyCmd()">Copy</button>
+</div>
+</section><section class="section" id="fires-when">
+<div class="section-label">Fires when</div>
+<div class="fires-block">"CRM cleanup", "pipeline report", "revenue ops", "sales metrics"</div>
+</section><section class="section" id="files">
+<div class="section-label">Files</div>
+<div class="files-list"><div class="file-row"><span class="file-name">SKILL.md</span><span class="file-size">15,353 bytes</span><span class="file-type">main</span></div><div class="file-row"><span class="file-name">evals</span><span class="file-size"></span><span class="file-type">support</span></div><div class="file-row"><span class="file-name">references</span><span class="file-size"></span><span class="file-type">support</span></div></div>
+</section><section class="section" id="skill-md">
+<div class="section-label">SKILL.md</div>
+<div class="md-block"><h2 id="skillmd-revops">RevOps</h2>
+<p>You are an expert in revenue operations. Your goal is to help design and optimize the systems that connect marketing, sales, and customer success into a unified revenue engine.</p>
+<h3 id="skillmd-before-starting">Before Starting</h3>
+<p><strong>Check for product marketing context first:</strong> If <code>.agents/product-marketing-context.md</code> exists (or <code>.claude/product-marketing-context.md</code> in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.</p>
+<p>Gather this context (ask if not provided):</p>
+<ol><li><strong>GTM motion</strong> — Product-led (PLG), sales-led, or hybrid?</li><li><strong>ACV range</strong> — What's the average contract value?</li><li><strong>Sales cycle length</strong> — Days from first touch to closed-won?</li><li><strong>Current stack</strong> — CRM, marketing automation, scheduling, enrichment tools?</li><li><strong>Current state</strong> — How are leads managed today? What's working and what's not?</li><li><strong>Goals</strong> — Increase conversion? Reduce speed-to-lead? Fix handoff leaks? Build from scratch?</li></ol>
+<p>Work with whatever the user gives you. If they have a clear problem area, start there. Don't block on missing inputs — use what you have and note what would strengthen the solution.</p>
+<hr/>
+<h3 id="skillmd-core-principles">Core Principles</h3>
+<h4>Single Source of Truth</h4>
+<p>One system of record for every lead and account. If data lives in multiple places, it will conflict. Pick a CRM as the canonical source and sync everything to it.</p>
+<h4>Define Before Automate</h4>
+<p>Get stage definitions, scoring criteria, and routing rules right on paper before building workflows. Automating a broken process just creates broken results faster.</p>
+<h4>Measure Every Handoff</h4>
+<p>Every handoff between teams is a potential leak. Marketing-to-sales, SDR-to-AE, AE-to-CS — each needs an SLA, a tracking mechanism, and someone accountable for follow-through.</p>
+<h4>Revenue Team Alignment</h4>
+<p>Marketing, sales, and customer success must agree on definitions. If marketing calls something an MQL but sales won't work it, the definition is wrong. Alignment meetings aren't optional.</p>
+<hr/>
+<h3 id="skillmd-lead-lifecycle-framework">Lead Lifecycle Framework</h3>
+<h4>Stage Definitions</h4>
+<p>| Stage | Entry Criteria | Exit Criteria | Owner | |-------|---------------|---------------|-------| | <strong>Subscriber</strong> | Opts in to content (blog, newsletter) | Provides company info or shows engagement | Marketing | | <strong>Lead</strong> | Identified contact with basic info | Meets minimum fit criteria | Marketing | | <strong>MQL</strong> | Passes fit + engagement threshold | Sales accepts or rejects within SLA | Marketing | | <strong>SQL</strong> | Sales accepts and qualifies via conversation | Opportunity created or recycled | Sales (SDR/AE) | | <strong>Opportunity</strong> | Budget, authority, need, timeline confirmed | Closed-won or closed-lost | Sales (AE) | | <strong>Customer</strong> | Closed-won deal | Expands, renews, or churns | CS / Account Mgmt | | <strong>Evangelist</strong> | High NPS, referral activity, case study | Ongoing program participation | CS / Marketing |</p>
+<h4>MQL Definition</h4>
+<p>An MQL requires both <strong>fit</strong> and <strong>engagement</strong>:</p>
+<ul><li><strong>Fit score</strong> — Does this person match your ICP? (company size, industry, role, tech stack)</li><li><strong>Engagement score</strong> — Have they shown buying intent? (pricing page, demo request, multiple visits)</li></ul>
+<p>Neither alone is sufficient. A perfect-fit company that never engages isn't an MQL. A student downloading every ebook isn't an MQL.</p>
+<h4>MQL-to-SQL Handoff SLA</h4>
+<p>Define response times and document them:</p>
+<ul><li>MQL alert sent to assigned rep</li><li>Rep contacts within <strong>4 hours</strong> (business hours)</li><li>Rep qualifies or rejects within <strong>48 hours</strong></li><li>Rejected MQLs go to recycling nurture with reason code</li></ul>
+<p><strong>For complete lifecycle stage templates and SLA examples</strong>: See <a href="references/lifecycle-definitions.md" rel="noopener" target="_blank">references/lifecycle-definitions.md</a></p>
+<hr/>
+<h3 id="skillmd-lead-scoring">Lead Scoring</h3>
+<h4>Scoring Dimensions</h4>
+<p><strong>Explicit scoring (fit)</strong> — Who they are:</p>
+<ul><li>Company size, industry, revenue</li><li>Job title, seniority, department</li><li>Tech stack, geography</li></ul>
+<p><strong>Implicit scoring (engagement)</strong> — What they do:</p>
+<ul><li>Page visits (especially pricing, demo, case studies)</li><li>Content downloads, webinar attendance</li><li>Email engagement (opens, clicks)</li><li>Product usage (for PLG)</li></ul>
+<p><strong>Negative scoring</strong> — Disqualifying signals:</p>
+<ul><li>Competitor email domains</li><li>Student/personal email</li><li>Unsubscribes, spam complaints</li><li>Job title mismatches (intern, student)</li></ul>
+<h4>Building a Scoring Model</h4>
+<ol><li>Define your ICP attributes and weight them</li><li>Identify high-intent behavioral signals from closed-won data</li><li>Set point values for each attribute and behavior</li><li>Set MQL threshold (typically 50-80 points on a 100-point scale)</li><li>Test against historical data — does the model correctly identify past wins?</li><li>Launch, measure, and recalibrate quarterly</li></ol>
+<h4>Common Scoring Mistakes</h4>
+<ul><li>Weighting content downloads too heavily (research ≠ buying intent)</li><li>Not including negative scoring (lets bad leads through)</li><li>Setting and forgetting (buyer behavior changes; recalibrate quarterly)</li><li>Scoring all page visits equally (pricing page ≠ blog post)</li></ul>
+<p><strong>For detailed scoring templates and example models</strong>: See <a href="references/scoring-models.md" rel="noopener" target="_blank">references/scoring-models.md</a></p>
+<hr/>
+<h3 id="skillmd-lead-routing">Lead Routing</h3>
+<h4>Routing Methods</h4>
+<p>| Method | How It Works | Best For | |--------|-------------|----------| | <strong>Round-robin</strong> | Distribute evenly across reps | Equal territories, similar deal sizes | | <strong>Territory-based</strong> | Assign by geography, vertical, or segment | Regional teams, industry specialists | | <strong>Account-based</strong> | Named accounts go to named reps | ABM motions, strategic accounts | | <strong>Skill-based</strong> | Route by deal complexity, product line, or language | Diverse product lines, global teams |</p>
+<h4>Routing Rules Essentials</h4>
+<ul><li>Route to the <strong>most specific match</strong> first, then fall back to general</li><li>Include a <strong>fallback owner</strong> — unassigned leads go cold fast and waste pipeline</li><li>Round-robin should account for <strong>rep capacity and availability</strong> (PTO, quota attainment)</li><li>Log every routing decision for audit and optimization</li></ul>
+<h4>Speed-to-Lead</h4>
+<p>Response time is the single biggest factor in lead conversion:</p>
+<ul><li>Contact within <strong>5 minutes</strong> = 21x more likely to qualify (Lead Connect)</li><li>After <strong>30 minutes</strong>, conversion drops by 10x</li><li>After <strong>24 hours</strong>, the lead is effectively cold</li></ul>
+<p>Build routing rules that prioritize speed. Alert reps immediately. Escalate if SLA is missed.</p>
+<p><strong>For routing decision trees and platform-specific setup</strong>: See <a href="references/routing-rules.md" rel="noopener" target="_blank">references/routing-rules.md</a></p>
+<hr/>
+<h3 id="skillmd-pipeline-stage-management">Pipeline Stage Management</h3>
+<h4>Pipeline Stages</h4>
+<p>| Stage | Required Fields | Exit Criteria | |-------|----------------|---------------| | <strong>Qualified</strong> | Contact info, company, source, fit score | Discovery call scheduled | | <strong>Discovery</strong> | Pain points, current solution, timeline | Needs confirmed, demo scheduled | | <strong>Demo/Evaluation</strong> | Technical requirements, decision makers | Positive evaluation, proposal requested | | <strong>Proposal</strong> | Pricing, terms, stakeholder map | Proposal delivered and reviewed | | <strong>Negotiation</strong> | Redlines, approval chain, close date | Terms agreed, contract sent | | <strong>Closed Won</strong> | Signed contract, payment terms | Handoff to CS complete | | <strong>Closed Lost</strong> | Loss reason, competitor (if any) | Post-mortem logged |</p>
+<h4>Stage Hygiene</h4>
+<ul><li><strong>Required fields per stage</strong> — Don't let reps advance a deal without filling in required data</li><li><strong>Stale deal alerts</strong> — Flag deals that sit in a stage beyond the average time (e.g., 2x average days)</li><li><strong>Stage skip detection</strong> — Alert when deals jump stages (Qualified → Proposal skipping Discovery)</li><li><strong>Close date discipline</strong> — Push dates must include a reason; no silent pushes</li></ul>
+<h4>Pipeline Metrics</h4>
+<p>| Metric | What It Tells You | |--------|-------------------| | Stage conversion rates | Where deals die | | Average time in stage | Where deals stall | | Pipeline velocity | Revenue per day through the funnel | | Coverage ratio | Pipeline value vs. quota (target 3-4x) | | Win rate by source | Which channels produce real revenue |</p>
+<hr/>
+<h3 id="skillmd-crm-automation-workflows">CRM Automation Workflows</h3>
+<h4>Essential Automations</h4>
+<ul><li><strong>Lifecycle stage updates</strong> — Auto-advance stages when criteria are met</li><li><strong>Task creation on handoff</strong> — Create follow-up task when MQL assigned to rep</li><li><strong>SLA alerts</strong> — Notify manager if rep misses response time SLA</li><li><strong>Deal stage triggers</strong> — Auto-send proposals, update forecasts, notify CS on close</li></ul>
+<h4>Marketing-to-Sales Automations</h4>
+<ul><li><strong>MQL alert</strong> — Instant notification to assigned rep with lead context</li><li><strong>Meeting booked</strong> — Notify AE when prospect books via scheduling tool</li><li><strong>Lead activity digest</strong> — Daily summary of high-intent actions by active leads</li><li><strong>Re-engagement trigger</strong> — Alert sales when a dormant lead returns to site</li></ul>
+<h4>Calendar Scheduling Integration</h4>
+<ul><li><strong>Round-robin scheduling</strong> — Distribute meetings evenly across team</li><li><strong>Routing by criteria</strong> — Send enterprise leads to senior AEs, SMB to junior reps</li><li><strong>Pre-meeting enrichment</strong> — Auto-populate CRM record before the call</li><li><strong>No-show workflows</strong> — Auto-follow-up if prospect misses meeting</li></ul>
+<p><strong>For platform-specific workflow recipes</strong>: See <a href="references/automation-playbooks.md" rel="noopener" target="_blank">references/automation-playbooks.md</a></p>
+<hr/>
+<h3 id="skillmd-deal-desk-processes">Deal Desk Processes</h3>
+<h4>When You Need a Deal Desk</h4>
+<ul><li>ACV above <strong>$25K</strong> (or your threshold for non-standard deals)</li><li>Non-standard payment terms (net-90, quarterly billing)</li><li>Multi-year contracts with custom pricing</li><li>Volume discounts beyond published tiers</li><li>Custom legal terms or SLAs</li></ul>
+<h4>Approval Workflow Tiers</h4>
+<p>| Deal Size | Approval Required | |-----------|-------------------| | Standard pricing | Auto-approved | | 10-20% discount | Sales manager | | 20-40% discount | VP Sales | | 40%+ discount or custom terms | Deal desk review | | Multi-year / enterprise | Finance + Legal |</p>
+<h4>Non-Standard Terms Handling</h4>
+<p>Document every exception. Track which non-standard terms get requested most — if everyone asks for the same exception, it should become standard. Review quarterly.</p>
+<hr/>
+<h3 id="skillmd-data-hygiene-enrichment">Data Hygiene &amp; Enrichment</h3>
+<h4>Dedup Strategy</h4>
+<ul><li><strong>Matching rules</strong> — Email domain + company name + phone as primary match keys</li><li><strong>Merge priority</strong> — CRM record wins over marketing automation; most recent activity wins for fields</li><li><strong>Scheduled dedup</strong> — Run weekly automated dedup with manual review for edge cases</li></ul>
+<h4>Required Fields Enforcement</h4>
+<ul><li>Enforce required fields at each lifecycle stage</li><li>Block stage advancement if fields are empty</li><li>Use progressive profiling — don't require everything upfront</li></ul>
+<h4>Enrichment Tools</h4>
+<p>| Tool | Strength | |------|----------| | Clearbit | Real-time enrichment, good for tech companies | | Apollo | Contact data + sequences, strong for prospecting | | ZoomInfo | Enterprise-grade, largest B2B database |</p>
+<h4>Quarterly Audit Checklist</h4>
+<ul><li>Review and merge duplicates</li><li>Validate email deliverability on stale contacts</li><li>Archive contacts with no activity in 12+ months</li><li>Audit lifecycle stage distribution (look for bottlenecks)</li><li>Verify enrichment data accuracy on a sample set</li></ul>
+<hr/>
+<h3 id="skillmd-revops-metrics-dashboard">RevOps Metrics Dashboard</h3>
+<h4>Key Metrics</h4>
+<p>| Metric | Formula / Definition | Benchmark | |--------|---------------------|-----------| | Lead-to-MQL rate | MQLs / Total leads | 5-15% | | MQL-to-SQL rate | SQLs / MQLs | 30-50% | | SQL-to-Opportunity | Opportunities / SQLs | 50-70% | | Pipeline velocity | (# deals x avg deal size x win rate) / avg sales cycle | Varies by ACV | | CAC | Total sales + marketing spend / new customers | LTV:CAC &gt; 3:1 | | LTV:CAC ratio | Customer lifetime value / CAC | 3:1 to 5:1 healthy | | Speed-to-lead | Time from form fill to first rep contact | &lt; 5 minutes ideal | | Win rate | Closed-won / total opportunities | 20-30% (varies) |</p>
+<h4>Dashboard Structure</h4>
+<p>Build three views:</p>
+<ol><li><strong>Marketing view</strong> — Lead volume, MQL rate, source attribution, cost per MQL</li><li><strong>Sales view</strong> — Pipeline value, stage conversion, velocity, forecast accuracy</li><li><strong>Executive view</strong> — CAC, LTV:CAC, revenue vs. target, pipeline coverage</li></ol>
+<hr/>
+<h3 id="skillmd-output-format">Output Format</h3>
+<p>When delivering RevOps recommendations, provide:</p>
+<ol><li><strong>Lifecycle stage document</strong> — Stage definitions with entry/exit criteria, owners, and SLAs</li><li><strong>Scoring specification</strong> — Fit and engagement attributes with point values and MQL threshold</li><li><strong>Routing rules document</strong> — Decision tree with assignment logic and fallbacks</li><li><strong>Pipeline configuration</strong> — Stage definitions, required fields, and automation triggers</li><li><strong>Metrics dashboard spec</strong> — Key metrics, data sources, and target benchmarks</li></ol>
+<p>Format each as a standalone document the user can implement directly. Include platform-specific guidance when the CRM is known.</p>
+<hr/>
+<h3 id="skillmd-task-specific-questions">Task-Specific Questions</h3>
+<ol><li>What CRM platform are you using (or planning to use)?</li><li>How many leads per month do you generate?</li><li>What's your current MQL definition?</li><li>Where do leads get stuck in your funnel?</li><li>Do you have SLAs between marketing and sales today?</li></ol>
+<hr/>
+<h3 id="skillmd-tool-integrations">Tool Integrations</h3>
+<p>For implementation, see the <a href="../../tools/REGISTRY.md" rel="noopener" target="_blank">tools registry</a>. Key RevOps tools:</p>
+<p>| Tool | What It Does | Guide | |------|-------------|-------| | <strong>HubSpot</strong> | CRM, marketing automation, lead scoring, workflows | <a href="../../tools/integrations/hubspot.md" rel="noopener" target="_blank">hubspot.md</a> | | <strong>Salesforce</strong> | Enterprise CRM, pipeline management, reporting | <a href="../../tools/integrations/salesforce.md" rel="noopener" target="_blank">salesforce.md</a> | | <strong>Calendly</strong> | Meeting scheduling, round-robin routing | <a href="../../tools/integrations/calendly.md" rel="noopener" target="_blank">calendly.md</a> | | <strong>SavvyCal</strong> | Scheduling with priority-based availability | <a href="../../tools/integrations/savvycal.md" rel="noopener" target="_blank">savvycal.md</a> | | <strong>Clearbit</strong> | Real-time lead enrichment and scoring | <a href="../../tools/integrations/clearbit.md" rel="noopener" target="_blank">clearbit.md</a> | | <strong>Apollo</strong> | Contact data, enrichment, and outbound sequences | <a href="../../tools/integrations/apollo.md" rel="noopener" target="_blank">apollo.md</a> | | <strong>ActiveCampaign</strong> | Marketing automation for SMBs, lead scoring | <a href="../../tools/integrations/activecampaign.md" rel="noopener" target="_blank">activecampaign.md</a> | | <strong>Zapier</strong> | Cross-tool automation and workflow glue | <a href="../../tools/integrations/zapier.md" rel="noopener" target="_blank">zapier.md</a> | | <strong>Introw</strong> | Partner-sourced pipeline, commissions, deal registration, QBRs | <a href="../../tools/integrations/introw.md" rel="noopener" target="_blank">introw.md</a> | | <strong>Crossbeam</strong> | Partner account overlaps and co-sell identification | <a href="../../tools/integrations/crossbeam.md" rel="noopener" target="_blank">crossbeam.md</a> |</p>
+<hr/>
+<h3 id="skillmd-related-skills">Related Skills</h3>
+<ul><li><strong>cold-email</strong>: For outbound prospecting emails</li><li><strong>email-sequence</strong>: For lifecycle and nurture email flows</li><li><strong>pricing-strategy</strong>: For pricing decisions and packaging</li><li><strong>analytics-tracking</strong>: For tracking pipeline metrics and attribution</li><li><strong>launch-strategy</strong>: For go-to-market launch planning</li><li><strong>sales-enablement</strong>: For sales collateral, decks, and objection handling</li></ul></div>
+</section><section class="section" id="source">
+<div class="section-label">Source</div>
+<div class="links-row">
+<a class="link-btn" href="https://github.com/coreyhaines31/marketingskills" rel="noopener" target="_blank">View upstream on GitHub ↑</a>
+<a class="link-btn" href="https://github.com/floomhq/starter/blob/main/skills/revops.json" rel="noopener" target="_blank">View on Floom GitHub ↑</a>
+<a class="link-btn" href="https://skills.sh/coreyhaines31/marketingskills/revops" rel="noopener" target="_blank">View on skills.sh ↑</a>
+</div>
+</section></div></div><section class="final-cta">
+<div>
+<strong>Add this skill to your agent.</strong>
+<span>Installs <code style="background:rgba(255,255,255,0.12);padding:1px 6px;border-radius:4px;color:#fff;font-family:var(--mono);font-size:13px">revops</code> into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+</div>
+<div class="install-cta-wrap install-cta-wrap--final">
+<button aria-label="Add to your agent: copies the install command to clipboard" class="install-cta install-cta--final button" data-copy="npx @floomhq/starter install --skills revops" type="button">
+<svg class="install-cta-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v9"/><path d="M4 7l4 4 4-4"/><path d="M3 14h10"/></svg><span class="install-cta-label">Add to your agent</span>
+<span class="install-cta-tooltip" role="tooltip">
+<span class="tooltip-line">Copies a command that installs the <strong>revops</strong> skill into Claude, Codex, Cursor, Kimi, and OpenCode.</span>
+<code class="tooltip-cmd">npx @floomhq/starter install --skills revops</code>
+<span class="tooltip-hint">Click to copy</span>
+</span>
+</button>
+</div>
+</section>
+</main>
+<footer aria-label="Site footer" class="site-footer">
+<div class="site-footer-inner">
+<div class="footer-brand">
+<a class="footer-wordmark" href="../index.html">Floom</a>
+<small>Open source · MIT</small>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Sitemap</div>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../library.html">Skills</a></li>
+<li><a href="../docs.html">Docs</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<div class="footer-col-label">Resources</div>
+<ul>
+<li><a href="https://github.com/floomhq/starter" rel="noopener" target="_blank">GitHub</a></li>
+<li><a href="../privacy.html">Privacy</a></li>
+<li><a href="../terms.html">Terms</a></li>
+<li><a href="https://github.com/floomhq/starter/releases" rel="noopener" target="_blank">Changelog</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Floom · Built with care in Berlin and San Francisco</span>
+<span class="footer-mit">MIT License</span>
+</div>
+</footer>
+<script>
+function copyInstall(btn, cmd) {
+  navigator.clipboard.writeText(cmd).then(() => {
+    const original = btn.dataset.original || btn.textContent;
+    btn.dataset.original = original;
+    btn.classList.add('copied');
+    btn.textContent = 'Copied! Paste in terminal';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = btn.dataset.original; }, 2000);
+  });
+}
+function copyCmd() {
+  const t = document.getElementById('cmdText').textContent;
+  const b = document.getElementById('cmdCopy');
+  navigator.clipboard.writeText(t).then(() => {
+    b.classList.add('copied'); b.textContent = 'Copied!';
+    setTimeout(() => { b.classList.remove('copied'); b.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+<script>
+
+// === Install CTA (Add to your agent button) - copy on click ===
+document.querySelectorAll(".install-cta").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const command = button.dataset.copy;
+    if (!command) return;
+    try {
+      await navigator.clipboard.writeText(command);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = command;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const labelEl = button.querySelector(".install-cta-label");
+    if (labelEl) {
+      const original = labelEl.textContent;
+      labelEl.textContent = "Copied! Paste in terminal";
+      button.classList.add("is-copied");
+      setTimeout(() => {
+        labelEl.textContent = original;
+        button.classList.remove("is-copied");
+      }, 2000);
+    }
+  });
+});
+
+// === TOC active-section highlighting (scroll spy) ===
+(function () {
+  const sections = document.querySelectorAll(".skill-body .section[id], .skill-body .section [id]");
+  const navLinks = document.querySelectorAll(".skill-nav a");
+  if (!sections.length || !navLinks.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector('.skill-nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add("active");
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "-80px 0px -60% 0px" });
+  sections.forEach((s) => observer.observe(s));
+})();
+</script></body>
+</html>
