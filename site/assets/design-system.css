@@ -20,11 +20,11 @@
   --muted-soft:     #4b4b4b;
   --muted-mute:     #6b6b6b;
   --muted-rule:     #e0dfdb;
-  --blue:           #0094ff;
-  --blue-deep:      #006fbf;
-  --blue-soft:      #bfe6ff;
-  --blue-pale:      #eaf7ff;
   --cloud-pink:     #ff4fd8;
+  --blue:           var(--cloud-pink);
+  --blue-deep:      #c51a9f;
+  --blue-soft:      #ffb8ef;
+  --blue-pale:      #fff0fb;
 
   /* Brand colors (for agent logos / hero accents) */
   --brand-claude:   #d97757;
@@ -75,8 +75,8 @@
   --max-content:        720px;
 
   /* Shadows */
-  --shadow-button-hover: 0 12px 26px rgba(5, 5, 5, 0.14), 0 0 0 4px rgba(0, 148, 255, 0.14);
-  --shadow-cta-hover:    0 8px 22px rgba(5, 5, 5, 0.16), 0 0 0 3px rgba(0, 148, 255, 0.10);
+  --shadow-button-hover: 0 12px 26px rgba(5, 5, 5, 0.14), 0 0 0 4px rgba(255, 79, 216, 0.14);
+  --shadow-cta-hover:    0 8px 22px rgba(5, 5, 5, 0.16), 0 0 0 3px rgba(255, 79, 216, 0.10);
   --shadow-card-hover:   0 14px 30px rgba(5, 5, 5, 0.18);
   --shadow-tooltip:      0 14px 30px rgba(5, 5, 5, 0.18);
 }
@@ -122,7 +122,7 @@ h1, h2, h3, p { margin: 0; }
   flex-wrap: wrap;
   gap: 12px;
   justify-content: flex-start;
-  border-bottom: var(--line);
+  border-bottom: 2px solid var(--ink);
   padding-bottom: 18px;
 }
 

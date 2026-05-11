@@ -59,10 +59,11 @@
         --paper: #fafaf7;
         --ink: #050505;
         --muted: #333333;
-        --blue: #0094ff;
-        --blue-soft: #bfe6ff;
-        --blue-pale: #eaf7ff;
         --cloud-pink: #ff4fd8;
+        --blue: var(--cloud-pink);
+        --blue-deep: #c51a9f;
+        --blue-soft: #ffb8ef;
+        --blue-pale: #fff0fb;
         --brand-claude: #d97757;
         --brand-codex: var(--blue);
         --brand-cursor: var(--ink);
@@ -83,7 +84,7 @@
         margin: 0;
         min-height: 100vh;
         background:
-          radial-gradient(circle at 14% 12%, rgba(0, 148, 255, 0.14), transparent 28rem),
+          radial-gradient(circle at 14% 12%, rgba(255, 79, 216, 0.14), transparent 28rem),
           radial-gradient(circle at 88% 2%, rgba(255, 79, 216, 0.12), transparent 24rem),
           var(--paper);
         color: var(--ink);
@@ -104,7 +105,7 @@
         flex-wrap: wrap;
         gap: 12px;
         justify-content: flex-start;
-        border-bottom: var(--line);
+        border-bottom: 2px solid var(--ink);
         padding-bottom: 18px;
       }
 
@@ -169,7 +170,7 @@
       .button-secondary { background: #ffffff; color: var(--ink); }
 
       .nav-sign-in:hover, .button:hover, .button-secondary:hover {
-        box-shadow: 0 12px 26px rgba(5,5,5,0.14), 0 0 0 4px rgba(0,148,255,0.14);
+        box-shadow: 0 12px 26px rgba(5,5,5,0.14), 0 0 0 4px rgba(255,79,216,0.14);
         transform: translateY(-2px);
       }
 
@@ -249,7 +250,7 @@
         padding-top: 44px;
       }
 
-      .eyebrow { color: #006fbf; }
+      .eyebrow { color: var(--blue-deep); }
 
       h1, h2, h3, p { margin: 0; }
 
@@ -345,7 +346,7 @@
         inset: 6% -8% -4%;
         background:
           radial-gradient(ellipse 88% 72% at 64% 44%, rgba(255, 79, 216, 0.58) 0%, rgba(255, 79, 216, 0.3) 44%, rgba(255, 79, 216, 0) 78%),
-          radial-gradient(ellipse 76% 60% at 30% 58%, rgba(0, 148, 255, 0.34) 0%, rgba(0, 148, 255, 0.16) 42%, rgba(0, 148, 255, 0) 76%),
+          radial-gradient(ellipse 76% 60% at 30% 58%, rgba(255, 79, 216, 0.34) 0%, rgba(255, 79, 216, 0.16) 42%, rgba(255, 79, 216, 0) 76%),
           radial-gradient(ellipse 58% 46% at 52% 22%, rgba(255, 215, 242, 0.52) 0%, rgba(255, 215, 242, 0.18) 38%, rgba(255, 215, 242, 0) 76%);
         filter: blur(24px);
         opacity: 0.92;
@@ -399,7 +400,7 @@
 
       .chart-kicker {
         display: block;
-        color: #006fbf;
+        color: var(--blue-deep);
         font-family: var(--mono);
         font-size: 11px;
         font-weight: 800;
@@ -687,7 +688,7 @@
         border-radius: 32px;
         background:
           radial-gradient(ellipse 58% 48% at 66% 36%, rgba(255, 215, 242, 0.56) 0%, rgba(255, 215, 242, 0) 74%),
-          radial-gradient(ellipse 60% 48% at 30% 68%, rgba(0, 148, 255, 0.16) 0%, rgba(0, 148, 255, 0) 72%),
+          radial-gradient(ellipse 60% 48% at 30% 68%, rgba(255, 79, 216, 0.16) 0%, rgba(255, 79, 216, 0) 72%),
           rgba(255,255,255,0.54);
       }
 
@@ -705,7 +706,7 @@
         min-height: 440px;
         padding: clamp(22px, 4vw, 42px);
         background:
-          radial-gradient(ellipse 52% 42% at 76% 26%, rgba(0, 148, 255, 0.2), transparent 72%),
+          radial-gradient(ellipse 52% 42% at 76% 26%, rgba(255, 79, 216, 0.2), transparent 72%),
           radial-gradient(ellipse 58% 46% at 24% 76%, rgba(255, 79, 216, 0.12), transparent 76%),
           #ffffff;
       }
@@ -785,7 +786,7 @@
 
       .lift-source a { color: var(--blue); text-decoration: none; white-space: nowrap; }
 
-      .pack-kicker { color: #006fbf; font-family: var(--mono); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+      .pack-kicker { color: var(--blue-deep); font-family: var(--mono); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
 
       /* SkillsBench finding visual */
       .download-visual {
@@ -793,7 +794,7 @@
         padding: clamp(22px, 4vw, 42px);
         background:
           radial-gradient(ellipse 48% 42% at 68% 28%, rgba(255, 79, 216, 0.18), transparent 72%),
-          radial-gradient(ellipse 54% 44% at 28% 72%, rgba(0, 148, 255, 0.24), transparent 76%),
+          radial-gradient(ellipse 54% 44% at 28% 72%, rgba(255, 79, 216, 0.24), transparent 76%),
           #ffffff;
       }
 
@@ -929,7 +930,7 @@
 
       .activation-stat span { color: rgba(5,5,5,0.58); font-family: var(--mono); font-size: 10px; font-weight: 850; line-height: 1.25; }
 
-      .activation-stat.is-floom { border-color: rgba(0, 148, 255, 0.38); background: var(--blue-pale); }
+      .activation-stat.is-floom { border-color: rgba(255, 79, 216, 0.38); background: var(--blue-pale); }
       .activation-stat.is-floom b { color: var(--blue); }
 
       .activation-rule {
@@ -981,7 +982,7 @@
       .proof-intro { position: sticky; top: 28px; }
 
       .proof-intro h2 { margin: 8px 0 0; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; }
-      .proof-intro .section-label { color: #006fbf; }
+      .proof-intro .section-label { color: var(--blue-deep); }
 
       .faq { display: grid; gap: 0; }
 
@@ -1236,7 +1237,7 @@
 
       .install-cta:hover,
       .install-cta:focus-visible {
-        box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(0,148,255,0.10);
+        box-shadow: 0 8px 22px rgba(5,5,5,0.16), 0 0 0 3px rgba(255,79,216,0.10);
         transform: translateY(-1px);
         outline: none;
       }
@@ -1341,7 +1342,7 @@
       .install-cta--final:hover,
       .install-cta--final:focus-visible {
         background: #ffffff;
-        box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(0,148,255,0.22);
+        box-shadow: 0 8px 22px rgba(0,0,0,0.22), 0 0 0 4px rgba(255,79,216,0.22);
       }
       .install-cta--final.is-copied { background: var(--blue); color: #ffffff; }
 
