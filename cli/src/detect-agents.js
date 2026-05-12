@@ -96,6 +96,20 @@ const PER_HARNESS = {
       activationFile: path.join(cwd, ".kimi", "agents", "floom-system.md"),
     }),
   },
+  pi: {
+    label: "Pi",
+    activationFileName: "AGENTS.md",
+    global: (h) => ({
+      presencePath: path.join(h, ".pi"),
+      skillsDir: path.join(h, ".pi", "skills"),
+      activationFile: path.join(h, ".pi", "AGENTS.md"),
+    }),
+    local: (cwd) => ({
+      presencePath: path.join(cwd, ".pi"),
+      skillsDir: path.join(cwd, ".pi", "skills"),
+      activationFile: path.join(cwd, ".pi", "AGENTS.md"),
+    }),
+  },
 };
 
 export const SUPPORTED_HARNESSES = Object.keys(PER_HARNESS);

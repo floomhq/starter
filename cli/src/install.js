@@ -93,7 +93,7 @@ function validateHarnesses(harnessList) {
     if (id === "gemini") {
       errors.push(
         "Gemini is not currently supported by Floom Starter Pack.\n" +
-          `  Supported agents: Claude Code, Codex, Cursor, Kimi, OpenCode.\n` +
+          `  Supported agents: Claude Code, Codex, Cursor, Kimi, OpenCode, Pi.\n` +
           "  See https://github.com/floomhq/starter for the full list.",
       );
     } else if (!SUPPORTED_HARNESSES.includes(id)) {
@@ -104,6 +104,13 @@ function validateHarnesses(harnessList) {
     }
   }
   return errors;
+}
+
+function normalizeHarnesses(harnessList) {
+  return (harnessList || []).map((id) => {
+    if (id === "py") return "pi";
+    return id;
+  });
 }
 
 /**
@@ -234,7 +241,7 @@ export async function install(opts = {}) {
   const globalScope = Boolean(opts.globalScope);
 
   // 0. Validate any explicitly-passed harnesses BEFORE doing any work.
-  const requestedHarnesses = opts.harness || [];
+  const requestedHarnesses = normalizeHarnesses(opts.harness || []);
   const harnessErrors = validateHarnesses(requestedHarnesses);
   if (harnessErrors.length > 0) {
     for (const err of harnessErrors) {
@@ -291,7 +298,7 @@ export async function install(opts = {}) {
 
   if (agentIds.length === 0) {
     throw new Error(
-      "No AI agents detected. Install Claude Code, Codex, Cursor, OpenCode, or Kimi first.",
+      "No AI agents detected. Install Claude Code, Codex, Cursor, OpenCode, Kimi, or Pi first.",
     );
   }
 
@@ -541,7 +548,8 @@ export async function update(opts = {}) {
   const cwd = opts.cwd || process.cwd();
   const globalScope = Boolean(opts.globalScope);
 
-  const harnessErrors = validateHarnesses(opts.harness || []);
+  const requestedHarnesses = normalizeHarnesses(opts.harness || []);
+  const harnessErrors = validateHarnesses(requestedHarnesses);
   if (harnessErrors.length > 0) {
     for (const err of harnessErrors) {
       log("");
@@ -603,7 +611,7 @@ export async function update(opts = {}) {
     profiles: [],
     skills: toUpdate,
     all: false,
-    harness: opts.harness || [],
+    harness: requestedHarnesses,
     log,
   });
   return { updated: result.installedSkills ? result.installedSkills.length : 0, unchanged, ...result };
@@ -627,7 +635,8 @@ export async function remove(opts = {}) {
   const cwd = opts.cwd || process.cwd();
   const globalScope = Boolean(opts.globalScope);
 
-  const harnessErrors = validateHarnesses(opts.harness || []);
+  const requestedHarnesses = normalizeHarnesses(opts.harness || []);
+  const harnessErrors = validateHarnesses(requestedHarnesses);
   if (harnessErrors.length > 0) {
     for (const err of harnessErrors) {
       log("");
@@ -641,7 +650,7 @@ export async function remove(opts = {}) {
 
   const agentScopeOpts = { globalScope, cwd };
   const agentIds =
-    opts.harness && opts.harness.length > 0 ? opts.harness : detectAgents(agentScopeOpts);
+    requestedHarnesses.length > 0 ? requestedHarnesses : detectAgents(agentScopeOpts);
 
   // For project-local removal we want the agents the user actually has installed
   // here. If none, fall back to "claude" so a misclick on uninstall is not a

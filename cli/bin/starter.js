@@ -2,7 +2,7 @@
 /**
  * @floomhq/starter, CLI entry point
  *
- * Install curated AI agent skills for Claude Code, Codex, Cursor, OpenCode, and Kimi.
+ * Install curated AI agent skills for Claude Code, Codex, Cursor, OpenCode, Kimi, and Pi.
  *
  * Usage:
  *   npx @floomhq/starter install --profiles core,dev
@@ -28,7 +28,7 @@ function usage() {
   return `
   @floomhq/starter v${PACKAGE_VERSION}
 
-  Install curated AI skills for Claude Code, Codex, Cursor, OpenCode, and Kimi.
+  Install curated AI skills for Claude Code, Codex, Cursor, OpenCode, Kimi, and Pi.
 
   Commands:
     install        Install all 65 curated skills to detected agents
@@ -47,7 +47,8 @@ function usage() {
                         marketing, sales, ops, founder, data, design, video)
     --skills <slugs>    Comma-separated skill slugs for direct selection
     --all               Install all available skills (default)
-    --harness <ids>     Comma-separated agent IDs: claude,codex,cursor,opencode,kimi
+    --harness <ids>     Comma-separated agent IDs: claude,codex,cursor,opencode,kimi,pi
+                        Alias: py -> pi
                         (default: auto-detect installed agents)
     --force             Overwrite existing skills
     --dry-run           Print plan without installing

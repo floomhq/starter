@@ -4,7 +4,7 @@
 
 **65 hand-picked AI agent skills. One install. Auto-activates.**
 
-Works with Claude Code, Codex, Cursor, Kimi, OpenCode.
+Works with Claude Code, Codex, Cursor, Kimi, OpenCode, Pi.
 
 <img src="site/demo.gif" alt="Floom Starter Pack install demo" width="640" />
 
@@ -25,7 +25,7 @@ Works with Claude Code, Codex, Cursor, Kimi, OpenCode.
 npx @floomhq/starter install --global
 ```
 
-That installs all 65 curated skills machine-wide into all eligible agents on your computer. Omit `--global` for a project-local install in the current repository, or pass `--profiles dev,writing` for a smaller subset. Auto-detects Claude Code, Codex, Cursor, Kimi, or OpenCode.
+That installs all 65 curated skills machine-wide into all eligible agents on your computer. Omit `--global` for a project-local install in the current repository, or pass `--profiles dev,writing` for a smaller subset. Auto-detects Claude Code, Codex, Cursor, Kimi, OpenCode, or Pi.
 
 ## What you get
 
@@ -50,7 +50,7 @@ That installs all 65 curated skills machine-wide into all eligible agents on you
 ## How it works
 
 1. One npm command runs the installer.
-2. Auto-detect your AI agent (Claude Code, Codex, Cursor, Kimi, OpenCode).
+2. Auto-detect your AI agent (Claude Code, Codex, Cursor, Kimi, OpenCode, Pi).
 3. Skills install locally to your machine (`~/.claude/skills/`, `~/.codex/skills/`, etc.) or to the current project when you omit `--global`.
 4. Folder-based skills also receive upstream support files when available, such as references and scripts.
 5. Activation rules are added to your agent's config so the right skill fires on the right task.
